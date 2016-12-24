@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+A GitHub for ideas.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Sean O'Neal
+  - __Scrum Master__: Craig Dearden
+  - __Development Team Members__: Efe Surekli, Michael Dai
 
 ## Table of Contents
 
