@@ -5,6 +5,7 @@ logs
 *.log
 npm-debug.log*
 
+
 # Runtime data
 pids
 *.pid
@@ -49,9 +50,11 @@ local.properties
 node_modules/
 npm-debug.log
 
+
 #Module dependencies
 node_modules/
 bower_components/
+
 
 # Optional eslint cache
 .eslintcache
