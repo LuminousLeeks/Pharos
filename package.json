@@ -82,7 +82,7 @@
     "snazzy": "^5.0.0",
     "standard": "8.6.0",
     "standard-flow": "^1.0.0",
-    "supertest": "^2.0.1"
+    "supertest": "^2.0.1",
   },
   "ava": {
     "files": [
