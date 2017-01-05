@@ -11,12 +11,7 @@ const router = require('./routes.js');
 app.use('/api', router);
 
 app.get('/', (req, res) => {
-  res.send('Hello from the Server!');
+  res.status(200).end('Hello from the Server!');
 });
 
-app.listen(3000, () => {
-//  TODO: Delete testing listen function below, uncomment app.listen
-  console.log('Example app listening on port 3000!');
-});
-
-// app.listen(3000);
+app.listen(3000);
