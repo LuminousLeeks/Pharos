@@ -1,0 +1,14 @@
+### node ###
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+#Module dependencies
+node_modules/
+bower_components/
