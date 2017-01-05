@@ -43,7 +43,7 @@ describe('socket tests', function() {
       socket.emit('getNotifications', (done) => {
         // console.log("notifications", data);
         done();
-      });    
+      });
     });
   });
 
@@ -55,12 +55,8 @@ describe('socket tests', function() {
       socket.emit('postNotificaions', [], (done) => {
         done();
       });
-      
+
     });
   });
 
 });
-
-
-
-
