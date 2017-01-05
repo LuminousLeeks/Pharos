@@ -23,18 +23,19 @@
     "flow": "flow --show-all-errors"
   },
   "dependencies": {
+    "apisauce": "^0.6.0",
+    "chai": "^3.5.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "express": "^4.14.0",
+    "format-json": "^1.0.3",
+    "lodash": "^4.17.2",
     "mocha": "^3.2.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
-    "apisauce": "^0.6.0",
-    "format-json": "^1.0.3",
-    "lodash": "^4.17.2",
     "querystringify": "0.0.4",
     "ramda": "^0.22.1",
     "react": "~15.4.0-rc.4",
@@ -54,13 +55,19 @@
     "redux-persist": "^3.5.0",
     "redux-saga": "^0.13.0",
     "reduxsauce": "0.2.0",
-    "seamless-immutable": "^6.3.0"
+    "seamless-immutable": "^6.3.0",
+    "superagent": "^3.3.1"
   },
   "devDependencies": {
     "ava": "^0.17.0",
     "babel-eslint": "^7.1.1",
     "babel-preset-es2015": "^6.18.0",
     "enzyme": "^2.6.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "flow-bin": "0.33.0",
     "ghooks": "^1.3.2",
     "mockery": "^2.0.0",
@@ -75,11 +82,7 @@
     "snazzy": "^5.0.0",
     "standard": "8.6.0",
     "standard-flow": "^1.0.0",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0"
+    "supertest": "^2.0.1"
   },
   "ava": {
     "files": [
