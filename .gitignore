@@ -3,15 +3,18 @@
 # Logs
 logs
 *.log
+npm-debug.log*
 
 # Runtime data
 pids
 *.pid
 *.seed
+*pid.lock
 
 # OSX
 #
 .DS_Store
+
 
 # Xcode
 #
@@ -49,6 +52,9 @@ npm-debug.log
 #Module dependencies
 node_modules/
 bower_components/
+
+# Optional eslint cache
+.eslintcache
 
 # BUCK
 buck-out/
