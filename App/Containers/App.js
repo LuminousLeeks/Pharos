@@ -26,6 +26,7 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 // create our store
 // const store = configureStore()
 
+
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
  * call this component first.
@@ -36,7 +37,7 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <RootContainer />
@@ -45,4 +46,5 @@ class App extends Component {
   };
 };
 
-export default App
+
+export default App;
