@@ -20,16 +20,16 @@
     "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
     "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
     "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
-    "flow": "flow --show-all-errors"
+    "flow": "flow --show-all-errors",
+    "startServer": "node server/server.js",
+    "builddb": "psql -f init.sql",
+    "testdb": "mocha server/test/dbspecs.js",
+    "dropdb": "psql -c 'drop database pharos_db'",
+    "testServer": "mocha server/test/specs.js",
   },
   "dependencies": {
     "apisauce": "^0.6.0",
     "chai": "^3.5.0",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
     "express": "^4.14.0",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
@@ -58,6 +58,7 @@
     "seamless-immutable": "^6.3.0",
     "superagent": "^3.3.1",
     "mocha": "^3.2.0",
+    "sequelize": "^3.28.0"
   },
   "devDependencies": {
     "ava": "^0.17.0",
@@ -114,8 +115,7 @@
   "config": {
     "ghooks": {
       "pre-commit": "if [ -d 'ignite-base' ]; then cd ignite-base; fi; npm run lint"
-    }
-  },
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuminousLeeks/Pharos.git"
