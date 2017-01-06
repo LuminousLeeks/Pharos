@@ -25,7 +25,7 @@
     "builddb": "psql -f init.sql",
     "testdb": "mocha server/test/dbspecs.js",
     "dropdb": "psql -c 'drop database pharos_db'",
-    "testServer": "mocha server/test/specs.js",
+    "testServer": "mocha server/test/specs.js"
   },
   "dependencies": {
     "apisauce": "^0.6.0",
@@ -83,7 +83,7 @@
     "snazzy": "^5.0.0",
     "standard": "8.6.0",
     "standard-flow": "^1.0.0",
-    "supertest": "^2.0.1",
+    "supertest": "^2.0.1"
   },
   "ava": {
     "files": [
@@ -114,7 +114,8 @@
   "config": {
     "ghooks": {
       "pre-commit": "if [ -d 'ignite-base' ]; then cd ignite-base; fi; npm run lint"
-    },
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuminousLeeks/Pharos.git"
