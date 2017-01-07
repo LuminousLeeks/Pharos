@@ -19,8 +19,8 @@ export default {
     bottom: -55,
     width: 50,
     height: 50,
-    borderRadius: 25,
-    padding: 15
+    borderRadius: 25
+
 
   },
   root: {

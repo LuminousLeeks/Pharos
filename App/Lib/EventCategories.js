@@ -1,42 +1,31 @@
+import React from 'react'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
+
 export default {
   waitTime: {
     description: 'Long wait time',
-    vectorIcon: {
-      designer: 'FontAwesome',
-      iconName: 'hand-rock-o'
-    }
-    event: ['evantA', 'eventB', 'eventC']
+    icon: ({size}) => (<FontAwesome name='hand-rock-o' size= {size}/>),
+    events: ['evantA', 'eventB', 'eventC']
   },
   crime: {
     description: 'Crimes found',
-    vectorIcon: {
-      designer: 'FontAwesome',
-      iconName: 'hand-paper-o'
-    }
-    event: ['evantD', 'eventE', 'eventF']
+    icon: ({size}) => (<FontAwesome name='hand-paper-o' size= {size}/>),
+    events: ['evantD', 'eventE', 'eventF']
   },
   publicEvent: {
     description: 'Public events',
-    vectorIcon: {
-      designer: 'FontAwesome',
-      iconName: 'hand-paper-o'
-    }
-    event: ['evantG', 'eventH', 'eventI']
+    icon: ({size}) => (<FontAwesome name='hand-scissors-o' size= {size}/>),
+    events: ['evantG', 'eventH', 'eventI']
   },
   hazard: {
     description: 'Hazard events',
-    vectorIcon: {
-      designer: 'FontAwesome',
-      iconName: 'hand-scissors-o'
-    }
-    event: ['evantJ', 'eventK', 'eventL']
+    icon: ({size}) => (<FontAwesome name='hand-lizard-o' size= {size}/>),
+    events: ['evantJ', 'eventK', 'eventL']
   },
   commute: {
     description: 'Commute related events',
-    vectorIcon: {
-      designer: 'FontAwesome',
-      iconName: 'hand-spock-o'
-    }
-    event: ['evantM', 'eventN', 'eventO']
+    icon: ({size}) => (<FontAwesome name='hand-spock-o' size= {size}/>),
+    events: ['evantM', 'eventN', 'eventO']
   },
 }
