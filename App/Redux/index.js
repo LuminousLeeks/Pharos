@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-const map = (state = {
+const mapAction = (state = {
   isFetching: false,
   message: ''
 }, action) => {
@@ -20,7 +20,7 @@ const map = (state = {
 }
 
 const rootReducer = combineReducers({
-  map
+  mapAction
 })
 
 export default rootReducer

@@ -130,8 +130,8 @@ MaterialCommunityIcons/ bomb
 */
 
 // itemRadius (Number) 30 - Menu item radius
-// menuRadius (Number) 100- Distance between root and items in open state.
-// spreadAngle (Number: 0 - 360) 360 - The angle in degrees based on which menu items are spread on a circle around our root. E.g. 360 full circle, 180 half of circle and so on.
+// menuRadius (Number) 60- Distance between root and items in open state.
+// spreadAngle (Number: 0 - 360) 90 - The angle in degrees based on which menu items are spread on a circle around our root. E.g. 360 full circle, 180 half of circle and so on.
 // startAngle (Number) 0 - Items are distributed in clockwise direction starting from startAngle. 0 is left, 90 top, and so on.
 
 

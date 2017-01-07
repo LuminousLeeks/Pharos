@@ -7,6 +7,7 @@ import NavigationDrawer from './NavigationDrawer'
 
 // screens identified by the router
 import Mapview from '../Containers/Mapview'
+import LoginScreen from '../Containers/LoginScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -32,6 +33,11 @@ class NavigationRouter extends Component {
               component={Mapview}
               title='Pharos'
               />
+            <Scene
+              key='loginScreen'
+              component={LoginScreen}
+              title='Login Screen'
+              />              
           </Scene>
         </Scene>
       </Router>
