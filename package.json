@@ -30,8 +30,15 @@
   "dependencies": {
     "apisauce": "^0.6.0",
     "express": "^4.14.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "express": "^4.14.0",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
+    "mocha": "^3.2.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "querystringify": "0.0.4",
@@ -44,7 +51,7 @@
     "react-native-drawer": "^2.3.0",
     "react-native-i18n": "^0.1.1",
     "react-native-maps": "^0.11.0",
-    "react-native-radial-menu": "^1.0.1",
+    "react-native-material-design": "^0.3.7",
     "react-native-router-flux": "^3.37.0",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^4.4.6",
@@ -52,10 +59,12 @@
     "redux-logger": "^2.7.4",
     "redux-persist": "^3.5.0",
     "redux-saga": "^0.13.0",
+    "redux-thunk": "^2.1.0" ,   
     "reduxsauce": "0.2.0",
     "seamless-immutable": "^6.3.0",
     "superagent": "^3.3.1",
-    "sequelize": "^3.28.0"
+    "sequelize": "^3.28.0",
+    "bluebird": "^3.4.7"
   },
   "devDependencies": {
     "ava": "^0.17.0",
@@ -113,7 +122,7 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "if [ -d 'ignite-base' ]; then cd ignite-base; fi; npm run lint"
+      "pre-commit": "if [ -d 'ignite-base' ]; then cd ignite-base; fi;"
     }
   },
   "repository": {

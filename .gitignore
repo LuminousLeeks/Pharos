@@ -15,7 +15,7 @@ pids
 
 # Xcode
 #
-build/
+ios/build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -55,5 +55,4 @@ buck-out/
 \.buckd/
 android/app/libs
 *.keystore
-
 

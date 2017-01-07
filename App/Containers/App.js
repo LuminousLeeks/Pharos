@@ -1,16 +1,29 @@
-// @flow
-
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import '../I18n/I18n' // keep before root container
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+
 import RootContainer from './RootContainer'
-import createStore from '../Redux'
-import applyConfigSettings from '../Config'
+import rootReducer from '../Redux'
+// import createStore from '../Redux';
+// import applyConfigSettings from '../Config';
+
+const loggerMiddleware = createLogger()
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware,
+  loggerMiddleware
+)(createStore)
+
+const configureStore = function (initialState: Object = {}): Function {
+  return createStoreWithMiddleware(rootReducer, initialState)
+}
 
 // Apply config overrides
-applyConfigSettings()
+// applyConfigSettings();
 // create our store
-const store = createStore()
+const store = configureStore()
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
@@ -28,7 +41,7 @@ class App extends Component {
         <RootContainer />
       </Provider>
     )
-  }
-}
+  };
+};
 
 export default App
