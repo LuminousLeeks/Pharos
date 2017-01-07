@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+/* eslint-disable */
+
+>>>>>>> add eslint ignore
 var React = require('react');
 var ReactNative = require('react-native');
 var {
