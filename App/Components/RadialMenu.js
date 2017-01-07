@@ -1,23 +1,29 @@
 import React from 'react'
-import { Badge } from 'native-base';
+import { Badge, Button } from 'native-base';
 
 import { View, Alert } from 'react-native'
 
 import RadialMenu from './RadialMenu_npm'
 import Styles from './Styles/RadialMenuStyles'
+import EventCategories from '../Lib/EventCategories'
+// const Icon = EventCategories.waitTime.icon
+
+// import Icon.FontAwesome from 'react-native-vector-icons/FontAwesome'
+// import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 // import IconButton from './IconButton'
-
+const EventCategory = EventCategories.waitTime;
 const Application = React.createClass({
-  handleSelect: function(category) {
+  handleSelect: function(events, description) {
     Alert.alert(
-      'Report event category: ' + category,
+      'Report event category: ' + description,
       null,
-      [
-        {text: 'Foo', onPress: () => console.log('Foo Pressed!')},
-        {text: 'Bar', onPress: () => console.log('Bar Pressed!')},
-        {text: 'Baz', onPress: () => console.log('Baz Pressed!')},
-      ]
+      events.map((event) => {
+        return {
+          text: event,
+          onPress: (event) => {console.log(event)}
+        }
+      })
     )
   },
   render: function() {
@@ -32,11 +38,21 @@ const Application = React.createClass({
           startAngle={0}
         >
           <Badge style={Styles.root}>Report</Badge>
-          <Badge style={Styles.option} primary onSelect={() => {this.handleSelect('B')}}>B</Badge>
-          <Badge style={Styles.option} success onSelect={() => {this.handleSelect('C')}}>C</Badge>
-          <Badge style={Styles.option} info onSelect={() => {this.handleSelect('D')}}>D</Badge>
-          <Badge style={Styles.option} warning onSelect={() => {this.handleSelect('E')}}>E</Badge>
-          <Badge style={Styles.option} danger onSelect={() => {this.handleSelect('F')}}>F</Badge>          
+          { Object.keys(EventCategories)
+            .map((EventCategoryKey) => EventCategories[EventCategoryKey])
+            .map((EventCategory, index) => 
+              <Button
+                style={Styles.option}
+                warning
+                key={index} 
+                onSelect={() => {
+                  this.handleSelect(EventCategory.events, EventCategory.description)
+                }}
+              >
+                <EventCategory.icon size={30} />
+              </Button>
+            ) 
+          }
         </RadialMenu>
       </View>
     )
@@ -44,4 +60,5 @@ const Application = React.createClass({
 })
 
 export default Application
+
 
