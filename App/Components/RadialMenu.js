@@ -1,9 +1,7 @@
 import React from 'react'
-<<<<<<< HEAD
-import { View, Text} from 'react-native'
-=======
+
 import { View, Text } from 'react-native'
->>>>>>> add eslint ignore
+
 import RadialMenu from './RadialMenu_npm'
 // import IconButton from './IconButton'
 
