@@ -9,7 +9,6 @@ pids
 *.pid
 *.seed
 
-
 # OSX
 #
 .DS_Store
@@ -48,7 +47,7 @@ node_modules/
 npm-debug.log
 
 #Module dependencies
-#
+node_modules/
 bower_components/
 
 # BUCK
@@ -56,3 +55,5 @@ buck-out/
 \.buckd/
 android/app/libs
 *.keystore
+
+
