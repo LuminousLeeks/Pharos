@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
-import { View, Text } from 'react-native'
-import { Button } from 'native-base'
-import Styles from './Styles/MapviewExampleStyle'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { Colors, Images, Metrics } from '../Themes'
+import React, { PropTypes } from 'react';
+import { View, Text } from 'react-native';
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Styles from './Styles/MapviewExampleStyle';
+import { Metrics } from '../Themes';
 
 
 class Callout extends React.Component {
@@ -20,14 +20,14 @@ class Callout extends React.Component {
       notification: {
         ...this.state.notification,
         votingDisabled: true,
-      }
+      },
     });
 
     const vote = {
       // TODO: add user id
       userId: null,
       notificationId: this.state.notification.id,
-      vote: false
+      vote: false,
     };
 
     // TODO: send update to server via some  sendToServer function which will
@@ -39,15 +39,15 @@ class Callout extends React.Component {
     this.setState({
       notification: {
         ...this.state.notification,
-        votingDisabled: true
-      }
+        votingDisabled: true,
+      },
     });
 
     const vote = {
       // TODO: add user id
       userId: null,
       notificationId: this.state.notification.id,
-      vote: false
+      vote: false,
     };
 
     // TODO: send update to server via some  sendToServer function which will
