@@ -1,100 +1,149 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import MapView from 'react-native-maps'
+import { Colors, Images, Metrics } from '../Themes'
 import { calculateRegion } from '../Lib/MapHelpers'
 import MapCallout from '../Components/MapCallout'
 import Styles from './Styles/MapviewStyle'
 import RadialMenu from '../Components/RadialMenu'
+import RadialMenu from  'react-native-radial-menu'
+import exampleNotifications from '../../data/exampleData.js'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Callout from './Callout'
 
-/* ***********************************************************
-* IMPORTANT!!! Before you get started, if you are going to support Android,
-* PLEASE generate your own API key and add it to android/app/src/main/AndroidManifest.xml
-* We've included our API key for demonstration purposes only, and it will be regenerated from
-* time to time. As such, neglecting to complete this step could potentially break your app in production!
-* https://console.developers.google.com/apis/credentials
-* Also, you'll need to enable Google Maps Android API for your project:
-* https://console.developers.google.com/apis/api/maps_android_backend/
-*************************************************************/
+// TODO: make callout render with dynamic width
+import { StyleSheet } from 'react-native'
+const calloutStyles = StyleSheet.create({
+  width: 100
+});
+
 
 class MapviewExample extends React.Component {
-  /* ***********************************************************
-  * This example is only intended to get you started with the basics.
-  * There are TONS of options available from traffic to buildings to indoors to compass and more!
-  * For full documentation, see https://github.com/lelandrichardson/react-native-maps
-  *************************************************************/
+  constructor(props) {
+    super(props);
 
-  constructor (props) {
-    super(props)
-    /* ***********************************************************
-    * STEP 1
-    * Set the array of locations to be displayed on your map. You'll need to define at least
-    * a latitude and longitude as well as any additional information you wish to display.
-    *************************************************************/
-    const locations = [
-      { title: 'Location A', latitude: 37.78825, longitude: -122.4324 },
-      { title: 'Location B', latitude: 37.75825, longitude: -122.4624 }
-    ]
-    /* ***********************************************************
-    * STEP 2
-    * Set your initial region either by dynamically calculating from a list of locations (as below)
-    * or as a fixed point, eg: { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
-    *************************************************************/
-    const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
+    // TODO: Set the initialRegion to the last know position read from datatbase
+    let initialRegion = { latitude: 37.7749, longitude: -122.4194, latitudeDelta: 0.1, longitudeDelta: 0.1 };
+
+    // TODO: remove exampleNotifications
     this.state = {
-      region,
-      locations,
+      region: initialRegion,
+      currentLocation: {},
+      notifications: exampleNotifications || [],
       showUserLocation: true
     }
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
   }
 
-  componentWillReceiveProps (newProps) {
-    /* ***********************************************************
-    * STEP 3
-    * If you wish to recenter the map on new locations any time the
-    * Redux props change, do something like this:
-    *************************************************************/
-    // this.setState({
-    //   region: calculateRegion(newProps.locations, { latPadding: 0.1, longPadding: 0.1 })
-    // })
+  componentDidMount() {
+    this.getCurrentPosition();
+    this.watchPosition();
+    this.retrieveMapMarkers();
   }
 
-  onRegionChange (newRegion) {
-    /* ***********************************************************
-    * STEP 4
-    * If you wish to fetch new locations when the user changes the
-    * currently visible region, do something like this:
-    *************************************************************/
-    // const searchRegion = {
-    //   ne_lat: newRegion.latitude + newRegion.latitudeDelta,
-    //   ne_long: newRegion.longitude + newRegion.longitudeDelta,
-    //   sw_lat: newRegion.latitude - newRegion.latitudeDelta,
-    //   sw_long: newRegion.longitude - newRegion.longitudeDelta
-    // }
-    // Fetch new data...
+  getCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const region = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          // TODO: changed for development purposes. Put these back in later
+          // latitudeDelta: 0.01,
+          // longitudeDelta: 0.01
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1
+        };
+        const currentLocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
+
+        this.setState( { region, currentLocation } );
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
 
-  calloutPress (location) {
-    /* ***********************************************************
-    * STEP 5
-    * Configure what will happen (if anything) when the user
-    * presses your callout.
-    *************************************************************/
-    console.tron.log(location)
+  // Set up watchId so we can end the geolocation watch when comonent unmounts
+  watchID: ?number = null;
+
+  watchPosition() {
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+        var lastPosition = JSON.stringify(position);
+        const region = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          ...this.state.region
+        };
+        const currentLocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
+
+        this.setState({ region, currentLocation });
+      },
+      (error) => alert(JSON.stringify(error))
+      // TODO: remove this for production
+      //, {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
 
-  renderMapMarkers (location) {
-    /* ***********************************************************
-    * STEP 6
-    * Customize the appearance and location of the map marker.
-    * Customize the callout in ../Components/MapCallout.js
-    *************************************************************/
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
 
+  onRegionChange () {
+    this.retrieveMapMarkers();
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+
+  calculateRadius() {
+    var lat1 = this.state.region.latitude;
+    var lat2 = this.state.region.latitude + this.state.region.latitudeDelta;
+    var lon1 = this.state.region.longitude;
+    var lon2 = this.state.region.longitude + this.state.region.longitudeDelta;
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2-lat1);  // this.deg2rad below
+    var dLon = this.deg2rad(lon2-lon1);
+    var a =
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c; // Distance in km
+    return d;
+  }
+
+  // TODO: Implement this function to get notifications from socket
+  // Sends a region object with form { latitude: 37.7749, longitude: -122.4194, radius };
+  // Outputs expects to recieve an array of nitifications and sets the state's notifications to whatever it is
+  retrieveMapMarkers () {
+    const data = {
+      latitude: this.state.region.latitude,
+      longitude: this.state.region.longitude,
+      radius: this.calculateRadius.call(this)
+    }
+
+    // this.state.region;
+    // this.setState({ notifications });
+  }
+
+  renderMapMarkers (notification) {
     return (
-      <MapView.Marker key={location.title} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-        <MapCallout location={location} onPress={this.calloutPress} />
+      <MapView.Marker key={notification.title} coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
+      title={notification.title} description={notification.category}
+      >
+        <Icon name="map-marker" size={30} color="#4F8EF7" />
+        <MapView.Callout style={calloutStyles} >
+          <Callout notification={notification} notifications={this.state.notifications} />
+        </MapView.Callout>
       </MapView.Marker>
     )
   }
@@ -105,10 +154,12 @@ class MapviewExample extends React.Component {
         <MapView
           style={Styles.map}
           initialRegion={this.state.region}
+          region={this.state.region}
           onRegionChangeComplete={this.onRegionChange}
           showsUserLocation={this.state.showUserLocation}
+          followsUserLocation={this.state.followsUserLocation}
         >
-          {this.state.locations.map((location) => this.renderMapMarkers(location))}
+          {this.state.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
         <RadialMenu />
       </View>
