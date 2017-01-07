@@ -11,31 +11,31 @@ import styles from './Styles/DrawerButtonStyles'
 //   />
 // )
 
-// type DrawerButtonProps = {
-//   text: string,
-//   onPress: () => void
-// }
-
-// class DrawerButton extends Component {
-//   props: DrawerButtonProps
-
-//   render () {
-//     return (
-//       <TouchableOpacity onPress={this.props.onPress}>
-//         <Text style={styles.text}>{this.props.text}</Text>
-//       </TouchableOpacity>
-//     )
-//   }
-// }
+type DrawerButtonProps = {
+  text: string,
+  onPress: () => void
+}
 
 class DrawerButton extends Component {
+  props: DrawerButtonProps
+
   render () {
     return (
-      <TouchableOpacity onPress={() => {}}>
-        <Text style={styles.text}>{}</Text>
+      <TouchableOpacity onPress={this.props.onPress}>
+        <Text style={styles.text}>{this.props.text}</Text>
       </TouchableOpacity>
     )
-  };
-};
+  }
+}
+
+// class DrawerButton extends Component {
+//   render () {
+//     return (
+//       <TouchableOpacity onPress={() => {}}>
+//         <Text style={styles.text}>{}</Text>
+//       </TouchableOpacity>
+//     )
+//   };
+// };
 
 export default DrawerButton
