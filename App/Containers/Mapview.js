@@ -7,7 +7,6 @@ import { calculateRegion } from '../Lib/MapHelpers'
 import MapCallout from '../Components/MapCallout'
 import Styles from './Styles/MapviewStyle'
 import RadialMenu from '../Components/RadialMenu'
-import RadialMenu from  'react-native-radial-menu'
 import exampleNotifications from '../../data/exampleData.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Callout from './Callout'
@@ -15,7 +14,7 @@ import Callout from './Callout'
 // TODO: make callout render with dynamic width
 import { StyleSheet } from 'react-native'
 const calloutStyles = StyleSheet.create({
-  width: 100
+  width: 200,
 });
 
 
@@ -104,20 +103,20 @@ class MapviewExample extends React.Component {
   }
 
   calculateRadius() {
-    var lat1 = this.state.region.latitude;
-    var lat2 = this.state.region.latitude + this.state.region.latitudeDelta;
-    var lon1 = this.state.region.longitude;
-    var lon2 = this.state.region.longitude + this.state.region.longitudeDelta;
-    var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2-lat1);  // this.deg2rad below
-    var dLon = this.deg2rad(lon2-lon1);
-    var a =
+    let R = 6371; // Radius of the earth in km
+    let lat1 = this.state.region.latitude;
+    let lat2 = this.state.region.latitude + this.state.region.latitudeDelta;
+    let lon1 = this.state.region.longitude;
+    let lon2 = this.state.region.longitude + this.state.region.longitudeDelta;
+    let dLat = this.deg2rad(lat2-lat1);  // this.deg2rad below
+    let dLon = this.deg2rad(lon2-lon1);
+    let a =
       Math.sin(dLat/2) * Math.sin(dLat/2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon/2) * Math.sin(dLon/2)
       ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var d = R * c; // Distance in km
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    let d = R * c; // Distance in km
     return d;
   }
 
@@ -130,6 +129,18 @@ class MapviewExample extends React.Component {
       longitude: this.state.region.longitude,
       radius: this.calculateRadius.call(this)
     }
+    //
+    // fetch('http://localhost:3000/', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     firstParam: 'yourValue',
+    //     secondParam: 'yourOtherValue',
+    //   });
+    // });
 
     // this.state.region;
     // this.setState({ notifications });

@@ -2,9 +2,8 @@ import React, { PropTypes } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Styles from './Styles/MapviewExampleStyle';
+import Styles from './Styles/MapviewStyle';
 import { Metrics } from '../Themes';
-
 
 class Callout extends React.Component {
   constructor(props) {
