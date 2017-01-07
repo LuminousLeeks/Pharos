@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import MapView from 'react-native-maps'
-// import { calculateRegion } from '../Lib/MapHelpers';
-import Styles from './Styles/MapviewStyle'
+import { calculateRegion } from '../Lib/MapHelpers'
 import MapCallout from '../Components/MapCallout'
+import Styles from './Styles/MapviewStyle'
 import RadialMenu from '../Components/RadialMenu'
 
 /* ***********************************************************
@@ -40,14 +40,14 @@ class MapviewExample extends React.Component {
     * Set your initial region either by dynamically calculating from a list of locations (as below)
     * or as a fixed point, eg: { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
     *************************************************************/
-    // const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
+    const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
     this.state = {
-      // region,
-      locations
-      // showUserLocation: true
+      region,
+      locations,
+      showUserLocation: true
     }
-    // this.renderMapMarkers = this.renderMapMarkers.bind(this)
-    // this.onRegionChange = this.onRegionChange.bind(this)
+    this.renderMapMarkers = this.renderMapMarkers.bind(this)
+    this.onRegionChange = this.onRegionChange.bind(this)
   }
 
   componentWillReceiveProps (newProps) {
@@ -93,38 +93,12 @@ class MapviewExample extends React.Component {
     *************************************************************/
 
     return (
-      <MapView.Marker
-        key={location.title}
-        coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-        <MapCallout
-          location={location}
-          onPress={this.calloutPress}
-        />
+      <MapView.Marker key={location.title} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapCallout location={location} onPress={this.calloutPress} />
       </MapView.Marker>
     )
   }
-  render () {
-    return (
-      <View style={Styles.container}>
-        <MapView
-          style={Styles.map}
-        >
-          {this.state.locations.map((location) => this.renderMapMarkers(location))}
-        </MapView>
-        <RadialMenu />
-      </View>
-    )
-  }
-}
-const mapStateToProps = (state) => {
-  return {
-    // ...redux state to props here
-  }
-}
 
-export default connect(mapStateToProps)(MapviewExample)
-
-/*
   render () {
     return (
       <View style={Styles.container}>
@@ -140,7 +114,7 @@ export default connect(mapStateToProps)(MapviewExample)
       </View>
     )
   }
-*/
+}
 /*
           <Icon name="menu" size={30} color="" />
           <Icon name="menu" size={30} color="#900" />
@@ -159,3 +133,12 @@ MaterialCommunityIcons/ bomb
 // menuRadius (Number) 100- Distance between root and items in open state.
 // spreadAngle (Number: 0 - 360) 360 - The angle in degrees based on which menu items are spread on a circle around our root. E.g. 360 full circle, 180 half of circle and so on.
 // startAngle (Number) 0 - Items are distributed in clockwise direction starting from startAngle. 0 is left, 90 top, and so on.
+
+
+const mapStateToProps = (state) => {
+  return {
+    // ...redux state to props here
+  }
+}
+
+export default connect(mapStateToProps)(MapviewExample)
