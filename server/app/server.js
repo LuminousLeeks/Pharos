@@ -1,46 +1,41 @@
-
 //  TODO: Uncomment when SSL set up
 // const https = require('https');
+require('dotenv').config();
 
+const port = require('./../env/index').PORT;
 const express = require('express');
+const db = require('../db/db');
+const path = require('path');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const logger = require('./utils/logger');
 
 const app = express();
 
-const path = require('path');
-const logger = require('./utils/logger');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const config = require('./config');
-
 //  Middleware
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 //  Logging Middleware
 app.use(morgan('dev'));
-app.use('./utils/logger.js', express.static(path.join(__dirname, 'allLogs.log')));
+app.use('./utils/logger', express.static(path.join(__dirname, 'allLogs')));
 
-//  JwT Secret Config
-app.set('g14classified', config.secret);
-
-
-const port = process.env.PORT || 8090;
 const server = require('http').Server(app);
 
-//  Server and Socket.io initialization
 server.listen(port, () => logger.info(`Server listening on ${port}!`));
+//  Server and Socket.io initialization
 //  TODO: SSL? const sslPort = 3011;
-
+//  Socket.io connection established
 const io = require('socket.io')(server);
 
-//  Prevent circular dependency by defining router after exports
+//  Prevent circular dependency by defining routes after exports
 module.exports = { app, io };
-const router = require('./routes.js');
+const router = require('./routes/router');
 
 //  Routes
 app.use('/api', router);
 
 //  TODO: Determine whether additional handling/rendering of static files is needed
 //  Send all other API requests to client side router
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.status(200).send('Hello from Pharos server!');
 });

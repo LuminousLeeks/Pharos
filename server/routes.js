@@ -1,12 +1,14 @@
-const router = require('express').Router()
 
-// const sessions = require('./controllers/restServer/sessions.js');
-// const pharosController = require('./controllers/socketServer/pharos.js');
+const router = require('express').Router();
 
-pharosRoute.route('/authenticate')
-  .post((req, res) => {
-    res.send('received post');
-  });
+
+const Sessions = require('./controllers/RESTController/Auth');
+const socketController = require('./controllers/SocketController/Socket');
+
+//  User Login Controller
+pharosRouter.route('/auth/login')
+  .get(Sessions.loginUser);
+
 
 pharosRoute.route('/authenticate')
   .get((req, res) => {
@@ -15,5 +17,4 @@ pharosRoute.route('/authenticate')
 //  TODO: Build Out Routes
 //  set up HTTP Routes
 //  set up Socket Routes
-module.exports = router
-
+module.exports = router;

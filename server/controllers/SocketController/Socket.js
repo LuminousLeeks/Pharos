@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const pharosSession = require('./../restServer/sessions.js');
+const pharosSession = require('./../RESTController/Sessions.js');
 //  TODO:Session manager needs to be linked
 
 module.exports = (pharosSocket) => {
