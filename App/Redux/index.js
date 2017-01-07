@@ -1,16 +1,26 @@
-// @flow
-
 import { combineReducers } from 'redux'
-import configureStore from './CreateStore'
-import rootSaga from '../Sagas/'
 
-export default () => {
-  /* ------------- Assemble The Reducers ------------- */
-  const rootReducer = combineReducers({
-    temperature: require('./TemperatureRedux').reducer,
-    login: require('./LoginRedux').reducer,
-    search: require('./SearchRedux').reducer
-  })
-
-  return configureStore(rootReducer, rootSaga)
+const map = (state = {
+  isFetching: false,
+  message: ''
+}, action) => {
+  switch (action.type) {
+  case 'A':
+    return Object.assign({}, state, {
+      isFetching: true
+    });
+  case 'B':
+    return Object.assign({}, state, {
+      isFetching: false,
+      message: action.data.message
+    });
+  default:
+    return state
+  }
 }
+
+const rootReducer = combineReducers({
+  map
+})
+
+export default rootReducer

@@ -1,5 +1,5 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
 //  TODO: Build Out Routes
 
-module.exports = router;
+module.exports = router
