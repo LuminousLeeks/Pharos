@@ -11,8 +11,8 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 
 const EventCategory = EventCategories.waitTime;
 class RadialMenuComponent extends React.Component {
-  handleReport (event) {
-    this.props.dispatch(reportEvent(event))
+  handleReport (newEvent) {
+    this.props.dispatch(reportEvent(newEvent))
     NavigationActions.reportEventScreen();
   }
 
@@ -24,12 +24,12 @@ class RadialMenuComponent extends React.Component {
         return {
           text: event,
           onPress: () => {
-            let event = {
+            let newEvent = {
               category: key,
               description: description,
               event: event
             }
-            this.handleReport(event);
+            this.handleReport(newEvent);
             // dispatch(reportEvent({}));
 
           }

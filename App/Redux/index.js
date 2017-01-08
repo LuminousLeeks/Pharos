@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
 
-let initalState = {
+const initalState = {
   fething: false,
-  newEvent: {},
+  newEvent: {
+    category: 'default category',
+    description: 'default description',
+    event: 'default'
+  },
   userInterests: {},
   userLocation: {},
   userName: '',
@@ -49,9 +53,9 @@ const mapAction = (state = initalState, action) => {
     return state
   }
 }
+export default mapAction
+// const rootReducer = combineReducers({
+//   mapAction
+// })
 
-const rootReducer = combineReducers({
-  mapAction
-})
-
-export default rootReducer
+// export default rootReducer

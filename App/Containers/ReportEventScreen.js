@@ -7,10 +7,12 @@ import ReportEventForms from '../Components/ReportEventForms'
 //   dispatch: () => {}
 // };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  return {
   newEvent: state.newEvent
-})
+  // newEvent: {}
+}}
 
-const mapDispatchToProps = () => {}
+// const mapDispatchToProps = () => {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportEventForms)
+export default connect(mapStateToProps, null)(ReportEventForms)
