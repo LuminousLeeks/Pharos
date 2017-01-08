@@ -4,11 +4,11 @@ var request = require('supertest');
 var should = require('should')
 var expect = require('chai').expect;
 var express = require('express');
-request = request('http://localhost:3000');
+request = request('http://localhost:8090');
+
 
 // var db = require('./db/db.js');
 // var User = require('./user/user.js');
-
 
 var app = express();
 
