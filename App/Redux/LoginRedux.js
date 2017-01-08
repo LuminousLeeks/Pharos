@@ -1,54 +1,70 @@
 // @flow
-
-import { createReducer, createActions } from 'reduxsauce'
+import req from 'superagent';
+// import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
+const request = () => {
+  return {
+    type: 'REQUEST',
+  };
+};
 
-const { Types, Creators } = createActions({
-  loginRequest: ['username', 'password'],
-  loginSuccess: ['username'],
-  loginFailure: ['error'],
-  logout: null
-})
+const success = (username) => {
+  return {
+    type: 'SUCCESS',
+    username,
+  }
+};
 
-export const LoginTypes = Types
-export default Creators
+const authFail = (error) => {
+  return  {
+    type: 'AUTH_FAIL',
+    error,
+};
+
+const loginRequest = (username, password) => {
+  return (dispatch) => {
+    dispatch(request);
+    return req.post(url + '/login')
+      .send({username, password})  
+      .end((err, res) => {
+        if(err) { throw err; }
+           //change state to success / failure
+          console.log(res);
+          let data = JSON.parse(res.text);
+          if(data.success) {
+           return dispatch(success(state, { username }));
+          } else {
+           let error = data.error;
+           return failure(state, { error });
+          }
+      });
+  }
+};
+
+// export default 
+
+
+
+//Creators.loginRequest('steve', 'secret') // { type: 'LOGIN_REQUEST', username: 'steve', password: 'secret' }
+// The keys of the object will become keys of the Creators. 
+// They will also become the keys of the Types after being converted to SCREAMING_SNAKE_CASE.
 
 /* ------------- Initial State ------------- */
 
-export const INITIAL_STATE = Immutable({
-  username: null,
-  error: null,
-  fetching: false
-})
-
 /* ------------- Reducers ------------- */
-
-// we're attempting to login
-export const request = (state: Object) => state.merge({ fetching: true })
-
-// we've successfully logged in
-export const success = (state: Object, { username }: Object) =>
-  state.merge({ fetching: false, error: null, username })
-
-// we've had a problem logging in
-export const failure = (state: Object, { error }: Object) =>
-  state.merge({ fetching: false, error })
-
-// we've logged out
-export const logout = (state: Object) => INITIAL_STATE
 
 /* ------------- Hookup Reducers To Types ------------- */
 
-export const reducer = createReducer(INITIAL_STATE, {
-  [Types.LOGIN_REQUEST]: request,
-  [Types.LOGIN_SUCCESS]: success,
-  [Types.LOGIN_FAILURE]: failure,
-  [Types.LOGOUT]: logout
-})
+// export const reducer = createReducer(INITIAL_STATE, {
+//   [Types.LOGIN_REQUEST]: signinRequest,
+//   [Types.LOGIN_SUCCESS]: success,
+//   [Types.LOGIN_FAILURE]: failure,
+//   [Types.LOGOUT]: logout
+// })
 
 /* ------------- Selectors ------------- */
 
 // Is the current user logged in?
-export const isLoggedIn = (loginState: Object) => loginState.username !== null
+// export const isLoggedIn = (loginState: Object) => loginState.username !== null

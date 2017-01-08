@@ -14,18 +14,18 @@ import {
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
 import {Images, Metrics} from '../Themes'
-import LoginActions from '../Redux/LoginRedux'
+import { loginRequest, registerRequest } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import I18n from 'react-native-i18n'
 
 type LoginScreenProps = {
   dispatch: () => any,
   fetching: boolean,
-  attemptLogin: () => void
+  attemptLogin: () => void,
+  attemptRegister: () => void
 }
 
 class LoginScreen extends React.Component {
-
+s
   props: LoginScreenProps
 
   state: {
@@ -49,7 +49,7 @@ class LoginScreen extends React.Component {
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
-    this.isAttempting = false
+    this.isAttempting = false;
   }
 
   componentWillReceiveProps (newProps) {
@@ -92,10 +92,16 @@ class LoginScreen extends React.Component {
   }
 
   handlePressLogin = () => {
-    const { username, password } = this.state
-    this.isAttempting = true
+    const { username, password } = this.state;
+    this.isAttempting = true;
     // attempt a login - a saga is listening to pick it up from here.
-    this.props.attemptLogin(username, password)
+    this.props.attemptLogin(username, password); //dispatch an action from here.
+  }
+
+  handlePressRegister = () => {
+    const { username, password } = this.state;
+    this.isAttempting = true;
+    this.props.attemptRegister(username, password);
   }
 
   handleChangeUsername = (text) => {
@@ -116,7 +122,7 @@ class LoginScreen extends React.Component {
         <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
         <View style={Styles.form}>
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>{I18n.t('username')}</Text>
+            <Text style={Styles.rowLabel}>User Name:</Text>
             <TextInput
               ref='username'
               style={textInputStyle}
@@ -129,11 +135,11 @@ class LoginScreen extends React.Component {
               onChangeText={this.handleChangeUsername}
               underlineColorAndroid='transparent'
               onSubmitEditing={() => this.refs.password.focus()}
-              placeholder={I18n.t('username')} />
+              />
           </View>
 
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>{I18n.t('password')}</Text>
+            <Text style={Styles.rowLabel}>Password: </Text>
             <TextInput
               ref='password'
               style={textInputStyle}
@@ -146,24 +152,22 @@ class LoginScreen extends React.Component {
               secureTextEntry
               onChangeText={this.handleChangePassword}
               underlineColorAndroid='transparent'
-              onSubmitEditing={this.handlePressLogin}
-              placeholder={I18n.t('password')} />
+              onSubmitEditing={this.handlePressLogin} />
           </View>
 
           <View style={[Styles.loginRow]}>
             <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
               <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
+                <Text style={Styles.loginText}>Login</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.pop}>
+            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ this.handlePressRegister }>
               <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('cancel')}</Text>
+                <Text style={Styles.loginText}>Signup</Text>
               </View>
             </TouchableOpacity>
           </View>
         </View>
-
       </ScrollView>
     )
   }
@@ -178,7 +182,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (username, password) => dispatch(LoginActions.loginRequest(username, password))
+    attemptLogin: (username, password) => dispatch(loginRequest(username, password)),
+    attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
   }
 }
 
