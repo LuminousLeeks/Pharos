@@ -10,12 +10,10 @@ import RadialMenu from '../Components/RadialMenu'
 import exampleNotifications from '../../data/exampleData.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Callout from './Callout'
+import Icons from '../Lib/EventCategories';
 
 // TODO: make callout render with dynamic width
-import { StyleSheet } from 'react-native'
-const calloutStyles = StyleSheet.create({
-  width: 200,
-});
+
 
 
 class MapviewExample extends React.Component {
@@ -49,10 +47,10 @@ class MapviewExample extends React.Component {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           // TODO: changed for development purposes. Put these back in later
-          // latitudeDelta: 0.01,
-          // longitudeDelta: 0.01
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
+          // latitudeDelta: 0.1,
+          // longitudeDelta: 0.1
         };
         const currentLocation = {
           latitude: position.coords.latitude,
@@ -151,9 +149,9 @@ class MapviewExample extends React.Component {
       <MapView.Marker key={notification.title} coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
       title={notification.title} description={notification.category}
       >
-        <Icon name="map-marker" size={30} color="#4F8EF7" />
-        <MapView.Callout style={calloutStyles} >
-          <Callout notification={notification} notifications={this.state.notifications} />
+        <View color="#4F8EF7" >{Icons[notification.category].icon({size: Metrics.icons.medium})}</View>
+        <MapView.Callout style={ Styles.myCallout } >
+          <Callout notification={notification} />
         </MapView.Callout>
       </MapView.Marker>
     )
@@ -172,7 +170,7 @@ class MapviewExample extends React.Component {
         >
           {this.state.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
-        <RadialMenu />
+        <RadialMenu notifications={this.state.notifications} region={this.state.region}/>
       </View>
     )
   }
