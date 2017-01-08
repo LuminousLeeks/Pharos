@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //  Logging Middleware
 app.use(morgan('dev'));
-app.use('./utils/logger', express.static(path.join(__dirname, 'allLogs')));
+app.use(logger, express.static(path.join(__dirname, 'allLogs')));
 
 const server = require('http').Server(app);
 
