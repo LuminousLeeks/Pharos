@@ -15,7 +15,7 @@ const initalState = {
 
 }
 
-const mapAction = (state = initalState, action) => {
+const mapAction = (state = [], action) => {
   switch (action.type) {
   case 'REPORT_EVENT':
     return {
@@ -23,10 +23,7 @@ const mapAction = (state = initalState, action) => {
       newEvent: action.newEvent
     };
   case 'LOAD_EVENTS':
-    return {
-      ...state,
-      // action.events
-    };
+    return action.events
   case 'UPDATE_EVENTS':
     return {
       ...state,
@@ -47,7 +44,7 @@ const mapAction = (state = initalState, action) => {
   case 'STOP_FETCHING':
     return {
       ...state,
-      fetching: false      
+      fetching: false
     }
   default:
     return state
