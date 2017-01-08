@@ -15,6 +15,8 @@ import LoginScreen from '../Containers/LoginScreen'
 
 class NavigationRouter extends Component {
   render () {
+    let test = 'Report';
+
     return (
       <Router>
         <Scene
@@ -32,11 +34,13 @@ class NavigationRouter extends Component {
               key='mapview'
               component={Mapview}
               title='Pharos'
+              socket={test}
               />
             <Scene
               key='loginScreen'
               component={LoginScreen}
               title='Login Screen'
+              socket={test}
               />              
           </Scene>
         </Scene>

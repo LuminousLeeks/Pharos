@@ -6,8 +6,8 @@ import { Colors, Images, Metrics } from '../Themes'
 import { calculateRegion } from '../Lib/MapHelpers'
 import MapCallout from '../Components/MapCallout'
 import Styles from './Styles/MapviewStyle'
-import RadialMenu from '../Components/RadialMenu'
-import exampleNotifications from '../../data/exampleData.js'
+import RadialMenu from './RadialMenu'
+// import exampleNotifications from '../../data/exampleData.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Callout from './Callout'
 import Icons from '../Lib/EventCategories';
@@ -27,7 +27,8 @@ class MapviewExample extends React.Component {
     this.state = {
       region: initialRegion,
       currentLocation: {},
-      notifications: exampleNotifications || [],
+      // notifications: exampleNotifications || [],
+      notifications: [],
       showUserLocation: true
     }
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
@@ -170,7 +171,9 @@ class MapviewExample extends React.Component {
         >
           {this.state.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
-        <RadialMenu notifications={this.state.notifications} region={this.state.region}/>
+
+        <RadialMenu notifications={this.state.notifications} region={this.state.region} socket={this.props.socket}/>
+
       </View>
     )
   }
