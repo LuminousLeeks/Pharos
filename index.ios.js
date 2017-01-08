@@ -21,9 +21,14 @@ const socket = io('http://127.0.0.1:3000', {
 
 socket.on('connect', () => {
   console.log('connected!');
+
   socket.emit('text', 'Hi Server!');
   socket.on('text', (data) => {
     console.log(data);
+  });
+
+  socket.emit('getNotifications', (data) => {
+    console.log("notifications", data);
   });
 });
 
