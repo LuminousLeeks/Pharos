@@ -11,26 +11,34 @@ import RadialMenu from './RadialMenu'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Callout from './Callout'
 import Icons from '../Lib/EventCategories';
-
-// TODO: make callout render with dynamic width
-
+import { loadEvents } from '../Actions'
 
 
 class MapviewExample extends React.Component {
   constructor(props) {
     super(props);
 
-    // TODO: Set the initialRegion to the last know position read from datatbase
+    console.log('props.not', props.notifications);
+
+    this.socket = props.props.socket;
+
+    console.log("props",props);
+
+    // TODO: Set the initialRegion to the last know user position read from datatbase
     let initialRegion = { latitude: 37.7749, longitude: -122.4194, latitudeDelta: 0.1, longitudeDelta: 0.1 };
 
     // TODO: remove exampleNotifications
+    // TODO: consider moving some of these properties into the store
     this.state = {
       region: initialRegion,
       currentLocation: {},
       // notifications: exampleNotifications || [],
-      notifications: [],
+      notifications: props.notifications,
       showUserLocation: true
     }
+
+
+    this.retrieveMapMarkers.call(this)
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
   }
@@ -123,28 +131,24 @@ class MapviewExample extends React.Component {
   // Sends a region object with form { latitude: 37.7749, longitude: -122.4194, radius };
   // Outputs expects to recieve an array of nitifications and sets the state's notifications to whatever it is
   retrieveMapMarkers () {
-    const data = {
+    console.log('states',this.state);
+    const location = {
       latitude: this.state.region.latitude,
       longitude: this.state.region.longitude,
       radius: this.calculateRadius.call(this)
     }
-    //
-    // fetch('http://localhost:3000/', {
-    //   method: 'GET',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     firstParam: 'yourValue',
-    //     secondParam: 'yourOtherValue',
-    //   });
-    // });
 
-    // this.state.region;
-    // this.setState({ notifications });
+    // TODO: Send the location object th the server to
+    // get notification in the correct area
+    this.socket.emit('getNotifications', (data) => {
+      console.log("notifications in map view", data);
+      //TODO: CODE IS BROKEN HERE. DOES NOT UPDATE THE STORE
+      this.props.dispatch(loadEvents(data));
+      console.log('this.notifications',this.state.notifications);
+    });
   }
 
+  // TODO: make callout render with dynamic width
   renderMapMarkers (notification) {
     return (
       <MapView.Marker key={notification.title} coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
@@ -198,10 +202,12 @@ MaterialCommunityIcons/ bomb
 // startAngle (Number) 0 - Items are distributed in clockwise direction starting from startAngle. 0 is left, 90 top, and so on.
 
 
+
+
 const mapStateToProps = (state) => {
   return {
-    // ...redux state to props here
+    notifications: state.notifications || []
   }
 }
 
-export default connect()(MapviewExample)
+export default connect(mapStateToProps)(MapviewExample)

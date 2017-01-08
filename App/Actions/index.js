@@ -1,3 +1,4 @@
+
 export const reportEvent = (newEvent) => {
   //do something here if needed
   return {
@@ -6,7 +7,7 @@ export const reportEvent = (newEvent) => {
   }
 }
 
-export const loadEvent = (events) => {
+export const loadEvents = (events) => {
   return {
     type: 'LOAD_EVENTS',
     events

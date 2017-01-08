@@ -10,14 +10,13 @@ import Mapview from '../Containers/Mapview'
 import LoginScreen from '../Containers/LoginScreen'
 import ReportEventScreen from '../Containers/ReportEventScreen'
 
+import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
 ***************************/
 
 class NavigationRouter extends Component {
   render () {
-    let test = 'Report!';
-
     return (
       <Router>
         <Scene
@@ -35,20 +34,20 @@ class NavigationRouter extends Component {
               key='mapview'
               component={Mapview}
               title='Pharos'
-              socket={test}
+              props={ {socket: socket} }
               />
             <Scene
               key='loginScreen'
               component={LoginScreen}
               title='Login Screen'
-              socket={test}
+              socket={ {socket: socket} }
               />
             <Scene
               key='reportEventScreen'
               component={ReportEventScreen}
               title='Report Event'
-              socket={test}
-              />                              
+              socket={ {socket: socket} }
+              />
           </Scene>
         </Scene>
       </Router>
