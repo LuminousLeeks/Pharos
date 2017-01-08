@@ -1,10 +1,30 @@
 const Sequelize = require('sequelize');
 const db = require('../db/db.js');
 
+//  TODO: break each model out into individual files
+
 const Models = {
   User: db.define('user', {
-    name: Sequelize.STRING,
-    password: Sequelize.STRING,
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        is: /^[A-Za-z0-9\\-]+$/i,
+      },
+    },
+    firstName: {
+      type: Sequelize.STRING, //  TODO: confirm
+    },
+    lastName: {
+      type: Sequelize.STRING, //  TODO: confirm
+    },
+    password: {
+      type: Sequelize.STRING, // TODO: ADD PASSWORD CONFIRMATION
+    },
+    salt: {
+      type: Sequelize.STRING, //SALT
+    },
   }),
 
   Category: db.define('category', {
