@@ -13,7 +13,7 @@ const ReportEventForms = ({ newEvent }) => (
       <Text
         style={{alignSelf: 'center', marginTop:200, marginBottom: 20}}
       >
-       {newEvent.description}
+       {'Report: ' + newEvent.description + ', ' + newEvent.event}
       </Text>
       <InputGroup borderType='rounded'>
           <Input
