@@ -10,9 +10,13 @@ import { reportEvent } from '../Actions'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 const EventCategory = EventCategories.waitTime;
-const Application = React.createClass({
+class RadialMenuComponent extends React.Component {
+  handleReport (event) {
+    this.props.dispatch(reportEvent(event))
+    NavigationActions.reportEventScreen();
+  }
 
-  handleSelect: function(events, description, key) {
+  handleSelect (events, description, key) {
     Alert.alert(
       'Report event category: ' + description,
       null,
@@ -22,17 +26,18 @@ const Application = React.createClass({
           onPress: () => {
             let event = {
               category: key,
+              description: description,
               event: event
             }
-            // dispatch(reportEvent(event));
-            // NavigationActions.reportEventScreen();
+            this.handleReport(event);
+            // dispatch(reportEvent({}));
 
           }
         }
       })
     )
-  },
-  render: function() {
+  }
+  render () {
     return (
       <View style={Styles.menu}>
         <RadialMenu
@@ -63,6 +68,10 @@ const Application = React.createClass({
       </View>
     )
   }
-})
-Application = connect()(Application);
-export default Application
+}
+RadialMenuComponent.defaultProps = {
+  dispatch: () => {}
+};
+RadialMenuComponent = connect()(RadialMenuComponent);
+
+export default RadialMenuComponent

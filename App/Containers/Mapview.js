@@ -204,4 +204,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MapviewExample)
+export default connect()(MapviewExample)
