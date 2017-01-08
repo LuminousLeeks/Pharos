@@ -7,9 +7,9 @@ import SocketIO from 'react-native-socketio';
 
 AppRegistry.registerComponent('Pharos', () => App);
 
-//= ========================================
+//=========================================
 // Sockets
-//= ========================================
+//=========================================
 window.navigator.userAgent = 'ReactNative';
 
 // Need to require instead of import so we can set the user agent first
@@ -34,4 +34,4 @@ socket.on('connect_error', (data) => {
 socket.on('disconnect', () => {
   console.log('disconnected');
 });
-//= ========================================
+//=========================================
