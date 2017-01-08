@@ -8,6 +8,7 @@ import NavigationDrawer from './NavigationDrawer'
 // screens identified by the router
 import Mapview from '../Containers/Mapview'
 import LoginScreen from '../Containers/LoginScreen'
+import ReportEventScreen from '../Containers/ReportEventScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -15,7 +16,7 @@ import LoginScreen from '../Containers/LoginScreen'
 
 class NavigationRouter extends Component {
   render () {
-    let test = 'Report';
+    let test = 'Report!';
 
     return (
       <Router>
@@ -41,7 +42,13 @@ class NavigationRouter extends Component {
               component={LoginScreen}
               title='Login Screen'
               socket={test}
-              />              
+              />
+            <Scene
+              key='reportEventScreen'
+              component={ReportEventScreen}
+              title='Report Event'
+              socket={test}
+              />                              
           </Scene>
         </Scene>
       </Router>

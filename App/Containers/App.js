@@ -6,24 +6,25 @@ import createLogger from 'redux-logger'
 
 import RootContainer from './RootContainer'
 import rootReducer from '../Redux'
+
 // import createStore from '../Redux';
 // import applyConfigSettings from '../Config';
 
-const loggerMiddleware = createLogger()
+// const loggerMiddleware = createLogger()
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunkMiddleware,
-  loggerMiddleware
-)(createStore)
-
-const configureStore = function (initialState: Object = {}): Function {
-  return createStoreWithMiddleware(rootReducer, initialState)
-}
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunkMiddleware,
+//   loggerMiddleware
+// )(createStore)
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+// const configureStore = function (initialState: Object = {}): Function {
+//   return createStoreWithMiddleware(rootReducer, initialState)
+// }
 
 // Apply config overrides
 // applyConfigSettings();
 // create our store
-const store = configureStore()
+// const store = configureStore()
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
