@@ -25,7 +25,7 @@ type LoginScreenProps = {
 }
 
 class LoginScreen extends React.Component {
-s
+
   props: LoginScreenProps
 
   state: {

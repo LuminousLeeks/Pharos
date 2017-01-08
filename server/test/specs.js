@@ -32,21 +32,3 @@ describe('GET /api', function() {
   });
 });
 
-// describe('POST /api/post', function() {
-//   it('should respond', function(done) {
-//     request
-//       .send() //TODO: fill in
-//       .set() //TODO: fill in
-//       .set('Accept', 'application/json')
-//       .end(function(err, res){
-//         if (err || !res.ok) {
-//         alert('Oh no! error');
-//         } else {
-//         alert('Success! ' + JSON.stringify(res.body));
-//       }
-//     });
-//   });
-// });
-
-
-//database tests
