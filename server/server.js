@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 
   socket.emit('text', 'Hi Client!');
+<<<<<<< HEAD
 
   socket.on('getNotifications', (callback) => {
     // TODO: get notifications from database and pass them back to the client
@@ -41,6 +42,13 @@ io.on('connection', (socket) => {
 
 });
 //============================================
+=======
+
+  socket.on('text', (data) => {
+    console.log(data);
+  });
+});
+>>>>>>> (feat) pass messages from client to server
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
