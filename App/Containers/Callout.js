@@ -59,18 +59,21 @@ class Callout extends React.Component {
       <View >
         <Text style={Styles.text} >{this.state.notification.title}</Text>
         <Text style={Styles.text} >{this.state.notification.category}</Text>
-        {
-          !this.state.notification.votingDisabled ?
-            <View style={{ flex: 1, flexDirection: 'row' }}>
-              <Button transparent onPress={this.handleThumbsUpIsPressed.bind(this)}>
-                <Icon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
-              </Button>
-              <Button transparent onPress={this.handleThumbsDownIsPressed.bind(this)}>
-                <Icon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} />
-              </Button>
-            </View>
-            : <View />
-        }
+        <View style={Styles.flex} >
+          <Text style={Styles.count} >{this.state.notification.voteCount}</Text>
+          {
+            !this.state.notification.votingDisabled ?
+              <View style={Styles.flex}>
+                <Button transparent onPress={this.handleThumbsUpIsPressed.bind(this)}>
+                  <Icon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
+                </Button>
+                <Button transparent onPress={this.handleThumbsDownIsPressed.bind(this)}>
+                  <Icon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} />
+                </Button>
+              </View>
+              : <View />
+          }
+        </View>
       </View>
     );
   }

@@ -1,14 +1,14 @@
 // @flow
 
-import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { StyleSheet } from 'react-native';
+import { ApplicationStyles } from '../../Themes/';
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   map: {
     // For Android :/
@@ -16,6 +16,18 @@ export default StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0
-  }
-})
+    bottom: 0,
+  },
+  myCallout: {
+    alignSelf: 'stretch',
+    width: 100,
+  },
+  flex: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  count: {
+    fontSize: 30,
+    color: 'blue',
+  },
+});
