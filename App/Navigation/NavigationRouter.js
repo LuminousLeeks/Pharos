@@ -9,7 +9,6 @@ import NavigationDrawer from './NavigationDrawer'
 import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen'
 import LoginScreen from '../Containers/LoginScreen'
-import MapScreen from '../Containers/MapScreen'
 import ReportEventScreen from '../Containers/ReportEventScreen'
 
 import socket from '../Lib/socket'
@@ -38,13 +37,13 @@ class NavigationRouter extends Component {
               props={ {socket: socket} }
               />
             <Scene
-              initial
               key='mapScreen'
               component={MapScreen}
               title='Pharos'
               props={ {socket: socket} }
               />
             <Scene
+              initial
               key='loginScreen'
               component={LoginScreen}
               title='Login Screen'
