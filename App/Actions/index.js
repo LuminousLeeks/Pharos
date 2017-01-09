@@ -8,14 +8,31 @@ export const reportEvent = (newEvent) => {
     newEvent,
   };
 };
+export const updatePosition = (position) => {
+  return {
+    type: 'UPDATE_POSITION',
+    userLocation: {
+      region:  {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
 
+      },
+      currentLocation: {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+    }
+  }
+}
+// !!! this is duplicate !!!
 export const loadEvents = (events) => {
   return {
-    type: 'LOAD_EVENTS',
-    events,
+    type: 'UPDATE_EVENTS',
+    events
   }
 };
-
 export const updateEvent = (events) => {
   return {
     type: 'UPDATE_EVENTS',

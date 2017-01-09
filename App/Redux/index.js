@@ -73,6 +73,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newEvent: action.newEvent
       };
+    // case 'LOAD_EVENTS':
+    //   return {
+    //     ...state,
+    //     action.events
+    //   }
     case 'UPDATE_POSITION':
       return {
         ...state,
