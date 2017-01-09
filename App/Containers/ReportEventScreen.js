@@ -1,7 +1,7 @@
 
-import React from 'react'
-import { connect } from 'react-redux'
-import ReportEventForms from '../Components/ReportEventForms'
+import React from 'react';
+import { connect } from 'react-redux';
+import ReportEventForms from '../Components/ReportEventForms';
 
 // ReportEventScreen.defaultProps = {
 //   dispatch: () => {}
@@ -10,7 +10,7 @@ import ReportEventForms from '../Components/ReportEventForms'
 const mapStateToProps = (state) => {
   console.log(state, ' state inside the report event screen');
   return {
-    newEvent: state.mapAction.newEvent,
+    newEvent: state.newEvent,
   // newEvent: {}
   };
 };

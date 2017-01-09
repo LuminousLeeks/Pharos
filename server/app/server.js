@@ -9,6 +9,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
+const router = require('./routes/router');
+const exampleData = require('../../data/exampleData.js');
 
 const app = express();
 
@@ -26,18 +28,17 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 //  TODO: SSL? const sslPort = 3011;
 //  Socket.io connection established
 const io = require('socket.io')(server);
-
-app.post('/login', (req, res) => {
-  console.log(req.body);
-  res.send(200);
+//  Prevent circular dependency by defining routes after exports
+io.on('connection', (socket) => {
+  socket.emit('text', 'Hi Client!');
+  socket.on('getNotifications', (callback) => {  
+    console.log('serving notifications');
+    callback(exampleData);
+  });
 });
 
-//  Prevent circular dependency by defining routes after exports
 module.exports = { app, io };
 
-const router = require('./routes/router');
-
-//  Routes
 app.use('/api', router);
 
 //  TODO: Determine whether additional handling/rendering of static files is needed

@@ -14,20 +14,23 @@ module.exports.loginUser = (request, response) => {
     },
   })
   .then((returnedUser) => {
-    if (bcrypt.compareSync(reqUser.password, returnedUser.password + returnedUser.salt)) {
-      response.status(200).json({ token });
+    if (returnedUser === null) {
+      response.status(400).json('User not found');
     } else {
-      response.status(400).json('Invalid Login');
+      if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
+        response.status(200).send({ token });
+      } else {
+        response.status(400).send('Invalid Login');
+      }
     }
   })
   .catch((error) => {
-    response.status(500).json('An error occured', error);
+    response.status(500).send('An error occured', error);
   });
 };
 
-
 module.exports.createUser = (request, response) => {
-  const newUser = request.body;
+  console.log('at the controller');
   const username = request.body.username;
   const firstName = request.body.firstName;
   const lastName = request.body.lastName;
@@ -37,7 +40,7 @@ module.exports.createUser = (request, response) => {
 // Hash  password with  salt
   const userHash = bcrypt.hashSync(userPassword, userSalt);
 
-  User.findOne({ where: { username: newUser.username } })
+  User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {
         User.create({
@@ -48,8 +51,13 @@ module.exports.createUser = (request, response) => {
           salt: userSalt,
         })
         .then((usr) => {
-          const token = jwtoken.sign(usr, jwtSecret);
-          response.status(200).json({ token });
+          // refactor below to utils
+          const userSignature = {
+            username: usr.dataValues.username,
+            password: usr.dataValues.password,
+          };
+          const token = jwtoken.sign(userSignature, jwtSecret);
+          response.send({ token });
         });
       } else {
         response.redirect('/login');

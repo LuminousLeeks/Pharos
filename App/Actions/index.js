@@ -1,28 +1,27 @@
 
 import req from 'superagent';
+import { Actions as NavigationActions } from 'react-native-router-flux';
 
 export const reportEvent = (newEvent) => {
-  //do something here if needed
-  console.log(newEvent, 'inside the action');
   return {
     type: 'REPORT_EVENT',
     newEvent,
-  }
-}
+  };
+};
 
 export const loadEvents = (events) => {
   return {
     type: 'LOAD_EVENTS',
-    events
+    events,
   }
-}
+};
 
 export const updateEvent = (events) => {
   return {
     type: 'UPDATE_EVENTS',
     events
   }
-}
+};
 
 const getUserInfo = (userName = '', userInterests = [], token = {}) => {
   return {
@@ -31,18 +30,7 @@ const getUserInfo = (userName = '', userInterests = [], token = {}) => {
     userInterests,
     token
   }
-}
-
-const startFetching = () => {
-  return{
-    type: 'START_FETCHING'
-  }
-}
-const stopFetching = () => {
-  return{
-    type: 'STOP_FETCHING'
-  }
-}
+};
 
 const getEvents = (userInterests) => {
 
@@ -52,9 +40,10 @@ export const request = () => ({
   type: 'REQUEST',
 });
 
-export const success = username => ({
+export const success = (username, token) => ({
   type: 'SUCCESS',
   username,
+  token,
 });
 
 export const authFail = error => ({
@@ -66,20 +55,20 @@ export const loginRequest = (username, password) => {
   return (dispatch) => {
     dispatch(request);
     const url = 'http://127.0.0.1:8099';
-    return req.post(url.concat('/login'))
+    return req.post(url.concat('/api/auth/login'))
       .send({ username, password })
       .end((err, res) => {
         if (err) { throw err; }
          // change state to success / failure
-
-        const data = res.text;
-        if (data) {
-          console.log(data, 'data');
-          console.log(username);
-          return dispatch(success(username));
+        const token = res.body;
+        console.log(token);
+        if (token) {
+          NavigationActions.mapview();
+          return dispatch(success(username, token));
+        } else {
+          const error = res.text;
+          return dispatch(authFail(error));
         }
-        const error = data.error;
-        return dispatch(authFail(error));
       });
   };
 };
@@ -91,18 +80,24 @@ export const registerRequest = (username, password) => {
   return (dispatch) => {
     dispatch(request);
     const url = 'http://127.0.0.1:8099';
-    return req.post(url.concat('/signup'))
-      .send({ username, password })
+    return req.post(url.concat('/api/auth/register'))
+      .send({
+        username,
+        password,
+        firstName: 'John',
+        lastName: 'Appleseed',
+      })
       .end((err, res) => {
         if (err) { throw err; }
+        const token = res.body;
+        console.log(token);
          // change state to success / failure
-        console.log(res);
-        const data = JSON.parse(res.text);
-        if (data.success) {
-          return dispatch(success(username));
+        if (token) {
+          return dispatch(success(username, token));
+        } else {
+          const error = res.text;
+          return dispatch(authFail(error));
         }
-        const error = data.error;
-        return dispatch(authFail(error));
       });
   };
 };

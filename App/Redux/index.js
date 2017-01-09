@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import Immutable from 'seamless-immutable';
+// import { combineReducers } from 'redux';
+// import Immutable from 'seamless-immutable';
 
 const initialState = {
   fething: false,
@@ -11,12 +11,12 @@ const initialState = {
   userInterests: {},
   userLocation: {},
   userName: '',
-  token: {},
+  token: '',
   events: [],
   error: null,
 };
 
-const mapAction = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'REPORT_EVENT':
       return {
@@ -37,34 +37,10 @@ const mapAction = (state = initialState, action) => {
         // action.userInterests
         // action.token
       };
-    case 'START_FETCHING':
-      return {
-        ...state,
-        fetching: true,
-      };
-    case 'STOP_FETCHING':
-      return {
-        ...state,
-        fetching: false,
-      };
-    default:
-      return state;
-  }
-};
-
-// old initial state.
-// const INITIAL_STATE = {
-//   username: null,
-//   error: null,
-//   fetching: false,
-// };
-
-const authenticate = (state = initialState, action) => {
-  switch (action.type) {
     case 'REQUEST':
       return { ...state, fetching: true };
     case 'SUCCESS':
-      return { ...state, fetching: false, userName: action.username };
+      return { ...state, fetching: false, userName: action.username, token: action.token };
     case 'AUTH_FAIL':
       return { ...state, fetching: false, error: action.error };
     case 'LOGOUT':
@@ -74,14 +50,14 @@ const authenticate = (state = initialState, action) => {
   }
 };
 
-
-// const authenticate = (state = { isFetching: false,
-//   message: '' }, action) => {
+// const authenticate = (state = initialState, action) => {
 //   switch (action.type) {
-//     case 'SIGNUP':
-//       return state;
-//     case 'SIGNIN':
-//       return state;
+//     case 'REQUEST':
+//       return { ...state, fetching: true };
+//     case 'SUCCESS':
+//       return { ...state, fetching: false, userName: action.username, token: action.token };
+//     case 'AUTH_FAIL':
+//       return { ...state, fetching: false, error: action.error };
 //     case 'LOGOUT':
 //       return state;
 //     default:
@@ -89,12 +65,10 @@ const authenticate = (state = initialState, action) => {
 //   }
 // };
 
-//Bing disabled the one below... Why, I don't know why.
-const rootReducer = combineReducers({
-  mapAction,
-  authenticate,
-});
+// const rootReducer = combineReducers({
+//   mapAction,
+//   authenticate,
+// });
 
-//Below was active in my case... so we have to make that up.
 export default rootReducer;
 
