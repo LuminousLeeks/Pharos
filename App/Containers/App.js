@@ -11,25 +11,11 @@ import rootReducer from '../Redux/index.js'
 // import applyConfigSettings from '../Config';
 
 const loggerMiddleware = createLogger();
-
-// const createStoreWithMiddleware = applyMiddleware(
-//   thunkMiddleware,
-//   loggerMiddleware
-// )(createStore)
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 // const configureStore = function (initialState: Object = {}): Function {
 //   return createStoreWithMiddleware(rootReducer, initialState)
 // }
-
-
-// BELOW WERE COMMENTED OUT AS WELL
-// const loggerMiddleware = createLogger();
-
-// const createStoreWithMiddleware = applyMiddleware(
-//   thunkMiddleware,
-//   loggerMiddleware,
-// )(createStore);
 
 // const configureStore = function (initialState: Object = {}): Function {
 //   return createStoreWithMiddleware(rootReducer, initialState)
