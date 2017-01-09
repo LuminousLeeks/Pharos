@@ -107,6 +107,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         fetching: false,
       };
+
     case 'REQUEST':
       return { ...state, fetching: true };
     case 'SUCCESS':
@@ -133,8 +134,8 @@ const rootReducer = (state = initialState, action) => {
 // export default rootReducer;
 
 
-export default rootReducer
 
+export default rootReducer
 
 
 
