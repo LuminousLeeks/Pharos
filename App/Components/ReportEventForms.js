@@ -3,11 +3,9 @@
 import React from 'react'
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 
-import Styles from './Styles/ReportEventFormsStyle'
+import Styles from './Styles/ReportEventFormsStyle';
 
-
-
-const ReportEventForms = ({ newEvent }) => (
+const ReportEventForms = ({ newEvent }) =>(
   <Container>
     <Content style={{padding:20}}>
       <Text
@@ -32,8 +30,6 @@ const ReportEventForms = ({ newEvent }) => (
       </Button>
     </Content>
   </Container>
-)
+);
 
-export default ReportEventForms
-
-
+export default ReportEventForms;

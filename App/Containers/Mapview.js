@@ -18,11 +18,11 @@ class MapviewExample extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('props.not', props.notifications);
+    // console.log('props.not', props.notifications);
 
     this.socket = props.props.socket;
 
-    console.log("props",props);
+    // console.log("props",props);
 
     // TODO: Set the initialRegion to the last know user position read from datatbase
     let initialRegion = { latitude: 37.7749, longitude: -122.4194, latitudeDelta: 0.1, longitudeDelta: 0.1 };

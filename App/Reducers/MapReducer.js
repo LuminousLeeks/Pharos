@@ -6,6 +6,6 @@ export const setNotifications = (state = [], action) => {
     default:
       return state
   }
-}
+};
 
-export default setNotifications
+export default setNotifications;
