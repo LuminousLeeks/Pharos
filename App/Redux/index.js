@@ -24,7 +24,10 @@ const rootReducer = (state = initialState, action) => {
         newEvent: action.newEvent,
       };
     case 'LOAD_EVENTS':
-      return action.events;
+      return {
+        ...state,
+        events: action.events,
+      };
     case 'UPDATE_EVENTS':
       return {
         ...state,

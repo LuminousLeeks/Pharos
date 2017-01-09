@@ -13,16 +13,11 @@ import Callout from './Callout'
 import Icons from '../Lib/EventCategories';
 import { loadEvents } from '../Actions'
 
-
 class MapviewExample extends React.Component {
+  
   constructor(props) {
     super(props);
-
-    // console.log('props.not', props.notifications);
-
     this.socket = props.props.socket;
-
-    // console.log("props",props);
 
     // TODO: Set the initialRegion to the last know user position read from datatbase
     let initialRegion = { latitude: 37.7749, longitude: -122.4194, latitudeDelta: 0.1, longitudeDelta: 0.1 };
@@ -138,13 +133,9 @@ class MapviewExample extends React.Component {
       radius: this.calculateRadius.call(this)
     }
 
-    // TODO: Send the location object th the server to
-    // get notification in the correct area
     this.socket.emit('getNotifications', (data) => {
       console.log("notifications in map view", data);
-      //TODO: CODE IS BROKEN HERE. DOES NOT UPDATE THE STORE
-
-      this.props.dispatch(loadEvents(data));  
+      this.props.fetchEvents(data);
       console.log('this.notifications',this.state.notifications);
     });
   }
@@ -174,7 +165,7 @@ class MapviewExample extends React.Component {
           showsUserLocation={this.state.showUserLocation}
           followsUserLocation={this.state.followsUserLocation}
         >
-          {this.state.notifications.map((notification) => this.renderMapMarkers(notification))}
+          {this.props.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
 
         <RadialMenu notifications={this.state.notifications} region={this.state.region} socket={this.props.socket}/>
@@ -206,10 +197,16 @@ MaterialCommunityIcons/ bomb
 
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log('inside mapping props');
   return {
-    notifications: state.notifications || []
+    notifications: state.events || []
   }
 }
 
-export default connect(mapStateToProps)(MapviewExample)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchEvents: (data) => dispatch(loadEvents(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapviewExample)

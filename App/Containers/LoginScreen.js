@@ -17,31 +17,31 @@ import {Images, Metrics} from '../Themes'
 import { loginRequest, registerRequest } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
-type LoginScreenProps = {
-  dispatch: () => any,
-  fetching: boolean,
-  attemptLogin: () => void,
-  attemptRegister: () => void
-}
+// type LoginScreenProps = {
+//   dispatch: () => any,
+//   fetching: boolean,
+//   attemptLogin: () => void,
+//   attemptRegister: () => void
+// }
 
 class LoginScreen extends React.Component {
 
-  props: LoginScreenProps
+  // props: LoginScreenProps
 
-  state: {
-    username: string,
-    password: string,
-    visibleHeight: number,
-    topLogo: {
-      width: number
-    }
-  }
+  // state: {
+  //   username: string,
+  //   password: string,
+  //   visibleHeight: number,
+  //   topLogo: {
+  //     width: number
+  //   }
+  // }
 
-  isAttempting: boolean
-  keyboardDidShowListener: Object
-  keyboardDidHideListener: Object
+  // isAttempting: boolean
+  // keyboardDidShowListener: Object
+  // keyboardDidHideListener: Object
 
-  constructor (props: LoginScreenProps) {
+  constructor (props) {
     super(props)
     this.state = {
       username: 'borat',
