@@ -7,6 +7,7 @@ import NavigationDrawer from './NavigationDrawer'
 
 // screens identified by the router
 import Mapview from '../Containers/Mapview'
+import MapScreen from '../Containers/MapScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ReportEventScreen from '../Containers/ReportEventScreen'
 
@@ -36,6 +37,12 @@ class NavigationRouter extends Component {
               props={ {socket: socket} }
               />
             <Scene
+              key='mapScreen'
+              component={MapScreen}
+              title='Pharos'
+              props={ {socket: socket} }
+              />
+            <Scene
               initial
               key='loginScreen'
               component={LoginScreen}
@@ -46,6 +53,12 @@ class NavigationRouter extends Component {
               key='reportEventScreen'
               component={ReportEventScreen}
               title='Report Event'
+              socket={ {socket: socket} }
+              />
+            <Scene
+              key='mapScreen'
+              component={MapScreen}
+              title='Pharos'
               socket={ {socket: socket} }
               />
           </Scene>
