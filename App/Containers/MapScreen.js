@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import MapViewComponents from '../Components/MapViewComponents'
-import Mapview from '../Components/Mapviews'
 import { loadEvents, updateEvent, updatePosition } from '../Actions'
 
 // NOTE: this is the standard format
@@ -65,7 +64,6 @@ const mapDispatchToProps = (dispatch, {socket}) => ({
     // socket.on('getNotifications', (data) => {
     //   dispatch(loadEvents(data))
     // })
-
 
   }
 
