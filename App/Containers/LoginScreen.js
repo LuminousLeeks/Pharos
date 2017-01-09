@@ -44,8 +44,8 @@ class LoginScreen extends React.Component {
   constructor (props: LoginScreenProps) {
     super(props)
     this.state = {
-      username: 'reactnative@infinite.red',
-      password: 'password',
+      username: 'borat',
+      password: 'borat',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }

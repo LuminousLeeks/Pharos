@@ -33,7 +33,6 @@ class RootContainer extends Component {
   // startup: () => dispatch(StartupActions.startup())
 // })
 
-// EXPORT DEFAULT FROM WITHIN A FUNCTION ???
 export default connect()(RootContainer);
 
 // ORIGINAL CASE (AUTHENTICATION)

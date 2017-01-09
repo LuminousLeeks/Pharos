@@ -3,9 +3,10 @@ import req from 'superagent';
 
 export const reportEvent = (newEvent) => {
   //do something here if needed
+  console.log(newEvent, 'inside the action');
   return {
     type: 'REPORT_EVENT',
-    newEvent
+    newEvent,
   }
 }
 
@@ -64,15 +65,17 @@ export const authFail = error => ({
 export const loginRequest = (username, password) => {
   return (dispatch) => {
     dispatch(request);
-    const url = 'http://127.0.0.1:3000';
+    const url = 'http://127.0.0.1:8099';
     return req.post(url.concat('/login'))
       .send({ username, password })
       .end((err, res) => {
         if (err) { throw err; }
          // change state to success / failure
-        console.log(res);
-        const data = JSON.parse(res.text);
-        if (data.success) {
+
+        const data = res.text;
+        if (data) {
+          console.log(data, 'data');
+          console.log(username);
           return dispatch(success(username));
         }
         const error = data.error;
@@ -87,7 +90,7 @@ export const loginRequest = (username, password) => {
 export const registerRequest = (username, password) => {
   return (dispatch) => {
     dispatch(request);
-    const url = 'http://127.0.0.1:3000';
+    const url = 'http://127.0.0.1:8099';
     return req.post(url.concat('/signup'))
       .send({ username, password })
       .end((err, res) => {
