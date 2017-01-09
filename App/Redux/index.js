@@ -1,20 +1,63 @@
-import { combineReducers } from 'redux';
-import Immutable from 'seamless-immutable';
+import { combineReducers } from 'redux'
+import Immutable from 'seamless-immutable'
+
+const defaultState = {
+  newEvent: {
+    category: 'waitTime',
+    description: 'Long wait time',
+    event: 'evantA'
+  },
+  events: [
+    {
+      category: 'waitTime',
+      description: 'Long wait time',
+      event: 'evantA',
+      story: 'Line for Pokemon ground is too long.',
+      latitude: 37.784235,
+      longitude: -122.410597
+
+    },
+    {
+      category: 'waitTime',
+      description: 'Long wait time',
+      event: 'evantB',
+      story: 'Line for Logo land is too long.',
+      latitude: 37.785566,
+      longitude: -122.407282
+    },
+    {
+      category: 'hazard',
+      description: 'Hazard events',
+      event: 'eventK',
+      story: 'Pikachu is on fire.',
+      latitude: 37.784311,
+      longitude: -122.404460
+    },
+    {
+      category: 'commute',
+      description: 'Commute related events',
+      event: 'eventN',
+      story: 'Pikachu blocked I-880.',
+      latitude: 37.784345,
+      longitude: -122.407679
+    },
+
+  ]
+}
+
 
 const initialState = {
   fething: false,
-  newEvent: {
-    category: 'default category',
-    description: 'default description',
-    event: 'default',
-  },
+
+  newEvent: defaultState.newEvent,
   userInterests: {},
   userLocation: {},
   userName: '',
+  toke: {},
+  events: defaultState.events,
   token: {},
-  events: [],
-  error: null,
-};
+  error: null
+}
 
 const mapAction = (state = initialState, action) => {
   switch (action.type) {
@@ -52,14 +95,10 @@ const mapAction = (state = initialState, action) => {
   }
 };
 
-// old initial state.
-// const INITIAL_STATE = {
-//   username: null,
-//   error: null,
-//   fetching: false,
-// };
+
 
 const authenticate = (state = initialState, action) => {
+
   switch (action.type) {
     case 'REQUEST':
       return { ...state, fetching: true };
@@ -75,19 +114,7 @@ const authenticate = (state = initialState, action) => {
 };
 
 
-// const authenticate = (state = { isFetching: false,
-//   message: '' }, action) => {
-//   switch (action.type) {
-//     case 'SIGNUP':
-//       return state;
-//     case 'SIGNIN':
-//       return state;
-//     case 'LOGOUT':
-//       return state;
-//     default:
-//       return state;
-//   }
-// };
+
 
 //Bing disabled the one below... Why, I don't know why.
 const rootReducer = combineReducers({
@@ -97,4 +124,9 @@ const rootReducer = combineReducers({
 
 //Below was active in my case... so we have to make that up.
 export default rootReducer;
+
+
+// export default mapAction
+
+
 

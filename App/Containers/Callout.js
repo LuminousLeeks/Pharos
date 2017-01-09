@@ -65,10 +65,10 @@ class Callout extends React.Component {
             !this.state.notification.votingDisabled ?
               <View style={Styles.flex}>
                 <Button transparent onPress={this.handleThumbsUpIsPressed.bind(this)}>
-                  <Icon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
+                  <Icon name="thumbs-o-up" size={Metrics.icons.small} color={'blue'} />
                 </Button>
                 <Button transparent onPress={this.handleThumbsDownIsPressed.bind(this)}>
-                  <Icon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} />
+                  <Icon name="thumbs-o-down" size={Metrics.icons.small} color={'blue'} />
                 </Button>
               </View>
               : <View />
