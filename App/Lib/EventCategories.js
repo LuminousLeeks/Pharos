@@ -14,6 +14,8 @@ export default {
       'line for movie',
       'line for bus'
     ]
+    icon: ({size}) => (<FontAwesome name='hand-rock-o' size={size}/>),
+    events: ['evantA', 'eventB', 'eventC']
   },
   crime: {
     key: 'crime',
