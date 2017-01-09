@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React from 'react';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 
 import Styles from './Styles/ReportEventFormsStyle';

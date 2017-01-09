@@ -143,7 +143,8 @@ class MapviewExample extends React.Component {
     this.socket.emit('getNotifications', (data) => {
       console.log("notifications in map view", data);
       //TODO: CODE IS BROKEN HERE. DOES NOT UPDATE THE STORE
-      this.props.dispatch(loadEvents(data));
+
+      this.props.dispatch(loadEvents(data));  
       console.log('this.notifications',this.state.notifications);
     });
   }
@@ -205,6 +206,7 @@ MaterialCommunityIcons/ bomb
 
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     notifications: state.notifications || []
   }
