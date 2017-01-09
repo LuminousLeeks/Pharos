@@ -22,7 +22,7 @@ class DrawerContent extends Component {
 
   handlePressMapView = () => {
     this.toggleDrawer()
-    NavigationActions.mapview()
+    NavigationActions.mapScreen()
   }
   handlePressLoginScreen = () => {
     this.toggleDrawer()
