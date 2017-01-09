@@ -15,10 +15,12 @@ class Callout extends React.Component {
   }
 
   handleThumbsUpIsPressed() {
+    alert("Vote counted");
     this.setState({
       notification: {
         ...this.state.notification,
         votingDisabled: true,
+        voteCount: this.state.notification.voteCount + 1,
       },
     });
 
@@ -35,10 +37,12 @@ class Callout extends React.Component {
   }
 
   handleThumbsDownIsPressed() {
+    alert("Vote counted");
     this.setState({
       notification: {
         ...this.state.notification,
         votingDisabled: true,
+        voteCount: this.state.notification.voteCount - 1,
       },
     });
 
@@ -60,9 +64,9 @@ class Callout extends React.Component {
         <Text style={Styles.text} >{this.state.notification.title}</Text>
         <Text style={Styles.text} >{this.state.notification.category}</Text>
         <View style={Styles.flex} >
-          <Text style={Styles.count} >{this.state.notification.voteCount}</Text>
+        <Text style={Styles.count} >{this.state.notification.voteCount}</Text>
           {
-            !this.state.notification.votingDisabled ?
+            /*!this.state.notification.votingDisabled ?*/
               <View style={Styles.flex}>
                 <Button transparent onPress={this.handleThumbsUpIsPressed.bind(this)}>
                   <Icon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
@@ -71,7 +75,7 @@ class Callout extends React.Component {
                   <Icon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} />
                 </Button>
               </View>
-              : <View />
+              /*: <View />*/
           }
         </View>
       </View>

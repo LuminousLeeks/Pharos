@@ -14,7 +14,7 @@ import Icons from '../Lib/EventCategories';
 import { loadEvents } from '../Actions'
 
 class MapviewExample extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.socket = props.props.socket;
@@ -84,7 +84,7 @@ class MapviewExample extends React.Component {
           longitude: position.coords.longitude
         }
 
-        this.setState({ region, currentLocation });
+        this.setState({currentLocation });
       },
       (error) => alert(JSON.stringify(error))
       // TODO: remove this for production
@@ -96,8 +96,9 @@ class MapviewExample extends React.Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  onRegionChange () {
+  onRegionChange (region) {
     this.retrieveMapMarkers();
+    this.setState({region})
   }
 
   deg2rad(deg) {
@@ -146,7 +147,7 @@ class MapviewExample extends React.Component {
       <MapView.Marker key={notification.title} coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
       title={notification.title} description={notification.category}
       >
-        <View color="#4F8EF7" >{Icons[notification.category].icon({size: Metrics.icons.medium})}</View>
+        <View color="#4F8EF7" >{Icons[notification.category].icon({size: Metrics.icons.small})}</View>
         <MapView.Callout style={ Styles.myCallout } >
           <Callout notification={notification} />
         </MapView.Callout>
@@ -159,11 +160,9 @@ class MapviewExample extends React.Component {
       <View style={Styles.container}>
         <MapView
           style={Styles.map}
-          initialRegion={this.state.region}
           region={this.state.region}
-          onRegionChangeComplete={this.onRegionChange}
+          onRegionChangeComplete={region => {this.onRegionChange(region)}}
           showsUserLocation={this.state.showUserLocation}
-          followsUserLocation={this.state.followsUserLocation}
         >
           {this.props.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
