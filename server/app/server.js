@@ -27,8 +27,14 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 //  Socket.io connection established
 const io = require('socket.io')(server);
 
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  res.send(200);
+});
+
 //  Prevent circular dependency by defining routes after exports
 module.exports = { app, io };
+
 const router = require('./routes/router');
 
 //  Routes
