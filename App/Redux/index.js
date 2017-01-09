@@ -73,16 +73,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newEvent: action.newEvent
       };
-    // case 'LOAD_EVENTS':
-    //   return {
-    //     ...state,
-    //     action.events
-    //   }
     case 'UPDATE_POSITION':
       return {
         ...state,
         userLocation: action.userLocation
       }
+    case 'LOAD_EVENTS':
+      return action.events;
     case 'UPDATE_EVENTS':
       return {
         ...state,
@@ -134,9 +131,6 @@ const rootReducer = (state = initialState, action) => {
 export default rootReducer
 
 
-
-
-// export default mapAction
 
 
 

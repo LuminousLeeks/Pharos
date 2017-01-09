@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import MapViewComponents from '../Components/MapViewComponents'
+import Mapview from '../Components/Mapviews'
 import { loadEvents, updateEvent, updatePosition } from '../Actions'
 
 // NOTE: this is the standard format
@@ -57,6 +58,7 @@ const mapDispatchToProps = (dispatch, {socket}) => ({
       latitude: coord.latitude,
       longitude: coord.longitude,
       radius: 0 //need to implement redius calculation
+
     }
     // activate this once the socket is set up    
     // socket.emit('sendLocation', coord)
@@ -64,11 +66,9 @@ const mapDispatchToProps = (dispatch, {socket}) => ({
     //   dispatch(loadEvents(data))
     // })
 
+
   }
 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapViewComponents)
-
-
-
