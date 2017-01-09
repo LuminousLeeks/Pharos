@@ -15,7 +15,6 @@ class Callout extends React.Component {
   }
 
   handleThumbsUpIsPressed() {
-    alert("Vote counted");
     this.setState({
       notification: {
         ...this.state.notification,
@@ -37,7 +36,6 @@ class Callout extends React.Component {
   }
 
   handleThumbsDownIsPressed() {
-    alert("Vote counted");
     this.setState({
       notification: {
         ...this.state.notification,
