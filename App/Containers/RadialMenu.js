@@ -31,8 +31,6 @@ class RadialMenuComponent extends React.Component {
               event: event,
             }
             this.handleReport(newEvent);
-            // dispatch(reportEvent({}));
-
           }
         }
       })
@@ -49,7 +47,7 @@ class RadialMenuComponent extends React.Component {
           spreadAngle={90}
           startAngle={0}
         >
-          <Badge style={Styles.root}>{this.props.socket}</Badge>
+          <Badge style={Styles.root}>Report</Badge>
           { Object.keys(EventCategories)
             .map((EventCategoryKey) => EventCategories[EventCategoryKey])
             .map((EventCategory, index) => 

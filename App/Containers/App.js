@@ -8,10 +8,32 @@ import createLogger from 'redux-logger'
 import RootContainer from './RootContainer'
 import rootReducer from '../Redux/index.js'
 
-// import applyConfigSettings from '../Config';
-
 const loggerMiddleware = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <RootContainer />
+      </Provider>
+    );
+  }
+}
+
+
+export default App;
+
+// const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+
+// import applyConfigSettings from '../Config';
+
+
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunkMiddleware,
+//   loggerMiddleware
+// )(createStore)
 
 // const configureStore = function (initialState: Object = {}): Function {
 //   return createStoreWithMiddleware(rootReducer, initialState)
@@ -42,15 +64,5 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMi
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <RootContainer />
-      </Provider>
-    );
-  }
-}
 
 
-export default App;
