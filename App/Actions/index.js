@@ -28,6 +28,8 @@ export const updatePosition = (position) => {
 }
 // !!! this is duplicate !!!
 export const loadEvents = (events) => {
+  console.log('loadEvents action triggered');
+  console.log(events);
   return {
     type: 'UPDATE_EVENTS',
     events

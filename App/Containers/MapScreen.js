@@ -17,21 +17,7 @@ const mapStateToProps = (state, {socket}) => {
 
 //if the Mapview need to trigger any action 
 const mapDispatchToProps = (dispatch, {socket}) => ({
-  // loadEvents: () => {
-    // request event through socket
-    // the code may be like this:
-    // socket.emit('request events', state.token);
-    // socket.on('get events', events => {
-    //   dispatch(loadEvents(events))
-    // })
-  // },
-  // updateEvents: () => {
-    // update event through socket
-    // the code may be like this:
-    // socket.on('get new events', events => {
-    //   dispatch(updateEvent(events))
-    // })
-  // },
+
   getCurrentPosition: (cb) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -52,19 +38,14 @@ const mapDispatchToProps = (dispatch, {socket}) => ({
       //, {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     )
   },
-  retrieveMapMarkers: (coord) => {
+  retrieveMapMarkers: (token, region) => {
     const location = {
-      latitude: coord.latitude,
-      longitude: coord.longitude,
+      latitude: region.latitude,
+      longitude: region.longitude,
       radius: 0 //need to implement redius calculation
 
     }
-    // activate this once the socket is set up    
-    // socket.emit('sendLocation', coord)
-    // socket.on('getNotifications', (data) => {
-    //   dispatch(loadEvents(data))
-    // })
-
+    dispatch(fetchEvents(token, region))
   }
 
 })

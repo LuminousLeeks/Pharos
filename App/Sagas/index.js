@@ -56,37 +56,39 @@ function connectSocket(token) {
     });
   });
 }
-//---------handle receiving data from socket
-// function input(socket) {
+
+// function getNotifications(socket, token) {
+//   return socket.emit('getNotifications', (events) => {
+//       console.log('fetch events using helper function')
+//     }
+// }
+
+
+
+// // ---------handle receiving data from socket
+// function getNotifications(socket, token) {
 //   return eventChannel(emit => {
-//     socket.emit('getNotifications', (data) => {
-//       console.log("notifications in Saga", data);
-//       emit(loadEvents(data));
+//     socket.emit('getNotifications', (events) => {
+//       console.log("notifications in Saga", events);
+//       emit(loadEvents(events));
 //     });
-//     // add more socket input here
-//     // socket.on('messages.new', ({ message }) => {
-//     //   emit(newMessage({ message }));
-//     // });
 //     return () => {};
 //   });
 // }
+function getNotifications(socket, token) {
+  return new Promise((resolve, reject) => {
+    socket.emit('getNotifications', (events) => {
+      console.log("notifications in Saga", events);
+      resolve(events);
+    })
+  })
+}
 
-// function* read(socket) {
-//   const channel = yield call(input, socket);
-//   while (true) {
-//     let action = yield take(channel);
-//     yield put(action);
-//   }
-// }
-function* fetchEvent(socket) {
+function* fetchEvents(socket) {
   while (true) {
     const { token } = yield take('FETCH_EVENTS');
-    console.log('------------Saga intercept fetch event: ');
-    console.log(token);
-    // active this line, once socket is up 
-    socket.emit('getNotifications', (events) => {
-      emit(loadEvents(data))
-    });
+    const events = yield call(getNotifications, socket, token);
+    yield put(loadEvents(events));
   }
 }
 //---------handle sending data to socket
@@ -113,7 +115,7 @@ function* voteEvent (socket) {
 //---------combine sending and receiving data
 function* handleIO(socket) {
   // yield fork(read, socket);
-  yield fork(fetchEvent, socket);
+  yield fork(fetchEvents, socket);
   yield fork(reportEvent, socket);
   yield fork(voteEvent, socket);
 }
@@ -121,7 +123,7 @@ function* handleIO(socket) {
 //---------define flow of Socket
 function* flow() {
   while (true) {
-    let { token } = yield take('LOGIN_SUCCESS');
+    let { token } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token);
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');
@@ -133,6 +135,7 @@ function* flow() {
 //---------export Sagas
 export default function* rootSaga() {
   yield fork(flow);
+  // yield fork(fetchEvents);
   yield fork(login);
   yield fork(signup);
 }
