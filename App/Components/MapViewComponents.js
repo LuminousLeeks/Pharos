@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import MapView from 'react-native-maps'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Metrics } from '../Themes'
 import Styles from './Styles/MapViewComponentsStyle'
 import RadialMenu from '../Containers/RadialMenu'
@@ -25,7 +26,7 @@ export default class MapViewComponents extends Component {
   }
   onRegionChange () {
     this.props.retrieveMapMarkers(this.props.token, this.props.currentLocation);
-  }  
+  }
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
@@ -34,22 +35,34 @@ export default class MapViewComponents extends Component {
       <View style={Styles.container}>
         <MapView
           style={Styles.map}
-          initialRegion={this.props.region}
           region={this.props.region}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
           // showsUserLocation={this.props.showUserLocation} //TODO: need to add this function
         >
+          <MapView.Marker
+            coordinate={{
+              latitude: this.props.region.latitude,
+              longitude: this.props.region.longitude,
+            }}
+          >
+            <Icon
+              name="map-pin"
+              size={Metrics.icons.small}
+              color={'blue'}
+            />
+          </MapView.Marker>
+
           {this.props.events
-            .map((event) => ({
-              event: event,
-              Icon: EventCategories[event.category].icon
+            .map(event => ({
+              event,
+              Icon: EventCategories[event.category].icon,
             }))
-            .map((EventObj, index) => 
+            .map((EventObj, index) =>
               <MapView.Marker
                 key={index}
                 coordinate={{
                   latitude: EventObj.event.latitude,
-                  longitude: EventObj.event.longitude
+                  longitude: EventObj.event.longitude,
                 }}
                 event={EventObj.event}
               >
@@ -57,18 +70,69 @@ export default class MapViewComponents extends Component {
                   <EventObj.Icon size={Metrics.icons.small} />
                 </View>
                 <MapView.Callout style={Styles.myCallout} >
-                  <CalloutContainer notification={EventObj.event} socket={this.props.socket}/>
+                  <CalloutContainer
+                    notification={EventObj.event}
+                    socket={this.props.socket}
+                  />
                 </MapView.Callout>
-              </MapView.Marker>
+              </MapView.Marker>,
             )
           }
         </MapView>
         <RadialMenu socket={this.props.socket} />
       </View>
-    )
+    );
+  }render() {
+    return (
+      <View style={Styles.container}>
+        <MapView
+          style={Styles.map}
+          region={this.props.region}
+          onRegionChangeComplete={this.onRegionChange.bind(this)}
+          // showsUserLocation={this.props.showUserLocation} //TODO: need to add this function
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: this.props.region.latitude,
+              longitude: this.props.region.longitude,
+            }}
+          >
+            <Icon
+              name="map-pin"
+              size={Metrics.icons.small}
+              color={'blue'}
+            />
+          </MapView.Marker>
+
+          {this.props.events
+            .map(event => ({
+              event,
+              Icon: EventCategories[event.category].icon,
+            }))
+            .map((EventObj, index) =>
+              <MapView.Marker
+                key={index}
+                coordinate={{
+                  latitude: EventObj.event.latitude,
+                  longitude: EventObj.event.longitude,
+                }}
+                event={EventObj.event}
+              >
+                <View color="#4F8EF7" >
+                  <EventObj.Icon size={Metrics.icons.small} />
+                </View>
+                <MapView.Callout style={Styles.myCallout} >
+                  <CalloutContainer
+                    notification={EventObj.event}
+                    socket={this.props.socket}
+                  />
+                </MapView.Callout>
+              </MapView.Marker>,
+            )
+          }
+        </MapView>
+        <RadialMenu socket={this.props.socket} />
+      </View>
+    );
   }
 }
-
-
-
-
