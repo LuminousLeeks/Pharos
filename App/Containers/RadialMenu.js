@@ -31,8 +31,6 @@ class RadialMenuComponent extends React.Component {
               event: event,
             }
             this.handleReport(newEvent);
-            // dispatch(reportEvent({}));
-
           }
         }
       })

@@ -11,7 +11,7 @@ import RadialMenu from './RadialMenu'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Callout from './Callout'
 import Icons from '../Lib/EventCategories';
-import { loadEvents } from '../Actions'
+import { loadEvents, fetchEvents } from '../Actions'
 
 class MapviewExample extends React.Component {
   
@@ -69,8 +69,8 @@ class MapviewExample extends React.Component {
   }
 
   // Set up watchId so we can end the geolocation watch when comonent unmounts
-  watchID: ?number = null;
-
+  // watchID: ?number = null;
+  //refectored
   watchPosition() {
     this.watchID = navigator.geolocation.watchPosition((position) => {
         var lastPosition = JSON.stringify(position);
@@ -104,12 +104,12 @@ class MapviewExample extends React.Component {
     return deg * (Math.PI/180)
   }
 
-  calculateRadius() {
+  calculateRadius(region) {
     let R = 6371; // Radius of the earth in km
-    let lat1 = this.state.region.latitude;
-    let lat2 = this.state.region.latitude + this.state.region.latitudeDelta;
-    let lon1 = this.state.region.longitude;
-    let lon2 = this.state.region.longitude + this.state.region.longitudeDelta;
+    let lat1 = region.latitude;
+    let lat2 = region.latitude + region.latitudeDelta;
+    let lon1 = region.longitude;
+    let lon2 = region.longitude + region.longitudeDelta;
     let dLat = this.deg2rad(lat2-lat1);  // this.deg2rad below
     let dLon = this.deg2rad(lon2-lon1);
     let a =
@@ -125,19 +125,20 @@ class MapviewExample extends React.Component {
   // TODO: Implement this function to get notifications from socket
   // Sends a region object with form { latitude: 37.7749, longitude: -122.4194, radius };
   // Outputs expects to recieve an array of nitifications and sets the state's notifications to whatever it is
-  retrieveMapMarkers () {
+  //--------- refectored !!!
+  retrieveMapMarkers (region) {
     console.log('states',this.state);
     const location = {
-      latitude: this.state.region.latitude,
-      longitude: this.state.region.longitude,
-      radius: this.calculateRadius.call(this)
+      latitude: region.latitude,
+      longitude: region.longitude,
+      radius: this.calculateRadius(region)
     }
-
-    this.socket.emit('getNotifications', (data) => {
-      console.log("notifications in map view", data);
-      this.props.fetchEvents(data);
-      console.log('this.notifications',this.state.notifications);
-    });
+    this.props._fetchEvents(this.props.token)
+    // this.socket.emit('getNotifications', (data) => {
+    //   console.log("notifications in map view", data);
+    //   this.props.fetchEvents(data);
+    //   console.log('this.notifications',this.state.notifications);
+    // });
   }
 
   // TODO: make callout render with dynamic width
@@ -199,13 +200,15 @@ MaterialCommunityIcons/ bomb
 const mapStateToProps = (state) => {
   console.log('inside mapping props');
   return {
-    notifications: state.events || []
+    notifications: state.events || [],
+    token: state.token
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchEvents: (data) => dispatch(loadEvents(data))
+    // fetchEvents: (data) => dispatch(loadEvents(data))
+    _fetchEvents: (token) => dispatch(fetchEvents(token))
   }
 }
 

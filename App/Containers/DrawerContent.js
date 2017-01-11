@@ -22,18 +22,22 @@ class DrawerContent extends Component {
 
   handlePressMapView = () => {
     this.toggleDrawer()
-    NavigationActions.mapview()
+    NavigationActions.mapScreen()
   }
-
   handlePressLoginScreen = () => {
     this.toggleDrawer()
     NavigationActions.loginScreen()
+  }
+  handlePressMapScreen = () => {
+    this.toggleDrawer()
+    NavigationActions.mapScreen()
   }
   render () {
     return (
       <ScrollView style={styles.container}>
         <DrawerButton text='Map View' onPress={this.handlePressMapView} />
         <DrawerButton text='Login' onPress={this.handlePressLoginScreen} />
+        <DrawerButton text='Map Screen' onPress={this.handlePressMapScreen} />
 
       </ScrollView>
     )

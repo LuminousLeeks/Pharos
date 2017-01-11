@@ -8,10 +8,56 @@ import createLogger from 'redux-logger'
 import RootContainer from './RootContainer'
 import rootReducer from '../Redux/index.js'
 
-// import applyConfigSettings from '../Config';
+import createSagaMiddleware from 'redux-saga';
+import saga from '../Sagas';
+
+// import reducer from './reducers';
 
 const loggerMiddleware = createLogger();
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(
+  thunkMiddleware, 
+  loggerMiddleware, 
+  sagaMiddleware
+));
+sagaMiddleware.run(saga);
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <RootContainer />
+      </Provider>
+    );
+  }
+}
+
+
+export default App;
+
+// export default function configureStore(initialState) {
+//   const sagaMiddleware = createSagaMiddleware();
+//   const store = createStore(
+//     reducer, initialState, applyMiddleware(
+//       sagaMiddleware, logger()
+//     )
+//   );
+//   sagaMiddleware.run(saga);
+//   return store;
+// }
+
+
+// const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+
+// import applyConfigSettings from '../Config';
+
+
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunkMiddleware,
+//   loggerMiddleware
+// )(createStore)
 
 // const configureStore = function (initialState: Object = {}): Function {
 //   return createStoreWithMiddleware(rootReducer, initialState)
@@ -42,15 +88,5 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMi
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <RootContainer />
-      </Provider>
-    );
-  }
-}
 
 
-export default App;
