@@ -52,7 +52,6 @@ const defaultState = {
 
 const initialState = {
   fething: false,
-
   newEvent: defaultState.newEvent,
   userInterests: {},
   userLocation: {
@@ -63,6 +62,7 @@ const initialState = {
   userName: '',
   events: defaultState.events,
   token: '',
+  watchID: '',
   error: null
 }
 
@@ -73,21 +73,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newEvent: action.newEvent
       };
-    // case 'LOAD_EVENTS':
-    //   return {
-    //     ...state,
-    //     action.events
-    //   }
     case 'UPDATE_POSITION':
       return {
         ...state,
         userLocation: action.userLocation
       }
-    // case 'LOAD_EVENTS':
-    //   return {
-    //     ...state,
-    //     events: action.events
-    //   };
+    case 'SAVE_WATCHID':
+      return {
+        ...state,
+        watchID: action.watchID
+      }
     case 'UPDATE_EVENTS':
       return {
         ...state,

@@ -1,22 +1,23 @@
 import { connect } from 'react-redux'
 import MapViewComponents from '../Components/MapViewComponents'
-import { loadEvents, updateEvent, updatePosition } from '../Actions'
+import { fetchEvents, updateEvent, updatePosition, saveWatchID } from '../Actions'
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
 // however the ownProps only have ownProps.socket so we use {socket}
 
-const mapStateToProps = (state, {socket}) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     events: state.events,
     region: state.userLocation.region,
-    currentLocation: state.userLocation.currentLocation,
-    socket: socket // use socket for rate event, no dispatch is associated
+    watchID: state.watchID,
+    token: state.token,
+    currentLocation: state.userLocation.currentLocation
   }
 }
 
 //if the Mapview need to trigger any action 
-const mapDispatchToProps = (dispatch, {socket}) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
 
   getCurrentPosition: (cb) => {
     navigator.geolocation.getCurrentPosition(
@@ -38,14 +39,11 @@ const mapDispatchToProps = (dispatch, {socket}) => ({
       //, {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     )
   },
-  retrieveMapMarkers: (token, region) => {
-    const location = {
-      latitude: region.latitude,
-      longitude: region.longitude,
-      radius: 0 //need to implement redius calculation
-
-    }
-    dispatch(fetchEvents(token, region))
+  retrieveMapMarkers: (token, userLocation) => {
+    dispatch(fetchEvents(token, userLocation))
+  },
+  saveWatchID: (watchID) => {
+    dispatch(saveWatchID(watchID))
   }
 
 })

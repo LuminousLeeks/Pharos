@@ -69,8 +69,8 @@ class MapviewExample extends React.Component {
   }
 
   // Set up watchId so we can end the geolocation watch when comonent unmounts
-  watchID: ?number = null;
-
+  // watchID: ?number = null;
+  //refectored
   watchPosition() {
     this.watchID = navigator.geolocation.watchPosition((position) => {
         var lastPosition = JSON.stringify(position);
@@ -125,6 +125,7 @@ class MapviewExample extends React.Component {
   // TODO: Implement this function to get notifications from socket
   // Sends a region object with form { latitude: 37.7749, longitude: -122.4194, radius };
   // Outputs expects to recieve an array of nitifications and sets the state's notifications to whatever it is
+  //--------- refectored !!!
   retrieveMapMarkers (region) {
     console.log('states',this.state);
     const location = {

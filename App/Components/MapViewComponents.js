@@ -11,23 +11,24 @@ import EventCategories from '../Lib/EventCategories'
 // const Mapviews = ({ events, socket, loadEvents, updateEvents }) => {
 export default class MapViewComponents extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
   }
 
   componentDidMount() {
-    // const retrieveMapMarkers = this.props.retrieveMapMarkers.bind(this)
+    const retrieveMapMarkers = this.props.retrieveMapMarkers.bind(this)
     this.props.getCurrentPosition((coord)=>{
-      // retrieveMapMarkers(coord)  
+      retrieveMapMarkers(this.props.token, coord)
     });
-    this.props.watchPosition();
+    const watchID = this.props.watchPosition()
+    this.props.saveWatchID(watchID)
   }
   onRegionChange () {
-    // this.props.retrieveMapMarkers(props.currentLocation);
+    this.props.retrieveMapMarkers(this.props.token, this.props.currentLocation);
   }  
-  // componentWillUnmount() {
-  //   navigator.geolocation.clearWatch(this.watchID);
-  // }
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.props.watchID);
+  }
   render() {
     return (
       <View style={Styles.container}>
@@ -35,7 +36,7 @@ export default class MapViewComponents extends Component {
           style={Styles.map}
           initialRegion={this.props.region}
           region={this.props.region}
-          onRegionChangeComplete={this.onRegionChange}
+          onRegionChangeComplete={this.onRegionChange.bind(this)}
           // showsUserLocation={this.props.showUserLocation} //TODO: need to add this function
         >
           {this.props.events

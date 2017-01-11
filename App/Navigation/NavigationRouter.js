@@ -6,12 +6,12 @@ import Styles from './Styles/NavigationContainerStyle'
 import NavigationDrawer from './NavigationDrawer'
 
 // screens identified by the router
-import Mapview from '../Containers/Mapview'
+// import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ReportEventScreen from '../Containers/ReportEventScreen'
 
-import socket from '../Lib/socket'
+// import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
 ***************************/
@@ -31,35 +31,25 @@ class NavigationRouter extends Component {
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}>
             <Scene
-              key='mapview'
-              component={Mapview}
-              title='Pharos'
-              props={ {socket: socket} }
-              />
-            <Scene
               key='mapScreen'
               component={MapScreen}
               title='Pharos'
-              props={ {socket: socket} }
               />
             <Scene
               initial
               key='loginScreen'
               component={LoginScreen}
               title='Login Screen'
-              socket={ {socket: socket} }
               />
             <Scene
               key='reportEventScreen'
               component={ReportEventScreen}
               title='Report Event'
-              socket={ {socket: socket} }
               />
             <Scene
               key='mapScreen'
               component={MapScreen}
               title='Pharos'
-              socket={ {socket: socket} }
               />
           </Scene>
         </Scene>

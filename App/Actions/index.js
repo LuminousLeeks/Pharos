@@ -35,16 +35,23 @@ export const loadEvents = (events) => {
     events
   }
 };
+export const saveWatchID = (watchID) => {
+  return {
+    type: 'SAVE_WATCHID',
+    watchID
+  }
+}
 export const updateEvent = (events) => {
   return {
     type: 'UPDATE_EVENTS',
     events
   }
 };
-export const fetchEvents = (token) => {
+export const fetchEvents = (token, userLocation) => {
   return {
     type: 'FETCH_EVENTS',
-    token
+    token,
+    userLocation
   }
 }
 const getUserInfo = (userName = '', userInterests = [], token = {}) => {
@@ -66,7 +73,7 @@ export const request = () => ({
 
 export const loginSuccess = (username, token) => {
   console.log(token);
-  NavigationActions.mapview();
+  NavigationActions.mapScreen();
   return {
     type: 'SUCCESS',
     username,
