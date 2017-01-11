@@ -83,12 +83,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userLocation: action.userLocation
       }
-    case 'LOAD_EVENTS':
-      return action.events;
+    // case 'LOAD_EVENTS':
+    //   return {
+    //     ...state,
+    //     events: action.events
+    //   };
     case 'UPDATE_EVENTS':
       return {
         ...state,
-        // action.events
+        events: action.events
       };
     case 'GET_USER_INFO':
       return {

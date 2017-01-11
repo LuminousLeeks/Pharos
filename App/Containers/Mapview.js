@@ -13,50 +13,6 @@ import Callout from './Callout'
 import Icons from '../Lib/EventCategories';
 import { loadEvents } from '../Actions'
 
-const defaultState = {
-  newEvent: {
-    category: 'waitTime',
-    description: 'Long wait time',
-    event: 'evantA'
-  },
-  events: [
-    {
-      category: 'waitTime',
-      description: 'Long wait time',
-      event: 'evantA',
-      story: 'Line for Pokemon ground is too long.',
-      latitude: 37.784235,
-      longitude: -122.410597
-
-    },
-    {
-      category: 'waitTime',
-      description: 'Long wait time',
-      event: 'evantB',
-      story: 'Line for Logo land is too long.',
-      latitude: 37.785566,
-      longitude: -122.407282
-    },
-    {
-      category: 'hazard',
-      description: 'Hazard events',
-      event: 'eventK',
-      story: 'Pikachu is on fire.',
-      latitude: 37.784311,
-      longitude: -122.404460
-    },
-    {
-      category: 'commute',
-      description: 'Commute related events',
-      event: 'eventN',
-      story: 'Pikachu blocked I-880.',
-      latitude: 37.784345,
-      longitude: -122.407679
-    },
-
-  ]
-}
-
 class MapviewExample extends React.Component {
   
   constructor(props) {
@@ -72,8 +28,7 @@ class MapviewExample extends React.Component {
       region: initialRegion,
       currentLocation: {},
       // notifications: exampleNotifications || [],
-      notifications: defaultState.events,
-      // notifications: [],
+      notifications: props.notifications,
       showUserLocation: true
     }
 
@@ -177,7 +132,7 @@ class MapviewExample extends React.Component {
       longitude: this.state.region.longitude,
       radius: this.calculateRadius.call(this)
     }
-
+    
     this.socket.emit('getNotifications', (data) => {
       console.log("notifications in map view", data);
       this.props.fetchEvents(data);
@@ -186,15 +141,12 @@ class MapviewExample extends React.Component {
   }
 
   // TODO: make callout render with dynamic width
-  renderMapMarkers (notification, index) {
+  renderMapMarkers (notification) {
     return (
-      <MapView.Marker
-        key={index}
-        coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
-        title={notification.title}
-        description={notification.category}
+      <MapView.Marker key={notification.title} coordinate={{latitude: notification.latitude, longitude: notification.longitude}}
+      title={notification.title} description={notification.category}
       >
-        <View color="#4F8EF7" >{Icons[notification.category].icon({size: Metrics.icons.small})}</View>
+        <View color="#4F8EF7" >{Icons[notification.category].icon({size: Metrics.icons.medium})}</View>
         <MapView.Callout style={ Styles.myCallout } >
           <Callout notification={notification} />
         </MapView.Callout>
@@ -213,8 +165,7 @@ class MapviewExample extends React.Component {
           showsUserLocation={this.state.showUserLocation}
           followsUserLocation={this.state.followsUserLocation}
         >
-          {this.state.notifications.map((notification, index) => this.renderMapMarkers(notification, index))}
-
+          {this.props.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
 
         <RadialMenu notifications={this.state.notifications} region={this.state.region} socket={this.props.socket}/>
@@ -223,6 +174,25 @@ class MapviewExample extends React.Component {
     )
   }
 }
+/*
+          <Icon name="menu" size={30} color="" />
+          <Icon name="menu" size={30} color="#900" />
+          <Icon name="menu" size={30} color="#900" />
+          <Icon name="menu" size={30} color="#900" />
+
+MaterialCommunityIcons/ target
+MaterialCommunityIcons/ pig
+MaterialCommunityIcons/ human-handsup
+MaterialCommunityIcons/ ghost
+MaterialCommunityIcons/ skull
+MaterialCommunityIcons/ bomb
+*/
+
+// itemRadius (Number) 30 - Menu item radius
+// menuRadius (Number) 60- Distance between root and items in open state.
+// spreadAngle (Number: 0 - 360) 90 - The angle in degrees based on which menu items are spread on a circle around our root. E.g. 360 full circle, 180 half of circle and so on.
+// startAngle (Number) 0 - Items are distributed in clockwise direction starting from startAngle. 0 is left, 90 top, and so on.
+
 
 
 
@@ -240,4 +210,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapviewExample)
-

@@ -8,8 +8,20 @@ import createLogger from 'redux-logger'
 import RootContainer from './RootContainer'
 import rootReducer from '../Redux/index.js'
 
+import createSagaMiddleware from 'redux-saga';
+import saga from '../Sagas';
+
+// import reducer from './reducers';
+
 const loggerMiddleware = createLogger();
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(
+  thunkMiddleware, 
+  loggerMiddleware, 
+  sagaMiddleware
+));
+sagaMiddleware.run(saga);
 
 class App extends Component {
   render() {
@@ -23,6 +35,18 @@ class App extends Component {
 
 
 export default App;
+
+// export default function configureStore(initialState) {
+//   const sagaMiddleware = createSagaMiddleware();
+//   const store = createStore(
+//     reducer, initialState, applyMiddleware(
+//       sagaMiddleware, logger()
+//     )
+//   );
+//   sagaMiddleware.run(saga);
+//   return store;
+// }
+
 
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
