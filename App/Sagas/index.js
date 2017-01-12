@@ -47,29 +47,21 @@ function* signup() {
 
 function connectSocket(token) {
   console.log('/////////// CONNECTING TO SOCKET IN SAGA   //////// ')
-    const socket = io.connect('http://127.0.0.2:8099', {
+    const socket = io.connect('http://127.0.0.1:8099', {
       transports: ['websocket'],
       jsonp: false,
       query: 'token=' + token
     });
 
+    return new Promise((resolve) => {
       console.log(socket, 'socket from inside the Promise');
-      console.log('############## PROMISE ################')
-
-      socket.on('connect', (socket, token) => {
-
+      socket.on('connect', () => {
+        console.log('############## PROMISE ################')
         console.log('############## CONNECTED ################')
 
-        socket
-          .emit('authenticate', { token })
-          .on('authenticated', () => {
-            console.log('authenticated!!!!');
-          })
+        resolve(socket);
       });
-
-    // return new Promise((resolve) => {
-        // resolve({ token });
-    // });
+    });
 }
 
 // function getNotifications(socket, token) {
@@ -100,7 +92,7 @@ function getNotifications(socket, token) {
   })
 }
 
-function* fetchEvents(socket, token) {
+function* fetchEvents(socket) {
   while (true) {
     const { token } = yield take('FETCH_EVENTS');
     const events = yield call(getNotifications, socket, token);
@@ -108,7 +100,7 @@ function* fetchEvents(socket, token) {
   }
 }
 //---------handle sending data to socket
-function* reportEvent(socket, token) {
+function* reportEvent(socket) {
   while (true) {
     const { newEvent } = yield take('REPORT_EVENT');
     console.log('Saga intercept report event: ');
@@ -131,14 +123,13 @@ function* voteEvent (socket) {
 //---------combine sending and receiving data
 function* handleIO(socket) {
   // yield fork(read, socket);
-  console.log(socket, 'testing the socket') // TEST
   yield fork(fetchEvents, socket);
   yield fork(reportEvent, socket);
   yield fork(voteEvent, socket);
 }
 
 //---------define flow of Socket
-function* flow(token) {
+function* flow() {
   while (true) {
     let { token } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token);

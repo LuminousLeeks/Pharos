@@ -77,8 +77,7 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_POSITION':
       return {
         ...state,
-        userLocation: action.userLocation,
-        token: action.token
+        userLocation: action.userLocation
       }
     case 'UPDATE_REGION':
       return {
