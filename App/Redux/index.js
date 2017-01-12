@@ -49,15 +49,16 @@ const defaultState = {
   ]
 }
 
-
 const initialState = {
   fething: false,
   newEvent: defaultState.newEvent,
   userInterests: {},
-  userLocation: {
-    //for demonstrating the data struction, delete this later
-    currentLocation: {}, 
-    region: {} 
+  userLocation: {},
+  region: {
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 100,
+    longitudeDelta: 100,
   },
   userName: '',
   events: defaultState.events,
@@ -77,6 +78,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userLocation: action.userLocation
+      }
+    case 'UPDATE_REGION':
+      return {
+        ...state,
+        region: action.region
       }
     case 'SAVE_WATCHID':
       return {
@@ -119,9 +125,6 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-
-
-
 //Bing disabled the one below... Why, I don't know why.
 // const rootReducer = combineReducers({
 //   mapAction,
@@ -131,10 +134,4 @@ const rootReducer = (state = initialState, action) => {
 //Below was active in my case... so we have to make that up.
 // export default rootReducer;
 
-
-
 export default rootReducer
-
-
-
-
