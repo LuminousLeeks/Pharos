@@ -77,7 +77,8 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_POSITION':
       return {
         ...state,
-        userLocation: action.userLocation
+        userLocation: action.userLocation,
+        token: action.token
       }
     case 'UPDATE_REGION':
       return {
@@ -92,7 +93,8 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_EVENTS':
       return {
         ...state,
-        events: action.events
+        events: action.events,
+        token: action.token
       };
     case 'GET_USER_INFO':
       return {
@@ -105,6 +107,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: true,
+        token: action.token,
       };
     case 'STOP_FETCHING':
       return {
@@ -113,9 +116,9 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case 'REQUEST':
-      return { ...state, fetching: true };
+      return { ...state, fetching: true, token: action.token };
     case 'SUCCESS':
-      return { ...state, fetching: false, userName: action.username };
+      return { ...state, fetching: false, userName: action.username,token: action.token };
     case 'AUTH_FAIL':
       return { ...state, fetching: false, error: action.error };
     case 'LOGOUT':

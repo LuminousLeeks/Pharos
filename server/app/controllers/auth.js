@@ -60,7 +60,7 @@ module.exports.createUser = (request, response) => {
           response.send({ token });
         });
       } else {
-        response.redirect('/login');
+        response.send(404).json('user already exists');
       }
     })
     .catch(() => {

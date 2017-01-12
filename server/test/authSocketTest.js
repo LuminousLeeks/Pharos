@@ -22,7 +22,7 @@ describe('Register a New User and Assign a JSON Web Token at Login', () => {
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
         expect(res.body).to.not.be.an('error');
         expect(res.body).to.be.an('object');

@@ -2,6 +2,7 @@
 import req from 'superagent';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
+<<<<<<< HEAD
 export const reportEvent = newEvent => ({
   type: 'REPORT_EVENT',
   newEvent,
@@ -20,7 +21,6 @@ export const updatePosition = position => ({
       longitude: position.coords.longitude,
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
-
     },
     currentLocation: {
       latitude: position.coords.latitude,
@@ -29,7 +29,7 @@ export const updatePosition = position => ({
   },
 });
 // !!! this is duplicate !!!
-export const loadEvents = (events) => {
+export const loadEvents = (events, token) => {
   console.log('loadEvents action triggered');
   console.log(events);
   return {
@@ -57,16 +57,17 @@ const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
   token,
 });
 
-const getEvents = (userInterests) => {
+// const getEvents = (userInterests) => {
 
 };
+
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
   type: 'REQUEST',
 });
 
 export const loginSuccess = (username, token) => {
-  console.log(token);
+  console.log(token, 'sucess and token!');
   NavigationActions.mapScreen();
   return {
     type: 'SUCCESS',
@@ -91,6 +92,7 @@ export const registerRequest = (username, password) => ({
   username,
   password,
 });
+
 export const loginRequest_ = (username, password) => (dispatch) => {
   dispatch(request);
   const url = 'http://127.0.0.1:8099';
@@ -110,7 +112,6 @@ export const loginRequest_ = (username, password) => (dispatch) => {
         }
       });
 };
-
 // REFACTOR: Below code is almost DUPLICATE.
 // Finalize the signin / signup endpoints then refactor
 
@@ -137,3 +138,4 @@ export const registerRequest_ = (username, password) => (dispatch) => {
         }
       });
 };
+

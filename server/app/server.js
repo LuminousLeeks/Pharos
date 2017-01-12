@@ -25,13 +25,12 @@ const server = require('http').Server(app);
 //  TODO: SSL? const sslPort = 3011;
 server.listen(port, () => logger.info(`Server listening on ${port}!`));
 
-
 //  Socket.io connection established
 const io = require('socket.io')(server);
 
-const ioListener = io.listen(server);
+const sio = io.listen(server);
 
-module.exports = { app, ioListener };
+module.exports = { app, sio };
 
 //  Prevent circular dependency by defining routes after exports
 const router = require('./routes/router');
