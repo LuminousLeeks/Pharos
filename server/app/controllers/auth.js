@@ -6,7 +6,9 @@ const User = require('./../../models/Models').User;
 
 module.exports.loginUser = (request, response) => {
   const reqUser = request.body;
-  const token = jwtoken.sign(reqUser, jwtSecret);
+  const token = jwtoken.sign(reqUser, jwtSecret, {
+    expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 Days
+  });
 
   User.findOne({
     where: {
@@ -16,12 +18,11 @@ module.exports.loginUser = (request, response) => {
   .then((returnedUser) => {
     if (returnedUser === null) {
       response.status(400).json('User not found');
+    }
+    if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
+      response.status(200).send({ token });
     } else {
-      if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
-        response.status(200).send({ token });
-      } else {
-        response.status(400).send('Invalid Login');
-      }
+      response.status(400).send('Invalid Login');
     }
   })
   .catch((error) => {
@@ -30,7 +31,6 @@ module.exports.loginUser = (request, response) => {
 };
 
 module.exports.createUser = (request, response) => {
-  console.log('at the controller');
   const username = request.body.username;
   const firstName = request.body.firstName;
   const lastName = request.body.lastName;
@@ -60,7 +60,7 @@ module.exports.createUser = (request, response) => {
           response.send({ token });
         });
       } else {
-        response.redirect('/login');
+        response.send(404).json('user already exists');
       }
     })
     .catch(() => {

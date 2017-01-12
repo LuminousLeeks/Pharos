@@ -1,3 +1,4 @@
+/* eslint-disable */
 import io from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
 import { fork, take, call, put, cancel } from 'redux-saga/effects'
@@ -9,20 +10,20 @@ import { loadEvents, loginSuccess } from '../Actions'
 //----------------- REST request ---------------------------
 //----------------------------------------------------------
 
-//helper function for login POST 
+//helper function for login POST
 export const loginPostsApi = (username, password) => {
   const url = 'http://127.0.0.1:8099';
   return req.post(`${url}/api/auth/login`)
     .send({ username, password })
 }
 
-//helper function for signup POST 
+//helper function for signup POST
 export const signupPostsApi = (username, password, userInfo) => {
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
   firstName = userInfo.firstName;
   lastName = userInfo.lastName;
   const url = 'http://127.0.0.1:8099';
-  return req.post(`${url}/api/auth/register`)
+  return req.post(`${url}/api/auth/signup`)
     .send({ username, password, firstName, lastName })
 }
 
@@ -36,7 +37,7 @@ function* login() {
 
 function* signup() {
     const { username, password, userInfo } = yield take('SIGNUP_REQUEST')
-    const res = yield call(loginPostsApi, username, password, userInfo)
+    const res = yield call(signupPostsApi, username, password, userInfo)
     yield put(loginSuccess( username, res.body))
 }
 //--------------------Socket Events-------------------------
@@ -45,16 +46,22 @@ function* signup() {
 //helper function for connect socket
 
 function connectSocket(token) {
-  const socket = io.connect('http://127.0.0.1:8099', {
-    transports: ['websocket']
-    // query: 'token=' + token
-  });
-  return new Promise(resolve => {
-    socket.on('connect', () => {
-      console.log('created socket')
-      resolve(socket);
+  console.log('/////////// CONNECTING TO SOCKET IN SAGA   //////// ')
+    const socket = io.connect('http://127.0.0.1:8099', {
+      transports: ['websocket'],
+      jsonp: false,
+      query: 'token=' + token
     });
-  });
+
+    return new Promise((resolve) => {
+      console.log(socket, 'socket from inside the Promise');
+      socket.on('connect', () => {
+        console.log('############## PROMISE ################')
+        console.log('############## CONNECTED ################')
+
+        resolve(socket);
+      });
+    });
 }
 
 // function getNotifications(socket, token) {
@@ -76,8 +83,9 @@ function connectSocket(token) {
 //   });
 // }
 function getNotifications(socket, token) {
+
   return new Promise((resolve, reject) => {
-    socket.emit('getNotifications', (events) => {
+    socket.emit('GET_NOTIFICATIONS', (events) => {
       console.log("notifications in Saga", events);
       resolve(events);
     })
@@ -97,7 +105,7 @@ function* reportEvent(socket) {
     const { newEvent } = yield take('REPORT_EVENT');
     console.log('Saga intercept report event: ');
     console.log(newEvent);
-    // active this line, once socket is up 
+    // active this line, once socket is up
     // socket.emit('reportEvent', newEvent);
   }
 }
@@ -107,7 +115,7 @@ function* voteEvent (socket) {
     const { event, vote } = yield take('VOTE_EVENT');
     console.log('Saga intercept vote event: ');
     console.log(event, vote);
-    // active this line, once socket is up 
+    // active this line, once socket is up
     // socket.emit('reportEvent', newEvent);
   }
 }
