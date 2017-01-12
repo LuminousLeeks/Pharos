@@ -7,8 +7,24 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
+const db = require('../db/db.js');
+const router = require('./routes/router');
+
+// Database:
+const exampleData = require('../../data/exampleData.js');
+
+
+// create tables if not exists.
 
 const app = express();
+
+// check database connection and create tables if non existent.
+db.authenticate().then(() => {
+  console.log('connected to the database');
+}).catch((error) => {
+  console.log('cannot connect to the db');
+  throw error;
+});
 
 //  Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +41,7 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 
 //  Socket.io connection established
 const io = require('socket.io')(server);
+
 
 //  Prevent circular dependency by defining routes after exports
 module.exports.io = io;

@@ -2,7 +2,7 @@ const jwtoken = require('jsonwebtoken');
 const socketioJwt = require('socketio-jwt');
 const bcrypt = require('bcrypt');
 const jwtSecret = require('../../env/index').JWT_SECRET;
-const User = require('./../../models/Models').User;
+const User = require('./../../models/User.js');
 
 module.exports.socketAuth = (sockets, cb) => {
   sockets
@@ -85,7 +85,7 @@ module.exports.createUser = (request, response) => {
             password: usr.dataValues.password,
           };
           const token = jwtoken.sign(userSignature, jwtSecret);
-          response.send({ token });
+          response.send({ token, userId: usr.dataValues.id });
         });
       } else {
         response.send(404).json('user already exists');

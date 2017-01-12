@@ -1,6 +1,31 @@
-// const Sequelize = require('sequelize');
-// const db = require('../db/db.js');
 // const bcrypt = require('bcrypt');
+const Sequelize = require('sequelize');
+const db = require('../db/db.js');
+
+const User = db.define('user', {
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    // validate: {
+    //   is: /^[A-Za-z0-9\\-]+$/i,
+    // },
+  },
+  firstName: {
+    type: Sequelize.STRING, //  TODO: confirm
+  },
+  lastName: {
+    type: Sequelize.STRING, //  TODO: confirm
+  },
+  password: {
+    type: Sequelize.STRING, // TODO: ADD PASSWORD CONFIRMATION
+  },
+  salt: {
+    type: Sequelize.STRING, //SALT
+  },
+});
+
+module.exports = User;
 
 
 // const User = db.define('user', {
