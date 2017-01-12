@@ -49,13 +49,17 @@ const defaultState = {
   ]
 }
 
-
 const initialState = {
   fething: false,
   newEvent: defaultState.newEvent,
   userInterests: {},
   userLocation: {},
-  region: {},
+  region: {
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 100,
+    longitudeDelta: 100,
+  },
   userName: '',
   events: defaultState.events,
   token: '',
