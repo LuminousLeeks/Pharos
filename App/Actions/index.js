@@ -2,7 +2,6 @@
 import req from 'superagent';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
-<<<<<<< HEAD
 export const reportEvent = newEvent => ({
   type: 'REPORT_EVENT',
   newEvent,
