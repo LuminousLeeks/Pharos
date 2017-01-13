@@ -7,7 +7,6 @@ const Vote = db.define('Vote', {
   type: Sequelize.BOOLEAN,
 });
 
-console.log(Notification);
 Notification.belongsToMany(User, { through: Vote });
 User.belongsToMany(Notification, { through: Vote });
 
