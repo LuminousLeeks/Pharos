@@ -32,6 +32,7 @@
     "bcrypt": "^1.0.2",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
+    "debug": "^2.6.0",
     "dotenv": "^4.0.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",

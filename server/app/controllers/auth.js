@@ -1,8 +1,19 @@
 const jwtoken = require('jsonwebtoken');
+const socketioJwt = require('socketio-jwt');
 const bcrypt = require('bcrypt');
 const jwtSecret = require('../../env/index').JWT_SECRET;
 const User = require('./../../models/Models').User;
 
+module.exports.socketAuth = (socket, callback) => {
+  socket
+    .on('connect', socketioJwt.authorize({
+      secret: jwtSecret,
+      timeout: 10000,
+    }))
+    .on('authenticated', (socket2) => {
+      callback(socket2);
+    });
+};
 
 module.exports.loginUser = (request, response) => {
   const reqUser = request.body;

@@ -32,7 +32,7 @@ function* login() {
     console.log('login in saga');
     const res = yield call(loginPostsApi, username, password)
     console.log(res.body);
-    yield put(loginSuccess( username, res.body))
+    yield put(loginSuccess( username, res.body.token))
 }
 
 function* signup() {
@@ -46,21 +46,29 @@ function* signup() {
 //helper function for connect socket
 
 function connectSocket(token) {
-  console.log('/////////// CONNECTING TO SOCKET IN SAGA   //////// ')
-    const socket = io.connect('http://127.0.0.1:8099', {
+  // console.log('/////////// CONNECTING TO SOCKET IN SAGA   //////// ')
+    const socket = io.connect('http://127.0.0.1:8099/socket', {
       transports: ['websocket'],
-      jsonp: false,
-      query: 'token=' + token
+      // jsonp: false,
+      // query: 'token=' + token
     });
-
     return new Promise((resolve) => {
-      console.log(socket, 'socket from inside the Promise');
-      socket.on('connect', () => {
-        console.log('############## PROMISE ################')
-        console.log('############## CONNECTED ################')
-
+      // console.log(socket, 'socket from inside the Promise');
+    socket
+      .emit('authenticate', { token })
+      .on('authenticated', (socket) => {
+        console.log('AUTHORIZED CLIENT')
         resolve(socket);
-      });
+      })
+      .on('unauthorized', (msg) => {
+        console.log('unauthorized', JSON.stringify(msg.data))
+      })
+      // socket.emit('authenticate', (so) => {
+      //   console.log('############## PROMISE ################')
+      //   console.log('############## CONNECTED ################')
+
+      //   resolve(socket);
+      // });
     });
 }
 
@@ -83,10 +91,9 @@ function connectSocket(token) {
 //   });
 // }
 function getNotifications(socket, token) {
-
   return new Promise((resolve, reject) => {
     socket.emit('GET_NOTIFICATIONS', (events) => {
-      console.log("notifications in Saga", events);
+      // console.log("notifications in Saga", events);
       resolve(events);
     })
   })

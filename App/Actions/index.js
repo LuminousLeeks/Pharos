@@ -56,10 +56,6 @@ const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
   token,
 });
 
-// const getEvents = (userInterests) => {
-
-};
-
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
   type: 'REQUEST',
