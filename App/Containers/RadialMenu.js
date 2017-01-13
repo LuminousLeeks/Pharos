@@ -25,7 +25,8 @@ class RadialMenuComponent extends React.Component {
         return {
           text: event,
           onPress: () => {
-            let newEvent = {
+            const newEvent = {
+              userName: this.props.userName,
               category: key,
               description: description,
               event: event,
@@ -74,6 +75,12 @@ class RadialMenuComponent extends React.Component {
 RadialMenuComponent.defaultProps = {
   dispatch: () => {}
 };
-RadialMenuComponent = connect()(RadialMenuComponent);
+
+const mapStateToProps = (state) => ({
+  userName: state.userName,
+})
+
+
+RadialMenuComponent = connect(mapStateToProps)(RadialMenuComponent);
 
 export default RadialMenuComponent

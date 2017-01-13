@@ -71,6 +71,7 @@ const mapDispatchToProps = dispatch => ({
     updatedEvent.description = description;
     dispatch(reportEvent(updatedEvent));
     NavigationActions.mapScreen();
+    console.log(updatedEvent)
   },
 });
 
