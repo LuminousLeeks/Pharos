@@ -10,9 +10,12 @@ router.post('/auth/login', authController.loginUser);
 router.post('/auth/signup', authController.createUser);
 
 
-// Socket Server Router
 socketController(io.of('/socket'));
 
 // Admin Use - List of all users
 // router.get('/users', authController.getUsers);
+
+// Socket Server Router
+socketController(io.of('/socket'));
+
 module.exports = router;

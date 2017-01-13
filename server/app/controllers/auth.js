@@ -3,6 +3,21 @@ const socketioJwt = require('socketio-jwt');
 const bcrypt = require('bcrypt');
 const jwtSecret = require('../../env/index').JWT_SECRET;
 const User = require('./../../models/Models').User;
+const socketioJwt = require('socketio-jwt');
+
+module.exports.socketAuth = (sockets, cb) => {
+  sockets
+    .on('connection', socketioJwt.authorize({
+      // secret: process.env.JWT_SECRET,
+      secret: jwtSecret,
+      // handshake: true,
+      timeout: 100000, // 10 seconds to send the authentication message
+      // callback: false, // disconnect socket server side if invalid token
+    }))
+    .on('authenticated', (socket) => {
+      cb(socket);
+    });
+};
 
 // Authentication JwToken passed from socket
 module.exports.socketAuth = (socket, callback) => {

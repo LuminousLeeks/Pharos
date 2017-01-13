@@ -27,7 +27,9 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 //  Socket.io connection established
 const io = require('socket.io')(server);
 
-module.exports = { app, io };
+//  Prevent circular dependency by defining routes after exports
+module.exports.io = io;
+module.exports.app = app;
 
 //  Prevent circular dependency by defining routes after exports
 const router = require('./routes/router');
@@ -39,3 +41,4 @@ app.use('/api', router);
 app.get('/*', (req, res) => {
   res.status(200).send('Hello from Pharos server!');
 });
+

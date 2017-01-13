@@ -1,7 +1,11 @@
-import io from 'socket.io-client';
-import { eventChannel } from 'redux-saga'; //  TODO: Never used
-import { fork, take, call, put, cancel } from 'redux-saga/effects';
-import req from 'superagent';
+
+/* eslint-disable */
+import io from 'socket.io-client'
+import { eventChannel } from 'redux-saga'
+import { fork, take, call, put, cancel } from 'redux-saga/effects'
+import req from 'superagent'
+import { Actions as NavigationActions } from 'react-native-router-flux';
+
 
 //  actions triggered at the end async event
 import { loadEvents, loginSuccess } from '../Actions';
@@ -27,23 +31,23 @@ export const signupPostsApi = (username, password, userInfo) => {
 };
 
 function* login() {
-  const { username, password } = yield take('LOGIN_REQUEST');
-  console.log('login in saga');
-  const res = yield call(loginPostsApi, username, password);
-  console.log(res.body);
-  yield put(loginSuccess(username, res.body.token));
+    const { username, password } = yield take('LOGIN_REQUEST')
+    console.log('login in saga');
+    const res = yield call(loginPostsApi, username, password)
+    console.log('login success----------------')
+    console.log(res.body.token);
+    yield put(loginSuccess( username, res.body.token))
 }
 
 function* signup() {
-  const { username, password, userInfo } = yield take('SIGNUP_REQUEST');
-  const res = yield call(signupPostsApi, username, password, userInfo);
-  yield put(loginSuccess(username, res.body));
+    const { username, password, userInfo } = yield take('SIGNUP_REQUEST')
+    const res = yield call(signupPostsApi, username, password, userInfo)
+    yield put(loginSuccess( username, res.body.token))
 }
 // --------------------Socket Events-------------------------
 // ----------------------------------------------------------
 
 // Connect Redux client to socket
-
 function connectSocket(token) {
   const socket = io.connect('http://127.0.0.1:8099/socket', { transports: ['websocket'] });
 
@@ -57,14 +61,14 @@ function connectSocket(token) {
     .on('unauthorized', (msg) => {
       console.log('unauthorized', JSON.stringify(msg.data));
       reject('unauthorized', JSON.stringify(msg.data));
-    });
+      });
   });
 }
 
 function getNotifications(socket, token) {
   return new Promise((resolve, reject) => {
-    socket.emit('GET_NOTIFICATIONS', (events) => {
-      // console.log("notifications in Saga", events);
+    socket.emit('getNotifications', (events) => {
+      console.log('Saga: getNotifications');
       resolve(events);
     });
   });
@@ -111,6 +115,7 @@ function* flow() {
   while (true) {
     let { token } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token);
+    NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');
     yield cancel(task);
