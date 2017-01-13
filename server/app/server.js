@@ -1,7 +1,6 @@
 //  TODO: Uncomment when SSL set up
 // const https = require('https');
 require('dotenv').config();
-
 const port = require('./../env/index').PORT;
 const express = require('express');
 const db = require('../db/db');
@@ -11,7 +10,6 @@ const morgan = require('morgan');
 const logger = require('./utils/logger');
 
 const app = express();
-
 
 //  Middleware
 app.use(bodyParser.urlencoded({ extended: true }));

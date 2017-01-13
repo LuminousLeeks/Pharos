@@ -6,7 +6,6 @@ module.exports = (io) => {
   socketAuth(io, (socket) => {
     socket.emit('text', 'Hello from Server');
     socket.on('getNotifications', (callback) => {
-      // console.log('DATA COMING IN HOT');
       callback(exampleData);
     });
   });

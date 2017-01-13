@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwtSecret = require('../../env/index').JWT_SECRET;
 const User = require('./../../models/Models').User;
 
+// Authentication JwToken passed from socket
 module.exports.socketAuth = (socket, callback) => {
   socket
     .on('connect', socketioJwt.authorize({
@@ -15,6 +16,7 @@ module.exports.socketAuth = (socket, callback) => {
     });
 };
 
+// HTTP login request
 module.exports.loginUser = (request, response) => {
   const reqUser = request.body;
   const token = jwtoken.sign(reqUser, jwtSecret, {
@@ -41,6 +43,7 @@ module.exports.loginUser = (request, response) => {
   });
 };
 
+// Register new user, hash password and store salt
 module.exports.createUser = (request, response) => {
   const username = request.body.username;
   const firstName = request.body.firstName;

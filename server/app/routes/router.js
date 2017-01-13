@@ -1,18 +1,18 @@
-const authController = require('../controllers/auth');
 const router = require('express').Router();
+const authController = require('../controllers/auth');
 const socketController = require('./../controllers/socket');
 const { io } = require('./../server.js');
 
- // User Login Controller
+// User Login Controller
 router.post('/auth/login', authController.loginUser);
 
- // New User Controller
+// New User Controller
 router.post('/auth/signup', authController.createUser);
+
+
+// Socket Server Router
+socketController(io.of('/socket'));
 
 // Admin Use - List of all users
 // router.get('/users', authController.getUsers);
-
-// Socket Server Router // //  TODO: DETERMINE IF NECESSARY WHEN SOCKET AUTH SET UP W CLIENT
-socketController(io.of('/socket'));
-
 module.exports = router;
