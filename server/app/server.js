@@ -54,4 +54,3 @@ app.use('/api', router);
 app.get('/*', (req, res) => {
   res.status(200).send('Hello from Pharos server!');
 });
-

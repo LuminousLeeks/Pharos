@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { postNotification } from '../Actions';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 // import Styles from './Styles/ReportEventFormsStyle';
+import ReportEventForms from '../Components/ReportEventForms';
+import { reportEvent } from '../Actions'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 class ReportEventForms extends React.Component {
   constructor(props) {
@@ -57,21 +59,23 @@ class ReportEventForms extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state, ' state inside the report event screen');
   return {
     newEvent: state.newEvent,
-  // newEvent: {}
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    submitNotification: notification => (dispatch(postNotification(notification))),
-  };
-};
 
-// const mapDispatchToProps = () => {}
+const mapDispatchToProps = dispatch => ({
+  handleSubmit: (newEvent, description) => {
+    let updatedEvent = newEvent;
+    updatedEvent.description = description;
+    dispatch(reportEvent(updatedEvent));
+    NavigationActions.mapScreen();
+  },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportEventForms);
+
+const ReportEventScreen = connect(mapStateToProps, mapDispatchToProps)(ReportEventForms);
+export default ReportEventScreen;
 
 // export default connect(mapStateToProps, null)(ReportEventForms);

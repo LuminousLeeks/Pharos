@@ -29,9 +29,9 @@ export const getPositionFromNavigator = () => {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             latitudeDelta: 0.01,
-            longitudeDelta: 0.01,            
+            longitudeDelta: 0.01,
           },
-        }) 
+        })
       },
       (err) => {console.log('in Saga, getCurrentPosition failed')},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
@@ -40,13 +40,13 @@ export const getPositionFromNavigator = () => {
 }
 function* getPosition() {
   yield take('GET_POSITION');
-  const {position, region} = yield call(getPositionFromNavigator);  
+  const {position, region} = yield call(getPositionFromNavigator);
   yield put(updatePosition(position));
 }
 //----------------- REST request ---------------------------
 //----------------------------------------------------------
 
-//helper function for login POST 
+//helper function for login POST
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
   const url = 'http://127.0.0.1:8099';
@@ -55,7 +55,7 @@ export const loginPostRequest = (username, password) => {
 };
 
 
-//helper function for signup POST 
+//helper function for signup POST
 export const signupPostRequest = (username, password, userInfo) => {
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
   firstName = userInfo.firstName;
@@ -67,7 +67,7 @@ export const signupPostRequest = (username, password, userInfo) => {
 
 function* login() {
     const { username, password } = yield take('LOGIN_REQUEST')
-    const {position, region} = yield call(getPositionFromNavigator);     
+    const {position, region} = yield call(getPositionFromNavigator);
     yield put(updatePosition(position));
     yield put(updateRegion(region));
     const res = yield call(loginPostRequest, username, password, position)
@@ -126,6 +126,7 @@ function* reportEvent(socket) {
     console.log(newEvent);
     // active this line, once socket is up
     // socket.emit('reportEvent', newEvent);
+
   }
 }
 
@@ -154,7 +155,7 @@ function* flow() {
     const socket = yield call(connectSocket, token);
     const events = yield call(getNotifications, socket, token);
     console.log(events);
-    yield put(loadEvents(events));  
+    yield put(loadEvents(events));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');

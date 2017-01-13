@@ -53,18 +53,18 @@ class RadialMenuComponent extends React.Component {
           <Badge style={Styles.root}>Report</Badge>
           { Object.keys(EventCategories)
             .map((EventCategoryKey) => EventCategories[EventCategoryKey])
-            .map((EventCategory, index) => 
+            .map((EventCategory, index) =>
               <Button
                 style={Styles.option}
                 warning
-                key={index} 
+                key={index}
                 onSelect={() => {
                   this.handleSelect(EventCategory.events, EventCategory.description, EventCategory.key)
                 }}
               >
                 <EventCategory.icon size={30} />
               </Button>
-            ) 
+            )
           }
         </RadialMenu>
       </View>
