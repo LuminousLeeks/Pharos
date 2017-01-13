@@ -1,3 +1,5 @@
+// A script that loads thousands of random user, notification and vote data to the db. //
+
 var db = require('../db/db.js');
 var User = require('../models/User.js');
 var Notification = require('../models/Notification.js');

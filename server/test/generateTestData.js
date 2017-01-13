@@ -1,5 +1,9 @@
 const faker = require('faker');
 const bcrypt = require('bcrypt');
+const db = require('../db/db.js');
+const User = require('../models/User.js');
+const Notification = require('../models/Notification.js');
+const Vote = require('../models/Vote.js');
 
 // volume of data:
 const userNumber = 1000;
@@ -90,8 +94,16 @@ for (let i = 0; i < voteNumber; i++) {
   });
 }
 
-// console.log(votes.slice(0, 30));
-console.log(notifications.slice(0, 30));
-// console.log(users.slice(0, 30));
+//Load all to the database:
 
-console.log(notifications.map(x => x.location));
+db.sync({ force:true }).then(function(){
+  return User.bulkCreate(data.users);
+}).then(function(){
+  return Notification.bulkCreate(data.notifications);
+})
+.then(function(){
+  return Vote.bulkCreate(data.votes);
+})
+.catch(function(error) {
+  throw error;
+});

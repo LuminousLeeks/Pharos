@@ -28,7 +28,9 @@
     "populatedb": "node server/test/populatedb.js",
     "testdb": "mocha server/test/dbspecs.js",
     "dropdb": "psql -c 'drop database pharos_db'",
-    "testServer": "mocha server/test/specs.js"
+    "testServer": "mocha server/test/specs.js",
+    "buildArchieveDb": "psql -f initArchieve.sql && node archieveDb/models/Notification.js",
+    "buildArchiever": "crontab services/archiever/cron-job.txt"
   },
   "dependencies": {
     "apisauce": "^0.6.0",
