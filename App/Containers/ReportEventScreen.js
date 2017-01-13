@@ -73,6 +73,9 @@ const mapDispatchToProps = dispatch => ({
     NavigationActions.mapScreen();
     console.log(updatedEvent)
   },
+  redirectToMapview: () => {
+    NavigationActions.mapScreen();
+  }
 });
 
 

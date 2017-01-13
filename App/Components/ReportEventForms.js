@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { View } from 'react-native';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 import Styles from './Styles/ReportEventFormsStyle';
 
@@ -30,15 +31,26 @@ class ReportEventForms extends React.Component {
               placeholder="add more details about event"
               />
           </InputGroup>
+          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
           <Button
+            primary
             onPress={() => this.props.handleSubmit(this.props.newEvent, this.state.description)}
             style={{
-              alignSelf: 'center',
-              marginTop: 20,
-              marginBottom: 20
+              alignSelf: 'flex-start',
+              margin: 20
             }}>
             Submit
           </Button>
+          <Button
+            danger
+            onPress={() => this.props.redirectToMapview()}
+            style={{
+              alignSelf: 'flex-end',
+              margin: 20
+            }}>
+            Cancel
+          </Button>
+        </View>
         </Content>
       </Container>
     );
