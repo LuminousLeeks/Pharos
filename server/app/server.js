@@ -13,7 +13,6 @@ const morgan = require('morgan');
 const logger = require('./utils/logger');
 const db = require('../db/db.js');
 
-
 // create tables if not exists.
 
 const app = express();
@@ -41,6 +40,10 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 
 //  Socket.io connection established
 const io = require('socket.io')(server);
+
+module.exports = { app, io };
+
+const router = require('./routes/router');
 
 //  Prevent circular dependency by defining routes after exports
 module.exports.io = io;

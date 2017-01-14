@@ -21,7 +21,7 @@ const db = new Sequelize('pharos_db', 'pharos_admin', 'aware', {
   host: url,
   dialect: 'postgres',
   pool: {
-    max: 20,
+    max: 10,
     min: 0,
     idle: 10000,
   },

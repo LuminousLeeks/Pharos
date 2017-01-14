@@ -5,8 +5,13 @@ var expect = require('chai').expect;
 var db = require('../db/db.js');
 var Promise = require('Sequelize').Promise;
 
-var st_dwithinQuery = require('../db/utils.js').st_dwithinQuery;
-var queryNotifications = require('../db/utils.js').queryNotifications;
+var utils = require('../db/utils.js');
+var stdWithinquery = utils.stdWithinquery;
+var getNotifications = utils.getNotifications;
+var insertUser = utils.insertUser;
+var insertNotification = utils.insertNotification;
+var insertVote = utils.insertVote;
+var queryNotifications = utils.queryNotifications;
 
 var User = require('../models/User.js');
 var Notification = require('../models/Notification.js');
@@ -17,41 +22,34 @@ var Vote = require('../models/Vote.js');
 // npm run builddb
 // npm run testdb 
 
-describe('Database query tests', function() {
-
-
+describe('Database tests', function() {
   //make sure you connect
   before(function(done){
     db.authenticate().then(done).catch(function(error) {
       console.log('db not connected');
       throw error;
+      
+
     });
   });
 
-  it('should be able to create an entry', function(done) { 
-      User.create({
-        username: 'aurelius',
-        firstName: 'John',
-        lastName: 'Appleseed',
-        password: 'marcus',
-        salt: '1234rf'
-      }).then(function(user){
-            Notification.create({
-              title: 'Savage Runaway',
-              location: { type: 'Point', coordinates: [37.7806521, -122.4070723] },
-              description: 'Axe throwing militant',
-              voteCount: 0,
-              userId: user.id,
-              category: 'crime',
-            }).then(function(entry){
-              entry.destroy();
-              done();
-            }).catch(function(error) {
-              throw error;
-            });
-        }).catch(function(error) {
-            throw error;
-          });
+  it('should be able to create an entry', function(done) {
+    insertUser({
+      username: 'aurelius',
+      firstName: 'John',
+      lastName: 'Appleseed',
+      password: 'marcus',
+    }).then(function(user){
+      return insertNotification({
+        title:'Savage attack',
+        location: { latitude: 37.7806521, longitude: -122.4070723 },
+        description: 'Axe thrower running down the street',
+        userId: user.id,
+        category:'crime',
+      }).then(function(){
+        done();
+      }).catch(done);
+    }); 
   });
 
   it('should be able to findone if exists', function(done) {
@@ -76,12 +74,14 @@ describe('Database query tests', function() {
   var col = 'location';
   var table = 'notifications';
 
+
+  // test the proximity query:
   it('should be able to return notifications within a given radii', function(done) {
       // set up query parameters:
     
     // structure a tight and a loose query:
-    var st_dwithinTight = st_dwithinQuery(table, col, lat, lng, radTight);
-    var st_dwithinLarge = st_dwithinQuery(table, col, lat, lng, radLoose);
+    var st_dwithinTight = stdWithinquery(table, col, lat, lng, radTight);
+    var st_dwithinLarge = stdWithinquery(table, col, lat, lng, radLoose);
 
     // Test for a tight range:
     db.query(st_dwithinTight).spread(function (found, metadata) {
@@ -111,28 +111,33 @@ describe('Database query tests', function() {
       });
   });
 
-  it('should be able to vote', function(done) {
+  it('a user should not be able to vote twice on the same notification', function(done) {
     var voterUserId = 3;
     var votedNotificationId = 2;
     var type = true;
-    Notification.findOne({
-      id: votedNotificationId
-    }).then(function(instance) {
-      var oldId = instance.voteCount;
-      if(type) {
-        return instance.increment('voteCount');
-      } else {
-        return instance.decrement('voteCount');
-      }
-    })
-    .then(function(instance) {
-      Vote.create({
-        type: type,
-        userId: voterUserId,
-        notificationId: instance.id,
-      })
-      .catch(done).then(function(){ done(); })
-    }).catch(done)
+    insertVote({
+      type: true,
+      userId: voterUserId,
+      notificationId: votedNotificationId
+    }).then(function() {
+      // will fail
+    }).catch(function(error){
+      done();
+    });
+  });
+
+  it('should be able to vote', function(done) {
+    var voterUserId = 5;
+    var votedNotificationId = 2;
+    var type = true;
+    insertVote({
+      type: true,
+      userId: voterUserId,
+      notificationId: votedNotificationId
+    }).then(function(vote){
+      done();
+      return vote.destroy();
+    }).catch(done);
   });
 
   it('should be able to return a set with correct vote-ability', function(done) {
@@ -141,19 +146,14 @@ describe('Database query tests', function() {
     // set up query parameters:
     var userId = 2;
     var category = 'hazard'; 
-    // structure the query:
-    var queryString = queryNotifications(userId, category, location, radTight);
   
-    // console.log(JSON.stringify(st_dwithinTight));
     // Test for a tight range with category constraint:
-    db.query(queryString).then(function (found) {
-        expect(found[0].map(item => item.title).includes('5')).to.be.true;
-        expect(found[0].length).to.equal(1);
-        done();
-      });
+    getNotifications(userId, category, location, radTight).then(function (found) {
+      expect(found.map(item => item.title).includes('5')).to.be.true;
+      expect(found.length).to.equal(1);
+      done();
+    });
   });
-
-
 });
 
 

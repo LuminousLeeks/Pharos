@@ -2,25 +2,32 @@
 // Use the below command to summon the archiever.
 // npm run buildArchiever
 
+const archieveDb = require('../../archieveDb/db');
+const db = require('../../server/db/db');
+const Notification = require('../../server/models/Notification.js');
+const ArchiveNotification = require('../../archieveDb/models/Notification.js');
 
-console.log('hello inside the file');
+// Expire hot notifications after x hours:
+const archieveAfterHours = 12;
 
-const Sequelize = require('sequelize');
-
-//connect to the db:
-const archieveDb = new Sequelize('pharos_db', 'pharos_admin', 'aware', {
-  host: 'localhost',
-  dialect: 'postgres',
-  pool: {
-    max: 20,
-    min: 0,
-    idle: 10000,
-  },
-});
-
-
-archieveDb.authenticate().then(function() {
-  // do copying stuff here
-
-});
+archieveDb.authenticate().then(() =>
+  db.authenticate()).then(() => {
+    return Notification.findAll({
+      where: {
+        updatedAt: {
+          $lte: new Date(Date.now() - (archieveAfterHours * 60 * 60 * 1000)),
+        },
+      },
+    });
+  }).then((notifications) => {
+    if (notifications.length) {
+      console.log(notifications);
+      ArchiveNotification.bulkCreate(notifications);
+      notifications.forEach(notification => notification.destroy());
+      // log the operation resolution to the log file:
+      console.log('Successful operation');
+    } else {
+      console.log('Nothing to delete');
+    }
+  });
 
