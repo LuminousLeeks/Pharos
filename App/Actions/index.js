@@ -42,6 +42,14 @@ export const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
   userInterests,
   token,
 });
+export const sendVoteToState = events => ({
+  type: 'STATE_VOTE_EVENT',
+  events,
+});
+export const sendVoteToServer = vote => ({
+  type: 'SERVER_VOTE_EVENT',
+  vote,
+});
 
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({

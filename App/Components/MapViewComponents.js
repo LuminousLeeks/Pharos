@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Metrics } from '../Themes';
 import Styles from './Styles/MapViewComponentsStyle';
 import RadialMenu from '../Containers/RadialMenu';
-import CalloutContainer from '../Containers/CalloutContainer';
+import MapCalloutContainer from '../Containers/MapCalloutContainer';
 import EventCategories from '../Lib/EventCategories';
 
 
@@ -70,9 +70,11 @@ export default class MapViewComponents extends Component {
                 <View color="#4F8EF7" >
                   <EventObj.Icon size={Metrics.icons.small} />
                 </View>
-                <MapView.Callout style={Styles.myCallout} >
-                  <CalloutContainer
-                    notification={EventObj.event}
+                <MapView.Callout style={Styles.callout} >
+                  <MapCalloutContainer
+                    event={EventObj.event}
+                    events={this.props.events}
+                    userName={this.props.userName}
                     socket={this.props.socket}
                   />
                 </MapView.Callout>

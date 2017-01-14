@@ -16,7 +16,6 @@ const defaultState = {
       vote: 7,
       latitude: 37.784235,
       longitude: -122.410597
-
     },
     {
       category: 'waitTime',
@@ -96,7 +95,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         events: action.events,
         // token: action.token
-      };
+      }
+    case 'STATE_VOTE_EVENT':
+      return {
+        ...state,
+        events: action.events
+      }
     case 'GET_USER_INFO':
       return {
         ...state,

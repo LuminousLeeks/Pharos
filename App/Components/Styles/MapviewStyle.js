@@ -19,12 +19,16 @@ export default StyleSheet.create({
     bottom: 0,
   },
   callout: {
-    alignSelf: 'stretch',
-    width: 100,
+    position: 'relative',
+    width: 200,
   },
   flex: {
     flex: 1,
     flexDirection: 'row',
+  },
+  text: {
+    fontSize: 15,
+    width: 200,
   },
   count: {
     fontSize: 30,

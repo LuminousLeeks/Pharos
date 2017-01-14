@@ -47,8 +47,12 @@ function* getPosition() {
 //----------------------------------------------------------
 
 //helper function for login POST
+<<<<<<< HEAD
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
+=======
+export const loginPostsApi = (username, password) => {
+>>>>>>> (feat) send vote events to the server
   const url = 'http://127.0.0.1:8099';
   return req.post(`${url}/api/auth/login`)
     .send({ username, password });
@@ -56,7 +60,11 @@ export const loginPostRequest = (username, password) => {
 
 
 //helper function for signup POST
+<<<<<<< HEAD
 export const signupPostRequest = (username, password, userInfo) => {
+=======
+export const signupPostsApi = (username, password, userInfo) => {
+>>>>>>> (feat) send vote events to the server
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
   firstName = userInfo.firstName;
   lastName = userInfo.lastName;
@@ -121,6 +129,7 @@ function* fetchEvents(socket) {
 // ---------Send event data to socket
 function* reportEvent(socket) {
   while (true) {
+<<<<<<< HEAD
     const { newNotification } = yield take('REPORT_EVENT');
     // active this line, once socket is up
     //  socket.emit('reportNotification', newNotification);
@@ -134,6 +143,25 @@ function* voteEvent(socket) {
     console.log(event, vote);
     // active this line, once socket is up
     // socket.emit('reportEvent', newEvent);
+=======
+    const { newEvent } = yield take('REPORT_EVENT');
+    console.log('Saga intercept report event: ');
+    console.log(newEvent);
+    // active this line, once socket is up
+    // socket.emit('reportEvent', newEvent);
+  }
+}
+
+function sendVote(socket, vote) {
+  socket.emit('sendVote', vote);
+}
+
+function* voteEvent(socket) {
+  while (true) {
+    const { vote } = yield take('SERVER_VOTE_EVENT');
+    console.log("Vote event inside saga", vote)
+    yield call(sendVote, socket, vote);
+>>>>>>> (feat) send vote events to the server
   }
 }
 

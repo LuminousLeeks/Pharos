@@ -40,6 +40,20 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 
 //  Socket.io connection established
 const io = require('socket.io')(server);
+<<<<<<< HEAD
+=======
+//  Prevent circular dependency by defining routes after exports
+io.on('connection', (socket) => {
+  socket.emit('text', 'Hi Client!');
+  socket.on('getNotifications', (callback) => {
+    console.log('serving notifications');
+    callback(exampleData);
+  });
+  socket.on('sendVote', (vote) => {
+    console.log('vote', vote);
+  });
+});
+>>>>>>> (feat) send vote events to the server
 
 //  Prevent circular dependency by defining routes after exports
 module.exports.io = io;
