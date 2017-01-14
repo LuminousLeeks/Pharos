@@ -58,7 +58,7 @@ export default class MapViewComponents extends Component {
               event,
               Icon: EventCategories[event.category].icon,
             }))
-            .map((EventObj, index) =>
+            .map((EventObj, index) => (
               <MapView.Marker
                 key={index}
                 coordinate={{
@@ -78,8 +78,8 @@ export default class MapViewComponents extends Component {
                     socket={this.props.socket}
                   />
                 </MapView.Callout>
-              </MapView.Marker>,
-            )
+              </MapView.Marker>
+            ))
           }
         </MapView>
         <RadialMenu
