@@ -36,8 +36,9 @@ class DrawerContent extends Component {
     return (
       <ScrollView style={styles.container}>
         <DrawerButton text='Map View' onPress={this.handlePressMapView} />
-        <DrawerButton text='Login' onPress={this.handlePressLoginScreen} />
+        <DrawerButton text='Categories List' onPress={this.handleListSelection} />
         <DrawerButton text='Map Screen' onPress={this.handlePressMapScreen} />
+        <DrawerButton text='Logout' onPress={this.handlePressLogoutScreen} />
 
       </ScrollView>
     )

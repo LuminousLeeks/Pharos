@@ -52,7 +52,7 @@ module.exports = exampleNotifications = [
     categoryId:1,
   },
 ];
-
+module.exports.exampleCategories = ['commute', 'hazard', 'publicEvent', 'crime', 'drugs', 'waitTime'];
 
 // location
 // {

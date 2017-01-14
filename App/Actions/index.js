@@ -50,7 +50,14 @@ export const sendVoteToServer = vote => ({
   type: 'SERVER_VOTE_EVENT',
   vote,
 });
+export const fetchCategories = (username = '', token) => ({
+  type: 'FETCH_CATEGORIES',
+  username,
+  token,
+});
+export const updateSelectedCategories = (username, categories, token) => ({
 
+});
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
   type: 'REQUEST',
