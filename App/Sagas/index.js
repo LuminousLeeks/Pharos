@@ -49,6 +49,7 @@ function* getPosition() {
 
 //helper function for login POST 
 export const loginPostRequest = (username, password) => {
+  console.log('in Saga, triggered loginPostRequest');
   const url = 'http://127.0.0.1:8099';
   return req.post(`${url}/api/auth/login`)
     .send({ username, password });

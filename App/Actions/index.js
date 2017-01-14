@@ -37,7 +37,7 @@ export const fetchEvents = (token, userLocation) => ({
   token,
   userLocation,
 });
-const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
+export const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
   type: 'GET_USER_INFO',
   userName,
   userInterests,
