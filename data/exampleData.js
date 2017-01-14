@@ -58,7 +58,7 @@ module.exports = exampleNotifications = [
     votingDisabled: false
   }
 ];
-
+module.exports.exampleCategories = ['commute', 'hazard', 'publicEvent', 'crime', 'drugs', 'waitTime'];
 
 // location
 // {

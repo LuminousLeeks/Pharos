@@ -1,23 +1,23 @@
 // @flow
 
-import React, { Component } from 'react'
-import { Scene, Router } from 'react-native-router-flux'
-import Styles from './Styles/NavigationContainerStyle'
-import NavigationDrawer from './NavigationDrawer'
+import React, { Component } from 'react';
+import { Scene, Router } from 'react-native-router-flux';
+import Styles from './Styles/NavigationContainerStyle';
+import NavigationDrawer from './NavigationDrawer';
 
 // screens identified by the router
 // import Mapview from '../Containers/Mapview'
-import MapScreen from '../Containers/MapScreen'
-import LoginScreen from '../Containers/LoginScreen'
-import ReportEventScreen from '../Containers/ReportEventScreen'
-
+import MapScreen from '../Containers/MapScreen';
+import LoginScreen from '../Containers/LoginScreen';
+import ReportEventScreen from '../Containers/ReportEventScreen';
+import CategoriesList from '../Containers/CategoriesList';
 // import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
 ***************************/
 
 class NavigationRouter extends Component {
-  render () {
+  render() {
     return (
       <Router>
         <Scene
@@ -29,18 +29,24 @@ class NavigationRouter extends Component {
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
-            rightButtonTextStyle={Styles.rightButton}>
+            rightButtonTextStyle={Styles.rightButton}
+          >
             <Scene
               key='mapScreen'
               component={MapScreen}
               title='Pharos'
-              />
+            />
             <Scene
               initial
               key='loginScreen'
               component={LoginScreen}
               title='Login Screen'
-              />
+            />
+            <Scene
+              key="categoriesList"
+              component={CategoriesList}
+              title="CategoriesList"
+            />
             <Scene
               key='reportEventScreen'
               component={ReportEventScreen}
@@ -58,4 +64,4 @@ class NavigationRouter extends Component {
   };
 };
 
-export default NavigationRouter
+export default NavigationRouter;

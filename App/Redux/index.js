@@ -72,28 +72,28 @@ const rootReducer = (state = initialState, action) => {
     case 'REPORT_EVENT':
       return {
         ...state,
-        newEvent: action.newEvent
+        newEvent: action.newEvent,
       };
     case 'UPDATE_POSITION':
       return {
         ...state,
-        userLocation: action.userLocation
+        userLocation: action.userLocation,
       }
     case 'UPDATE_REGION':
       return {
         ...state,
-        region: action.region
+        region: action.region,
       }
     case 'SAVE_WATCHID':
       return {
         ...state,
-        watchID: action.watchID
+        watchID: action.watchID,
       }
     case 'UPDATE_EVENTS':
       return {
         ...state,
         events: action.events,
-        token: action.token
+        token: action.token,
       };
     case 'GET_USER_INFO':
       return {
@@ -101,6 +101,13 @@ const rootReducer = (state = initialState, action) => {
         // action.userName,
         // action.userInterests
         // action.token
+      };
+    case 'UPDATE_CATEGORIES' :
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+        categories: action.categories,
       };
     case 'START_FETCHING':
       return {
