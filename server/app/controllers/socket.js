@@ -1,5 +1,5 @@
 // const socketioJwt = require('socketio-jwt');
-const exampleData = require('./../../../data/exampleData');
+const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 
 module.exports = (io) => {

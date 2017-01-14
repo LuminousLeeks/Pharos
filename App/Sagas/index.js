@@ -40,7 +40,6 @@ export const getPositionFromNavigator = () => {
 }
 function* getPosition() {
   yield take('GET_POSITION');
-  console.log('Saga heard GET_POSITION');
   const {position, region} = yield call(getPositionFromNavigator);  
   yield put(updatePosition(position));
 }
@@ -68,14 +67,11 @@ export const signupPostRequest = (username, password, userInfo) => {
 
 function* login() {
     const { username, password } = yield take('LOGIN_REQUEST')
-    console.log('login attempt in saga-----------');
     const {position, region} = yield call(getPositionFromNavigator);     
     yield put(updatePosition(position));
     yield put(updateRegion(region));
     const res = yield call(loginPostRequest, username, password, position)
-    console.log('login success----------------')
     const token = res.body.token;
-    console.log(token);
     yield put(loginSuccess(username, token))
 }
 
@@ -89,19 +85,20 @@ function* signup() {
 
 // Connect Redux client to socket
 function connectSocket(token) {
-  const socket = io.connect('http://127.0.0.1:8099/socket', { transports: ['websocket'] });
+  const socket = io.connect('http://127.0.0.1:8099/socket', {
+    transports: ['websocket'],
+  });
 
   return new Promise((resolve, reject) => {
-  socket
-    .emit('authenticate', { token })
-    .on('authenticated', (socket) => {
-      console.log('AUTHORIZED CLIENT');
-      resolve(socket);
-    })
-    .on('unauthorized', (msg) => {
-      console.log('unauthorized', JSON.stringify(msg.data));
-      reject('unauthorized', JSON.stringify(msg.data));
-      });
+    socket
+      .emit('authenticate', { token })
+      .on('authenticated', () => {
+        resolve(socket);
+      })
+      .on('unauthorized', (msg) => {
+        console.log('unauthorized', JSON.stringify(msg.data));
+        reject(JSON.stringify(msg.data));
+        });
   });
 }
 
@@ -156,10 +153,8 @@ function* flow() {
     let { token } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token);
     const events = yield call(getNotifications, socket, token);
-    console.log('get events in flow-----------');
     console.log(events);
-    yield put(loadEvents(events));
-    console.log('finished loading events--------------');    
+    yield put(loadEvents(events));  
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');

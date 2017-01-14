@@ -3,7 +3,6 @@ const socketioJwt = require('socketio-jwt');
 const bcrypt = require('bcrypt');
 const jwtSecret = require('../../env/index').JWT_SECRET;
 const User = require('./../../models/Models').User;
-const socketioJwt = require('socketio-jwt');
 
 module.exports.socketAuth = (sockets, cb) => {
   sockets

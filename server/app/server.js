@@ -3,7 +3,6 @@
 require('dotenv').config();
 const port = require('./../env/index').PORT;
 const express = require('express');
-const db = require('../db/db');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
