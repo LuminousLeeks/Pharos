@@ -37,8 +37,11 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/Pharos.xcodeproj/project.pbxproj
+<<<<<<< HEAD
 #
 
+=======
+>>>>>>> remove iOS Builds from commits
 # Android/IntelliJ
 #
 build/
