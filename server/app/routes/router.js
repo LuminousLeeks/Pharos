@@ -15,7 +15,5 @@ socketController(io.of('/socket'));
 // Admin Use - List of all users
 // router.get('/users', authController.getUsers);
 
-// Socket Server Router
-socketController(io.of('/socket'));
 
 module.exports = router;
