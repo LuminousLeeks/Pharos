@@ -19,7 +19,7 @@ export const updatePosition = position => ({
   },
 });
 // !!! this is duplicate !!!
-export const loadEvents = (events) => ({
+export const loadEvents = events => ({
   type: 'UPDATE_EVENTS',
   events,
 });
