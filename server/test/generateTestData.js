@@ -4,6 +4,7 @@ const db = require('../db/db.js');
 const User = require('../models/User.js');
 const Notification = require('../models/Notification.js');
 const Vote = require('../models/Vote.js');
+const overriddenBulkCreate = require('../db/utils.js').overriddenBulkCreate;
 
 // volume of data:
 const userNumber = 1000;
@@ -34,6 +35,12 @@ const generateRandomId = function generateRandomId(range) {
   return Math.floor(Math.random() * range);
 };
 
+const generateRandomPast = function generateRandomPast() {
+  // all data is generated in the last month (720 hours)
+  const randomHour = Math.floor(Math.random() * 720);
+  return new Date(Date.now() - (randomHour * 60 * 60 * 1000));
+};
+
 const generateRandomCoordinates = function generateRandomCoordinates(lat1, lat2, lng1, lng2) {
   // san francisco area:
   // left bottom corner : 37.697676, -122.49258 (lat1, lng1)
@@ -44,6 +51,10 @@ const generateRandomCoordinates = function generateRandomCoordinates(lat1, lat2,
   // add a random increment to the left bottom corner:
   return [lat1 + lat, lng1 + lng];
 };
+
+// Database helpers:
+
+
 
 // Generate datasets:
 
@@ -69,6 +80,7 @@ for (let i = 0; i < notificationNumber; i++) {
   let voteCount = 0;
   let userId = generateRandomId(userNumber);
   let category = generateCategory();
+  let updatedAt = generateRandomPast();
   let location = {
     type: 'Point',
     coordinates: generateRandomCoordinates(latitude1, latitude2, longitude1, longitude2),
@@ -80,6 +92,7 @@ for (let i = 0; i < notificationNumber; i++) {
     title,
     voteCount,
     category,
+    updatedAt,
   });
 };
 
@@ -99,7 +112,7 @@ for (let i = 0; i < voteNumber; i++) {
 db.sync({ force:true }).then(function(){
   return User.bulkCreate(data.users);
 }).then(function(){
-  return Notification.bulkCreate(data.notifications);
+  return overriddenBulkCreate(Notification, data.notifications); //to override updatedAt
 })
 .then(function(){
   return Vote.bulkCreate(data.votes);

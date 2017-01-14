@@ -21,8 +21,10 @@ archieveDb.authenticate().then(() =>
     });
   }).then((notifications) => {
     if (notifications.length) {
-      console.log(notifications);
-      ArchiveNotification.bulkCreate(notifications);
+      const toArchieve = notifications.map(({ category, voteCount, userId, title, description, location }) => ({
+        category, voteCount, userId, title, description, location,
+      }));
+      ArchiveNotification.bulkCreate(toArchieve);
       notifications.forEach(notification => notification.destroy());
       // log the operation resolution to the log file:
       console.log('Successful operation');

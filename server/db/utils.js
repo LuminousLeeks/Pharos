@@ -33,6 +33,13 @@ const stdWithinquery = function stdWithinquery(table, geoCol, lat, lng, radius) 
   + " WHERE ST_DWithin(" + geoCol + "," + "'POINT(" + lat + " " + lng + ")'," + radius + ")";
 };
 
+const overriddenBulkCreate = function overriddenBulkCreate(model, entries) {
+  return new Promise(function(resolve, reject){
+    Promise.all(entries.map(entry => model.create(entry, { raw: true, silent: true })))
+      .then(resolve).catch(reject);
+  });
+};
+
 // Exported controller functions:
 
 // userId: integer
@@ -124,4 +131,5 @@ module.exports = {
   insertNotification,
   insertUser,
   getNotifications,
+  overriddenBulkCreate,
 };
