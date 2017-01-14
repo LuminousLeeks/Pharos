@@ -22,6 +22,8 @@
     "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
     "flow": "flow --show-all-errors",
     "startServer": "nodemon server/app/server.js",
+    "startdb": "postgres -D /usr/local/var/postgres",
+    "startApp": "react-native run-ios",
     "builddb": "psql -f init.sql",
     "testdb": "mocha server/test/dbspecs.js",
     "dropdb": "psql -c 'drop database pharos_db'",

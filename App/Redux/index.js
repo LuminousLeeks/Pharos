@@ -93,7 +93,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.events,
-        token: action.token
+        // token: action.token
       };
     case 'GET_USER_INFO':
       return {
@@ -106,7 +106,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: true,
-        token: action.token,
+        // token: action.token,
       };
     case 'STOP_FETCHING':
       return {
@@ -115,11 +115,11 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case 'REQUEST':
-      return { ...state, fetching: true, token: action.token };
+      return { ...state, token: action.token };
     case 'SUCCESS':
-      return { ...state, fetching: false, userName: action.username,token: action.token };
+      return { ...state, username: action.username, token: action.token };
     case 'AUTH_FAIL':
-      return { ...state, fetching: false, error: action.error };
+      return { ...state, error: action.error };
     case 'LOGOUT':
       return state;
     default:

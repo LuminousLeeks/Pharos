@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { connect } from 'react-redux';
 import MapViewComponents from '../Components/MapViewComponents';
 import { fetchEvents, updateEvent, updatePosition, saveWatchID, updateRegion } from '../Actions';
