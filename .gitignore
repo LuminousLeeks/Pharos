@@ -36,7 +36,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-
+ios/Pharos.xcodeproj/project.pbxproj
 # Android/IntelliJ
 #
 build/
