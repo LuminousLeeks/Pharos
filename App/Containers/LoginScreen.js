@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
 import {Images, Metrics} from '../Themes'
-import { loginRequest, registerRequest } from '../Actions/index.js'
+import { loginRequest, registerRequest, getPosition } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // type LoginScreenProps = {
@@ -182,7 +182,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (username, password) => dispatch(loginRequest(username, password)),
+    attemptLogin: (username, password) => {
+      // dispatch(getPosition());
+      dispatch(loginRequest(username, password));
+    },
     attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
   }
 }

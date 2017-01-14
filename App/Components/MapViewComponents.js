@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
@@ -16,17 +17,17 @@ export default class MapViewComponents extends Component {
   }
 
   componentDidMount() {
-    const retrieveMapMarkers = this.props.retrieveMapMarkers.bind(this);
-    this.props.getCurrentPosition((coord) => {
-      const region = {
-        latitude: coord.latitude,
-        longitude: coord.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      };
-      this.props.updateRegion(region);
-      retrieveMapMarkers(this.props.token, coord);
-    });
+    // const retrieveMapMarkers = this.props.retrieveMapMarkers.bind(this);
+    // this.props.getCurrentPosition((coord) => {
+    //   const region = {
+    //     latitude: coord.latitude,
+    //     longitude: coord.longitude,
+    //     latitudeDelta: 0.01,
+    //     longitudeDelta: 0.01,
+    //   };
+    //   this.props.updateRegion(region);
+    //   retrieveMapMarkers(this.props.token, coord);
+    // });
     const watchID = this.props.watchPosition();
     this.props.saveWatchID(watchID);
   }

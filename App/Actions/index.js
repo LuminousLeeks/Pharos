@@ -8,7 +8,9 @@ export const updateRegion = region => ({
   type: 'UPDATE_REGION',
   region,
 });
-
+export const getPosition = () => ({
+  type: 'GET_POSITION',
+});
 export const updatePosition = position => ({
   type: 'UPDATE_POSITION',
   userLocation: {
