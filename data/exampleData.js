@@ -3,8 +3,9 @@ module.exports = exampleNotifications = [
   {
     userId: 1,
     title: 'Location A',
-    categoryType: 'crime',
-    location: {type:'Point', coordinates:[37.789,-122.408918]},
+    category: 'crime',
+    latitude:37.789, 
+    longitude: -122.408918,
     voteCount: 5,
     description:'whatever',
     categoryId:1,
@@ -13,10 +14,9 @@ module.exports = exampleNotifications = [
   {
     userId: 1,
     title: 'Location B',
-    categoryType: 'waitTime',
-    location: {type:'Point', coordinates:[37.789,-122.408918]},
-    latitude: 37.7834,
-    longitude: -122.4085,
+    category: 'waitTime',
+    latitude:37.789000, 
+    longitude: -122.408918,
     voteCount: 5,
     description:'whatever',
     categoryId:1,
@@ -24,8 +24,9 @@ module.exports = exampleNotifications = [
   {
     userId: 1,
     title: 'Location C',
-    categoryType: 'publicEvent',
-    location: {type:'Point', coordinates:[37.79,-122.4080]},
+    category: 'publicEvent',
+    latitude:37.790000,
+    longitude: -122.408000,
     voteCount: 25,
     description:'whatever',
     categoryId:1,
@@ -33,8 +34,9 @@ module.exports = exampleNotifications = [
   {
     userId: 1,
     title: 'Location D',
-    categoryType: 'hazard',
-    location: {type:'Point', coordinates:[37.7800,-122.4082,]},
+    category: 'hazard',
+    latitude:37.7800,
+    longitude: -122.408200,
     voteCount: 10,
     description:'whatever',
     categoryId:1,
@@ -42,12 +44,13 @@ module.exports = exampleNotifications = [
   {
     userId: 1,
     title: 'Location E',
-    categoryType: 'commute',
-    location: {type:'Point', coordinates:[37.7830,-122.4085]},
+    category: 'commute',
+    latitude:37.7830,
+    longitude: -122.408500,
     voteCount: 10,
     description:'whatever',
     categoryId:1,
-  }
+  },
 ];
 
 

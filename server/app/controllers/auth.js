@@ -30,6 +30,7 @@ module.exports.socketAuth = (socket, callback) => {
     });
 };
 
+
 // HTTP login request
 module.exports.loginUser = (request, response) => {
   const reqUser = request.body;
