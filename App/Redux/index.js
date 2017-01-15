@@ -71,6 +71,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'REPORT_EVENT':
+    console.log("new event", action.newEvent)
       return {
         ...state,
         newEvent: action.newEvent

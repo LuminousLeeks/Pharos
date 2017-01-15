@@ -80,7 +80,11 @@ export default class MapViewComponents extends Component {
             )
           }
         </MapView>
-        <RadialMenu socket={this.props.socket} />
+        <RadialMenu
+          socket={this.props.socket}
+          region={this.props.region}
+          userId={this.props.userId}
+          />
       </View>
     );
   }

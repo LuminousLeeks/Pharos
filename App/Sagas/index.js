@@ -121,12 +121,9 @@ function* fetchEvents(socket) {
 // ---------Send event data to socket
 function* reportEvent(socket) {
   while (true) {
-    const { newEvent } = yield take('REPORT_EVENT');
-    console.log('Saga intercept report event: ');
-    console.log(newEvent);
+    const { newNotification } = yield take('REPORT_EVENT');
     // active this line, once socket is up
-    // socket.emit('reportEvent', newEvent);
-
+    //  socket.emit('reportNotification', newNotification);
   }
 }
 

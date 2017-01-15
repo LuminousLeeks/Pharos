@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { View } from 'react-native';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 import Styles from './Styles/ReportEventFormsStyle';
@@ -26,12 +26,12 @@ class ReportEventForms extends React.Component {
             <Input
               style={{height:300, marginTop:20}}
               stackedLabel
-              onChangeText={text => this.setState({ description: text })}
+              onChangeText={text => {this.setState({ description: text }); console.log(text);}}
               label="Report"
               placeholder="add more details about event"
               />
           </InputGroup>
-          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+          <View style={ {flexDirection: 'row', alignSelf: 'center'} }>
           <Button
             primary
             onPress={() => this.props.handleSubmit(this.props.newEvent, this.state.description)}
@@ -56,5 +56,10 @@ class ReportEventForms extends React.Component {
     );
   }
 }
+
+ReportEventForms.propTypes = {
+  redirectToMapview: PropTypes.func,
+  newEvent: PropTypes.object,
+};
 
 export default ReportEventForms;

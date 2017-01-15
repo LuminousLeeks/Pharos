@@ -1,46 +1,44 @@
-import React from 'react'
+import React, { PropTypes } from 'react';
 import { Badge, Button } from 'native-base';
+import { View, Alert } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions as NavigationActions } from 'react-native-router-flux';
+import RadialMenu from '../Components/RadialMenu_npm';
+import Styles from './Styles/RadialMenuStyles';
+import EventCategories from '../Lib/EventCategories';
+import { reportEvent } from '../Actions';
 
-import { View, Alert } from 'react-native'
-import { connect } from 'react-redux'
-import RadialMenu from '../Components/RadialMenu_npm'
-import Styles from './Styles/RadialMenuStyles'
-import EventCategories from '../Lib/EventCategories'
-import { reportEvent } from '../Actions'
-import { Actions as NavigationActions } from 'react-native-router-flux'
-
-const EventCategory = EventCategories.waitTime;
 class RadialMenuComponent extends React.Component {
-  handleReport (newEvent) {
+  handleReport(newEvent) {
     this.props.dispatch(reportEvent(newEvent));
     NavigationActions.reportEventScreen();
   }
 
-  handleSelect (events, description, key) {
+  handleSelect(events, description, key) {
     Alert.alert(
       'Report event category: ' + description,
       null,
       events.map((event) => {
-        console.log(event, 'this is the event');
         return {
           text: event,
           onPress: () => {
             const newEvent = {
               userName: this.props.userName,
               category: key,
-              description: description,
-              event: event,
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
-              userId: this.props.userId
-            }
+              userId: this.props.userId,
+              event,
+              description,
+            };
             this.handleReport(newEvent);
-          }
-        }
-      })
-    )
+          },
+        };
+      }),
+    );
   }
-  render () {
+
+  render() {
     return (
       <View style={Styles.menu}>
         <RadialMenu
@@ -53,32 +51,37 @@ class RadialMenuComponent extends React.Component {
         >
           <Badge style={Styles.root}>Report</Badge>
           { Object.keys(EventCategories)
-            .map((EventCategoryKey) => EventCategories[EventCategoryKey])
+            .map(EventCategoryKey => EventCategories[EventCategoryKey])
             .map((EventCategory, index) =>
               <Button
                 style={Styles.option}
                 warning
                 key={index}
                 onSelect={() => {
-                  this.handleSelect(EventCategory.events, EventCategory.description, EventCategory.key)
+                  this.handleSelect(EventCategory.events,
+                    EventCategory.description,
+                    EventCategory.key);
                 }}
               >
                 <EventCategory.icon size={30} />
-              </Button>
+              </Button>,
             )
           }
         </RadialMenu>
       </View>
-    )
+    );
   }
 }
-RadialMenuComponent.defaultProps = {
-  dispatch: () => {}
+
+RadialMenuComponent.propTypes = {
+  userName: PropTypes.string,
+  region: PropTypes.object,
+  userId: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userName: state.userName,
-})
+});
 
 
 RadialMenuComponent = connect(mapStateToProps)(RadialMenuComponent);
