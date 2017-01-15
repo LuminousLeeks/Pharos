@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         if (cb) { cb(position.coords); }
       },
       (err) => {},
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   },
   watchPosition: () => navigator.geolocation.watchPosition(
