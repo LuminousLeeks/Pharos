@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 import Styles from './Styles/ReportEventFormsStyle';
 
-<<<<<<< HEAD
+
 class ReportEventForms extends React.Component {
   constructor(props) {
     super(props);
@@ -62,33 +62,5 @@ ReportEventForms.propTypes = {
   redirectToMapview: PropTypes.func,
   newEvent: PropTypes.object,
 };
-=======
-const ReportEventForms = ({ newEvent }) =>(
-  <Container>
-    <Content style={{padding:20}}>
-      <Text
-        style={{alignSelf: 'center', marginTop:200, marginBottom: 20}}
-      >
-       {'Report: ' + newEvent.event}
-      </Text>
-      <InputGroup borderType='rounded'>
-          <Input
-            style={{height:100, marginTop:20, textAlignVertical: 'top'}}
-            stackedLabel
-            label="Report"
-            placeholder="Describe the event"
-          />
-      </InputGroup>
-      <Button style={{
-        alignSelf: 'center',
-        marginTop: 20,
-        marginBottom: 20
-      }}>
-          Submit
-      </Button>
-    </Content>
-  </Container>
-);
->>>>>>> (feat) send vote events to the server
 
 export default ReportEventForms;

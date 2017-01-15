@@ -89,7 +89,7 @@ module.exports.createUser = (request, response) => {
           response.send({ token, userId: usr.dataValues.id });
         });
       } else {
-        response.send(404).json('user already exists');
+        response.status(404).send('user already exists');
       }
     })
     .catch(() => {
