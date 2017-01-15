@@ -1,44 +1,37 @@
-import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import React, { PropTypes } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView from 'react-native-maps'
-import Styles from './Styles/MapCalloutStyle'
-// import ExamplesRegistry from '../Services/ExamplesRegistry'
+import Styles from './Styles/MapviewStyle';
+import { Metrics } from '../Themes';
 
-// Example
-// ExamplesRegistry.add('Map Callout', () =>
-//   <MapCallout
-//     location={{
-//       title: 'Callout Example'
-//     }}
-//     onPress={() => window.alert('That tickles!')}
-//   />
-// )
+const MapCallout = ({ event, handleThumbsUpIsPressed, handleThumbsDownIsPressed  }) => {
+console.log("rendered");
+ return (
+  <View >
+    <Text style={Styles.text} >{event.title}</Text>
+    <Text style={Styles.text} >{event.category}</Text>
+    <View style={Styles.flex} >
+      <Text style={Styles.count} >{event.voteCount}</Text>
+      {
+        !event.votable ?
+          <View style={Styles.flex}>
+            <Button transparent onPress={handleThumbsUpIsPressed}>
+              <Icon name="thumbs-o-up" size={Metrics.icons.small} color={'blue'} />
+            </Button>
+            <Button transparent onPress={handleThumbsDownIsPressed}>
+              <Icon name="thumbs-o-down" size={Metrics.icons.small} color={'blue'} />
+            </Button>
+          </View>
+          : <View>Hiasdsa</View>
+    }
+    </View>
+  </View>
+)};
 
-// type MapCalloutProps = {
-//   location: Object,
-//   onPress: () => void
-// }
+MapCallout.propTypes = {
+  event: PropTypes.object
+};
 
-export default class MapCallout extends React.Component {
-  // props: MapCalloutProps
-
-  // constructor (props: MapCalloutProps) {
-  //   super(props)
-  //   this.onPress = this.props.onPress.bind(this, this.props.location)
-  // }
-
-  render () {
-    /* ***********************************************************
-    * Customize the appearance of the callout that opens when the user interacts with a marker.
-    * Note: if you don't want your callout surrounded by the default tooltip, pass `tooltip={true}` to `MapView.Callout`
-    *************************************************************/
-    // const { location } = this.props
-    return (
-      <MapView.Callout style={Styles.callout}>
-        <TouchableOpacity onPress={() => {}}>
-          <Text>{}</Text>
-        </TouchableOpacity>
-      </MapView.Callout>
-    )
-  }
-}
+export default MapCallout;

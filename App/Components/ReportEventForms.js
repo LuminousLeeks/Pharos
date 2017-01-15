@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
 import Styles from './Styles/ReportEventFormsStyle';
 
+
 class ReportEventForms extends React.Component {
   constructor(props) {
     super(props);

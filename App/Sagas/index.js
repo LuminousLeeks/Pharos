@@ -127,13 +127,17 @@ function* reportEvent(socket) {
   }
 }
 
+
+
+function sendVote(socket, vote) {
+  socket.emit('sendVote', vote);
+}
+
 function* voteEvent(socket) {
   while (true) {
-    const { event, vote } = yield take('VOTE_EVENT');
-    console.log('Saga intercept vote event: ');
-    console.log(event, vote);
-    // active this line, once socket is up
-    // socket.emit('reportEvent', newEvent);
+    const { vote } = yield take('SERVER_VOTE_EVENT');
+    console.log("Vote event inside saga", vote)
+    yield call(sendVote, socket, vote);
   }
 }
 
