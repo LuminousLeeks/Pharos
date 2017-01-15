@@ -43,6 +43,7 @@ class NavigationRouter extends Component {
               title='Login Screen'
             />
             <Scene
+              // initial
               key="categoriesList"
               component={CategoriesList}
               title="CategoriesList"

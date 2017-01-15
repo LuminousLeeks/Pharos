@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux'
-import Immutable from 'seamless-immutable'
+import { combineReducers } from 'redux';
+import Immutable from 'seamless-immutable';
+import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
 
 const defaultState = {
   newEvent: {
@@ -64,8 +65,9 @@ const initialState = {
   events: defaultState.events,
   token: '',
   watchID: '',
-  error: null
-}
+  error: null,
+  selectedCategories: {}
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -102,12 +104,19 @@ const rootReducer = (state = initialState, action) => {
         // action.userInterests
         // action.token
       };
-    case 'UPDATE_CATEGORIES' :
+    case 'FETCH_CATEGORIES' :
       return {
         ...state,
         username: action.username,
         token: action.token,
-        categories: action.categories,
+        categories: exampleCategories,
+      };
+    case 'SAVE_SELECTED_CATEGORIES' :
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+        userCategories: action.categories, // TODO: Make sure naming convention matches Database
       };
     case 'START_FETCHING':
       return {

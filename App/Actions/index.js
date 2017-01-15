@@ -49,7 +49,7 @@ export const fetchEvents = (token, userLocation) => ({
   token,
   userLocation,
 });
-const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
+export const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
   type: 'GET_USER_INFO',
   userName,
   userInterests,
@@ -60,8 +60,11 @@ export const fetchCategories = (username = '', token) => ({
   username,
   token,
 });
-export const updateSelectedCategories = (username, categories, token) => ({
-
+export const saveSelectedCategories = (username, selectedCategories, token) => ({
+  type: 'SAVE_SELECTED_CATEGORIES',
+  username,
+  token,
+  categories,
 });
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({

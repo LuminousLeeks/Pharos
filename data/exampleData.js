@@ -1,5 +1,5 @@
 
-module.exports = exampleNotifications = [
+module.exports.exampleNotifications = [
   {
     id: 12345,
     title: 'Location A',
@@ -9,7 +9,7 @@ module.exports = exampleNotifications = [
     voteCount: 17,
     thumbsUp: false,
     thumbsDown: false,
-    votingDisabled: false
+    votingDisabled: false,
 
   },
   // Notification
@@ -22,7 +22,7 @@ module.exports = exampleNotifications = [
     voteCount: 5,
     thumbsUp: false,
     thumbsDown: false,
-    votingDisabled: false
+    votingDisabled: false,
   },
   {
     id: 12344,
@@ -33,7 +33,7 @@ module.exports = exampleNotifications = [
     voteCount: 25,
     thumbsUp: false,
     thumbsDown: false,
-    votingDisabled: false
+    votingDisabled: false,
   },
   {
     id: 12344,
@@ -44,7 +44,7 @@ module.exports = exampleNotifications = [
     voteCount: 10,
     thumbsUp: false,
     thumbsDown: false,
-    votingDisabled: false
+    votingDisabled: false,
   },
   {
     id: 12344,
@@ -55,10 +55,9 @@ module.exports = exampleNotifications = [
     voteCount: 10,
     thumbsUp: false,
     thumbsDown: false,
-    votingDisabled: false
-  }
+    votingDisabled: false,
+  },
 ];
-module.exports.exampleCategories = ['commute', 'hazard', 'publicEvent', 'crime', 'drugs', 'waitTime'];
 
 // location
 // {
