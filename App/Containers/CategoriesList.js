@@ -1,24 +1,24 @@
-// @fl
-import React, { PropTypes, Component } from 'react'
-import { View, Text, ListView } from 'react-native'
-import { connect } from 'react-redux'
-import { Actions as NavigationActions } from 'react-native-router-flux'
-import exampleNotifications from './../../data/exampleData';
+import React, { PropTypes, Component } from 'react';
+import { View, ListView } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions as NavigationActions } from 'react-native-router-flux';
+import { List, ListItem, CheckBox, Text } from 'native-base';
+import EventCategories from './../Lib/EventCategories';
 
 // For empty lists
-// import AlertMessage from '../Components/AlertMessage'
+import AlertMessage from './../Components/AlertMessage';
 
 // Styles
-import styles from './Styles/CategoriesListStyle'
+import styles from './Styles/CategoriesListStyle';
 
 class CategoriesList extends React.Component {
 
-  state: {
-    dataSource: Object
-  }
+  // state: {
+  //   dataSource: EventCategories
+  // }
 
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     // If you need scroll to bottom, consider http://bit.ly/2bMQ2BZ
 
     /* ***********************************************************
@@ -26,15 +26,7 @@ class CategoriesList extends React.Component {
     * This is an array of objects with the properties you desire
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
-    const dataObjects = [
-      {category: '', title: '', selected: false},
-      {category: '', title: '', selected: false,},
-      {category: '', title: '', selected: false,},
-      {category: '', title: '', selected: false,},
-      {category: '', title: '', selected: false,},
-      {category: '', title: '', selected: false,},
-      {category: '', title: '', selected: false,}
-    ];
+    const dataObjects = EventCategories;
 
     /* ***********************************************************
     * STEP 2
@@ -42,19 +34,21 @@ class CategoriesList extends React.Component {
     * Make this function fast!  Perhaps something like:
     *   (r1, r2) => r1.id !== r2.id}
     *************************************************************/
-    const rowHasChanged = (r1, r2) => r1 !== r2
+    const rowHasChanged = (r1, r2) => r1 !== r2;
 
     // DataSource configured
-    const ds = new ListView.DataSource({rowHasChanged})
+    const ds = new ListView.DataSource({ rowHasChanged });
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRows(dataObjects)
+      dataSource: ds.cloneWithRows(dataObjects),
     }
   }
-  handleSelected(e) {  //TODO: finish handling the checkbox selecting action
+  handleSelected(e) {  // TODO: finish handling the checkbox selecting action
     e.preventDefault();
-  }
+    // this.props.dispatch
+    console.log('handle selected');
+  };
   /* ***********************************************************
   * STEP 3
   * `renderRow` function -How each cell/row should be rendered
@@ -63,15 +57,13 @@ class CategoriesList extends React.Component {
   * e.g.
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
-  renderRow (rowData) {
+  renderRow(rowData) {
     return (
-      <View style={styles.row}>
-        <ListItem>
-          <CheckBox checked={rowData.selected} onPress={rowData.toggleSelected} />
-          <Text>{rowData.title}</Text>
-        </ListItem>
-      </View>
-    )
+      <ListItem>
+        <CheckBox checked={true} onPress={this.handleSelected} />
+        <Text>{rowData.title}</Text>
+      </ListItem>
+    );
   }
 
   /* ***********************************************************
@@ -92,7 +84,7 @@ class CategoriesList extends React.Component {
     }
   *************************************************************/
   // componentWillReceiveProps (newProps) {
-  //   if (new.props.categories){
+  //   if (newProps.categories){
   //     this.setState({
   //       categories: this.state.categories.cloneWithRows(newProps.someData),
   //     });
@@ -100,37 +92,41 @@ class CategoriesList extends React.Component {
   // }
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
-  noRowData () {
-    return this.state.dataSource.getRowCount() === 0
+  noRowData() {
+    return this.state.dataSource.getRowCount() === 0;
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
-        <AlertMessage title='Nothing to See Here, Move Along' show={this.noRowData()} />
+        <AlertMessage title="Nothing to See Here, Move Along" show={this.noRowData()} />
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
+          renderRow={this.renderRow} // TODO: Update
           renderFooter={this.renderFooter}
           enableEmptySections
-          pageSize={15}
+          pageSize={this.state.dataSource.length} // TODO: update
         />
       </View>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
+    //userId: // TODO: need to update later
+    username: state.username,
+    token: state.token,
+    user: state.selectedCategories,
+
 
     // ...redux state to props here
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList);

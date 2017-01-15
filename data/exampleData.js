@@ -1,10 +1,10 @@
 
-module.exports = exampleNotifications = [
+module.exports.exampleNotifications = [
   {
     userId: 1,
     title: 'Location A',
     category: 'crime',
-    latitude:37.789, 
+    latitude:37.789,
     longitude: -122.408918,
     voteCount: 5,
     description:'whatever',
@@ -15,7 +15,7 @@ module.exports = exampleNotifications = [
     userId: 1,
     title: 'Location B',
     category: 'waitTime',
-    latitude:37.789000, 
+    latitude:37.789000,
     longitude: -122.408918,
     voteCount: 5,
     description:'whatever',
@@ -52,7 +52,6 @@ module.exports = exampleNotifications = [
     categoryId:1,
   },
 ];
-module.exports.exampleCategories = ['commute', 'hazard', 'publicEvent', 'crime', 'drugs', 'waitTime'];
 
 // location
 // {

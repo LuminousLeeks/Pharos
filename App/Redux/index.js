@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import Immutable from 'seamless-immutable'
 // import { combineReducers } from 'redux';
 // import Immutable from 'seamless-immutable';
-
+import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
 
 const defaultState = {
   newEvent: {
@@ -68,6 +68,7 @@ const initialState = {
   watchID: '',
   error: null,
   userId: 0,
+  selectedCategories: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -111,12 +112,19 @@ const rootReducer = (state = initialState, action) => {
         // action.userInterests
         // action.token
       };
-    case 'UPDATE_CATEGORIES' :
+    case 'FETCH_CATEGORIES' :
       return {
         ...state,
         username: action.username,
         token: action.token,
-        categories: action.categories,
+        categories: exampleCategories,
+      };
+    case 'SAVE_SELECTED_CATEGORIES' :
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+        userCategories: action.categories, // TODO: Make sure naming convention matches Database
       };
     case 'START_FETCHING':
       return {
