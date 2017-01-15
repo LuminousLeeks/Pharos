@@ -1,62 +1,56 @@
 
 module.exports = exampleNotifications = [
   {
-    id: 12345,
+    userId: 1,
     title: 'Location A',
     category: 'crime',
-    latitude: 37.789,
+    latitude:37.789, 
     longitude: -122.408918,
-    voteCount: 17,
-    thumbsUp: false,
-    thumbsDown: false,
-    votingDisabled: false
-
+    voteCount: 5,
+    description:'whatever',
+    categoryId:1,
   },
   // Notification
   {
-    id: 12344,
+    userId: 1,
     title: 'Location B',
     category: 'waitTime',
-    latitude: 37.7834,
-    longitude: -122.4085,
+    latitude:37.789000, 
+    longitude: -122.408918,
     voteCount: 5,
-    thumbsUp: false,
-    thumbsDown: false,
-    votingDisabled: false
+    description:'whatever',
+    categoryId:1,
   },
   {
-    id: 12344,
+    userId: 1,
     title: 'Location C',
     category: 'publicEvent',
-    latitude: 37.79,
-    longitude: -122.4080,
+    latitude:37.790000,
+    longitude: -122.408000,
     voteCount: 25,
-    thumbsUp: false,
-    thumbsDown: false,
-    votingDisabled: false
+    description:'whatever',
+    categoryId:1,
   },
   {
-    id: 12344,
+    userId: 1,
     title: 'Location D',
     category: 'hazard',
-    latitude: 37.7800,
-    longitude: -122.4082,
+    latitude:37.7800,
+    longitude: -122.408200,
     voteCount: 10,
-    thumbsUp: false,
-    thumbsDown: false,
-    votingDisabled: false
+    description:'whatever',
+    categoryId:1,
   },
   {
-    id: 12344,
+    userId: 1,
     title: 'Location E',
     category: 'commute',
-    latitude: 37.7830,
-    longitude: -122.4085,
+    latitude:37.7830,
+    longitude: -122.408500,
     voteCount: 10,
-    thumbsUp: false,
-    thumbsDown: false,
-    votingDisabled: false
-  }
+    description:'whatever',
+    categoryId:1,
+  },
 ];
 
 

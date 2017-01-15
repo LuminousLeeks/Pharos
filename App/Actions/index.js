@@ -1,4 +1,3 @@
-
 export const reportEvent = newEvent => ({
   type: 'REPORT_EVENT',
   newEvent,
@@ -74,4 +73,3 @@ export const registerRequest = (username, password) => ({
   username,
   password,
 });
-

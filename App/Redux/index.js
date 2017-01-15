@@ -64,8 +64,9 @@ const initialState = {
   events: defaultState.events,
   token: '',
   watchID: '',
-  error: null
-}
+  error: null,
+  userId: 0,
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -122,18 +123,13 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, error: action.error };
     case 'LOGOUT':
       return state;
+    case 'LOGGEDIN':
+      return { ...state, fetching: false };
     default:
       return state;
   }
 };
 
-//Bing disabled the one below... Why, I don't know why.
-// const rootReducer = combineReducers({
-//   mapAction,
-//   authenticate,
-// });
 
-//Below was active in my case... so we have to make that up.
-// export default rootReducer;
 
 export default rootReducer

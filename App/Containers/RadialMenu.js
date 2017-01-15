@@ -29,6 +29,9 @@ class RadialMenuComponent extends React.Component {
               category: key,
               description: description,
               event: event,
+              latitude: this.props.region.latitude,
+              longitude: this.props.region.longitude,
+              userId: this.props.userId
             }
             this.handleReport(newEvent);
           }

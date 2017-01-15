@@ -169,7 +169,7 @@ class MapviewExample extends React.Component {
           {this.props.notifications.map((notification) => this.renderMapMarkers(notification))}
         </MapView>
 
-        <RadialMenu notifications={this.state.notifications} region={this.state.region} socket={this.props.socket}/>
+        <RadialMenu userId={this.props.userId} notifications={this.state.notifications} region={this.state.region} socket={this.props.socket}/>
 
       </View>
     )
