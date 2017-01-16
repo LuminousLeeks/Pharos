@@ -29,6 +29,7 @@
     "testdb": "mocha server/test/dbspecs.js",
     "dropdb": "psql -c 'drop database pharos_db'",
     "testServer": "mocha server/test/specs.js",
+    "testAva": "ava \"Tests/**/*.test.js\"",
     "buildArchieveDb": "psql -f initArchieve.sql && node archieveDb/models/Notification.js",
     "buildArchiever": "crontab services/archiever/cron-job.txt"
   },
