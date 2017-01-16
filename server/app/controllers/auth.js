@@ -14,25 +14,28 @@ module.exports.socketAuth = (sockets, cb) => {
       // callback: false, // disconnect socket server side if invalid token
     }))
     .on('authenticated', (socket) => {
+      console.log('hello! ' + socket.decoded_token.name);
+
       cb(socket);
     });
 };
 
 // Authentication JwToken passed from socket
-module.exports.socketAuth = (socket, callback) => {
-  socket
-    .on('connect', socketioJwt.authorize({
-      secret: jwtSecret,
-      timeout: 10000,
-    }))
-    .on('authenticated', (socket2) => {
-      callback(socket2);
-    });
-};
+// module.exports.socketAuth = (socket, callback) => {
+//   socket
+//     .on('connect', socketioJwt.authorize({
+//       secret: jwtSecret,
+//       timeout: 10000,
+//     }))
+//     .on('authenticated', (socket2) => {
+//       callback(socket2);
+//     });
+// };
 
 
 // HTTP login request
 module.exports.loginUser = (request, response) => {
+  response.header('Access-Control-Allow-Origin', '*');
   const reqUser = request.body;
   const token = jwtoken.sign(reqUser, jwtSecret, {
     expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 Days
