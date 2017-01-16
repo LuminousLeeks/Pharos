@@ -28,14 +28,14 @@ export const updatePosition = position => ({
   },
 });
 // !!! this is duplicate !!!
-export const loadEvents = (events, token) => {
-  console.log('loadEvents action triggered');
-  console.log(events);
-  return {
-    type: 'UPDATE_EVENTS',
-    events,
-  };
-};
+// export const loadEvents = (events, token) => {
+//   console.log('loadEvents action triggered');
+//   console.log(events);
+//   return {
+//     type: 'UPDATE_EVENTS',
+//     events,
+//   };
+// };
 export const saveWatchID = watchID => ({
   type: 'SAVE_WATCHID',
   watchID,
@@ -49,22 +49,35 @@ export const fetchEvents = (token, userLocation) => ({
   token,
   userLocation,
 });
-export const getUserInfo = (userName = '', userInterests = [], token = {}) => ({
-  type: 'GET_USER_INFO',
-  userName,
-  userInterests,
+export const fetchUserInfo = (username, token, firstName, lastName) => ({
+  type: 'FETCH_USER_INFO',
+  username: this.state.username,
   token,
+  firstName,
+  lastName,
+  // userInterests, //TODO: decide on naming conventions
 });
-export const fetchCategories = (username = '', token) => ({
+export const updateUserInfo = (username, token) => ({
+  type: 'UPDATE_USER_INFO',
+  username,
+  token,
+  // TODO: Update user data
+});
+export const fetchCategories = (username, token, categories = '') => ({
   type: 'FETCH_CATEGORIES',
   username,
   token,
+  categories,
 });
-export const saveSelectedCategories = (username, selectedCategories, token) => ({
-  type: 'SAVE_SELECTED_CATEGORIES',
+export const saveCategories = (username, token, categories) => ({
+  type: 'SAVE_CATEGORIES',
   username,
   token,
   categories,
+});
+export const toggleCategory = (username, id) => ({
+  type: 'TOGGLE_CATEGORY',
+  id,
 });
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
