@@ -51,7 +51,6 @@ const defaultState = {
   categories: exampleCategories,
 };
 
-
 const initialState = {
   fething: false,
   newNotification: defaultState.newEvent,
