@@ -34,13 +34,18 @@ class NavigationRouter extends Component {
             rightButtonTextStyle={Styles.rightButton}
           >
             <Scene
+              key='mapScreen'
+              component={MapScreen}
+              title='Pharos'
+            />
+            <Scene
               initial
               key="loginScreen"
               component={LoginScreen}
               title="Login Screen"
             />
             <Scene
-              // initial
+              initial
               key="signUpPage"
               component={SignUpPage}
               title="Sign-Up"
