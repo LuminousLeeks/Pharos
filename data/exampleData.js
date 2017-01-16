@@ -1,5 +1,5 @@
 
-module.exports.exampleNotifications = [
+const exampleNotifications = [
   {
     userId: 1,
     title: 'Location A',
@@ -52,6 +52,8 @@ module.exports.exampleNotifications = [
     categoryId:1,
   },
 ];
+
+module.exports = exampleNotifications;
 
 // location
 // {
