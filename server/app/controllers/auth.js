@@ -14,7 +14,6 @@ module.exports.socketAuth = (sockets, cb) => {
       // callback: false, // disconnect socket server side if invalid token
     }))
     .on('authenticated', (socket) => {
-      console.log('hello! ' + socket.decoded_token.name);
 
       cb(socket);
     });
@@ -40,6 +39,8 @@ module.exports.loginUser = (request, response) => {
   const token = jwtoken.sign(reqUser, jwtSecret, {
     expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 Days
   });
+  // TODO: get userId from database
+  const userId = (123456789).toString();
 
   User.findOne({
     where: {
@@ -51,7 +52,7 @@ module.exports.loginUser = (request, response) => {
       response.status(400).json('User not found');
     }
     if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
-      response.status(200).send({ token });
+      response.status(200).send({ token, userId });
     } else {
       response.status(400).send('Invalid Login');
     }

@@ -2,68 +2,81 @@
 const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 
+const rooms = [];
+
+
+//======================================================
+// TODO: remove this code
+
+const Promise = require('bluebird');
 
 const getNotificationsFromDB = (userID) => {
-
-  return exampleData;
+  console.log('getNotifications');
+  return new Promise((resolve, reject) => {
+    resolve(exampleData);
+  });
 }
 const insertNotification = (event) => {
-  return
-}
+  console.log('New event', event)
+  console.log('reportNotification');
 
-const rooms = [];
+  return new Promise((resolve) => {
+    resolve(rooms, event);
+  });
+}
+const setUserConfigurations = (event) => {
+  console.log('setUserConfigurations');
+}
+//=========================================================
+
 
 module.exports = (io) => {
   socketAuth(io, (socket) => {
-    socket.emit('text', 'Server: Hello!!!!');
+    //===============================
+    // TODO: remove this code
+
     socket.on('text', (text) => {
+    socket.emit('text', 'Server: Hello!!!!');
       console.log(text);
     });
+    //===============================
 
-    socket.on('createRoom', function (roomName) {
-      console.log(roomName);
+    socket.on('createRoom', (roomName) => {
+      // TODO: Remove console.log
+      console.log('ROOM:', roomName);
+
       socket.join(roomName);
       rooms.push(roomName);
 
       socket.on('getNotifications', (userID, callback) => {
-        console.log('getNotifications');
-
-        // using userID, server find the proper events
-        // send back events
-
-        // TODO: remove this line
-        callback(exampleData);
-        //callback(getNotificationsFromDB(userID));
-
-        // io.to(roomName).emit('events', {events: roomName});
+        getNotificationsFromDB(userID)
+        .then((notifications) => {
+          callback(notifications);
+        });
       });
 
-      socket.on('reportNotification', function(notification) {
-        console.log('reportNotification');
-
+      socket.on('reportNotification', (notification) => {
         // server finds room names
         // foreach  room name send notifications to client
-        // insertNotification(notification)
-        // .then((userIds, notification)=> {
-        //   userIds.forEach((userId) => {
-        //
-        //     // TODO: remove this line
-        //     let notification = exampleData[1];
-        //
-        //     io.to(userId).emit('pushNotification', notification);
-        //   })
-        // });
+        insertNotification(notification)
+        .then((userIds, newNotification) => {
+          userIds.forEach((userId) => {
+            io.to(userId).emit('pushNotification', newNotification);
+          });
+        });
       });
 
-      socket.on('setUserConfigurations', (userConfigurations) => {
+      socket.on('setUserConfigurations', (userConfigurations, userId, callback) => {
         console.log('setUserConfigurations');
-        //updateUserConficuration(userConfigurations)
-
-        // TODO: remove this line
-        let notifications = exampleData;
-
         //send back notifications
-        io.to(userConfigurations.userId).emit('pushNotifications', notifications);
+        // TODO: do we want to use a callback here?
+        setUserConfigurations(userConfigurations, userId);
+
+        getNotificationsFromDB(userID)
+        .then((notifications) => {
+          // io.to(userConfigurations.userId).emit('pushNotifications', notifications);
+          callback(notifications);
+        });
       });
     });
   });

@@ -7,7 +7,6 @@ import Styles from './Styles/MapviewStyle';
 import { Metrics } from '../Themes';
 
 const MapCallout = ({ event, handleThumbsUpIsPressed, handleThumbsDownIsPressed  }) => {
-console.log("rendered");
  return (
   <View >
     <Text style={Styles.text} >{event.title}</Text>

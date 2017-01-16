@@ -47,13 +47,12 @@ const defaultState = {
       latitude: 37.784345,
       longitude: -122.407679
     },
-
   ]
 }
 
 const initialState = {
   fething: false,
-  newEvent: defaultState.newEvent,
+  newNotification: defaultState.newEvent,
   userInterests: {},
   userLocation: {},
   region: {
@@ -67,13 +66,12 @@ const initialState = {
   token: '',
   watchID: '',
   error: null,
-  userId: 0,
+  userId: 'none',
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'REPORT_EVENT':
-    console.log("new event", action.newEvent)
       return {
         ...state,
         newEvent: action.newEvent
@@ -126,7 +124,7 @@ const rootReducer = (state = initialState, action) => {
     case 'REQUEST':
       return { ...state, token: action.token };
     case 'SUCCESS':
-      return { ...state, username: action.username, token: action.token };
+      return { ...state, username: action.username, token: action.token, userId: action.userId };
     case 'AUTH_FAIL':
       return { ...state, error: action.error };
     case 'LOGOUT':

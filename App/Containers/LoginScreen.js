@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
 import {Images, Metrics} from '../Themes'
-import { 
+import {
   loginRequest,
   registerRequest,
   getPosition

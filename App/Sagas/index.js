@@ -7,6 +7,9 @@ import req from 'superagent'
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 
+
+
+
 //actions triggered at the end async event
 import {
   loginSuccess,
@@ -21,8 +24,6 @@ export const getPositionFromNavigator = () => {
   return new Promise ((resolve) => {
      navigator.geolocation.getCurrentPosition (
       (position) => {
-        console.log('getCurrentPosition in Saga');
-        console.log(position);
         resolve({
           position,
           region: {
@@ -72,7 +73,8 @@ function* login() {
     yield put(updateRegion(region));
     const res = yield call(loginPostRequest, username, password, position)
     const token = res.body.token;
-    yield put(loginSuccess(username, token))
+    const userId = res.body.userId;
+    yield put(loginSuccess(username, token, userId))
 }
 
 function* signup() {
@@ -84,7 +86,7 @@ function* signup() {
 // ----------------------------------------------------------
 
 // Connect Redux client to socket
-function connectSocket(token) {
+function connectSocket(token, userId) {
   const socket = io.connect('http://127.0.0.1:8099/socket', {
     transports: ['websocket'],
   });
@@ -93,6 +95,12 @@ function connectSocket(token) {
     socket
       .emit('authenticate', { token })
       .on('authenticated', () => {
+        socket.emit('text', 'Client: hello');
+        socket.on('text', (text) => {
+          console.log(text);
+        });
+        socket.emit('createRoom', userId);
+
         resolve(socket);
       })
       .on('unauthorized', (msg) => {
@@ -102,10 +110,9 @@ function connectSocket(token) {
   });
 }
 
-function getNotifications(socket, token) {
+function getNotifications(socket, userId) {
   return new Promise((resolve, reject) => {
-    socket.emit('getNotifications', (events) => {
-      console.log('Saga: getNotifications');
+    socket.emit('getNotifications', userId, (events) => {
       resolve(events);
     });
   });
@@ -122,12 +129,9 @@ function* fetchEvents(socket) {
 function* reportEvent(socket) {
   while (true) {
     const { newNotification } = yield take('REPORT_EVENT');
-    // active this line, once socket is up
-    //  socket.emit('reportNotification', newNotification);
+     socket.emit('reportNotification', newNotification);
   }
 }
-
-
 
 function sendVote(socket, vote) {
   socket.emit('sendVote', vote);
@@ -152,10 +156,9 @@ function* handleIO(socket) {
 // ---------Define flow of socket
 function* flow() {
   while (true) {
-    let { token } = yield take('SUCCESS');
-    const socket = yield call(connectSocket, token);
-    const events = yield call(getNotifications, socket, token);
-    console.log(events);
+    let { token, userId } = yield take('SUCCESS');
+    const socket = yield call(connectSocket, token, userId);
+    const events = yield call(getNotifications, socket, userId);
     yield put(loadEvents(events));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
