@@ -8,12 +8,14 @@ import { fetchUserInfo, updateUserInfo } from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
   console.log(state, 'MAP USER STATE TO PROPS');
-  return {
-    username: state.username,
-    firstName: state.firstName,
-    lastName: state.lastName,
-    token: state.token,
-  };
+  // return {
+  //   username: state.username,
+  //   firstName: state.firstName,
+  //   lastName: state.lastName,
+  //   token: state.token,
+  // };
+  const { username, firstName, lastName } = state;
+  return { username, firstName, lastName };
   // email: state.email,
 };
 
