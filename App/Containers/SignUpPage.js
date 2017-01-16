@@ -121,7 +121,6 @@ class SignUpPage extends React.Component {
                     placeholder="Email"
                     onChangeText={(text) => this.setState({email: text})} />
                 </InputGroup>
-              </ListItem>
               <ListItem>
                 <Icon name="user" size={30} />
               </ListItem>

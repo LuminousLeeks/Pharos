@@ -41,7 +41,7 @@ class NavigationRouter extends Component {
               title="Map"
             />
             <Scene
-              initial
+              // initial
               key="loginScreen"
               component={LoginScreen}
               title="Login"
