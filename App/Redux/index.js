@@ -18,7 +18,7 @@ const defaultState = {
       story: 'Line for Pokemon ground is too long.',
       vote: 7,
       latitude: 37.784235,
-      longitude: -122.410597
+      longitude: -122.410597,
     },
     {
       category: 'waitTime',
@@ -27,7 +27,7 @@ const defaultState = {
       story: 'Line for Logo land is too long.',
       vote: 2,
       latitude: 37.785566,
-      longitude: -122.407282
+      longitude: -122.407282,
     },
     {
       category: 'hazard',
@@ -36,7 +36,7 @@ const defaultState = {
       story: 'Pikachu is on fire.',
       vote: 10,
       latitude: 37.784311,
-      longitude: -122.404460
+      longitude: -122.404460,
     },
     {
       category: 'commute',
@@ -45,11 +45,11 @@ const defaultState = {
       story: 'Pikachu blocked I-880.',
       vote: 6,
       latitude: 37.784345,
-      longitude: -122.407679
+      longitude: -122.407679,
     },
-
-  ]
-}
+  ],
+  categories: exampleCategories,
+};
 
 const initialState = {
   fething: false,
@@ -63,12 +63,15 @@ const initialState = {
     longitudeDelta: 100,
   },
   userName: '',
+  firstName: '',
+  lastName: '',
   events: defaultState.events,
   token: '',
   watchID: '',
   error: null,
   userId: 0,
   selectedCategories: {},
+  categories: defaultState.categories,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -83,17 +86,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userLocation: action.userLocation,
-      }
+      };
     case 'UPDATE_REGION':
       return {
         ...state,
         region: action.region,
-      }
+      };
     case 'SAVE_WATCHID':
       return {
         ...state,
         watchID: action.watchID,
-      }
+      };
     case 'UPDATE_EVENTS':
       return {
         ...state,
@@ -105,27 +108,42 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         events: action.events
       }
-    case 'GET_USER_INFO':
+    case 'FETCH_USER_INFO':
       return {
         ...state,
-        // action.userName,
-        // action.userInterests
-        // action.token
+        username: action.username, // Uncommented to build user profile
+        // userInterests: action.userInterests, // TODO: Decide on naming conventions
+        token: action.token,
+        firstName: action.firstName,
+        lastName: action.lastName,
+      };
+    case 'UPDATE_USER_INFO':
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
       };
     case 'FETCH_CATEGORIES' :
       return {
         ...state,
         username: action.username,
         token: action.token,
-        categories: exampleCategories,
+        categories: action.categories,
       };
-    case 'SAVE_SELECTED_CATEGORIES' :
+    case 'SAVE_CATEGORIES':
       return {
         ...state,
         username: action.username,
         token: action.token,
-        userCategories: action.categories, // TODO: Make sure naming convention matches Database
+        saveCategories: action.saveCategories, // TODO: Make sure naming convention matches Database
       };
+    case 'TOGGLE_CATEGORY':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        selected: !state.selected,
+      });
     case 'START_FETCHING':
       return {
         ...state,
@@ -153,6 +171,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-
-
-export default rootReducer
+export default rootReducer;

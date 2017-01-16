@@ -3,6 +3,8 @@ import { View, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import { List, ListItem, CheckBox, Text } from 'native-base';
+import { fetchCategories, saveSelectedCategories, toggleCategory } from './../Actions/index.js';
+// TODO: Remove Test Data
 import EventCategories from './../Lib/EventCategories';
 
 // For empty lists
@@ -13,9 +15,9 @@ import styles from './Styles/CategoriesListStyle';
 
 class CategoriesList extends React.Component {
 
-  // state: {
-  //   dataSource: EventCategories
-  // }
+  state: {
+    dataSource: EventCategories
+  }
 
   constructor(props) {
     super(props);
@@ -40,13 +42,17 @@ class CategoriesList extends React.Component {
     const ds = new ListView.DataSource({ rowHasChanged });
 
     // Datasource is always in state
+    dataSource.
     this.state = {
-      dataSource: ds.cloneWithRows(dataObjects),
+      dataSource: ds.cloneWithRows(),
     }
   }
-  handleSelected(e) {  // TODO: finish handling the checkbox selecting action
+
+  handleCheckBoxSelection(e) {  // TODO: finish handling the checkbox selecting action
+    const { username, categories, selectedCategories } = this.state;
+    this.
     e.preventDefault();
-    // this.props.dispatch
+    // this.props.toggleCategory(selectedCategories)
     console.log('handle selected');
   };
   /* ***********************************************************
@@ -57,7 +63,14 @@ class CategoriesList extends React.Component {
   * e.g.
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
-  renderRow(rowData) {
+  renderCategories(categories) {
+    return (
+      categories.forEach( category => {
+        return !this.state.selectedCategories.indexOf(category);
+      })
+    )
+  }
+  renderRows(rowData) {
     return (
       <ListItem>
         <CheckBox checked={true} onPress={this.handleSelected} />
@@ -100,6 +113,7 @@ class CategoriesList extends React.Component {
     return (
       <View style={styles.container}>
         <AlertMessage title="Nothing to See Here, Move Along" show={this.noRowData()} />
+        <Text>Select Notification Categories</Text>
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
@@ -118,7 +132,8 @@ const mapStateToProps = (state, ownProps) => {
     //userId: // TODO: need to update later
     username: state.username,
     token: state.token,
-    user: state.selectedCategories,
+    selectedCategories: state.selectedCategories,
+
 
 
     // ...redux state to props here
