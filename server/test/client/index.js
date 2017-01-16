@@ -1,4 +1,3 @@
-// const bingsSocket = io('http://localhost:8099');
 let token = '';
 const username = 'borat';
 const password = 'borat';
@@ -49,7 +48,7 @@ $.ajax({
 
 
 //=========================================
-// Socket connections to origin
+// Socket connections to stubbed origin
 //=========================================
 
 // const craigsSocket = io.connect('http://localhost:3000');

@@ -1,6 +1,6 @@
-export const reportEvent = newEvent => ({
+export const reportEvent = newNotification => ({
   type: 'REPORT_EVENT',
-  newEvent,
+  newNotification,
 });
 
 export const updateRegion = region => ({
@@ -78,12 +78,12 @@ export const request = () => ({
   type: 'REQUEST',
 });
 
-export const loginSuccess = (username, token) => {
-  console.log(token, 'sucess and token!');
+export const loginSuccess = (username, token, userId) => {
   return {
     type: 'SUCCESS',
     username,
     token,
+    userId
   };
 };
 

@@ -9,7 +9,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {
-    newEvent: state.newEvent,
+    newEvent: state.newNotification,
   };
 };
 

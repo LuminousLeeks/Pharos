@@ -27,7 +27,7 @@ class ReportEventForms extends React.Component {
             <Input
               style={{height:300, marginTop:20}}
               stackedLabel
-              onChangeText={text => {this.setState({ description: text }); console.log(text);}}
+              onChangeText={(text) => this.setState({ description: text })}
               label="Report"
               placeholder="add more details about event"
               />
