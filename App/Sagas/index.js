@@ -70,7 +70,7 @@ export const signupPostRequest = (username, password, userInfo) => {
 
 function* login() {
     const { username, password } = yield take('LOGIN_REQUEST')
-    const {position, region} = yield call(getPositionFromNavigator);
+    const { position, region } = yield call(getPositionFromNavigator);
     yield put(updatePosition(position));
     yield put(updateRegion(region));
     const res = yield call(loginPostRequest, username, password, position)
