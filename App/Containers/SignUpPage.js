@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {
   View,
@@ -22,11 +23,25 @@ import { registerRequest } from '../Actions/index.js';
 // Styles
 import { Images, Metrics } from '../Themes';
 import Styles from './Styles/SignUpPageStyle';
+=======
+// @flow
+
+import React from 'react';
+import { ScrollView, Text } from 'react-native';
+import { connect } from 'react-redux';
+// Add Actions - replace 'Your' with whatever your reducer is called :)
+// import YourActions from '../Redux/YourRedux'
+import { Actions as NavigationActions } from 'react-native-router-flux';
+import { registerRequest } from '../Actions/index.js';
+// Styles
+import styles from './Styles/SignUpPageStyle';
+>>>>>>> (feat) Build new Update Profile Page and Sign Up Page
 
 class SignUpPage extends React.Component {
 
   constructor(props) {
     super(props);
+<<<<<<< HEAD
     this.state = {
       selected1: undefined,
       username: '',
@@ -152,6 +167,17 @@ class SignUpPage extends React.Component {
         </Container>
       </ScrollView>
     )
+=======
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Text>SignUpPage</Text>
+      </ScrollView>
+    );
+>>>>>>> (feat) Build new Update Profile Page and Sign Up Page
   }
 }
 
@@ -162,7 +188,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+<<<<<<< HEAD
     attemptRegister: (username, password, userInfo) => dispatch(registerRequest(username, password, userInfo)),
+=======
+>>>>>>> (feat) Build new Update Profile Page and Sign Up Page
   };
 };
 
