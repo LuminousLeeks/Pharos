@@ -11,6 +11,8 @@ import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
 import ReportEventScreen from '../Containers/ReportEventScreen';
 import CategoriesList from '../Containers/CategoriesList';
+import UserProfilePage from '../Containers/UserProfilePage';
+import SignUpPage from '../Containers/SignUpPage';
 // import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -38,9 +40,15 @@ class NavigationRouter extends Component {
             />
             <Scene
               initial
-              key='loginScreen'
+              key="loginScreen"
               component={LoginScreen}
-              title='Login Screen'
+              title="Login Screen"
+            />
+            <Scene
+              // initial
+              key="signUpPage"
+              component={SignUpPage}
+              title="Sign-Up"
             />
             <Scene
               // initial
@@ -52,12 +60,13 @@ class NavigationRouter extends Component {
               key='reportEventScreen'
               component={ReportEventScreen}
               title='Report Event'
-              />
+            />
             <Scene
-              key='mapScreen'
-              component={MapScreen}
-              title='Pharos'
-              />
+              // initial
+              key="userProfilePage"
+              component={UserProfilePage}
+              title="User Profile Page"
+            />
           </Scene>
         </Scene>
       </Router>
