@@ -39,13 +39,13 @@ class NavigationRouter extends Component {
               title='Pharos'
             />
             <Scene
-              initial
+              // initial
               key="loginScreen"
               component={LoginScreen}
               title="Login Screen"
             />
             <Scene
-              // initial
+              initial
               key="signUpPage"
               component={SignUpPage}
               title="Sign-Up"

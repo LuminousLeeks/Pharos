@@ -95,15 +95,15 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
               <ListItem>
-                <InputGroup>
-                  <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-                  <Input placeholder="PASSWORD" secureTextEntry />
-                </InputGroup>
+              <InputGroup>
+                <Icon name="ios-person" style={{ color: '#0A69FE' }} />
+                <Input placeholder="Email" />
+              </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Icon name="ios-call" style={{ color: '#0A69FE' }} />
-                  <Input placeholder="PHONE" keyboardType="numeric" />
+                  <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
+                  <Input placeholder="PASSWORD" secureTextEntry />
                 </InputGroup>
               </ListItem>
             </List>
