@@ -47,14 +47,10 @@ const defaultState = {
       latitude: 37.784345,
       longitude: -122.407679,
     },
-<<<<<<< HEAD
   ],
   categories: exampleCategories,
 };
-=======
-  ]
-}
->>>>>>> (refactor) allow users to connect through individual rooms
+
 
 const initialState = {
   fething: false,
