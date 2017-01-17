@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   notifications: state.notifications,
   region: state.region,
   watchID: state.watchID,
-  token: state.token,
+  userId: state.userId,
   userName: state.userName,
   userId: state.userId,
   currentLocation: state.currentLocation,
@@ -45,6 +45,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(saveWatchID(watchID));
   },
   updateRegion: (region) => {
+    console.log('in MapScreen, updateRegion props is triggered-------')
+    console.log(region);
     dispatch(updateRegion(region));
   },
 });
