@@ -145,9 +145,9 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
             </List>
-            <TouchableOpacity style={Styles.signUpButtonWrapper} onPress={ this.handlePressSignUp }>
-              <View style={Styles.signUpButton}>
-                <Text style={Styles.signUpText}>Submit</Text>
+            <TouchableOpacity style={Styles.container} onPress={ this.handlePressSignUp }>
+              <View style={Styles.button}>
+                <Text style={Styles.buttonText}>Submit</Text>
               </View>
             </TouchableOpacity>
           </Content>

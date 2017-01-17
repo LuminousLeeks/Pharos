@@ -76,7 +76,6 @@ const rootReducer = (state = initialState, action) => {
     case 'STATE_VOTE_EVENT':
       return {
         ...state,
-
         notifications: action.notifications,
       };
     case 'FETCH_USER_INFO':

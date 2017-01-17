@@ -1,3 +1,4 @@
+/* eslint-disable */
 // const socketioJwt = require('socketio-jwt');
 // const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;

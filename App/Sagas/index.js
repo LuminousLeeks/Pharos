@@ -243,6 +243,8 @@ function* flow() {
     const socket = yield call(connectSocket, token, userId);
     const notifications = yield call(getNotifications, socket, userId, location);
     yield put(loadNotifications(notifications));
+    const userInfo = yield call(getUserInfo, socket, userId);
+    yield put(saveUserInfo(userInfo));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');

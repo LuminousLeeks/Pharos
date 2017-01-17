@@ -24,20 +24,21 @@ class NavigationRouter extends Component {
     return (
       <Router>
         <Scene
-          key='drawer'
+          key="drawer"
           component={NavigationDrawer}
-          open={false}>
+          open={false}
+        >
           <Scene
-            key='drawerChildrenWrapper'
+            key="drawerChildrenWrapper"
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}
           >
             <Scene
-              key='mapScreen'
+              key="mapScreen"
               component={MapScreen}
-              title='Pharos'
+              title="Pharos"
             />
             <Scene
               initial
@@ -52,6 +53,7 @@ class NavigationRouter extends Component {
               title="Sign-Up"
             />
             <Scene
+<<<<<<< HEAD
               // // initial
               // key="categoriesList"
               // component={CategoriesList}
@@ -61,6 +63,11 @@ class NavigationRouter extends Component {
               key='reportNotificationScreen'
               component={ReportNotificationScreen}
               title='Report Notification'
+=======
+              key="reportEventScreen"
+              component={ReportEventScreen}
+              title='Report Event'
+>>>>>>> fixed undefined styles
             />
             <Scene
               // initial
@@ -68,17 +75,28 @@ class NavigationRouter extends Component {
               component={UserProfilePage}
               title="User Profile"
             />
+          </Scene>
+        </Scene>
+      </Router>
+    );
+  }
+}
+
+export default NavigationRouter;
+
+
+/*
+            <Scene
+              // initial
+              key="categoriesList"
+              component={CategoriesList}
+              title="CategoriesList"
+            />
             <Scene
               // initial
               key="updateProfilePage"
               component={UpdateProfilePage}
               title="Update Profile"
             />
-          </Scene>
-        </Scene>
-      </Router>
-    )
-  };
-};
 
-export default NavigationRouter;
+*/

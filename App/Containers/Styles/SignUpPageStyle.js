@@ -28,13 +28,13 @@ export default StyleSheet.create({
     height: 40,
     color: Colors.steel,
   },
-  signUpButton: {
+  button: {
     flex: 1,
     borderWidth: 1,
     backgroundColor: Colors.coal,
     padding: 6,
   },
-  signUpText: {
+  buttonText: {
     textAlign: 'center',
     color: Colors.frost,
   },

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import UserProfile from '../Components/UserProfile';
 import { fetchUserInfo } from '../Actions';
-import { Actions as NavigationActions } from 'react-native-router-flux';
+// import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
 // however the ownProps only have ownProps.socket so we use {socket}
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   console.log(state, 'MAP USER STATE TO PROPS');
   return {
     userInfo: state.userInfo,
@@ -16,10 +16,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
 
   fetchUserInfo: (userId) => {
-    console.log('in triggered fetchUserInfo---------------');
     dispatch(fetchUserInfo(userId));
   },
   // updateUserInfo: (username, token) => {
@@ -27,6 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   // },
 });
 
-const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
 
-export default UserProfilePage;
+// export default UserProfilePage;
