@@ -1,3 +1,8 @@
+export const partialReport = newNotification => ({
+  type: 'PARTIAL_REPORT',
+  newNotification,
+});
+
 export const reportEvent = newNotification => ({
   type: 'REPORT_EVENT',
   newNotification,
