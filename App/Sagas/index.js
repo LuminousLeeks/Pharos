@@ -46,21 +46,15 @@ function* getPosition() {
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
   const url = 'http://127.0.0.1:8099';
-  // return req.post(`${url}/api/auth/login`)
-  //   .send({ username, password });
-  return new Promise ((resolve, reject) => {
-    req.post(`${url}/api/auth/login`)
-      .send({ username, password })
-      .end((err, res) => {
-         if (err || !res.ok) {
-           reject(err);
-           console.log('signin error');
-         } else {
-          resolve(res)
-           console('yay got ' + JSON.stringify(res.body));
-         }      
-      });
-  })
+  return req.post(`${url}/api/auth/login`)
+    .send({ username, password });
+  // return new Promise((resolve) => {
+  //   req.post(`${url}/api/auth/login`)
+  //   .send({ username, password })
+  //   .end(function(err, res){
+  //     resolve({res, err});
+  //   })
+  // })
 };
 
 
@@ -81,14 +75,20 @@ function* login() {
     const { position, region } = yield call(getPositionFromNavigator);
     yield put(updatePosition(position));
     yield put(updateRegion(region));
-    const res = yield call(loginPostRequest, username, password, position)
-    const token = res.body.token;
-    const userId = res.body.userId;
-    const location = {
-      latitude: region.latitude,
-      longitude: region.longitude,
-    };
-    yield put(loginSuccess(username, token, userId, location))
+    const res = yield call(loginPostRequest, username, password, position);
+    // if (err) {
+    //   console.log('loginPostRequest and server failed failed');
+    //   console.log(err);
+    // } else {
+    if (! res.body.err) {
+      const token = res.body.token;
+      const userId = res.body.userId;
+      yield put(loginSuccess(username, token, userId))
+    } else {
+      console.log('login error, response is-----');
+      console.log(res.body.err);
+      yield fork(login);
+    }
 }
 
 function* signup() {
