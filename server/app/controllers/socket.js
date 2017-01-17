@@ -16,6 +16,7 @@ const getNotificationsFromDB = (userID) => {
     resolve(exampleData);
   });
 }
+
 const insertNotification = (event) => {
   console.log('New event', event)
   console.log('reportNotification');
@@ -24,9 +25,32 @@ const insertNotification = (event) => {
     resolve(rooms, event);
   });
 }
+
 const setUserConfigurations = (event) => {
   console.log('setUserConfigurations');
 }
+
+// const user = {
+//   username,
+//   firstName,
+//   lastName,
+//   password,
+//   email,
+// }
+//
+// const settings = {
+//   radius: int,
+//   subscriptions: [1,2,3,4]
+// }
+
+const insertUser = (user, settings) => {
+  console.log('setUserConfigurations');
+}
+
+const updateUser = (userId, settings) => {
+  console.log('setUserConfigurations');
+}
+
 //=========================================================
 
 
@@ -66,11 +90,15 @@ module.exports = (io) => {
         });
       });
 
-      socket.on('setUserConfigurations', (userConfigurations, userId, callback) => {
-        console.log('setUserConfigurations');
-        //send back notifications
-        // TODO: do we want to use a callback here?
-        setUserConfigurations(userConfigurations, userId);
+      // socket.on('createUser', (userConfigurations, userId, callback) => {
+      //   console.log('createUser');
+      //   //send back notifications
+      //   // TODO: do we want to use a callback here?
+      //   insertUser(user, settings);
+      // });
+
+      socket.on('setUserConfigurations', (userConfigurations, userId) => {
+        updateUser(userId, settings);
       });
     });
   });
