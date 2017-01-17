@@ -71,12 +71,6 @@ module.exports = (io) => {
         //send back notifications
         // TODO: do we want to use a callback here?
         setUserConfigurations(userConfigurations, userId);
-
-        getNotificationsFromDB(userID)
-        .then((notifications) => {
-          // io.to(userConfigurations.userId).emit('pushNotifications', notifications);
-          callback(notifications);
-        });
       });
     });
   });
