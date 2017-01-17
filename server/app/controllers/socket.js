@@ -2,44 +2,9 @@
 const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 const rooms = [];
-const { getNotifications, insertNotification, updateUser, insertVote } = require('../db/utils.js');
-
-
-//======================================================
-// TODO: remove this code
+const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
 
 const Promise = require('bluebird');
-
-// const getNotifications = (userID) => {
-//   console.log('getNotifications');
-//   return new Promise((resolve, reject) => {
-//     resolve(exampleData);
-//   });
-// };
-
-const insertNotification = (event) => {
-  console.log('New event', event)
-  console.log('reportNotification');
-
-  return new Promise((resolve) => {
-    resolve(rooms, event);
-  });
-};
-
-// const setUserConfigurations = (event) => {
-//   console.log('setUserConfigurations');
-// };
-
-// const insertUser = (user, settings) => {
-//   console.log('setUserConfigurations');
-// };
-
-// const updateUser = (userId, settings) => {
-//   console.log('setUserConfigurations');
-// };
-
-//=========================================================
-
 
 module.exports = (io) => {
   socketAuth(io, (socket) => {
