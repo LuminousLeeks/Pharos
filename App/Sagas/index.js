@@ -59,11 +59,12 @@ export const loginPostRequest = (username, password) => {
 //helper function for signup POST
 export const signupPostRequest = (username, password, userInfo) => {
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
-  firstName = userInfo.firstName;
-  lastName = userInfo.lastName;
+  const firstName = userInfo.firstName;
+  const lastName = userInfo.lastName;
+  const email = userInfo.email;
   const url = 'http://127.0.0.1:8099';
   return req.post(`${url}/api/auth/signup`)
-    .send({ username, password, firstName, lastName });
+    .send({ username, password, firstName, lastName, email });
 };
 
 function* login() {

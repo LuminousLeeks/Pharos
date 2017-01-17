@@ -32,6 +32,7 @@ class SignUpPage extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
+      email: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth },
     };
@@ -74,9 +75,18 @@ class SignUpPage extends React.Component {
     });
   }
   handlePressRegister = () => {
-    const { username, password } = this.state;
+    const { username,
+      password,
+      firstName,
+      lastName,
+      email } = this.state;
+    const userInfo = {
+      firstName,
+      lastName,
+      email,
+    };
     this.isAttempting = true;
-    this.props.attemptRegister(username, password);
+    this.props.attemptRegister(username, password, userInfo);
   }
   render() {
     return (
@@ -86,24 +96,34 @@ class SignUpPage extends React.Component {
             <List>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="First Name" placeholder="John" value=""/>
+                  <Input inlineLabel label="First Name"
+                  onChangeText={(text) => this.setState({firstName: text})} placeholder="John" value=""/>
                 </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="Last Name" placeholder="Appleseed" value=""/>
+                  <Input inlineLabel label="Last Name"
+                    onChangeText={(text) => this.setState({lastName: text})} placeholder="Appleseed" value=""/>
                 </InputGroup>
               </ListItem>
               <ListItem>
               <InputGroup>
                 <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                <Input placeholder="Email" />
+                <Input placeholder="Email"
+                  onChangeText={(text) => this.setState({email: text})} />
               </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
+                  <Input inlineLabel label="Username"
+                  onChangeText={(text) => this.setState({username: text})} placeholder="username" value=""/>
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <InputGroup>
                   <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-                  <Input placeholder="PASSWORD" secureTextEntry />
+                  <Input placeholder="password"
+                    onChangeText={(text) => this.setState({password: text})} secureTextEntry />
                 </InputGroup>
               </ListItem>
             </List>
@@ -126,7 +146,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
+    attemptRegister: (username, password, userInfo) => dispatch(registerRequest(username, password, userInfo)),
   };
 };
 

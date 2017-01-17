@@ -103,8 +103,9 @@ export const loginRequest = (username, password) => ({
   password,
 });
 
-export const registerRequest = (username, password) => ({
+export const registerRequest = ((username, password, userInfo) => ({
   type: 'SIGNUP_REQUEST',
   username,
   password,
+  userInfo,
 });

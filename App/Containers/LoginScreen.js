@@ -165,7 +165,7 @@ class LoginScreen extends React.Component {
                 <Text style={Styles.loginText}>Login</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ this.handlePressRegister }>
+            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ NavigationActions.signUpPage }>
               <View style={Styles.loginButton}>
                 <Text style={Styles.loginText}>Signup</Text>
               </View>
