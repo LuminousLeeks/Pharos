@@ -46,8 +46,21 @@ function* getPosition() {
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
   const url = 'http://127.0.0.1:8099';
-  return req.post(`${url}/api/auth/login`)
-    .send({ username, password });
+  // return req.post(`${url}/api/auth/login`)
+  //   .send({ username, password });
+  return new Promise ((resolve, reject) => {
+    req.post(`${url}/api/auth/login`)
+      .send({ username, password })
+      .end((err, res) => {
+         if (err || !res.ok) {
+           reject(err);
+           console.log('signin error');
+         } else {
+          resolve(res)
+           console('yay got ' + JSON.stringify(res.body));
+         }      
+      });
+  })
 };
 
 
