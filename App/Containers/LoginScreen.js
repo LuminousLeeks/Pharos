@@ -105,7 +105,8 @@ class LoginScreen extends React.Component {
   handlePressRegister = () => {
     const { username, password } = this.state;
     this.isAttempting = true;
-    this.props.attemptRegister(username, password);
+    NavigationActions.signUpPage();
+    // this.props.attemptRegister(username, password);
   }
 
   handleChangeUsername = (text) => {
