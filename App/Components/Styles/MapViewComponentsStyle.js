@@ -19,8 +19,10 @@ export default StyleSheet.create({
     bottom: 0,
   },
   callout: {
+
     alignSelf: 'stretch',
     width: 100,
+
   },
   flex: {
     flex: 1,
@@ -30,4 +32,10 @@ export default StyleSheet.create({
     fontSize: 30,
     color: 'blue',
   },
+  icon: {
+
+  },
+  maker: {
+
+  }
 });
