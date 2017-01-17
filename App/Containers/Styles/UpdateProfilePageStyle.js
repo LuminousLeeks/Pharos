@@ -1,9 +1,19 @@
-// @flow
 
 import { StyleSheet } from 'react-native';
 import { Colors, Metrics } from '../../Themes';
 
 export default StyleSheet.create({
+
+  updateButton: {
+    flex: 1,
+    borderWidth: 1,
+    backgroundColor: Colors.coal,
+    padding: 6,
+  },
+  updateText: {
+    textAlign: 'center',
+    color: Colors.frost,
+  },
   container: {
     paddingTop: 70,
     backgroundColor: Colors.snow,
@@ -28,15 +38,15 @@ export default StyleSheet.create({
     height: 40,
     color: Colors.steel,
   },
-  updateButton: {
+  button: {
     flex: 1,
     borderWidth: 1,
-    borderColor: Colors.charcoal,
-    backgroundColor: '#0A69FE',
+    backgroundColor: Colors.panther,
     padding: 6,
   },
-  updateText: {
+  buttonText: {
     textAlign: 'center',
-    color: Colors.panther,
+    color: Colors.frost,
   },
 });
+

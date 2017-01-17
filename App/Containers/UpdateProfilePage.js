@@ -20,7 +20,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 import { registerRequest } from '../Actions/index.js';
 
 // Styles
-import { Images, Metrics } from '../Themes';
+import { Colors, Images, Metrics } from '../Themes';
 import Styles from './Styles/UpdateProfilePageStyle';
 
 class UpdateProfilePage extends React.Component {
@@ -58,11 +58,23 @@ class UpdateProfilePage extends React.Component {
       visibleHeight: Metrics.screenHeight,
     })
   }
-    onValueChange(e) {
+  onValueChange(e) {
     this.setState({
       selected1: e.target.value,
     });
   }
+  // handleUpdateUsername(e) {
+
+  // }
+  // handleUpdateFirstName(e) {
+
+  // }
+  // handleUpdateUsername(e) {
+
+  // }
+  // handleUpdateUsername(e) {
+
+  // }
   handlePressUpdate = () => {
     const { username, firstName, lastName, email } = this.state;
     this.isAttempting = true;
@@ -70,29 +82,65 @@ class UpdateProfilePage extends React.Component {
   }
   render() {
     return (
+      <ScrollView style={Styles.container}>
         <Container>
           <Content>
             <List>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="First Name" placeholder="John" value=""/>
+                  <Icon
+                    name="ios-person"
+                    style={{color: Colors.panther }}
+                  />
+                  <Input inlineLabel label="Username" placeholder="Update Username" value=""/>
                 </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="Last Name" placeholder="Appleseed" value=""/>
+                  <Icon
+                    name="ios-person"
+                    style={{ color: Colors.panther }}
+                  />
+                  <Input
+                  inlineLabel
+                  label="First Name"
+                  placeholder="Update First Name"
+                  value=""/>
                 </InputGroup>
               </ListItem>
               <ListItem>
-              <InputGroup>
-                <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                <Input placeholder="Email" />
-              </InputGroup>
+                <InputGroup>
+                  <Icon
+                    name="ios-person"
+                    style={{ color: Colors.panther }}
+                  />
+                  <Input
+                  inlineLabel
+                  label="Last Name"
+                  placeholder="Enter Last Name"
+                  value=""/>
+                </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-                  <Input placeholder="PASSWORD" secureTextEntry />
+                  <Icon
+                    name=""
+                    style={{ color: Colors.panther }}
+                  />
+                  <Input placeholder="Update Email" />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Icon
+                    name="ios-unlock"
+                    style={{ color: Colors.panther }}
+                  />
+                  <Input
+                    inputSuccessBorderColor={Colors.facebook}
+                    placeholder="Update Password"
+                    secureTextEntry
+                  />
                 </InputGroup>
               </ListItem>
             </List>
@@ -103,6 +151,7 @@ class UpdateProfilePage extends React.Component {
             </TouchableOpacity>
           </Content>
       </Container>
+    </ScrollView>
     )
   }
 }

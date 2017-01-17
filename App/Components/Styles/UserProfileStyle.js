@@ -41,12 +41,12 @@ export default StyleSheet.create({
   button: {
     flex: 1,
     borderWidth: 1,
-    backgroundColor: Colors.coal,
+    backgroundColor: Colors.panther,
     padding: 6,
   },
   buttonText: {
     textAlign: 'center',
     color: Colors.frost,
-  },  
+  },
 });
 

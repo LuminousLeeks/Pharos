@@ -23,9 +23,9 @@ class UserProfile extends Component {
     // console.log(type)
     // this.props.fetchUserInfo(this.props.userId);
     console.log('in componentWillMount');
-    console.log(typeof this)
+    console.log(typeof this);
   }
-  handleClick() {
+  sendToUpdatePage() {
     NavigationActions.updateProfilePage();
     // this.props.updateUserInfo();
   }
@@ -36,13 +36,13 @@ class UserProfile extends Component {
           <Content>
             <List>
               <ListItem>
-                <Text>Email
-                  <Text>{this.props.userInfo.email}</Text>
+                <Text>Username
+                  <Text>{this.props.username}</Text>
                 </Text>
               </ListItem>
               <ListItem>
                 <Text> Full Name
-                  <Text>{`${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`}</Text>
+                  <Text>{` ${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`}</Text>
                 </Text>
               </ListItem>
               <ListItem >
@@ -50,7 +50,7 @@ class UserProfile extends Component {
               </ListItem>
             </List>
             <TouchableOpacity
-              onPress={this.handleClick}
+              onPress={this.sendToUpdatePage}
               style={Styles.container}
             >
               <View style={Styles.button}>
