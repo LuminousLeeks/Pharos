@@ -6,11 +6,11 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 import RadialMenu from '../Components/RadialMenu_npm';
 import Styles from './Styles/RadialMenuStyles';
 import EventCategories from '../Lib/EventCategories';
-import { reportEvent } from '../Actions';
+import { partialReport } from '../Actions';
 
 class RadialMenuComponent extends React.Component {
   handleReport(newEvent) {
-    this.props.dispatch(reportEvent(newEvent));
+    this.props.dispatch(partialReport(newEvent));
     NavigationActions.reportEventScreen();
   }
 
