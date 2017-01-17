@@ -60,6 +60,7 @@ const generateRandomCoordinates = function generateRandomCoordinates(lat1, lat2,
 
 for (let i = 0; i < userNumber; i++) {
   let randName = faker.name.findName();
+  let email = faker.internet.email();
   let firstName = randName.split(' ')[0];
   let lastName = randName.split(' ')[1];
   let randomPassword = faker.internet.password();
@@ -71,6 +72,7 @@ for (let i = 0; i < userNumber; i++) {
     password,
     salt,
     username,
+    email,
   });
 }
 
