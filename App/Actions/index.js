@@ -4,6 +4,7 @@ export const partialReport = newNotification => ({
 });
 
 export const reportNotification = newNotification => ({
+
   type: 'REPORT_EVENT',
   newNotification,
 });
@@ -41,14 +42,19 @@ export const fetchNotifications = (token, location, userId) => ({
   location,
   userId,
 });
-export const fetchUserInfo = (username, token, firstName, lastName) => ({
+export const fetchUserInfo = userId => ({
   type: 'FETCH_USER_INFO',
-  username: this.state.username,
-  token,
-  firstName,
-  lastName,
+  userId,
   // userInterests, //TODO: decide on naming conventions
 });
+export const saveUserInfo = userInfo => {
+  console.log('in redux action');
+  console.log(userInfo);
+  return {
+    type: 'SAVE_USER_INFO',
+    userInfo,
+  }
+};
 export const updateUserInfo = (username, token) => ({
   type: 'UPDATE_USER_INFO',
   username,

@@ -98,7 +98,7 @@ class UpdateProfilePage extends React.Component {
             </List>
             <TouchableOpacity style={Styles.updateButtonWrapper} onPress={ this.handlePressUpdate }>
               <View style={Styles.updateButton}>
-                <Text style={Styles.updateText}>Signup</Text>
+                <Text style={Styles.updateText}>Submit and Update</Text>
               </View>
             </TouchableOpacity>
           </Content>

@@ -5,14 +5,31 @@ import {
   TouchableOpacity,
   }
   from 'react-native';
-import { Container, Content, List, ListItem} from 'native-base';
+import { Container, Content, List, ListItem } from 'native-base';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import { Metrics,  } from '../Themes';
+import { Metrics } from '../Themes';
 import Styles from './Styles/UserProfileStyle';
 
 
 class UserProfile extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount');
+    // console.log(type)
+    this.props.fetchUserInfo(this.props.userId);
+    console.log('in componentWillMount');
+    console.log(typeof this)
+  }
+  handleClick(){
+    NavigationActions.updateProfilePage();
+    console.log('in handleClick');
+    console.log(typeof this)
+    this.props.updateUserInfo();
+  }
   render() {
     return (
       <ScrollView>
@@ -20,16 +37,16 @@ class UserProfile extends Component {
           <Content>
             <List>
               <ListItem>
-                <Text>{`Hello + ${this.props.firstName} + ${this.props.lastName} !`}</Text>
+
               </ListItem>
               <ListItem>
-                <Text>Username
-                  <Text>{this.props.username}</Text>
+                <Text>Email
+                  <Text>{this.props.userInfo.email}</Text>
                 </Text>
               </ListItem>
               <ListItem>
                 <Text> Full Name
-                  <Text>{`${this.props.firstName} ${this.props.lastName}`}</Text>
+                  <Text>{`${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`}</Text>
                 </Text>
               </ListItem>
               <ListItem >
@@ -37,11 +54,8 @@ class UserProfile extends Component {
               </ListItem>
               <TouchableOpacity
                 style={Styles.updateButtonWrapper}
-                onPress={() => {
-                  NavigationActions.updateProfilePage();
-                  this.props.updateUserInfo();
-                }}
-                >
+                onPress={this.handleClick}
+              >
                 <Text style={Styles.updateButton}>
                   <Text style={Styles.updateText}>Change Profile Settings</Text>
                 </Text>
@@ -55,10 +69,13 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
+  userId: PropTypes.string,
   username: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
+  email: PropTypes.string,
   updateUserInfo: PropTypes.function,
+  fetchUserInfo: PropTypes.function,
 };
 
 export default UserProfile;

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UserProfile from '../Components/UserProfile';
-import { fetchUserInfo, updateUserInfo } from '../Actions';
+import { fetchUserInfo } from '../Actions';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // NOTE: this is the standard format
@@ -9,25 +9,22 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 
 const mapStateToProps = (state, ownProps) => {
   console.log(state, 'MAP USER STATE TO PROPS');
-  // return {
-  //   username: state.username,
-  //   firstName: state.firstName,
-  //   lastName: state.lastName,
-  //   token: state.token,
-  // };
-  const { username, firstName, lastName } = state;
-  return { username, firstName, lastName };
-  // email: state.email,
+  return {
+    userInfo: state.userInfo,
+    userId: state.userId,
+  };
 };
+
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 
-  fetchUserInfo: (username, token) => {
-    dispatch(fetchUserInfo(username, token));
+  fetchUserInfo: (userId) => {
+    console.log('in triggered fetchUserInfo---------------');
+    dispatch(fetchUserInfo(userId));
   },
-  updateUserInfo: (username, token) => {
-    dispatch(updateUserInfo(username, token));
-  },
+  // updateUserInfo: (username, token) => {
+  //   dispatch(updateUserInfo());
+  // },
 });
 
 const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);

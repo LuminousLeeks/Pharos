@@ -4,6 +4,7 @@ const socketAuth = require('./auth').socketAuth;
 const rooms = [];
 const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
 
+
 module.exports = (io) => {
   socketAuth(io, (socket) => {
     //===============================
@@ -33,6 +34,12 @@ module.exports = (io) => {
           console.log('inserted vote to db ~~~~~~~~~~~~~');
           console.log(insertedVote);
         });
+      socket.on('getUserInfo', (userId, callback) => {
+        getUserInfoFromDB(userId)
+        .then((info) => {
+          callback(info);
+        });
+      });
 
         io.to(vote.userId)
           .emit('updateNotification', 'server updated vote');
@@ -57,4 +64,5 @@ module.exports = (io) => {
       });
     });
   });
-};
+  });
+}
