@@ -90,7 +90,7 @@ export const loginSuccess = (username, token, userId, location) => {
     username,
     token,
     userId,
-    location
+    location,
   };
 };
 

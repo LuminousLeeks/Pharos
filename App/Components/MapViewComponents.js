@@ -24,6 +24,7 @@ export default class MapViewComponents extends Component {
   onRegionChange(region) {
     this.props.updateRegion(region);
     this.props.retrieveMapMarkers(this.props.token, this.props.userId, this.props.region);
+
   }
 
   componentWillUnmount() {
@@ -94,5 +95,5 @@ export default class MapViewComponents extends Component {
 
 MapViewComponents.propTypes = {
   region: PropTypes.object,
-  updateRegion: PropTypes.func,
+  updateRegion: PropTypes.function,
 };
