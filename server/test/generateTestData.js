@@ -5,6 +5,8 @@ const User = require('../models/User.js');
 const Notification = require('../models/Notification.js');
 const Vote = require('../models/Vote.js');
 const overriddenBulkCreate = require('../db/utils.js').overriddenBulkCreate;
+const Category = require('../models/Category.js');
+const Subscription = require('../models/Subscription.js');
 
 // volume of data:
 const userNumber = 1000;
@@ -24,11 +26,14 @@ const longitude2 = -122.391129;
 const users = [];
 const notifications = [];
 const votes = [];
+const categories = [];
+const subscriptions = [];
+const categoryTypes = ['crime', 'waitTime', 'hazard', 'publicEvent'];
 
 // random generator helpers:
-const generateCategory = function generateCategory() {
-  const categoryEnum = ['crime', 'waitTime', 'hazard', 'publicEvent'];
-  return categoryEnum[Math.floor(Math.random() * 4)];
+const generateCategoryId = function generateCategory() {
+  // const categoryEnum = ['crime', 'waitTime', 'hazard', 'publicEvent'];
+  return Math.floor(Math.random() * 4);
 };
 
 const generateRandomId = function generateRandomId(range) {
@@ -54,9 +59,13 @@ const generateRandomCoordinates = function generateRandomCoordinates(lat1, lat2,
 
 // Database helpers:
 
-
-
 // Generate datasets:
+
+for (let i = 0; i < categoryTypes.length; i++) {
+  categories.push({
+    name: categoryTypes[i],
+  });
+}
 
 for (let i = 0; i < userNumber; i++) {
   let randName = faker.name.findName();
@@ -65,6 +74,7 @@ for (let i = 0; i < userNumber; i++) {
   let lastName = randName.split(' ')[1];
   let randomPassword = faker.internet.password();
   let username = faker.internet.userName();
+  let radius =  Math.floor(Math.random() * 1500);
 
   users.push({
     firstName,
@@ -73,6 +83,7 @@ for (let i = 0; i < userNumber; i++) {
     salt,
     username,
     email,
+    radius,
   });
 }
 
@@ -81,7 +92,7 @@ for (let i = 0; i < notificationNumber; i++) {
   let title = faker.random.word();
   let voteCount = 0;
   let userId = generateRandomId(userNumber);
-  let category = generateCategory();
+  let categoryId = generateCategoryId();
   let updatedAt = generateRandomPast();
   let location = {
     type: 'Point',
@@ -93,10 +104,19 @@ for (let i = 0; i < notificationNumber; i++) {
     location,
     title,
     voteCount,
-    category,
+    categoryId,
     updatedAt,
   });
 };
+
+for (let i = 0; i < userNumber; i++) {
+  let randomUserId = generateRandomId(userNumber);
+  let randomCategoryId = generateCategoryId();
+  subscriptions.push({
+    userId: randomUserId,
+    categoryId: randomCategoryId,
+  });
+}
 
 for (let i = 0; i < voteNumber; i++) {
   let type = faker.random.boolean();
@@ -109,15 +129,23 @@ for (let i = 0; i < voteNumber; i++) {
   });
 }
 
-//Load all to the database:
+// Load all to the database:
 
-db.sync({ force:true }).then(function(){
-  return User.bulkCreate(data.users);
-}).then(function(){
-  return overriddenBulkCreate(Notification, data.notifications); //to override updatedAt
+db.sync({ force: true })
+.then(function() {
+  return Category.bulkCreate(categories);
+})
+.then(function() {
+  return User.bulkCreate(users);
 })
 .then(function(){
-  return Vote.bulkCreate(data.votes);
+  return overriddenBulkCreate(Notification, notifications); //to override updatedAt
+})
+.then(function() {
+  return Subscription.bulkCreate(subscriptions);
+})
+.then(function() {
+  return Vote.bulkCreate(votes);
 })
 .catch(function(error) {
   throw error;

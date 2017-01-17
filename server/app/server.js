@@ -20,6 +20,7 @@ const app = express();
 // check database connection and create tables if non existent.
 db.authenticate().then(() => {
   console.log('connected to the database');
+  db.sync();
 }).catch((error) => {
   console.log('cannot connect to the db');
   throw error;
