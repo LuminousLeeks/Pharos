@@ -12,14 +12,16 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
 const db = require('../db/db.js');
-
-// create tables if not exists.
+const initializeDb = require('../db/utils.js').initializeDb;
 
 const app = express();
 
 // check database connection and create tables if non existent.
 db.authenticate().then(() => {
   console.log('connected to the database');
+  db.sync(); 
+  initializeDb(); // you don't do that once the db is deployed. 
+   
 }).catch((error) => {
   console.log('cannot connect to the db');
   throw error;

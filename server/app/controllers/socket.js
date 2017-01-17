@@ -24,8 +24,8 @@ module.exports = (io) => {
       socket.join(roomName);
       rooms.push(roomName);
 
-      socket.on('getNotifications', (userID, callback) => {
-        getNotifications(userID)
+      socket.on('getNotifications', (userID, location, callback) => {
+        getNotifications(userID, location)
         .then((notifications) => {
           callback(notifications);
         });
@@ -41,11 +41,13 @@ module.exports = (io) => {
           });
         });
       });
-      // socket.on('createUser', (userConfigurations, userId, callback) => {
-      //   console.log('createUser');
-      //   //send back notifications
-      //   // TODO: do we want to use a callback here?
-      //   insertUser(user, settings);
+      // create user implementation dependent:
+      // socket.on('createUser', (userConfigurations, userId) => {
+      //   insertUser(user, userConfigurations)
+      //     .then(user => getNotifications(user.id)
+      //       .then(notifications => io.to(user.id)
+      //         .emit('getNotifications', (userId, callback) => callback(notifications))))
+      //       .catch(error => { throw error; });
       // });
 
       socket.on('setUserConfigurations', (userConfigurations, userId) => {

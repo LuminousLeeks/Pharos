@@ -7,7 +7,7 @@ const Notification = db.define('notification', {
   location: Sequelize.GEOGRAPHY,
   voteCount: Sequelize.INTEGER,
   title: Sequelize.STRING,
-  category: Sequelize.ENUM('crime', 'waitTime', 'hazard', 'publicEvent'),
+  categoryId: Sequelize.INTEGER,
 });
 
 db.authenticate().then(() => {
