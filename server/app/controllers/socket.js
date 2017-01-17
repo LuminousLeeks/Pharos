@@ -2,6 +2,7 @@
 const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 const rooms = [];
+const { getNotifications, insertNotification, updateUser, insertVote } = require('../db/utils.js');
 
 
 //======================================================
@@ -9,12 +10,12 @@ const rooms = [];
 
 const Promise = require('bluebird');
 
-const getNotificationsFromDB = (userID) => {
-  console.log('getNotifications');
-  return new Promise((resolve, reject) => {
-    resolve(exampleData);
-  });
-}
+// const getNotifications = (userID) => {
+//   console.log('getNotifications');
+//   return new Promise((resolve, reject) => {
+//     resolve(exampleData);
+//   });
+// };
 
 const insertNotification = (event) => {
   console.log('New event', event)
@@ -23,32 +24,19 @@ const insertNotification = (event) => {
   return new Promise((resolve) => {
     resolve(rooms, event);
   });
-}
+};
 
-const setUserConfigurations = (event) => {
-  console.log('setUserConfigurations');
-}
+// const setUserConfigurations = (event) => {
+//   console.log('setUserConfigurations');
+// };
 
-// const user = {
-//   username,
-//   firstName,
-//   lastName,
-//   password,
-//   email,
-// }
-//
-// const settings = {
-//   radius: int,
-//   subscriptions: [1,2,3,4]
-// }
+// const insertUser = (user, settings) => {
+//   console.log('setUserConfigurations');
+// };
 
-const insertUser = (user, settings) => {
-  console.log('setUserConfigurations');
-}
-
-const updateUser = (userId, settings) => {
-  console.log('setUserConfigurations');
-}
+// const updateUser = (userId, settings) => {
+//   console.log('setUserConfigurations');
+// };
 
 //=========================================================
 
@@ -72,7 +60,7 @@ module.exports = (io) => {
       rooms.push(roomName);
 
       socket.on('getNotifications', (userID, callback) => {
-        getNotificationsFromDB(userID)
+        getNotifications(userID)
         .then((notifications) => {
           callback(notifications);
         });

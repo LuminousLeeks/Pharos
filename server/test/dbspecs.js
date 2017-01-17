@@ -46,7 +46,7 @@ describe('Database tests', function() {
         description: 'Axe thrower running down the street',
         userId: user.id,
         categoryId: 2
-      }).then(function(){
+      }).then(function(userIds, notification){
         done();
       }).catch(done);
     }); 
@@ -141,12 +141,12 @@ describe('Database tests', function() {
 
   it('should be able to update the user settings', function(done) {
     const settings = {
-      radius: 1600,
+      radius: 1500,
       subscriptions: [1, 2, 3, 4],
     };
     const userId = 3;
     updateUser(userId, settings).then((user)=>{
-      console.log(user);
+      expect(user.dataValues.radius).to.equal(radius);
       done();
     }).catch(done)
   }); 

@@ -115,7 +115,15 @@ const insertNotification = function insertNotification(notification) {
       voteCount: 0,
       userId,
       categoryId,
-    }).then(resolve).catch(reject);
+    }).then((notification) => {
+      Subscription.findAll({
+        attributes: ['userId'],
+        where: {
+          categoryId: notification.categoryId,
+        },
+      }).then(userIds => resolve(userIds.map(uid => uid.dataValues.userId), notification))
+        .catch(reject);
+    }).catch(reject);
   });
 };
 
@@ -157,10 +165,12 @@ const updateUser = function updateUser(userId, settings) {
             in: subscriptions,
           },
         },
-      }).then(categories => user.setCategories(categories))
-        .catch(reject);
-    }).then(resolve)
+      }).then(categories => {
+        user.setCategories(categories);
+        resolve(user);
+      })
       .catch(reject);
+    });
   });
 };
 
