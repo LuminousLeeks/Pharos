@@ -27,7 +27,6 @@ module.exports.loginUser = (request, response) => {
   const token = jwtoken.sign(reqUser, jwtSecret, {
     expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 Days
   });
-
   User.findOne({
     where: {
       username: reqUser.username,
@@ -38,6 +37,7 @@ module.exports.loginUser = (request, response) => {
       response.status(400).json('User not found');
     }
     if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
+      console.log(returnedUser.id, 'this is the returned user id');
       response.status(200).send({ token, userId: returnedUser.id });
     } else {
       response.status(400).send('Invalid Login');
@@ -59,7 +59,7 @@ module.exports.createUser = (request, response) => {
   };
   const defaultEmail = 'hello@pharos.com';
   // structure the user
-  const user = {
+  const userModel = {
     username,
     firstName,
     lastName,
@@ -70,19 +70,21 @@ module.exports.createUser = (request, response) => {
   User.findOne({ where: { username } })
     .then((user) => {
       if(!user) {
-        insertUser(user, settings).then((usr) => {
+        insertUser(userModel, settings).then((createdUser) => {
           const userSignature = {
-            username: usr.dataValues.username,
-            password: usr.dataValues.password,
+            username: createdUser.username,
+            password: createdUser.password,
           };
           const token = jwtoken.sign(userSignature, jwtSecret);
-          response.send({ token, userId: usr.dataValues.id });
+          console.log(createdUser.id, 'this is the user id');
+          response.send({ token, userId: createdUser.id });
         });
       } else {
         response.status(404).send('user already exists');
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error);
       response.status(500).send('Please try again. Your credentials could not be saved.');
     });
 };

@@ -41,8 +41,7 @@ module.exports = (io) => {
           });
         });
       });
-     
-      //create user implementation dependent:
+      // create user implementation dependent:
       // socket.on('createUser', (userConfigurations, userId) => {
       //   insertUser(user, userConfigurations)
       //     .then(user => getNotifications(user.id)

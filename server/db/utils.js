@@ -174,7 +174,18 @@ const updateUser = function updateUser(userId, settings) {
   });
 };
 
+const initializeDb = function initializeDb() {
+  Category.findAll({}).then(results => {
+    if (!results.length) {
+      const categoryTypes = ['hazard', 'crime', 'waitTime', 'publicEvent'];
+      const categories = categoryTypes.map(c => ({ name: c }));
+      Category.bulkCreate(categories);
+    }
+  });
+};
+
 module.exports = {
+  initializeDb,
   queryNotifications,
   stdWithinquery,
   insertVote,
