@@ -13,6 +13,7 @@ import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
 import CategoriesList from '../Containers/CategoriesList';
 import UserProfilePage from '../Containers/UserProfilePage';
 import SignUpPage from '../Containers/SignUpPage';
+import UpdateProfilePage from '../Containers/UpdateProfilePage';
 // import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -66,6 +67,12 @@ class NavigationRouter extends Component {
               key="userProfilePage"
               component={UserProfilePage}
               title="User Profile Page"
+            />
+            <Scene
+              // initial
+              key="updateProfilePage"
+              component={UpdateProfilePage}
+              title="Update Profile"
             />
           </Scene>
         </Scene>

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {  Container, Content } from 'native-base';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Styles from './Styles/UserProfileStyle';
+import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // const testUser = {
 //   username: 'demo',
@@ -32,7 +33,10 @@ class UserProfile extends Component {
         <View style={[Styles.updateRow]}>
           <TouchableOpacity
             style={Styles.updateButtonWrapper}
-            onPress={() => { this.props.updateUserInfo(); }}
+            onPress={() => {
+              NavigationActions.userProfilePage();
+              this.props.updateUserInfo();
+            }}
           >
             <View style={Styles.updateButton}>
               <Text style={Styles.updateText}>Update Profile</Text>
@@ -48,6 +52,7 @@ UserProfile.propTypes = {
   username: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
+  updateUserInfo: PropTypes.function,
 };
 
 export default UserProfile;
