@@ -3,11 +3,13 @@ const Promise = require('bluebird');
 const User = require('../models/User.js');
 const Notification = require('../models/Notification.js');
 const Vote = require('../models/Vote.js');
+const Category = require('../models/Category.js');
+const Subscription = require('../models/Subscription.js');
 const bcrypt = require('bcrypt');
 
 
 // Helper functions for db queries:
-const queryNotifications = (userId, category, location, radius) => {
+const queryNotifications = (userId, location, category, radius) => {
   const { latitude, longitude } = location;
   // table that contains geolocation column:
   const table = 'notifications';
@@ -15,15 +17,30 @@ const queryNotifications = (userId, category, location, radius) => {
   const geoCol = 'location';
 
   // Postgres query:
-  // SELECT id, title, description, location, "voteCount", category FROM notifications
-  // where id not in (select "notificationId" from "Votes" where "userId"=2)
-  // AND notifications.category='hazard' AND ST_DWithin(location,'POINT(37.7806521 -122.4070723)',200);
+  // select * from notifications where "categoryId" in (select "categoryId" from subscriptions where "userId"=1);
+  // select * from notifications where ST_DWithin(location,'POINT(37.7806521 -122.4070723)',(select radius from users where id=2));
 
-  return "SELECT id, title, description, location, \"voteCount\", category FROM " + table
-  + " where id not in" + "(select \"notificationId\" from \"Votes\" where \"userId\"=" + userId + ")"
-  + " AND " + "notifications.category=" + "'" + category + "'"
-  + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," + radius + ")"
+  return "SELECT id, title, description, location, \"voteCount\", \"categoryId\" FROM " + table
+  + " where \"categoryId\" in" + "(select \"categoryId\" from subscriptions where \"userId\"=" + userId + ")"
+  + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," 
+  + "(select radius from users where id=" + userId + ")" + ")"
 };
+
+// get notifications where category is x and distance to the given location is y. 
+
+// const queryNotifications = (userId, category, location, radius) => {
+//   const { latitude, longitude } = location;
+//   // table that contains geolocation column:
+//   const table = 'notifications';
+//   // geolocation column:
+//   const geoCol = 'location';
+
+//   return "SELECT id, title, description, location, \"voteCount\", category FROM " + table
+//   + " where " + "notifications.category=" + userId + ")"
+//   + " AND " + "notifications.category=" + "'" + category + "'"
+//   + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," + radius + ")"
+// };
+
 
 const stdWithinquery = function stdWithinquery(table, geoCol, lat, lng, radius) {
   // postgres query:
@@ -42,13 +59,14 @@ const overriddenBulkCreate = function overriddenBulkCreate(model, entries) {
 
 // Exported controller functions:
 
+// last two arguments are overload functions
 // userId: integer
 // category: 'enum'
 // location: { latitude (float), longitude (float) }
 // radius: float (meters) (ex: 100.0 is 100 meters)
-const getNotifications = function getNotifications(userId, category, location, radius) {
+const getNotifications = function getNotifications(userId, location, category, radius) {
   return new Promise((resolve, reject) => {
-    db.query(queryNotifications(userId, category, location, radius),
+    db.query(queryNotifications(userId, location, category, radius),
       { type: db.QueryTypes.SELECT, model: Notification })
         .then((results) => {
           resolve(results.map(result => result.dataValues));
@@ -57,8 +75,10 @@ const getNotifications = function getNotifications(userId, category, location, r
 };
 
 // all inputs are string
-const insertUser = function insertUser(user) {
+// expect subscriptions as an array of category ids.
+const insertUser = function insertUser(user, settings) {
   const { username, firstName, lastName, password } = user;
+  const { radius, subscriptions } = settings;
   const salt = bcrypt.genSaltSync(10);
   const passwordToStore = bcrypt.hashSync(password, salt);
   return new Promise((resolve, reject) => {
@@ -68,6 +88,17 @@ const insertUser = function insertUser(user) {
       lastName,
       password: passwordToStore,
       salt,
+      radius,
+    })
+    .then((user) => {
+      return Category.findAll({
+        where: {
+          id: {
+            in: subscriptions,
+          },
+        },
+      }).then(categories => user.setCategories(categories))
+        .catch(reject);
     }).then(resolve).catch(reject);
   });
 };
@@ -75,7 +106,7 @@ const insertUser = function insertUser(user) {
 // { title, description: string;
 // userId: integer; location: { latitude (float), longitude (float) } }
 const insertNotification = function insertNotification(notification) {
-  const { title, location, description, userId, category } = notification;
+  const { title, location, description, userId, categoryId } = notification;
   return new Promise((resolve, reject) => {
     Notification.create({
       title,
@@ -83,7 +114,7 @@ const insertNotification = function insertNotification(notification) {
       description,
       voteCount: 0,
       userId,
-      category,
+      categoryId,
     }).then(resolve).catch(reject);
   });
 };
@@ -110,26 +141,36 @@ const insertVote = function insertVote(vote) {
   });
 };
 
-const decorateNotifications = (notifications) => {
-  notifications.map(({ description, title, category, location, voteCount }) => { return {
-    description,
-    title,
-    category,
-    latitude: location.coordinates.latitude,
-    longitude: location.coordinates.longitude,
-    votingDisabled: false,
-    voteCount,
-  };
+const updateUser = function updateUser(userId, settings) {
+  const { radius, subscriptions } = settings;
+  return new Promise((resolve, reject) => {
+    User.update({
+      radius,
+    }, { where: { id: userId }, returning: true }).then((results) => {
+      const user = results[1][0]; // postgres syntax
+      if (subscriptions.length === 0) {
+        return resolve(user);
+      }
+      return Category.findAll({
+        where: {
+          id: {
+            in: subscriptions,
+          },
+        },
+      }).then(categories => user.setCategories(categories))
+        .catch(reject);
+    }).then(resolve)
+      .catch(reject);
   });
 };
 
 module.exports = {
   queryNotifications,
   stdWithinquery,
-  decorateNotifications,
   insertVote,
   insertNotification,
   insertUser,
   getNotifications,
   overriddenBulkCreate,
+  updateUser,
 };

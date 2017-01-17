@@ -1,7 +1,6 @@
 // const socketioJwt = require('socketio-jwt');
 const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
-
 const rooms = [];
 
 
@@ -89,7 +88,6 @@ module.exports = (io) => {
           });
         });
       });
-
       // socket.on('createUser', (userConfigurations, userId, callback) => {
       //   console.log('createUser');
       //   //send back notifications
@@ -98,7 +96,7 @@ module.exports = (io) => {
       // });
 
       socket.on('setUserConfigurations', (userConfigurations, userId) => {
-        updateUser(userId, settings);
+        updateUser(userId, userConfigurations);
       });
     });
   });

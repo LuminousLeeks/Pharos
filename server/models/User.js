@@ -1,6 +1,7 @@
 // const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const db = require('../db/db.js');
+// const Category = require('./Category.js');
 
 const User = db.define('user', {
   username: {
@@ -12,18 +13,36 @@ const User = db.define('user', {
     // },
   },
   firstName: {
-    type: Sequelize.STRING, //  TODO: confirm
+    type: Sequelize.STRING,
   },
   lastName: {
-    type: Sequelize.STRING, //  TODO: confirm
+    type: Sequelize.STRING,
   },
   password: {
-    type: Sequelize.STRING, // TODO: ADD PASSWORD CONFIRMATION
+    type: Sequelize.STRING,
   },
   salt: {
-    type: Sequelize.STRING, //SALT
+    type: Sequelize.STRING,
+  },
+  email: {
+    type: Sequelize.STRING,
+  },
+  radius: {
+    type: Sequelize.INTEGER,
   },
 });
+
+// to test
+// User.hook('afterCreate', 'afterUpdate', (user, subscriptions) => {
+//   Category.findAll({
+//     where: {
+//       id: {
+//         in: subscriptions,
+//       },
+//     },
+//   }).then(categories => user.setCategories(categories))
+//     .catch((error) => { throw error; });
+// });
 
 module.exports = User;
 

@@ -12,6 +12,7 @@ var insertUser = utils.insertUser;
 var insertNotification = utils.insertNotification;
 var insertVote = utils.insertVote;
 var queryNotifications = utils.queryNotifications;
+var updateUser = utils.updateUser;
 
 var User = require('../models/User.js');
 var Notification = require('../models/Notification.js');
@@ -28,8 +29,6 @@ describe('Database tests', function() {
     db.authenticate().then(done).catch(function(error) {
       console.log('db not connected');
       throw error;
-      
-
     });
   });
 
@@ -39,13 +38,14 @@ describe('Database tests', function() {
       firstName: 'John',
       lastName: 'Appleseed',
       password: 'marcus',
-    }).then(function(user){
+      email: 'apple@gmail.com',
+    }, { radius: 200, subscriptions: [1,2] }).then(function(user){
       return insertNotification({
         title:'Savage attack',
         location: { latitude: 37.7806521, longitude: -122.4070723 },
         description: 'Axe thrower running down the street',
         userId: user.id,
-        category:'crime',
+        categoryId: 2
       }).then(function(){
         done();
       }).catch(done);
@@ -68,8 +68,8 @@ describe('Database tests', function() {
   var lat = location.latitude;
   var lng = location.longitude;
 
-  var radTight = 200.0;
-  var radLoose = 1500.0;
+  var radTight = 200;
+  var radLoose = 1500;
   
   var col = 'location';
   var table = 'notifications';
@@ -95,18 +95,17 @@ describe('Database tests', function() {
     
   });
 
-  it('should be able query based on geolocation radius and category', function(done) {
+  it('should be able query based on user location and subscription', function(done) {
     // set up query parameters:
     var userId = 1; // user 1 is not voted to any. So just check for category filter.
-    var category = 'hazard'; 
     // structure a tight and a loose query:
-    var queryString = queryNotifications(userId, category, location, radTight);
-  
+    var queryString = queryNotifications(userId, location);
     // console.log(JSON.stringify(st_dwithinTight));
     // Test for a tight range with category constraint:
-    db.query(queryString).then(function (found) {
+    getNotifications(userId, location).then(function (found) {
         // console.log(found[0]);
-        expect(found[0].map(item => item.title).includes('2')).to.be.true;
+        expect(found.map(item => item.title).includes('2')).to.be.true;
+        expect(found.map(item => item.title).includes('4')).to.be.false;
         done();
       });
   });
@@ -140,15 +139,25 @@ describe('Database tests', function() {
     }).catch(done);
   });
 
-  it('should be able to return a set with correct vote-ability', function(done) {
+  it('should be able to update the user settings', function(done) {
+    const settings = {
+      radius: 1600,
+      subscriptions: [1, 2, 3, 4],
+    };
+    const userId = 3;
+    updateUser(userId, settings).then((user)=>{
+      console.log(user);
+      done();
+    }).catch(done)
+  }); 
+
+  xit('should be able to get notifications given the user id', function(done) {
     // user 2 votes for notification 2 (in the dataset)
     // from all the notifications that are returned it should not include notification #2 
     // set up query parameters:
     var userId = 2;
-    var category = 'hazard'; 
-  
     // Test for a tight range with category constraint:
-    getNotifications(userId, category, location, radTight).then(function (found) {
+    getNotifications(userId, location, category, radTight).then(function (found) {
       expect(found.map(item => item.title).includes('5')).to.be.true;
       expect(found.length).to.equal(1);
       done();
