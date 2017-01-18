@@ -33,6 +33,8 @@ module.exports.loginUser = (request, response) => {
     },
   })
   .then((returnedUser) => {
+    console.log("returnedUser");
+    console.log(returnedUser);
     if (returnedUser === null) {
       response.status(200).json('User not found');
     }
@@ -43,6 +45,7 @@ module.exports.loginUser = (request, response) => {
     }
   })
   .catch((error) => {
+    console.log(error);
     response.status(200).send({ err: 'An error occured', errMsg: error });
   });
 };
