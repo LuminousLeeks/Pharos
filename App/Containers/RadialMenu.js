@@ -5,33 +5,33 @@ import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import RadialMenu from '../Components/RadialMenu_npm';
 import Styles from './Styles/RadialMenuStyles';
-import EventCategories from '../Lib/EventCategories';
+import NotificationCategories from '../Lib/NotificationCategories';
 import { partialReport } from '../Actions';
 
 class RadialMenuComponent extends React.Component {
-  handleReport(newEvent) {
-    this.props.dispatch(partialReport(newEvent));
-    NavigationActions.reportEventScreen();
+  handleReport(newNotification) {
+    this.props.dispatch(partialReport(newNotification));
+    NavigationActions.reportNotificationScreen();
   }
 
-  handleSelect(events, description, key) {
+  handleSelect(notifications, description, key) {
     Alert.alert(
-      'Report event category: ' + description,
+      'Report notification category: ' + description,
       null,
-      events.map((event) => {
+      notifications.map((notification) => {
         return {
-          text: event,
+          text: notification,
           onPress: () => {
-            const newEvent = {
+            const newNotification = {
               userName: this.props.userName,
               category: key,
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
               userId: this.props.userId,
-              event,
+              notification,
               description,
             };
-            this.handleReport(newEvent);
+            this.handleReport(newNotification);
           },
         };
       }),
@@ -50,20 +50,20 @@ class RadialMenuComponent extends React.Component {
           startAngle={0}
         >
           <Badge style={Styles.root}>Report</Badge>
-          { Object.keys(EventCategories)
-            .map(EventCategoryKey => EventCategories[EventCategoryKey])
-            .map((EventCategory, index) =>
+          { Object.keys(NotificationCategories)
+            .map(NotificationCategoryKey => NotificationCategories[NotificationCategoryKey])
+            .map((NotificationCategory, index) =>
               <Button
                 style={Styles.option}
                 warning
                 key={index}
                 onSelect={() => {
-                  this.handleSelect(EventCategory.events,
-                    EventCategory.description,
-                    EventCategory.key);
+                  this.handleSelect(NotificationCategory.notifications,
+                    NotificationCategory.description,
+                    NotificationCategory.key);
                 }}
               >
-                <EventCategory.icon size={30} />
+                <NotificationCategory.icon size={30} />
               </Button>,
             )
           }

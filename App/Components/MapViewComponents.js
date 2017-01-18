@@ -7,10 +7,10 @@ import { Metrics } from '../Themes';
 import Styles from './Styles/MapViewComponentsStyle';
 import RadialMenu from '../Containers/RadialMenu';
 import MapCalloutContainer from '../Containers/MapCalloutContainer';
-import EventCategories from '../Lib/EventCategories';
+import NotificationCategories from '../Lib/NotificationCategories';
 
 
-// const Mapviews = ({ events, socket, loadEvents, updateEvents }) => {
+// const Mapviews = ({ notifications, socket, loadNotifications, updateNotifications }) => {
 export default class MapViewComponents extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ export default class MapViewComponents extends Component {
 
   onRegionChange(region) {
     this.props.updateRegion(region);
-    this.props.retrieveMapMarkers(this.props.userId, this.props.currentLocation);
+    this.props.retrieveMapMarkers(this.props.token, this.props.userId, this.props.region);
   }
 
   componentWillUnmount() {
@@ -53,27 +53,27 @@ export default class MapViewComponents extends Component {
             />
           </MapView.Marker>
 
-          {this.props.events
-            .map(event => { return {
-              event,
-              Icon: EventCategories[event.categoryId].icon,
+          {this.props.notifications
+            .map(notification => { return {
+              notification,
+              Icon: NotificationCategories[notification.categoryId].icon,
             }})
-            .map((EventObj, index) => (
+            .map((NotificationObj, index) => (
               <MapView.Marker
                 key={index}
                 coordinate={{
-                  latitude: EventObj.event.location.coordinates[0],
-                  longitude: EventObj.event.location.coordinates[1],
+                  latitude: NotificationObj.notification.location.coordinates[0],
+                  longitude: NotificationObj.notification.location.coordinates[1],
                 }}
-                event={EventObj.event}
+                notification={NotificationObj.notification}
               >
                 <View color="#4F8EF7" >
-                  <EventObj.Icon size={Metrics.icons.small} />
+                  <NotificationObj.Icon size={Metrics.icons.small} />
                 </View>
                 <MapView.Callout style={Styles.callout} >
                   <MapCalloutContainer
-                    event={EventObj.event}
-                    events={this.props.events}
+                    notification={NotificationObj.notification}
+                    notifications={this.props.notifications}
                     userName={this.props.userName}
                     socket={this.props.socket}
                   />

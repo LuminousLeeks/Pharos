@@ -5,16 +5,16 @@ import Immutable from 'seamless-immutable'
 import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
 
 const defaultState = {
-  newEvent: {
+  newNotification: {
     category: 'waitTime',
     description: 'Long wait time',
-    event: 'evantA'
+    notification: 'evantA'
   },
-  events: [
+  notifications: [
     {
       category: 'waitTime',
       description: 'Long wait time',
-      event: 'evantA',
+      notification: 'evantA',
       story: 'Line for Pokemon ground is too long.',
       vote: 7,
       latitude: 37.784235,
@@ -23,7 +23,7 @@ const defaultState = {
     {
       category: 'waitTime',
       description: 'Long wait time',
-      event: 'evantB',
+      notification: 'evantB',
       story: 'Line for Logo land is too long.',
       vote: 2,
       latitude: 37.785566,
@@ -31,8 +31,8 @@ const defaultState = {
     },
     {
       category: 'hazard',
-      description: 'Hazard events',
-      event: 'eventK',
+      description: 'Hazard notifications',
+      notification: 'notificationK',
       story: 'Pikachu is on fire.',
       vote: 10,
       latitude: 37.784311,
@@ -40,8 +40,8 @@ const defaultState = {
     },
     {
       category: 'commute',
-      description: 'Commute related events',
-      event: 'eventN',
+      description: 'Commute related notifications',
+      notification: 'notificationN',
       story: 'Pikachu blocked I-880.',
       vote: 6,
       latitude: 37.784345,
@@ -53,7 +53,7 @@ const defaultState = {
 
 const initialState = {
   fething: false,
-  newNotification: defaultState.newEvent,
+  newNotification: defaultState.newNotification,
   userInterests: {},
   userLocation: {},
   region: {
@@ -65,7 +65,7 @@ const initialState = {
   userName: '',
   firstName: '',
   lastName: '',
-  events: defaultState.events,
+  notifications: defaultState.notifications,
   token: '',
   watchID: '',
   error: null,
@@ -79,7 +79,7 @@ const rootReducer = (state = initialState, action) => {
     case 'REPORT_EVENT':
       return {
         ...state,
-        newEvent: action.newEvent,
+        newNotification: action.newNotification,
       };
     case 'UPDATE_POSITION':
       return {
@@ -99,13 +99,13 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_EVENTS':
       return {
         ...state,
-        events: action.events,
+        notifications: action.notifications,
         // token: action.token
       }
     case 'STATE_VOTE_EVENT':
       return {
         ...state,
-        events: action.events,
+        notifications: action.notifications,
       }
     case 'FETCH_USER_INFO':
       return {

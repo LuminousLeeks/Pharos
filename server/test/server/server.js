@@ -22,17 +22,17 @@ io.on('connection', function (socket) {
     socket.join(roomName);
     rooms.push(roomName);
 
-    socket.on('eventsRequest', function() {
-      console.log("send events to " + roomName);
-      io.to(roomName).emit('events', {events: roomName});
+    socket.on('notificationsRequest', function() {
+      console.log("send notifications to " + roomName);
+      io.to(roomName).emit('notifications', {notifications: roomName});
     });
 
 
-    socket.on('reportEvents', function(events) {
-      console.log("send events to " + events); //
+    socket.on('reportNotifications', function(notifications) {
+      console.log("send notifications to " + notifications); //
       // server finds room names
-      // foreach  room name send events to client
-      // io.to(roomName).emit('events', {events: roomName});
+      // foreach  room name send notifications to client
+      // io.to(roomName).emit('notifications', {notifications: roomName});
     });
   });
 });
@@ -40,6 +40,6 @@ io.on('connection', function (socket) {
 // setTimeout(() => {
 //   console.log("sending push notification to bing");
 //   if (rooms.includes('bing')) {
-//     io.to('bing').emit('events', {events: 'push notification'});
+//     io.to('bing').emit('notifications', {notifications: 'push notification'});
 //   }
 // }, 5000);

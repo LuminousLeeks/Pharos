@@ -22,11 +22,12 @@ module.exports = (io) => {
       socket.join(roomName);
       rooms.push(roomName);
 
-      socket.on('getNotifications', (userID, callback) => {
+      socket.on('getNotifications', (userID, location, callback) => {
         // TODO:
         // location is stubbed here
         // check what user id is.
-        getNotifications(userID, { latitude: 37.77493, longitude: -122.419416 })
+        console.log("location!!!!!!!!!!!!", location)
+        getNotifications(userID, location)
           .then((notifications) => {
             callback(notifications);
           });
@@ -36,6 +37,7 @@ module.exports = (io) => {
       socket.on('reportNotification', (notification) => {
         // server finds room names
         // foreach  room name send notifications to client
+        console.log("new notification!!!!!!!!!!!!", notification)
         insertNotification(notification)
         .then((userIds, newNotification) => {
           userIds.forEach((userId) => {

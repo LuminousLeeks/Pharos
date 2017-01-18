@@ -27,23 +27,23 @@ module.exports = {
   votes: [{
     voteType: true,
     userId: 2,
-    eventId: 1,
+    notificationId: 1,
   }, {
     voteType: true,
     userId: 2,
-    eventId: 1,
+    notificationId: 1,
   }, {
     voteType: false,
     userId: 3,
-    eventId: 1,
+    notificationId: 1,
   }, {
     voteType: true,
     userId: 4,
-    eventId: 1,
+    notificationId: 1,
   }, {
     voteType: true,
     userId: 5,
-    eventId: 1,
+    notificationId: 1,
   }],
   users: [{
     name: 'seneca',

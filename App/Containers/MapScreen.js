@@ -1,14 +1,14 @@
 /* eslint-disable */
 import { connect } from 'react-redux';
 import MapViewComponents from '../Components/MapViewComponents';
-import { fetchEvents, updateEvent, updatePosition, saveWatchID, updateRegion } from '../Actions';
+import { fetchNotifications, updateNotification, updatePosition, saveWatchID, updateRegion } from '../Actions';
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
 // however the ownProps only have ownProps.socket so we use {socket}
 
 const mapStateToProps = (state, ownProps) => ({
-  events: state.events,
+  notifications: state.notifications,
   region: state.region,
   watchID: state.watchID,
   token: state.token,
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       // TODO: remove this for production
       // , {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     ),
-  retrieveMapMarkers: (userId, userLocation) => {
-    dispatch(fetchEvents(userId, userLocation));
+  retrieveMapMarkers: (token, userId, location) => {
+    dispatch(fetchNotifications(token, location, userId));
   },
   saveWatchID: (watchID) => {
     dispatch(saveWatchID(watchID));

@@ -8,53 +8,53 @@ import { sendVoteToState, sendVoteToServer } from '../Actions/index.js'
 
 
 const mapStateToProps = (state, ownProps) => ({
-  event: ownProps.event,
+  notification: ownProps.notification,
 
   userName: state.userName,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   handleThumbsUpIsPressed: () => {
-    const votedEvent = {
-      ...ownProps.event,
-      voteCount: ownProps.event.voteCount + 1,
+    const votedNotification = {
+      ...ownProps.notification,
+      voteCount: ownProps.notification.voteCount + 1,
       votable: false,
     };
 
-    const events = ownProps.events;
-    events.forEach((event, index, array) => {
-      if (event.eventId === votedEvent.eventId) {
-        array.splice(index, 1, votedEvent);
+    const notifications = ownProps.notifications;
+    notifications.forEach((notification, index, array) => {
+      if (notification.notificationId === votedNotification.notificationId) {
+        array.splice(index, 1, votedNotification);
       }
     });
-    const updateEventsArray = events;
+    const updateNotificationsArray = notifications;
 
-    // dispatch(sendVoteToState(updateEventsArray));
+    // dispatch(sendVoteToState(updateNotificationsArray));
     dispatch(sendVoteToServer({
       userName: ownProps.userName,
-      eventId: ownProps.event.eventId,
+      notificationId: ownProps.notification.notificationId,
       vote: true,
     }));
   },
   handleThumbsDownIsPressed: () => {
-    const votedEvent = {
-      ...ownProps.event,
-      voteCount: ownProps.event.voteCount - 1,
+    const votedNotification = {
+      ...ownProps.notification,
+      voteCount: ownProps.notification.voteCount - 1,
       votable: false,
     };
 
-    const events = ownProps.events;
-    events.forEach((event, index, array) => {
-      if (event.eventId === votedEvent.eventId) {
-        array.splice(index, 1, votedEvent);
+    const notifications = ownProps.notifications;
+    notifications.forEach((notification, index, array) => {
+      if (notification.notificationId === votedNotification.notificationId) {
+        array.splice(index, 1, votedNotification);
       }
     });
-    const updatedEventsArray = events;
+    const updatedNotificationsArray = notifications;
 
-    // dispatch(sendVoteToState(updatedEventsArray));
+    // dispatch(sendVoteToState(updatedNotificationsArray));
     dispatch(sendVoteToServer({
       userName: ownProps.userName,
-      eventId: ownProps.event.eventId,
+      notificationId: ownProps.notification.notificationId,
       vote: false,
     }));
   },
@@ -63,9 +63,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCallout);
 
 MapCalloutContainer.propTypes = {
-  event: PropTypes.object,
+  notification: PropTypes.object,
   userName: PropTypes.string,
-  events: PropTypes.array,
+  notifications: PropTypes.array,
 };
 
 export default MapCalloutContainer;

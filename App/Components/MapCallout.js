@@ -6,15 +6,15 @@ import MapView from 'react-native-maps'
 import Styles from './Styles/MapviewStyle';
 import { Metrics } from '../Themes';
 
-const MapCallout = ({ event, handleThumbsUpIsPressed, handleThumbsDownIsPressed  }) => {
+const MapCallout = ({ notification, handleThumbsUpIsPressed, handleThumbsDownIsPressed  }) => {
  return (
   <View >
-    <Text style={Styles.text} >{event.title}</Text>
-    <Text style={Styles.text} >{event.category}</Text>
+    <Text style={Styles.text} >{notification.title}</Text>
+    <Text style={Styles.text} >{notification.category}</Text>
     <View style={Styles.flex} >
-      <Text style={Styles.count} >{event.voteCount}</Text>
+      <Text style={Styles.count} >{notification.voteCount}</Text>
       {
-        !event.votable ?
+        !notification.votable ?
           <View style={Styles.flex}>
             <Button transparent onPress={handleThumbsUpIsPressed}>
               <Icon name="thumbs-o-up" size={Metrics.icons.small} color={'blue'} />
@@ -30,7 +30,7 @@ const MapCallout = ({ event, handleThumbsUpIsPressed, handleThumbsDownIsPressed 
 )};
 
 MapCallout.propTypes = {
-  event: PropTypes.object
+  notification: PropTypes.object
 };
 
 export default MapCallout;
