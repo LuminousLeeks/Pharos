@@ -10,13 +10,13 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 const mapStateToProps = (state) => {
   return {
     newNotification: state.newNotification,
+    notificationLocation: state.region,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleSubmit: (newNotification, description) => {
-    let updatedNotification = newNotification;
-    updatedNotification.description = description;
+  handleSubmit: (newNotification, description, location) => {
+    const updatedNotification = { ...newNotification, description, location };
     dispatch(reportNotification(updatedNotification));
     NavigationActions.mapScreen();
   },

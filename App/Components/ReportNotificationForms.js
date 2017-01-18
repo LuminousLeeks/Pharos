@@ -21,7 +21,7 @@ class ReportNotificationForms extends React.Component {
           <Text
             style={{alignSelf: 'center', marginTop:200, marginBottom: 20}}
             >
-            {'Report: ' + this.props.newNotification.description + ', ' + this.props.newNotification.notification}
+            {'Report: ' + this.props.newNotification.description + ', ' + this.props.newNotification.title}
           </Text>
           <InputGroup borderType='rounded'>
             <Input
@@ -36,7 +36,7 @@ class ReportNotificationForms extends React.Component {
           <Button
             primary
             onPress={() =>
-              this.props.handleSubmit(this.props.newEvent, this.state.description, this.props.eventLocation)}
+              this.props.handleSubmit(this.props.newNotification, this.state.description, this.props.notificationLocation)}
             style={{
               alignSelf: 'flex-start',
               margin: 20
