@@ -22,11 +22,11 @@ const queryNotifications = (userId, location, category, radius) => {
 
   return "SELECT id, title, description, location, \"voteCount\", \"categoryId\" FROM " + table
   + " where \"categoryId\" in" + "(select \"categoryId\" from subscriptions where \"userId\"=" + userId + ")"
-  + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," 
+  + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")',"
   + "(select radius from users where id=" + userId + ")" + ")"
 };
 
-// get notifications where category is x and distance to the given location is y. 
+// get notifications where category is x and distance to the given location is y.
 
 // const queryNotifications = (userId, category, location, radius) => {
 //   const { latitude, longitude } = location;
@@ -189,7 +189,7 @@ const updateUser = function updateUser(userId, settings) {
 const initializeDb = function initializeDb() {
   Category.findAll({}).then(results => {
     if (!results.length) {
-      const categoryTypes = ['hazard', 'crime', 'waitTime', 'publicEvent'];
+      const categoryTypes = ['hazard', 'crime', 'waitTime', 'publicNotification'];
       const categories = categoryTypes.map(c => ({ name: c }));
       Category.bulkCreate(categories);
     }

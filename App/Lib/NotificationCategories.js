@@ -1,15 +1,12 @@
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-
-
-
 export default {
   3: {
     key: 'waitTime',
     description: 'Long wait time',
     icon: ({size}) => (<FontAwesome name='clock-o' size= {size}/>),
-    events: [
+    notifications: [
       'line for restaurant',
       'line for movie',
       'line for bus'
@@ -19,17 +16,17 @@ export default {
     key: 'crime',
     description: 'Crimes found',
     icon: ({size}) => (<FontAwesome name='bug' size= {size}/>),
-    events: [
+    notifications: [
       'theft',
       'gun man',
       'bumb'
     ]
   },
   4: {
-    key: 'publicEvent',
-    description: 'Public events',
+    key: 'publicNotification',
+    description: 'Public notifications',
     icon: ({size}) => (<FontAwesome name='bullhorn' size= {size}/>),
-    events: [
+    notifications: [
       'music festival',
       'farmer market',
       'free food'
@@ -37,9 +34,9 @@ export default {
   },
   1: {
     key: 'hazard',
-    description: 'Hazard events',
+    description: 'Hazard notifications',
     icon: ({size}) => (<FontAwesome name='flag' size= {size}/>),
-    events: [
+    notifications: [
       'fire',
       'flood',
       'Pokemon'
@@ -47,9 +44,9 @@ export default {
   },
   5: {
     key: 'commute',
-    description: 'Commute related events',
+    description: 'Commute related notifications',
     icon: ({size}) => (<FontAwesome name='car' size= {size}/>),
-    events: [
+    notifications: [
       'traffic',
       'accident',
       'police on sight'

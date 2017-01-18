@@ -3,7 +3,7 @@ export const partialReport = newNotification => ({
   newNotification,
 });
 
-export const reportEvent = newNotification => ({
+export const reportNotification = newNotification => ({
   type: 'REPORT_EVENT',
   newNotification,
 });
@@ -23,19 +23,19 @@ export const updatePosition = position => ({
   },
 });
 // !!! this is duplicate !!!
-export const loadEvents = events => ({
+export const loadNotifications = notifications => ({
   type: 'UPDATE_EVENTS',
-  events,
+  notifications,
 });
 export const saveWatchID = watchID => ({
   type: 'SAVE_WATCHID',
   watchID,
 });
-export const updateEvent = events => ({
+export const updateNotification = notifications => ({
   type: 'UPDATE_EVENTS',
-  events,
+  notifications,
 });
-export const fetchEvents = (token, location, userId) => ({
+export const fetchNotifications = (token, location, userId) => ({
   type: 'FETCH_EVENTS',
   token,
   location,
@@ -55,9 +55,9 @@ export const updateUserInfo = (username, token) => ({
   token,
   // TODO: Update user data
 });
-export const sendVoteToState = events => ({
+export const sendVoteToState = notifications => ({
   type: 'STATE_VOTE_EVENT',
-  events,
+  notifications,
 });
 export const sendVoteToServer = vote => ({
   type: 'SERVER_VOTE_EVENT',

@@ -9,7 +9,7 @@ import NavigationDrawer from './NavigationDrawer';
 // import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
-import ReportEventScreen from '../Containers/ReportEventScreen';
+import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
 import CategoriesList from '../Containers/CategoriesList';
 import UserProfilePage from '../Containers/UserProfilePage';
 import SignUpPage from '../Containers/SignUpPage';
@@ -57,9 +57,9 @@ class NavigationRouter extends Component {
               title="CategoriesList"
             />
             <Scene
-              key='reportEventScreen'
-              component={ReportEventScreen}
-              title='Report Event'
+              key='reportNotificationScreen'
+              component={ReportNotificationScreen}
+              title='Report Notification'
             />
             <Scene
               // initial

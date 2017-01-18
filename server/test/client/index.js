@@ -57,8 +57,8 @@ $.ajax({
 // } );
 // const craigsUniqueIdentifier = 'craig';
 // craigsSocket.emit('createRoom', craigsUniqueIdentifier);
-// craigsSocket.emit('eventsRequest');
-// craigsSocket.on('events', function (data) {
+// craigsSocket.emit('notificationsRequest');
+// craigsSocket.on('notifications', function (data) {
 //   console.log(data);
 // });
 //
@@ -66,26 +66,26 @@ $.ajax({
 // const efesSocket = io('http://127.0.0.1:8099');
 // const efesUniqueIdentifier = 'efe';
 // efesSocket.emit('createRoom', efesUniqueIdentifier);
-// efesSocket.emit('eventsRequest');
-// efesSocket.on('events', function (data) {
+// efesSocket.emit('notificationsRequest');
+// efesSocket.on('notifications', function (data) {
 //   console.log(data);
 // });
 //
 // const seansSocket = io('http://127.0.0.1:8099');
 // const seansUniqueIdentifier = 'sean';
 // seansSocket.emit('createRoom', seansUniqueIdentifier);
-// seansSocket.emit('eventsRequest');
-// seansSocket.on('events', function (data) {
+// seansSocket.emit('notificationsRequest');
+// seansSocket.on('notifications', function (data) {
 //   console.log(data);
 // });
-// seansSocket.emit('eventsRequest');
-// seansSocket.emit('eventsRequest');
-// seansSocket.emit('eventsRequest');
-// seansSocket.emit('eventsRequest');
-// seansSocket.emit('eventsRequest');
+// seansSocket.emit('notificationsRequest');
+// seansSocket.emit('notificationsRequest');
+// seansSocket.emit('notificationsRequest');
+// seansSocket.emit('notificationsRequest');
+// seansSocket.emit('notificationsRequest');
 //
 //
 // setTimeout(() => {
 //   console.log("sending push notification to bing");
-//   bingsSocket.emit('reportEvents', {events: ['rawr']});
+//   bingsSocket.emit('reportNotifications', {notifications: ['rawr']});
 // }, 7000);

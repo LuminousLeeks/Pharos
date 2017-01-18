@@ -42,11 +42,11 @@ server.listen(port, () => logger.info(`Server listening on ${port}!`));
 //  Socket.io connection established
 const io = require('socket.io')(server);
 
-//  Prevent circular dependency by defining routes after exports
+//  Prnotification circular dependency by defining routes after exports
 module.exports.io = io;
 module.exports.app = app;
 
-//  Prevent circular dependency by defining routes after exports
+//  Prnotification circular dependency by defining routes after exports
 const router = require('./routes/router');
 app.use('/api', router);
 

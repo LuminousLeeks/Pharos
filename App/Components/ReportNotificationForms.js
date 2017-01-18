@@ -2,10 +2,10 @@
 import React, { PropTypes } from 'react';
 import { View } from 'react-native';
 import { Container, Text, Content, InputGroup, Button, Input } from 'native-base';
-import Styles from './Styles/ReportEventFormsStyle';
+import Styles from './Styles/ReportNotificationFormsStyle';
 
 
-class ReportEventForms extends React.Component {
+class ReportNotificationForms extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,7 +21,7 @@ class ReportEventForms extends React.Component {
           <Text
             style={{alignSelf: 'center', marginTop:200, marginBottom: 20}}
             >
-            {'Report: ' + this.props.newEvent.description + ', ' + this.props.newEvent.event}
+            {'Report: ' + this.props.newNotification.description + ', ' + this.props.newNotification.notification}
           </Text>
           <InputGroup borderType='rounded'>
             <Input
@@ -29,13 +29,13 @@ class ReportEventForms extends React.Component {
               stackedLabel
               onChangeText={(text) => this.setState({ description: text })}
               label="Report"
-              placeholder="add more details about event"
+              placeholder="add more details about notification"
               />
           </InputGroup>
           <View style={ {flexDirection: 'row', alignSelf: 'center'} }>
           <Button
             primary
-            onPress={() => this.props.handleSubmit(this.props.newEvent, this.state.description)}
+            onPress={() => this.props.handleSubmit(this.props.newNotification, this.state.description)}
             style={{
               alignSelf: 'flex-start',
               margin: 20
@@ -58,9 +58,9 @@ class ReportEventForms extends React.Component {
   }
 }
 
-ReportEventForms.propTypes = {
+ReportNotificationForms.propTypes = {
   redirectToMapview: PropTypes.func,
-  newEvent: PropTypes.object,
+  newNotification: PropTypes.object,
 };
 
-export default ReportEventForms;
+export default ReportNotificationForms;

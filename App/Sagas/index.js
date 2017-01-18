@@ -1,7 +1,7 @@
 
 /* eslint-disable */
 import io from 'socket.io-client'
-import { eventChannel } from 'redux-saga'
+import { notificationChannel } from 'redux-saga'
 import { fork, take, call, put, cancel } from 'redux-saga/effects'
 import req from 'superagent'
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -10,10 +10,10 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 
 
 
-//actions triggered at the end async event
+//actions triggered at the end async notification
 import {
   loginSuccess,
-  loadEvents,
+  loadNotifications,
   updateRegion,
   updatePosition,
 } from '../Actions'
@@ -76,7 +76,11 @@ function* login() {
     const res = yield call(loginPostRequest, username, password, position)
     const token = res.body.token;
     const userId = res.body.userId;
-    yield put(loginSuccess(username, token, userId, position))
+    const location = {
+      latitude: region.latitude,
+      longitude: region.longitude,
+    };
+    yield put(loginSuccess(username, token, userId, location))
 }
 
 function* signup() {
@@ -87,10 +91,13 @@ function* signup() {
     const res = yield call(signupPostRequest, username, password, userInfo);
     const token = res.body.token;
     const userId = res.body.userId;
-    console.log('userId');
-    yield put(loginSuccess( username, token, userId, position));
+    const location = {
+      latitude: region.latitude,
+      longitude: region.longitude,
+    };
+    yield put(loginSuccess( username, token, userId, location));
 }
-// --------------------Socket Events-------------------------
+// --------------------Socket Notifications-------------------------
 // ----------------------------------------------------------
 
 // Connect Redux client to socket
@@ -120,21 +127,22 @@ function connectSocket(token, userId) {
 
 function getNotifications(socket, userId, location) {
   return new Promise((resolve, reject) => {
-    socket.emit('getNotifications', userId, location, (events) => {
-      resolve(events);
+    socket.emit('getNotifications', userId, location, (notifications) => {
+      resolve(notifications);
     });
   });
 }
 
-function* fetchEvents(socket) {
+function* fetchNotifications(socket) {
   while (true) {
     const { token, userId, location } = yield take('FETCH_EVENTS');
-    const events = yield call(getNotifications, socket, userId, location);
-    yield put(loadEvents(events));
+    console.log("location!!!!!!!!!!!!", location)
+    const notifications = yield call(getNotifications, socket, userId, location);
+    yield put(loadNotifications(notifications));
   }
 }
-// ---------Send event data to socket
-function* reportEvent(socket) {
+// ---------Send notification data to socket
+function* reportNotification(socket) {
   while (true) {
     const { newNotification } = yield take('REPORT_EVENT');
      socket.emit('reportNotification', newNotification);
@@ -145,10 +153,10 @@ function sendVote(socket, vote) {
   socket.emit('sendVote', vote);
 }
 
-function* voteEvent(socket) {
+function* voteNotification(socket) {
   while (true) {
     const { vote } = yield take('SERVER_VOTE_EVENT');
-    console.log("Vote event inside saga", vote)
+    console.log("Vote notification inside saga", vote)
     yield call(sendVote, socket, vote);
   }
 }
@@ -156,9 +164,9 @@ function* voteEvent(socket) {
 // ---------Combine sending and receiving data
 function* handleIO(socket) {
   // yield fork(read, socket);
-  yield fork(fetchEvents, socket);
-  yield fork(reportEvent, socket);
-  yield fork(voteEvent, socket);
+  yield fork(fetchNotifications, socket);
+  yield fork(reportNotification, socket);
+  yield fork(voteNotification, socket);
 }
 
 // ---------Define flow of socket
@@ -167,9 +175,9 @@ function* flow() {
     let { token, userId, location } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token, userId);
     console.log('RRRRRRR', userId, location)
-    const events = yield call(getNotifications, socket, userId, location);
-    console.log(')))))))))', events)
-    yield put(loadEvents(events));
+    const notifications = yield call(getNotifications, socket, userId, location);
+    console.log(')))))))))', notifications)
+    yield put(loadNotifications(notifications));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');
