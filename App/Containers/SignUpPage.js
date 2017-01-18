@@ -11,7 +11,8 @@ import {
   Button,
   }
   from 'react-native';
-import { Container, Content, List, ListItem, InputGroup, Input, Icon } from 'native-base';
+import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -95,33 +96,48 @@ class SignUpPage extends React.Component {
           <Content>
             <List>
               <ListItem>
+                <Icon name="user" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="First Name"
-                  onChangeText={(text) => this.setState({firstName: text})} placeholder="John" value=""/>
+                  <Input
+                   label="First Name"
+                  onChangeText={(text) => this.setState({firstName: text})} placeholder="First" />
                 </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="Last Name"
-                    onChangeText={(text) => this.setState({lastName: text})} placeholder="Appleseed" value=""/>
+                  <Input
+                    label="Last Name"
+                    onChangeText={(text) => this.setState({lastName: text})} placeholder="Last" />
                 </InputGroup>
               </ListItem>
               <ListItem>
-              <InputGroup>
-                <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                <Input placeholder="Email"
-                  onChangeText={(text) => this.setState({email: text})} />
-              </InputGroup>
+                <Icon name="envelope" size={30} color="blue" />
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Input inlineLabel label="Username"
-                  onChangeText={(text) => this.setState({username: text})} placeholder="username" value=""/>
+                  <Input
+                    label="Email"
+                    placeholder="Email"
+                    onChangeText={(text) => this.setState({email: text})} />
                 </InputGroup>
               </ListItem>
               <ListItem>
+                <Icon name="user" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
                 <InputGroup>
-                  <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
+                  <Input label="Username"
+                  onChangeText={(text) => this.setState({username: text})} placeholder="username"
+                  />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <Icon name="lock" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
+                <InputGroup>
                   <Input placeholder="password"
                     onChangeText={(text) => this.setState({password: text})} secureTextEntry />
                 </InputGroup>

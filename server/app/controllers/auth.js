@@ -49,23 +49,21 @@ module.exports.loginUser = (request, response) => {
 
 // Register new user, hash password and store salt
 module.exports.createUser = (request, response) => {
-  const { username, firstName, lastName } = request.body;
-  const userPassword = request.body.password;
+  const { username, firstName, lastName, email, password } = request.body;
   // default settings:
   const settings = request.body.settings || {
     radius: 200,
     subscriptions: [1, 2, 3, 4],
   };
-  const defaultEmail = 'hello@pharos.com';
   // structure the user
   const userModel = {
-    username,
     firstName,
     lastName,
-    password: userPassword,
-    email: defaultEmail,
+    email,
+    username,
+    password,
   };
-
+  console.log(userModel)
   User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {
@@ -74,7 +72,7 @@ module.exports.createUser = (request, response) => {
             username: userModel.username,
             password: userModel.password,
           };
-          // user signature must be consistent       
+          // user signature must be consistent
           const token = jwtoken.sign(userSignature, jwtSecret);
           response.send({ token, userId: createdUserId });
         });

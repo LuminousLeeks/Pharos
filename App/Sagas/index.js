@@ -59,6 +59,7 @@ export const loginPostRequest = (username, password) => {
 //helper function for signup POST
 export const signupPostRequest = (username, password, userInfo) => {
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
+  console.log('userInfo', userInfo);
   const firstName = userInfo.firstName;
   const lastName = userInfo.lastName;
   const email = userInfo.email;
@@ -75,13 +76,19 @@ function* login() {
     const res = yield call(loginPostRequest, username, password, position)
     const token = res.body.token;
     const userId = res.body.userId;
-    yield put(loginSuccess(username, token, userId))
+    yield put(loginSuccess(username, token, userId, position))
 }
 
 function* signup() {
     const { username, password, userInfo } = yield take('SIGNUP_REQUEST')
-    const res = yield call(signupPostRequest, username, password, userInfo)
-    yield put(loginSuccess( username, res.body.token))
+    const {position, region} = yield call(getPositionFromNavigator);
+    yield put(updatePosition(position));
+    yield put(updateRegion(region));
+    const res = yield call(signupPostRequest, username, password, userInfo);
+    const token = res.body.token;
+    const userId = res.body.userId;
+    console.log('userId');
+    yield put(loginSuccess( username, token, userId, position));
 }
 // --------------------Socket Events-------------------------
 // ----------------------------------------------------------
@@ -111,9 +118,9 @@ function connectSocket(token, userId) {
   });
 }
 
-function getNotifications(socket, userId) {
+function getNotifications(socket, userId, location) {
   return new Promise((resolve, reject) => {
-    socket.emit('getNotifications', userId, (events) => {
+    socket.emit('getNotifications', userId, location, (events) => {
       resolve(events);
     });
   });
@@ -121,8 +128,8 @@ function getNotifications(socket, userId) {
 
 function* fetchEvents(socket) {
   while (true) {
-    const { token } = yield take('FETCH_EVENTS');
-    const events = yield call(getNotifications, socket, token);
+    const { token, userId, location } = yield take('FETCH_EVENTS');
+    const events = yield call(getNotifications, socket, userId, location);
     yield put(loadEvents(events));
   }
 }
@@ -157,9 +164,11 @@ function* handleIO(socket) {
 // ---------Define flow of socket
 function* flow() {
   while (true) {
-    let { token, userId } = yield take('SUCCESS');
+    let { token, userId, location } = yield take('SUCCESS');
     const socket = yield call(connectSocket, token, userId);
-    const events = yield call(getNotifications, socket, userId);
+    console.log('RRRRRRR', userId, location)
+    const events = yield call(getNotifications, socket, userId, location);
+    console.log(')))))))))', events)
     yield put(loadEvents(events));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);

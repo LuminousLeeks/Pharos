@@ -35,10 +35,11 @@ export const updateEvent = events => ({
   type: 'UPDATE_EVENTS',
   events,
 });
-export const fetchEvents = (token, userLocation) => ({
+export const fetchEvents = (token, location, userId) => ({
   type: 'FETCH_EVENTS',
   token,
-  userLocation,
+  location,
+  userId,
 });
 export const fetchUserInfo = (username, token, firstName, lastName) => ({
   type: 'FETCH_USER_INFO',
@@ -83,12 +84,13 @@ export const request = () => ({
   type: 'REQUEST',
 });
 
-export const loginSuccess = (username, token, userId) => {
+export const loginSuccess = (username, token, userId, location) => {
   return {
     type: 'SUCCESS',
     username,
     token,
-    userId
+    userId,
+    location
   };
 };
 
@@ -103,7 +105,7 @@ export const loginRequest = (username, password) => ({
   password,
 });
 
-export const registerRequest = ((username, password, userInfo) => ({
+export const registerRequest = (username, password, userInfo) => ({
   type: 'SIGNUP_REQUEST',
   username,
   password,
