@@ -18,7 +18,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(
   thunkMiddleware,
-  // loggerMiddleware, 
+  loggerMiddleware, 
   sagaMiddleware
 ));
 sagaMiddleware.run(saga);

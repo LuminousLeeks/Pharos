@@ -8,6 +8,7 @@ const Category = db.define('category', {
     singular: 'category',
     plural: 'categories',
   },
+  timestamps: false,
 });
 
 module.exports = Category;

@@ -21,8 +21,8 @@ archieveDb.authenticate().then(() =>
     });
   }).then((notifications) => {
     if (notifications.length) {
-      const toArchieve = notifications.map(({ category, voteCount, userId, title, description, location }) => ({
-        category, voteCount, userId, title, description, location,
+      const toArchieve = notifications.map(({ categoryId, voteCount, userId, title, description, location }) => ({
+        categoryId, voteCount, userId, title, description, location,
       }));
       ArchiveNotification.bulkCreate(toArchieve);
       notifications.forEach(notification => notification.destroy());

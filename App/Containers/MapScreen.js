@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
   watchID: state.watchID,
   token: state.token,
   userName: state.userName,
+  userId: state.userId,
   currentLocation: state.currentLocation,
 });
 
@@ -37,8 +38,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       // TODO: remove this for production
       // , {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     ),
-  retrieveMapMarkers: (token, userLocation) => {
-    dispatch(fetchEvents(token, userLocation));
+  retrieveMapMarkers: (userId, userLocation) => {
+    dispatch(fetchEvents(userId, userLocation));
   },
   saveWatchID: (watchID) => {
     dispatch(saveWatchID(watchID));

@@ -76,7 +76,7 @@ class RadialMenuComponent extends React.Component {
 RadialMenuComponent.propTypes = {
   userName: PropTypes.string,
   region: PropTypes.object,
-  userId: PropTypes.string,
+  userId: PropTypes.number,
 };
 
 const mapStateToProps = state => ({

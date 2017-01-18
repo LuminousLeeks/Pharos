@@ -1,10 +1,8 @@
 // const socketioJwt = require('socketio-jwt');
-const exampleData = require('./../../../data/exampleData.js');
+// const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 const rooms = [];
 const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
-
-const Promise = require('bluebird');
 
 module.exports = (io) => {
   socketAuth(io, (socket) => {
@@ -24,12 +22,16 @@ module.exports = (io) => {
       socket.join(roomName);
       rooms.push(roomName);
 
-      socket.on('getNotifications', (userID, location, callback) => {
-        getNotifications(userID, location)
-        .then((notifications) => {
-          callback(notifications);
-        });
+      socket.on('getNotifications', (userID, callback) => {
+        // TODO:
+        // location is stubbed here
+        // check what user id is.
+        getNotifications(userID, { latitude: 37.77493, longitude: -122.419416 })
+          .then((notifications) => {
+            callback(notifications);
+          });
       });
+
 
       socket.on('reportNotification', (notification) => {
         // server finds room names

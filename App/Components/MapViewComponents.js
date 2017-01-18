@@ -23,7 +23,7 @@ export default class MapViewComponents extends Component {
 
   onRegionChange(region) {
     this.props.updateRegion(region);
-    this.props.retrieveMapMarkers(this.props.token, this.props.currentLocation);
+    this.props.retrieveMapMarkers(this.props.userId, this.props.currentLocation);
   }
 
   componentWillUnmount() {
@@ -54,16 +54,16 @@ export default class MapViewComponents extends Component {
           </MapView.Marker>
 
           {this.props.events
-            .map(event => ({
+            .map(event => { return {
               event,
-              Icon: EventCategories[event.category].icon,
-            }))
+              Icon: EventCategories[event.categoryId].icon,
+            }})
             .map((EventObj, index) => (
               <MapView.Marker
                 key={index}
                 coordinate={{
-                  latitude: EventObj.event.latitude,
-                  longitude: EventObj.event.longitude,
+                  latitude: EventObj.event.location.coordinates[0],
+                  longitude: EventObj.event.location.coordinates[1],
                 }}
                 event={EventObj.event}
               >
