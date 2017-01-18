@@ -1,4 +1,5 @@
 const faker = require('faker');
+// const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const db = require('../db/db.js');
 const User = require('../models/User.js');
@@ -23,21 +24,21 @@ const latitude2 = 37.791608;
 const longitude2 = -122.391129;
 
 
-const users = [];
-const notifications = [];
-const votes = [];
-const categories = [];
-const subscriptions = [];
-const categoryTypes = ['crime', 'waitTime', 'hazard', 'publicEvent'];
+let users = [];
+let notifications = [];
+let votes = [];
+let categories = [];
+let subscriptions = [];
+let categoryTypes = ['crime', 'waitTime', 'hazard', 'publicEvent'];
 
 // random generator helpers:
 const generateCategoryId = function generateCategory() {
   // const categoryEnum = ['crime', 'waitTime', 'hazard', 'publicEvent'];
-  return Math.floor(Math.random() * 4);
+  return Math.floor(Math.random() * 4) + 1; //should be 1 -4
 };
 
 const generateRandomId = function generateRandomId(range) {
-  return Math.floor(Math.random() * range);
+  return Math.floor(Math.random() * range) + 1; // starts from 1
 };
 
 const generateRandomPast = function generateRandomPast() {
@@ -109,25 +110,31 @@ for (let i = 0; i < notificationNumber; i++) {
   });
 };
 
-for (let i = 0; i < userNumber; i++) {
-  let randomUserId = generateRandomId(userNumber);
+for (let i = 1; i < users.length; i++) {
   let randomCategoryId = generateCategoryId();
   subscriptions.push({
-    userId: randomUserId,
+    userId: i,
+    categoryId: randomCategoryId,
+  });
+  (randomCategoryId > 1) ? randomCategoryId -= 1 : randomCategoryId += 1;
+  subscriptions.push({
+    userId: i,
     categoryId: randomCategoryId,
   });
 }
 
-for (let i = 0; i < voteNumber; i++) {
-  let type = faker.random.boolean();
-  let userId = generateRandomId(userNumber);
-  let notificationId = generateRandomId(notificationNumber);
-  votes.push({
-    type,
-    userId,
-    notificationId,
-  });
-}
+// for (let i = 0; i < notificationNumber; i++) {
+//   let type = faker.random.boolean();
+//   let userId = generateRandomId(userNumber);
+//   let notificationId = generateRandomId(notificationNumber);
+//   votes.push({
+//     type,
+//     userId,
+//     notificationId,
+//   });
+// }
+
+// console.log(notifications.map(n => n.location.coordinates));
 
 // Load all to the database:
 
@@ -138,15 +145,15 @@ db.sync({ force: true })
 .then(function() {
   return User.bulkCreate(users);
 })
-.then(function(){
-  return overriddenBulkCreate(Notification, notifications); //to override updatedAt
-})
 .then(function() {
   return Subscription.bulkCreate(subscriptions);
 })
-.then(function() {
-  return Vote.bulkCreate(votes);
+.then(function(){
+  return overriddenBulkCreate(Notification, notifications); //to override updatedAt
 })
+// .then(function() {
+//   return Vote.bulkCreate(votes);
+// })
 .catch(function(error) {
   throw error;
 });

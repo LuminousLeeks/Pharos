@@ -39,8 +39,14 @@ const queryNotifications = (userId, location, category, radius) => {
 //   + " where " + "notifications.category=" + userId + ")"
 //   + " AND " + "notifications.category=" + "'" + category + "'"
 //   + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," + radius + ")"
-// };
+// }
 
+// accept geoJson format
+const coordinateTransform = function coordinateTransform(location) {
+  const coords = location.coordinates;
+  coords[1] = (coords[1] + 180) * (-1);
+  return { type: 'Point', coordinates: coords };
+};
 
 const stdWithinquery = function stdWithinquery(table, geoCol, lat, lng, radius) {
   // postgres query:
@@ -69,7 +75,11 @@ const getNotifications = function getNotifications(userId, location, category, r
     db.query(queryNotifications(userId, location, category, radius),
       { type: db.QueryTypes.SELECT, model: Notification })
         .then((results) => {
-          resolve(results.map(result => result.dataValues));
+          resolve(results.map((result) => {
+            const notification = result.dataValues;
+            notification.location = coordinateTransform(notification.location);
+            return notification;
+          }));
         }).catch(reject);
   });
 };
@@ -99,7 +109,9 @@ const insertUser = function insertUser(user, settings) {
         },
       }).then(categories => user.setCategories(categories))
         .catch(reject);
-    }).then(resolve).catch(reject);
+    }).then((subs) => { // resolves into subscriptions
+      resolve(subs[0][0].userId);
+    }).catch(reject);
   });
 };
 
@@ -165,7 +177,7 @@ const updateUser = function updateUser(userId, settings) {
             in: subscriptions,
           },
         },
-      }).then(categories => {
+      }).then((categories) => {
         user.setCategories(categories);
         resolve(user);
       })
@@ -186,6 +198,7 @@ const initializeDb = function initializeDb() {
 
 module.exports = {
   initializeDb,
+  coordinateTransform,
   queryNotifications,
   stdWithinquery,
   insertVote,
