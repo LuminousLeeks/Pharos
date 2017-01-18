@@ -11,6 +11,7 @@ import {
   loadNotifications,
   updateRegion,
   updatePosition,
+  updateUserInfo,
   saveUserInfo,
 } from '../Actions'
 
@@ -160,11 +161,30 @@ function getUserInfo(socket, userId) {
 
 function* fetchUserInfo(socket) {
   while (true) {
-    const { userId } = yield take('FETCH_USER_INFO');
+    const { userId } = yield take('LOAD_USER_INFO');
     const userInfo = yield call(getUserInfo, socket, userId);
     yield put(saveUserInfo(userInfo));
   }
 }
+
+function updateUser(socket, userId) {
+  return new Promise((resolve, reject) => {
+    socket.emit('updateUser', userId, (userInfo) => {
+      console.log('socket in saga -----------------');
+      console.log('changing', userInfo);
+      resolve(userInfo);
+    })
+  })
+}
+
+function* updateUserData(socket) {
+  while (true) {
+    const { userId } = yield take('UPDATE_USER_INFO');
+    const userInfo = yield call(updateUser, socket, userId);
+    yield put(saveUserInfo(userInfo));
+  }
+}
+
 // ---------Send event data to socket
 function* reportEvent(socket) {
   while (true) {
@@ -234,6 +254,7 @@ function* handleIO(socket) {
   yield fork(reportNotification, socket);
   yield fork(voteNotification, socket);
   yield fork(fetchUserInfo, socket);
+  yield fork(updateUserData, socket);
 }
 
 // ---------Define flow of socket

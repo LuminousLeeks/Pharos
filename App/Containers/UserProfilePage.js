@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UserProfile from '../Components/UserProfile';
-import { fetchUserInfo } from '../Actions';
+import { loadUserInfo } from '../Actions';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // NOTE: this is the standard format
@@ -18,14 +18,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 
-  fetchUserInfo: (userId) => {
-    dispatch(fetchUserInfo(userId));
+  loadLoggedInUser: (userId) => {
+    dispatch(loadUserInfo(userId));
   },
   // updateUserInfo: () => {
   //   dispatch(updateUserInfo());
   // },
 });
 
-export default UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
-
+const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default UserProfilePage;
 // export default UserProfilePage;

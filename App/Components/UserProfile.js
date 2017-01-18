@@ -1,11 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  }
-  from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Container, Content, List, ListItem } from 'native-base';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 // import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,20 +8,13 @@ import Styles from './Styles/UserProfileStyle';
 
 
 class UserProfile extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   componentWillMount() {
-    console.log('componentWillMount');
-    // console.log(type)
-    // this.props.fetchUserInfo(this.props.userId);
-    console.log('in componentWillMount');
-    console.log(typeof this);
+    const context = this;
+    this.props.loadLoggedInUser(context.props.userId);
   }
   sendToUpdatePage() {
     NavigationActions.updateProfilePage();
-    // this.props.updateUserInfo();
   }
   render() {
     return (
@@ -37,7 +24,7 @@ class UserProfile extends Component {
             <List>
               <ListItem>
                 <Text>Username
-                  <Text>{this.props.username}</Text>
+                  <Text>{this.props.userInfo.username}</Text>
                 </Text>
               </ListItem>
               <ListItem>
@@ -69,9 +56,9 @@ UserProfile.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
-  // updateUserInfo: PropTypes.func,
+  loadLoggedInUser: PropTypes.func,
   // fetchUserInfo: PropTypes.func,
-  userInfo: PropTypes.Object,
+  userInfo: PropTypes.object,
 };
 
 export default UserProfile;

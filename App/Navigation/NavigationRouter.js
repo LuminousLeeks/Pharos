@@ -53,7 +53,6 @@ class NavigationRouter extends Component {
               title="Sign-Up"
             />
             <Scene
-<<<<<<< HEAD
               // // initial
               // key="categoriesList"
               // component={CategoriesList}
@@ -63,17 +62,18 @@ class NavigationRouter extends Component {
               key='reportNotificationScreen'
               component={ReportNotificationScreen}
               title='Report Notification'
-=======
-              key="reportEventScreen"
-              component={ReportEventScreen}
-              title='Report Event'
->>>>>>> fixed undefined styles
             />
             <Scene
               // initial
               key="userProfilePage"
               component={UserProfilePage}
               title="User Profile"
+            />
+            <Scene
+              // initial
+              key="updateProfilePage"
+              component={UpdateProfilePage}
+              title="Update Profile"
             />
           </Scene>
         </Scene>

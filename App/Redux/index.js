@@ -86,11 +86,16 @@ const rootReducer = (state = initialState, action) => {
         // userInterests: action.userInterests, // TODO: Decide on naming conventions
         userInfo: action.userInfo,
       };
-    case 'UPDATE_USER_INFO':
-      return {
-        ...state,
-        userId: action.userId,
-      };
+    // case 'UPDATE_USER_INFO':
+    //   return {
+    //     ...state,
+    //     userId: action.userId,
+    //     userInfo: action.userInfo,
+    //     // username: action.username,
+    //     // firstName: action.firstName,
+    //     // lastName: action.lastName,
+    //     // email: action.email,
+    //   };
     case 'SAVE_USER_INFO':
       console.log('in reducer -----------------');
       console.log(action.userInfo);

@@ -1,23 +1,12 @@
 import React from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Keyboard,
-  LayoutAnimation,
-  Button,
-  }
-  from 'react-native';
-import { Container, Content, List, ListItem, InputGroup, Input, Icon } from 'native-base';
+import {View, ScrollView, Image, Text, TextInput, TouchableOpacity, Keyboard,LayoutAnimation, Button, } from 'react-native';
+import { Container, Content, List, ListItem, InputGroup, Input, Icon} from 'native-base';
 
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 //Actions
-import { registerRequest } from '../Actions/index.js';
+import { loadUserInfo, updateUserInfo  } from '../Actions/index.js';
 
 // Styles
 import { Colors, Images, Metrics } from '../Themes';
@@ -27,12 +16,20 @@ class UpdateProfilePage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userId: '',
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      //password
+      visibleHeight: Metrics.screenHeight,
+    };
   }
 
   componentWillMount () {
-    // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
-    // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
+    this.props.loadCurrentUserInfo(this.props.userId);
+
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
   }
@@ -43,7 +40,6 @@ class UpdateProfilePage extends React.Component {
   }
 
   keyboardDidShow = (e) => {
-    // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     let newSize = Metrics.screenHeight - e.endCoordinates.height
     this.setState({
@@ -52,47 +48,85 @@ class UpdateProfilePage extends React.Component {
   }
 
   keyboardDidHide = (e) => {
-    // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({
       visibleHeight: Metrics.screenHeight,
     })
   }
-  onValueChange(e) {
+  //
+  // handleUpdateUsername(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     username: e.target.value,
+  //   });
+  // }
+  handleUpdateFirstName(e) {
+    e.preventDefault();
     this.setState({
-      selected1: e.target.value,
+      firstName: e.target.value,
     });
   }
-  // handleUpdateUsername(e) {
-
+  handleUpdateLastName(e) {
+    e.preventDefault();
+    this.setState({
+      lastName: e.target.value,
+    });
+  }
+  handleUpdateEmail(e) {
+    e.preventDefault();
+    this.setState({
+      email: e.target.value,
+    });
+  }
+  // handleUpdatePassword(e) {
+  //   this.setState({
+  //     password: e.target.value,
+  //   });
   // }
-  // handleUpdateFirstName(e) {
+  handleSubmit = () => {
+    // e.preventDefault();
+    const context = this;
 
-  // }
-  // handleUpdateUsername(e) {
+    const userInfo = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email
+    }
 
-  // }
-  // handleUpdateUsername(e) {
+    console.log(userInfo, this.state.userId, context.state.userId, 'handle Submit');
 
-  // }
-  handlePressUpdate = () => {
-    const { username, firstName, lastName, email } = this.state;
-    this.isAttempting = true;
-    this.props.attempt(username, password);
+    this.props.updateUserInfo(context.state.userId, userInfo);
+
+    NavigationActions.UserProfile();
   }
   render() {
+    const { firstName, lastName, email} = this.state;
     return (
       <ScrollView style={Styles.container}>
         <Container>
           <Content>
             <List>
               <ListItem>
+              <Text>Update Profile Below</Text>
+              </ListItem>
+              <ListItem>
                 <InputGroup>
                   <Icon
                     name="ios-person"
-                    style={{color: Colors.panther }}
+                    style={{ color: Colors.panther }}
                   />
-                  <Input inlineLabel label="Username" placeholder="Update Username" value=""/>
+                  <Input inlineLabel
+                    label="First Name"
+                    ref="firstName"
+                    placeholder="Update First Name"
+                    value={firstName}
+                    keyboardType='default'
+                    returnKeyType='next'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    underlineColorAndroid='transparent'
+                    onChange={this.handleUpdateFirstName.bind(this)}
+                  />
                 </InputGroup>
               </ListItem>
               <ListItem>
@@ -101,33 +135,37 @@ class UpdateProfilePage extends React.Component {
                     name="ios-person"
                     style={{ color: Colors.panther }}
                   />
-                  <Input
-                  inlineLabel
-                  label="First Name"
-                  placeholder="Update First Name"
-                  value=""/>
+                  <Input inlineLabel
+                    label="Last Name"
+                    ref="lastName"
+                    placeholder="Update Last Name"
+                    value={lastName}
+                    keyboardType='default'
+                    returnKeyType='next'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    underlineColorAndroid='transparent'
+                    onChange={this.handleUpdateLastName.bind(this)}
+                  />
                 </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
-                  <Icon
-                    name="ios-person"
+                  <Icon name="ios-person"
                     style={{ color: Colors.panther }}
                   />
-                  <Input
-                  inlineLabel
-                  label="Last Name"
-                  placeholder="Enter Last Name"
-                  value=""/>
-                </InputGroup>
-              </ListItem>
-              <ListItem>
-                <InputGroup>
-                  <Icon
-                    name=""
-                    style={{ color: Colors.panther }}
+                  <Input inlineLabel
+                    ref="email"
+                    label="Email"
+                    placeholder="Update Email"
+                    value={email}
+                    keyboardType='email-address'
+                    returnKeyType='next'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    underlineColorAndroid='transparent'
+                    onChange={this.handleUpdateEmail.bind(this)}
                   />
-                  <Input placeholder="Update Email" />
                 </InputGroup>
               </ListItem>
               <ListItem>
@@ -137,6 +175,7 @@ class UpdateProfilePage extends React.Component {
                     style={{ color: Colors.panther }}
                   />
                   <Input
+                    ref="password"
                     inputSuccessBorderColor={Colors.facebook}
                     placeholder="Update Password"
                     secureTextEntry
@@ -144,9 +183,11 @@ class UpdateProfilePage extends React.Component {
                 </InputGroup>
               </ListItem>
             </List>
-            <TouchableOpacity style={Styles.updateButtonWrapper} onPress={ this.handlePressUpdate }>
+            <TouchableOpacity
+              onSubmit={() => {this.handleSubmit}}
+            >
               <View style={Styles.updateButton}>
-                <Text style={Styles.updateText}>Submit and Update</Text>
+                <Text style={Styles.updateText}>Submit and Save</Text>
               </View>
             </TouchableOpacity>
           </Content>
@@ -155,17 +196,27 @@ class UpdateProfilePage extends React.Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
+    console.log(state)
   return {
+    userId: state.userId,
+    username: state.username,
+    firstName: state.firstName,
+    lastName: state.lastName,
+    email: state.email,
+    visibleHeight: Metrics.screenHeight,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    loadCurrentUserInfo: (userId) => {
+      dispatch(loadUserInfo(userId))
+    },
+    updateUserInfo: (userId) => {
+      dispatch(updateUserInfo(userId, userInfo))
+    }
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfilePage);
