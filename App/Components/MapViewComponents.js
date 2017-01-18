@@ -9,7 +9,6 @@ import RadialMenu from '../Containers/RadialMenu';
 import MapCalloutContainer from '../Containers/MapCalloutContainer';
 import NotificationCategories from '../Lib/NotificationCategories';
 // import MapCalloutContainer from '../Containers/MapCalloutContainer';
-import EventCategories from '../Lib/EventCategories';
 import NotificationScreen from '../Containers/NotificationScreen';
 
 
