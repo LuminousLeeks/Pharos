@@ -2,7 +2,8 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text } from 'react-native';
 import MapView from 'react-native-maps';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { Metrics } from '../Themes';
 import Styles from './Styles/MapViewComponentsStyle';
 import RadialMenu from '../Containers/RadialMenu';
@@ -10,6 +11,8 @@ import MapCalloutContainer from '../Containers/MapCalloutContainer';
 import NotificationCategories from '../Lib/NotificationCategories';
 // import MapCalloutContainer from '../Containers/MapCalloutContainer';
 import NotificationScreen from '../Containers/NotificationScreen';
+import SnackBar from './SnackbarDialog_npm';
+
 
 
 
@@ -36,14 +39,28 @@ export default class MapViewComponents extends Component {
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
-  handlePressIcon(event) {
+  handlePressIcon(notification, Icon) {
     console.log('clicked----------------')
-    console.log(event);
-    console.log(this.props.events);
-    this.setState({
-      openSwiper: true,
-      displayedEvent: event,
-    })
+    console.log(notification);
+    const descriptions = (
+        <Icon size={Metrics.icons.medium} />
+    );
+
+    const upvoteIcon = (
+      <FontAwesomeIcon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
+    )
+    // console.log(this.props.events);
+    SnackBar.show(descriptions, {
+      confirmText: upvoteIcon,
+      onConfirm: () => {
+        console.log('Thank you')
+        SnackBar.dismiss()
+      }
+    })    
+    // this.setState({
+    //   openSwiper: true,
+    //   displayedEvent: event,
+    // })
   }
 
   render() {
@@ -79,7 +96,7 @@ export default class MapViewComponents extends Component {
               longitude: this.props.region.longitude,
             }}
           >
-            <Icon
+            <FontAwesomeIcon
               name="map-pin"
               size={Metrics.icons.small}
               color={'blue'}
@@ -98,12 +115,14 @@ export default class MapViewComponents extends Component {
                   latitude: NotificationObj.notification.location.coordinates[0],
                   longitude: NotificationObj.notification.location.coordinates[1],
                 }}
-                event={EventObj.event}
+                event={NotificationObj.notification}
                 style={Styles.marker}
-                onPress={() => this.handlePressIcon(EventObj.event)}
+                onPress={() => {
+                  this.handlePressIcon(NotificationObj.notification, NotificationObj.Icon)
+                }}
               >
                 <View color="#4F8EF7" syle={Styles.icon} >
-                  <EventObj.Icon size={Metrics.icons.small} />
+                  <NotificationObj.Icon size={Metrics.icons.small} />
                 </View>
               </MapView.Marker>
             ))
@@ -113,11 +132,7 @@ export default class MapViewComponents extends Component {
           socket={this.props.socket}
           region={this.props.region}
           userId={this.props.userId}
-          />
-        {this.state.openSwiper ? 
-          (<NotificationScreen 
-            event={this.state.displayedEvent}
-          />) : null}
+        />
       </View>
     );
   }
@@ -125,7 +140,7 @@ export default class MapViewComponents extends Component {
 
 MapViewComponents.propTypes = {
   region: PropTypes.object,
-  updateRegion: PropTypes.function,
+  updateRegion: PropTypes.func,
 };
 
 /*

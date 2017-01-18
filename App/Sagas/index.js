@@ -83,7 +83,9 @@ function* login() {
     if (! res.body.err) {
       const token = res.body.token;
       const userId = res.body.userId;
-      yield put(loginSuccess(username, token, userId))
+      console.log('position in Sage *login --------------');
+      console.log(position);
+      yield put(loginSuccess(username, token, userId, position.coords));
     } else {
       console.log('login error, response is-----');
       console.log(res.body.err);
@@ -181,6 +183,8 @@ function* handleIO(socket) {
 function* flow() {
   while (true) {
     let { token, userId, location } = yield take('SUCCESS');
+    console.log('Location ----------inside saga flow');
+    console.log(location);
     const socket = yield call(connectSocket, token, userId);
     console.log('RRRRRRR', userId, location)
     const notifications = yield call(getNotifications, socket, userId, location);
