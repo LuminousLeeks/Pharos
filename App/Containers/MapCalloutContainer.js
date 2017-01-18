@@ -10,24 +10,25 @@ import { sendVoteToState, sendVoteToServer } from '../Actions/index.js'
 const mapStateToProps = (state, ownProps) => ({
   notification: ownProps.notification,
 
-  userName: state.userName,
+  username: state.username,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   handleThumbsUpIsPressed: () => {
-    const votedNotification = {
-      ...ownProps.notification,
-      voteCount: ownProps.notification.voteCount + 1,
-      votable: false,
-    };
+    // const votedEvent = {
+    //   ...ownProps.event,
+    //   voteCount: ownProps.event.voteCount + 1,
+    //   votable: false,
+    // };
 
-    const notifications = ownProps.notifications;
-    notifications.forEach((notification, index, array) => {
-      if (notification.notificationId === votedNotification.notificationId) {
-        array.splice(index, 1, votedNotification);
-      }
-    });
-    const updateNotificationsArray = notifications;
+    // const events = ownProps.events;
+    // events.forEach((event, index, array) => {
+    //   if (event.eventId === votedEvent.eventId) {
+    //     array.splice(index, 1, votedEvent);
+    //   }
+    // });
+    // const updateEventsArray = events;
+
 
     // dispatch(sendVoteToState(updateNotificationsArray));
     dispatch(sendVoteToServer({
@@ -37,20 +38,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }));
   },
   handleThumbsDownIsPressed: () => {
-    const votedNotification = {
-      ...ownProps.notification,
-      voteCount: ownProps.notification.voteCount - 1,
-      votable: false,
-    };
-
-    const notifications = ownProps.notifications;
-    notifications.forEach((notification, index, array) => {
-      if (notification.notificationId === votedNotification.notificationId) {
-        array.splice(index, 1, votedNotification);
-      }
-    });
-    const updatedNotificationsArray = notifications;
-
     // dispatch(sendVoteToState(updatedNotificationsArray));
     dispatch(sendVoteToServer({
       userName: ownProps.userName,

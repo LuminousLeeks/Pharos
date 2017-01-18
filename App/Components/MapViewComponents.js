@@ -8,24 +8,18 @@ import Styles from './Styles/MapViewComponentsStyle';
 import RadialMenu from '../Containers/RadialMenu';
 import MapCalloutContainer from '../Containers/MapCalloutContainer';
 import NotificationCategories from '../Lib/NotificationCategories';
+// import MapCalloutContainer from '../Containers/MapCalloutContainer';
+import EventCategories from '../Lib/EventCategories';
+import NotificationScreen from '../Containers/NotificationScreen';
 
 
-<<<<<<< HEAD
-// const Mapviews = ({ notifications, socket, loadNotifications, updateNotifications }) => {
-=======
-// const Mapviews = ({ events, socket, loadEvents, updateEvents }) => {
-const DeckSwiper = () => (
-  <View>
-    <Text> Test </Text>
-  </View>
-) 
 
->>>>>>> implement conditional rendering
 export default class MapViewComponents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSwiper: false
+      openSwiper: false,
+      displayedEvent: {} 
     }
   }
 
@@ -43,24 +37,34 @@ export default class MapViewComponents extends Component {
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
-  handlePressIcon() {
+  handlePressIcon(event) {
     console.log('clicked----------------')
+    console.log(event);
+    console.log(this.props.events);
     this.setState({
       openSwiper: true,
+      displayedEvent: event,
     })
   }
 
   render() {
-    let swiper = null;
-    if (this.state.openSwiper) {
-      swiper = DeckSwiper();
-      // swiper = (
-      //   <View>
-      //     <Text> Test </Text>
-      //   </View>        
-      // );
-      // console.log(swiper);
-    } 
+    // let swiper = null;
+    // if (this.state.openSwiper) {
+    //   console.log(this.state.displayedEvent);
+    //   console.log(this.props.events);
+    //   swiper = (<MapCalloutContainer 
+    //     event={this.state.displayedEvent}
+    //     events={this.props.events}
+    //     userName={this.props.userName}
+    //     socket={this.props.socket}
+    //   />);
+    //   // console.log(swiper);
+    // } 
+    // let test = (
+    //   <View>
+    //     <Text> Test </Text>
+    //   </View>        
+    // );
     return (
       <View style={Styles.container}>
         <MapView
@@ -95,29 +99,13 @@ export default class MapViewComponents extends Component {
                   latitude: NotificationObj.notification.location.coordinates[0],
                   longitude: NotificationObj.notification.location.coordinates[1],
                 }}
-<<<<<<< HEAD
-                notification={NotificationObj.notification}
-              >
-                <View color="#4F8EF7" >
-                  <NotificationObj.Icon size={Metrics.icons.small} />
-                </View>
-                <MapView.Callout style={Styles.callout} >
-                  <MapCalloutContainer
-                    notification={NotificationObj.notification}
-                    notifications={this.props.notifications}
-                    userName={this.props.userName}
-                    socket={this.props.socket}
-                  />
-                </MapView.Callout>
-=======
                 event={EventObj.event}
                 style={Styles.marker}
-                onPress={this.handlePressIcon.bind(this)}
+                onPress={() => this.handlePressIcon(EventObj.event)}
               >
                 <View color="#4F8EF7" syle={Styles.icon} >
                   <EventObj.Icon size={Metrics.icons.small} />
                 </View>
->>>>>>> implement conditional rendering
               </MapView.Marker>
             ))
           }
@@ -127,7 +115,10 @@ export default class MapViewComponents extends Component {
           region={this.props.region}
           userId={this.props.userId}
           />
-        {swiper}
+        {this.state.openSwiper ? 
+          (<NotificationScreen 
+            event={this.state.displayedEvent}
+          />) : null}
       </View>
     );
   }
