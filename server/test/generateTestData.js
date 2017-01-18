@@ -29,11 +29,11 @@ let notifications = [];
 let votes = [];
 let categories = [];
 let subscriptions = [];
-let categoryTypes = ['crime', 'waitTime', 'hazard', 'publicNotification'];
+let categoryTypes = ['crime', 'waitTime', 'hazard', 'publicEvent'];
 
 // random generator helpers:
 const generateCategoryId = function generateCategory() {
-  // const categoryEnum = ['crime', 'waitTime', 'hazard', 'publicNotification'];
+  // const categoryEnum = ['crime', 'waitTime', 'hazard', 'publicEvent'];
   return Math.floor(Math.random() * 4) + 1; //should be 1 -4
 };
 

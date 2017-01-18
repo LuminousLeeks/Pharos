@@ -21,7 +21,7 @@ var data = {
   }, {
     name: 'waitTime',
   }, {
-    name: 'publicNotification',
+    name: 'publicEvent',
   }],
   notifications: [{
     title: '1',
