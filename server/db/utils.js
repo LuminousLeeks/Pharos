@@ -26,21 +26,6 @@ const queryNotifications = (userId, location, category, radius) => {
   + "(select radius from users where id=" + userId + ")" + ")"
 };
 
-// get notifications where category is x and distance to the given location is y.
-
-// const queryNotifications = (userId, category, location, radius) => {
-//   const { latitude, longitude } = location;
-//   // table that contains geolocation column:
-//   const table = 'notifications';
-//   // geolocation column:
-//   const geoCol = 'location';
-
-//   return "SELECT id, title, description, location, \"voteCount\", category FROM " + table
-//   + " where " + "notifications.category=" + userId + ")"
-//   + " AND " + "notifications.category=" + "'" + category + "'"
-//   + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," + radius + ")"
-// }
-
 // accept geoJson format
 const coordinateTransform = function coordinateTransform(location) {
   const coords = location.coordinates;
@@ -67,7 +52,7 @@ const overriddenBulkCreate = function overriddenBulkCreate(model, entries) {
 
 // last two arguments are overload functions
 // userId: integer
-// category: 'enum'
+// categoryId: integer
 // location: { latitude (float), longitude (float) }
 // radius: float (meters) (ex: 100.0 is 100 meters)
 const getNotifications = function getNotifications(userId, location, category, radius) {
