@@ -14,21 +14,34 @@ class RadialMenuComponent extends React.Component {
     NavigationActions.reportNotificationScreen();
   }
 
-  handleSelect(notifications, description, key) {
+
+  handleSelect(events, description, key) {
+
+    // helper function to get category id
+    const getCategoryId = (categoryName) => {
+      for(let prop in EventCategories) {
+        if (EventCategories[prop].key === categoryName) {
+          return parseInt(prop, 10);
+        }
+      }
+      return 0; // throws error;
+    };
+
     Alert.alert(
       'Report notification category: ' + description,
       null,
-      notifications.map((notification) => {
+      notifications.map((title) => {
         return {
-          text: notification,
-          onPress: () => {
+          text: title,
+          onPress: () => { // TODO : add title to it
             const newNotification = {
               userName: this.props.userName,
               category: key,
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
-              userId: this.props.userId,
-              notification,
+              userId: this.props.userId,          
+              categoryId: getCategoryId(key),
+              title,
               description,
             };
             this.handleReport(newNotification);

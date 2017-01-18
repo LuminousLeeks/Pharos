@@ -26,7 +26,6 @@ module.exports = (io) => {
         // TODO:
         // location is stubbed here
         // check what user id is.
-        console.log("location!!!!!!!!!!!!", location)
         getNotifications(userID, location)
           .then((notifications) => {
             callback(notifications);
@@ -37,7 +36,8 @@ module.exports = (io) => {
       socket.on('reportNotification', (notification) => {
         // server finds room names
         // foreach  room name send notifications to client
-        console.log("new notification!!!!!!!!!!!!", notification)
+        console.log(notification, 'this is the notification from the client');
+
         insertNotification(notification)
         .then((userIds, newNotification) => {
           userIds.forEach((userId) => {

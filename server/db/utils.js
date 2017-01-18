@@ -87,7 +87,7 @@ const getNotifications = function getNotifications(userId, location, category, r
 // all inputs are string
 // expect subscriptions as an array of category ids.
 const insertUser = function insertUser(user, settings) {
-  const { username, firstName, lastName, password } = user;
+  const { username, firstName, lastName, password, email } = user;
   const { radius, subscriptions } = settings;
   const salt = bcrypt.genSaltSync(10);
   const passwordToStore = bcrypt.hashSync(password, salt);
@@ -99,6 +99,7 @@ const insertUser = function insertUser(user, settings) {
       password: passwordToStore,
       salt,
       radius,
+      email,
     })
     .then((user) => {
       return Category.findAll({
