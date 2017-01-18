@@ -8,7 +8,9 @@ const defaultState = {
   newNotification: {
     category: 'waitTime',
     description: 'Long wait time',
-    notification: 'evantA'
+    title: 'evantA',
+    location: { latitude: 37.78500, longitude: -122.41059 },
+    categoryId: 3,
   },
   notifications: [
     {
@@ -77,6 +79,11 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'REPORT_EVENT':
+      return {
+        ...state,
+        newNotification: action.newNotification,
+      };
+    case 'PARTIAL_REPORT':
       return {
         ...state,
         newNotification: action.newNotification,
