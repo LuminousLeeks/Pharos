@@ -143,32 +143,16 @@ describe('Database tests', function() {
     const settings = {
       radius: 1500,
       subscriptions: [1, 2, 3, 4],
+      email: 'aladin@gmail.com',
+      password: 'guess2',
     };
     const userId = 3;
     updateUser(userId, settings).then((user)=>{
-      expect(user.dataValues.radius).to.equal(radius);
+      expect(user.radius).to.equal(1500);
+      expect(user.password.length > settings.password.length).to.be.true;
       done();
     }).catch(done)
   }); 
-
-  xit('should be able to get notifications given the user id', function(done) {
-    // user 2 votes for notification 2 (in the dataset)
-    // from all the notifications that are returned it should not include notification #2 
-    // set up query parameters:
-    var userId = 2;
-    // Test for a tight range with category constraint:
-    getNotifications(userId, location, category, radTight).then(function (found) {
-      expect(found.map(item => item.title).includes('5')).to.be.true;
-      expect(found.length).to.equal(1);
-      done();
-    });
-  });
 });
 
-
-
-//   it('should be able to filter notifications based on votes and geolocation', function(done) {
-
-
-// });
 

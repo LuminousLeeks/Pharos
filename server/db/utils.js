@@ -89,18 +89,15 @@ const getNotifications = function getNotifications(userId, location, category, r
 const insertUser = function insertUser(user, settings) {
   const { username, firstName, lastName, password, email } = user;
   const { radius, subscriptions } = settings;
-  const salt = bcrypt.genSaltSync(10);
-  const passwordToStore = bcrypt.hashSync(password, salt);
   return new Promise((resolve, reject) => {
     User.create({
       username,
       firstName,
       lastName,
-      password: passwordToStore,
-      salt,
+      password,
       radius,
       email,
-    })
+    }, { individualHooks: true })
     .then((user) => {
       return Category.findAll({
         where: {
@@ -162,23 +159,30 @@ const insertVote = function insertVote(vote) {
   });
 };
 
-const updateUser = function updateUser(userId, settings) {
-  const { radius, subscriptions } = settings;
+const updateUser = function updateUser(userId, updates) {
   return new Promise((resolve, reject) => {
-    User.update({
-      radius,
-    }, { where: { id: userId }, returning: true }).then((results) => {
+    let enableHooks = true;
+    if (updates.password === undefined) {
+      enableHooks = false;
+    }
+    User.update(updates, {
+      where: { id: userId },
+      returning: true,
+      individualHooks: enableHooks,
+    })
+    .then((results) => {
       const user = results[1][0]; // postgres syntax
-      if (subscriptions.length === 0) {
-        return resolve(user);
+      if (updates.subscriptions === undefined) {
+        return resolve(user.dataValues);
       }
       return Category.findAll({
         where: {
           id: {
-            in: subscriptions,
+            in: updates.subscriptions,
           },
         },
-      }).then((categories) => {
+      })
+      .then((categories) => {
         user.setCategories(categories);
         resolve(user);
       })
@@ -188,7 +192,7 @@ const updateUser = function updateUser(userId, settings) {
 };
 
 const initializeDb = function initializeDb() {
-  Category.findAll({}).then(results => {
+  Category.findAll({}).then((results) => {
     if (!results.length) {
       const categoryTypes = ['hazard', 'crime', 'waitTime', 'publicEvent'];
       const categories = categoryTypes.map(c => ({ name: c }));

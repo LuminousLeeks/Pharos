@@ -45,15 +45,8 @@ module.exports = (io) => {
           });
         });
       });
-      // create user implementation dependent:
-      // socket.on('createUser', (userConfigurations, userId) => {
-      //   insertUser(user, userConfigurations)
-      //     .then(user => getNotifications(user.id)
-      //       .then(notifications => io.to(user.id)
-      //         .emit('getNotifications', (userId, callback) => callback(notifications))))
-      //       .catch(error => { throw error; });
-      // });
 
+      // userConfigurations should be an object with {email, firstName, subscriptions, lastName, password } etc.
       socket.on('setUserConfigurations', (userConfigurations, userId) => {
         updateUser(userId, userConfigurations);
       });
