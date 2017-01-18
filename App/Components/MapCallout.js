@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { Button } from 'native-base';
+import { Button, DeckSwiper } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView from 'react-native-maps'
 import Styles from './Styles/MapviewStyle';

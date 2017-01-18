@@ -48,8 +48,8 @@ class LoginScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: 'borat',
-      password: 'borat',
+      username: 'Ccc',
+      password: 'ccc',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
@@ -105,7 +105,8 @@ class LoginScreen extends React.Component {
   handlePressRegister = () => {
     const { username, password } = this.state;
     this.isAttempting = true;
-    this.props.attemptRegister(username, password);
+    NavigationActions.signUpPage();
+    // this.props.attemptRegister(username, password);
   }
 
   handleChangeUsername = (text) => {

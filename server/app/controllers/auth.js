@@ -33,17 +33,20 @@ module.exports.loginUser = (request, response) => {
     },
   })
   .then((returnedUser) => {
+    console.log("returnedUser");
+    console.log(returnedUser);
     if (returnedUser === null) {
-      response.status(400).json('User not found');
+      response.status(200).send({ err: 'User not found' });
     }
     if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
       response.status(200).send({ token, userId: returnedUser.id });
     } else {
-      response.status(400).send('Invalid Login');
+      response.status(200).send({ err: 'Invalid Login' });
     }
   })
   .catch((error) => {
-    response.status(500).send('An error occured', error);
+    console.log(error);
+    response.status(200).send({ err: 'An error occured', errMsg: error });
   });
 };
 

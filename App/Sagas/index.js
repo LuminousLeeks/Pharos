@@ -6,11 +6,6 @@ import { fork, take, call, put, cancel } from 'redux-saga/effects'
 import req from 'superagent'
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
-
-
-
-
-//actions triggered at the end async event
 import {
   loginSuccess,
   loadNotifications,
@@ -53,6 +48,13 @@ export const loginPostRequest = (username, password) => {
   const url = 'http://127.0.0.1:8099';
   return req.post(`${url}/api/auth/login`)
     .send({ username, password });
+  // return new Promise((resolve) => {
+  //   req.post(`${url}/api/auth/login`)
+  //   .send({ username, password })
+  //   .end(function(err, res){
+  //     resolve({res, err});
+  //   })
+  // })
 };
 
 
@@ -70,17 +72,25 @@ export const signupPostRequest = (username, password, userInfo) => {
 
 function* login() {
     const { username, password } = yield take('LOGIN_REQUEST')
-    const {position, region} = yield call(getPositionFromNavigator);
+    const { position, region } = yield call(getPositionFromNavigator);
     yield put(updatePosition(position));
     yield put(updateRegion(region));
-    const res = yield call(loginPostRequest, username, password, position)
-    const token = res.body.token;
-    const userId = res.body.userId;
-    const location = {
-      latitude: region.latitude,
-      longitude: region.longitude,
-    };
-    yield put(loginSuccess(username, token, userId, location))
+    const res = yield call(loginPostRequest, username, password, position);
+    // if (err) {
+    //   console.log('loginPostRequest and server failed failed');
+    //   console.log(err);
+    // } else {
+    if (! res.body.err) {
+      const token = res.body.token;
+      const userId = res.body.userId;
+      console.log('position in Sage *login --------------');
+      console.log(position);
+      yield put(loginSuccess(username, token, userId, position.coords));
+    } else {
+      console.log('login error, response is-----');
+      console.log(res.body.err);
+      yield fork(login);
+    }
 }
 
 function* signup() {
@@ -173,6 +183,8 @@ function* handleIO(socket) {
 function* flow() {
   while (true) {
     let { token, userId, location } = yield take('SUCCESS');
+    console.log('Location ----------inside saga flow');
+    console.log(location);
     const socket = yield call(connectSocket, token, userId);
     console.log('RRRRRRR', userId, location)
     const notifications = yield call(getNotifications, socket, userId, location);
