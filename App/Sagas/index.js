@@ -1,7 +1,7 @@
 
 /* eslint-disable */
 import io from 'socket.io-client'
-import { notificationChannel } from 'redux-saga'
+import { eventChannel } from 'redux-saga'
 import { fork, take, call, put, cancel } from 'redux-saga/effects'
 import req from 'superagent'
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -10,7 +10,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 
 
 
-//actions triggered at the end async notification
+//actions triggered at the end async event
 import {
   loginSuccess,
   loadNotifications,
@@ -97,7 +97,7 @@ function* signup() {
     };
     yield put(loginSuccess( username, token, userId, location));
 }
-// --------------------Socket Notifications-------------------------
+// --------------------Socket Evnets-------------------------
 // ----------------------------------------------------------
 
 // Connect Redux client to socket

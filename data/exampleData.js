@@ -24,7 +24,7 @@ const exampleNotifications = [
   {
     userId: 1,
     title: 'Location C',
-    category: 'publicNotification',
+    category: 'publicEvent',
     latitude:37.790000,
     longitude: -122.408000,
     voteCount: 25,
