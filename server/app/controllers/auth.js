@@ -36,7 +36,7 @@ module.exports.loginUser = (request, response) => {
     console.log("returnedUser");
     console.log(returnedUser);
     if (returnedUser === null) {
-      response.status(200).send('User not found');
+      response.status(200).send({ err: 'User not found' });
     }
     if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
       response.status(200).send({ token, userId: returnedUser.id });
