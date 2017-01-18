@@ -11,6 +11,7 @@ class UserProfile extends Component {
 
   componentWillMount() {
     const context = this;
+    // console.log(this.props.loadLoggedInUser, 'this sending to Actions');
     this.props.loadLoggedInUser(context.props.userId);
   }
   sendToUpdatePage() {
@@ -52,13 +53,13 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
-  userId: PropTypes.string,
+  userId: PropTypes.number,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
   loadLoggedInUser: PropTypes.func,
   // fetchUserInfo: PropTypes.func,
-  userInfo: PropTypes.object,
+  // userInfo: PropTypes.object,
 };
 
 export default UserProfile;

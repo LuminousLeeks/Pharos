@@ -1,9 +1,6 @@
 //  TODO: Uncomment when SSL set up
 // const https = require('https');
-
 require('dotenv').config();
-
-// require('dotenv').config();
 
 const port = require('./../env/index').PORT;
 const express = require('express');
@@ -48,6 +45,7 @@ module.exports.app = app;
 
 //  Prevent circular dependency by defining routes after exports
 const router = require('./routes/router');
+
 app.use('/api', router);
 
 //  TODO: Determine whether additional handling/rendering of static files is needed

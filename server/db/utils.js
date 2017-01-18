@@ -186,6 +186,16 @@ const initializeDb = function initializeDb() {
     }
   });
 };
+const getUserInfoFromDb = function getUserInfoFromD(userId) {
+  return new Promise((resolve, reject) => {
+    User.findAll({ where: { id: userId }, returning: true })
+      .then((results) => {
+        console.log(results, 'RESULTS IN DATABASE!!!!!!!!!!!!!!!!!!!!!')
+        resolve(results);
+      })
+      .catch(reject)
+  });
+};
 
 module.exports = {
   initializeDb,
@@ -198,4 +208,5 @@ module.exports = {
   getNotifications,
   overriddenBulkCreate,
   updateUser,
+  getUserInfoFromDb,
 };

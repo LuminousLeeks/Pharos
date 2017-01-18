@@ -1,9 +1,8 @@
-/* eslint-disable */
 // const socketioJwt = require('socketio-jwt');
 // const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 const rooms = [];
-const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
+const { getNotifications, insertNotification, updateUser, insertVote, getUserInfoFromDb } = require('../../db/utils.js');
 
 
 module.exports = (io) => {
@@ -59,11 +58,12 @@ module.exports = (io) => {
         });
       });
 
-      // userConfigurations should be an object with {email, firstName, subscriptions, lastName, password } etc.
+      socket.on('getUserInDb', (userId) => {
+        getUserInfoFromDb(userId)
+      });
       socket.on('setUserConfigurations', (userConfigurations, userId) => {
         updateUser(userId, userConfigurations);
       });
     });
-  });
   });
 }

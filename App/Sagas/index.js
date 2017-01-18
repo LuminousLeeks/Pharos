@@ -149,11 +149,11 @@ function* fetchNotifications(socket) {
     yield put(loadNotifications(notifications));
   }
 }
+
 function getUserInfo(socket, userId) {
   return new Promise((resolve, reject) => {
-    socket.emit('getUserInfo', userId, (userInfo) => {
-      console.log('socket in saga -----------------');
-      console.log(userInfo);
+    socket.emit('getUserInDb', userId, (userInfo) => {
+      console.log('socket in saga/////////////////////////////////////////////');
       resolve(userInfo);
     })
   })
@@ -162,7 +162,7 @@ function getUserInfo(socket, userId) {
 function* fetchUserInfo(socket) {
   while (true) {
     const { userId } = yield take('LOAD_USER_INFO');
-    const userInfo = yield call(getUserInfo, socket, userId);
+    const userInfo = yield call(findUserInDb, socket, userId);
     yield put(saveUserInfo(userInfo));
   }
 }

@@ -18,7 +18,7 @@ import {
   loginRequest,
   registerRequest,
   getPosition,
-  loadUserInfo,
+  // loadUserInfo,
 } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
