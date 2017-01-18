@@ -39,6 +39,7 @@ export default class MapViewComponents extends Component {
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
+  
   handlePressIcon(notification, Icon) {
     console.log('clicked----------------')
     console.log(notification);

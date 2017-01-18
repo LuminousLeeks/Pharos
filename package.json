@@ -25,6 +25,7 @@
     "startdb": "postgres -D /usr/local/var/postgres",
     "startApp": "react-native run-ios",
     "builddb": "psql -f init.sql",
+    "generateDataset": "node server/test/generateTestData.js",
     "populatedb": "node server/test/populatedb.js",
     "testdb": "mocha server/test/dbspecs.js",
     "dropdb": "psql -c 'drop database pharos_db'",

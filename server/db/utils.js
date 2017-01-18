@@ -1,4 +1,4 @@
-/*eslint-disable*/
+
 const db = require('./db.js');
 const Promise = require('bluebird');
 const User = require('../models/User.js');
