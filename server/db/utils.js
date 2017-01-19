@@ -1,4 +1,4 @@
-/*eslint-disable*/
+
 const db = require('./db.js');
 const Promise = require('bluebird');
 const User = require('../models/User.js');
@@ -27,21 +27,6 @@ const queryNotifications = (userId, location, category, radius) => {
   + "(select radius from users where id=" + userId + ")" + ")"
 };
 
-// get notifications where category is x and distance to the given location is y.
-
-// const queryNotifications = (userId, category, location, radius) => {
-//   const { latitude, longitude } = location;
-//   // table that contains geolocation column:
-//   const table = 'notifications';
-//   // geolocation column:
-//   const geoCol = 'location';
-
-//   return "SELECT id, title, description, location, \"voteCount\", category FROM " + table
-//   + " where " + "notifications.category=" + userId + ")"
-//   + " AND " + "notifications.category=" + "'" + category + "'"
-//   + " AND " + "ST_DWithin(" + geoCol + "," + "'POINT(" + latitude + " " + longitude + ")'," + radius + ")"
-// }
-
 // accept geoJson format
 const coordinateTransform = function coordinateTransform(location) {
   const coords = location.coordinates;
@@ -68,7 +53,7 @@ const overriddenBulkCreate = function overriddenBulkCreate(model, entries) {
 
 // last two arguments are overload functions
 // userId: integer
-// category: 'enum'
+// categoryId: integer
 // location: { latitude (float), longitude (float) }
 // radius: float (meters) (ex: 100.0 is 100 meters)
 const getNotifications = function getNotifications(userId, location, category, radius) {
@@ -90,18 +75,15 @@ const getNotifications = function getNotifications(userId, location, category, r
 const insertUser = function insertUser(user, settings) {
   const { username, firstName, lastName, password, email } = user;
   const { radius, subscriptions } = settings;
-  const salt = bcrypt.genSaltSync(10);
-  const passwordToStore = bcrypt.hashSync(password, salt);
   return new Promise((resolve, reject) => {
     User.create({
       username,
       firstName,
       lastName,
-      password: passwordToStore,
-      salt,
+      password,
       radius,
       email,
-    })
+    }, { individualHooks: true })
     .then((user) => {
       return Category.findAll({
         where: {
@@ -163,23 +145,30 @@ const insertVote = function insertVote(vote) {
   });
 };
 
-const updateUser = function updateUser(userId, settings) {
-  const { radius, subscriptions } = settings;
+const updateUser = function updateUser(userId, updates) {
   return new Promise((resolve, reject) => {
-    User.update({
-      radius,
-    }, { where: { id: userId }, returning: true }).then((results) => {
+    let enableHooks = true;
+    if (updates.password === undefined) {
+      enableHooks = false;
+    }
+    User.update(updates, {
+      where: { id: userId },
+      returning: true,
+      individualHooks: enableHooks,
+    })
+    .then((results) => {
       const user = results[1][0]; // postgres syntax
-      if (subscriptions.length === 0) {
-        return resolve(user);
+      if (updates.subscriptions === undefined) {
+        return resolve(user.dataValues);
       }
       return Category.findAll({
         where: {
           id: {
-            in: subscriptions,
+            in: updates.subscriptions,
           },
         },
-      }).then((categories) => {
+      })
+      .then((categories) => {
         user.setCategories(categories);
         resolve(user);
       })
@@ -189,7 +178,7 @@ const updateUser = function updateUser(userId, settings) {
 };
 
 const initializeDb = function initializeDb() {
-  Category.findAll({}).then(results => {
+  Category.findAll({}).then((results) => {
     if (!results.length) {
       const categoryTypes = ['hazard', 'crime', 'waitTime', 'publicEvent'];
       const categories = categoryTypes.map(c => ({ name: c }));

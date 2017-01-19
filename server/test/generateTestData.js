@@ -123,6 +123,7 @@ for (let i = 1; i < users.length; i++) {
   });
 }
 
+// Votes are disabled for now:
 // for (let i = 0; i < notificationNumber; i++) {
 //   let type = faker.random.boolean();
 //   let userId = generateRandomId(userNumber);
