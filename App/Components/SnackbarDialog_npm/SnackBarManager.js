@@ -44,7 +44,7 @@ export default class SnackBarManager {
   }
 
   add = (
-    title: string,
+    title,
     options?: SnackItemType,
     callback?: Function = () => {}
   ): void => {

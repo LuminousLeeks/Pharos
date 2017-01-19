@@ -111,3 +111,11 @@ export const registerRequest = (username, password, userInfo) => ({
   password,
   userInfo,
 });
+
+// export const TESTONLY = () => {
+//   console.log('testonly action triggered~~~~~~~~~~~~');
+//   return {
+//     type: 'TESTONLY',
+//   }
+
+// }

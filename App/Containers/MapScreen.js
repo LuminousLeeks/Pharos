@@ -1,7 +1,14 @@
 /* eslint-disable */
 import { connect } from 'react-redux';
 import MapViewComponents from '../Components/MapViewComponents';
-import { fetchNotifications, updateNotification, updatePosition, saveWatchID, updateRegion } from '../Actions';
+import {
+  fetchNotifications,
+  updateNotification,
+  updatePosition,
+  saveWatchID,
+  updateRegion,
+  sendVoteToServer
+} from '../Actions';
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
@@ -49,6 +56,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     console.log(region);
     dispatch(updateRegion(region));
   },
+  voteForNotification: (vote) => {
+    dispatch(sendVoteToServer(vote));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapViewComponents);

@@ -76,7 +76,7 @@ class RadialMenuComponent extends React.Component {
                     NotificationCategory.key);
                 }}
               >
-                <NotificationCategory.icon size={30} />
+                <NotificationCategory.icon size={30} color={'black'} />
               </Button>,
             )
           }
