@@ -15,9 +15,11 @@ class UserProfile extends Component {
     this.props.loadLoggedInUser(context.props.userId);
   }
   sendToUpdatePage() {
+    console.log(this.props);
     NavigationActions.updateProfilePage();
   }
   render() {
+    const {username, firstName, lastName, email, radius} = this.props;
     return (
       <ScrollView style={Styles.container}>
         <Container>
@@ -25,16 +27,23 @@ class UserProfile extends Component {
             <List>
               <ListItem>
                 <Text>Username
-                  <Text>{this.props.userInfo.username}</Text>
+                  <Text>{` ${username} `}</Text>
                 </Text>
               </ListItem>
               <ListItem>
-                <Text> Full Name
-                  <Text>{` ${this.props.userInfo.firstName} ${this.props.userInfo.lastName}`}</Text>
+                <Text>Full Name
+                  <Text>{` ${firstName} ${lastName}`}</Text>
                 </Text>
               </ListItem>
               <ListItem >
-                <Text > Email</Text>
+                <Text > Email
+                  <Text>{` ${email}`}</Text>
+                </Text>
+              </ListItem>
+              <ListItem >
+                <Text >Radius
+                <Text>{` ${radius}`}</Text>
+                </Text>
               </ListItem>
             </List>
             <TouchableOpacity
@@ -54,10 +63,13 @@ class UserProfile extends Component {
 
 UserProfile.propTypes = {
   userId: PropTypes.number,
+  username: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
+  radius: PropTypes.string,
   loadLoggedInUser: PropTypes.func,
+
   // fetchUserInfo: PropTypes.func,
   // userInfo: PropTypes.object,
 };

@@ -50,7 +50,8 @@ module.exports = (io) => {
         // foreach  room name send notifications to client
         console.log(notification, 'this is the notification from the client');
 
-        console.log('new notification!!!!!!!!!!!!', notification);        insertNotification(notification)
+        console.log('new notification!!!!!!!!!!!!', notification);
+        insertNotification(notification)
         .then((userIds, newNotification) => {
           userIds.forEach((userId) => {
             io.to(userId).emit('pushNotification', newNotification);
@@ -60,8 +61,7 @@ module.exports = (io) => {
       socket.on('getUserInDb', (userId, callback) => {
         getUserInfoFromDb(userId)
           .then((userData) => {
-
-            console.log(userData, 'USER INFOOOOOOO');
+            io.to(userId).emit('saveUserInfo', userData);
             callback(userData);
           });
       });
@@ -71,4 +71,4 @@ module.exports = (io) => {
       });
     });
   });
-}
+};

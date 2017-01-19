@@ -144,34 +144,32 @@ function getNotifications(socket, userId, location) {
 function* fetchNotifications(socket) {
   while (true) {
     const { token, userId, location } = yield take('FETCH_EVENTS');
-    console.log("location!!!!!!!!!!!!", location)
     const notifications = yield call(getNotifications, socket, userId, location);
     yield put(loadNotifications(notifications));
   }
 }
 
+
+function* fetchUserInfo(socket) {
+  while (true) {
+    const { userId } = yield take('LOAD_USER_INFO');
+    const user = yield call(getUserInfo, socket, userId);
+    yield put(saveUserInfo(userId, user));
+  }
+}
 function getUserInfo(socket, userId) {
   return new Promise((resolve, reject) => {
     socket.emit('getUserInDb', userId, (userInfo) => {
-      console.log('socket in saga/////////////////////////////////////////////');
       resolve(userInfo);
     })
   })
 }
 
-function* fetchUserInfo(socket) {
-  while (true) {
-    const { userId } = yield take('LOAD_USER_INFO');
-    const userInfo = yield call(getUserInfo, socket, userId);
-    yield put(saveUserInfo(userInfo));
-  }
-}
-
 function updateUser(socket, userId) {
   return new Promise((resolve, reject) => {
     socket.emit('updateUser', userId, (userInfo) => {
-      console.log('socket in saga -----------------');
-      console.log('changing', userInfo);
+      // console.log('socket in saga -----------------');
+      // console.log('changing', userInfo);
       resolve(userInfo);
     })
   })
@@ -181,6 +179,7 @@ function* updateUserData(socket) {
   while (true) {
     const { userId } = yield take('UPDATE_USER_INFO');
     const userInfo = yield call(updateUser, socket, userId);
+    console.log(userInfo, '******************************')
     yield put(saveUserInfo(userInfo));
   }
 }
@@ -200,7 +199,7 @@ function sendVote(socket, vote) {
 function* voteNotification(socket) {
   while (true) {
     const { vote } = yield take('SERVER_VOTE_EVENT');
-    console.log("Vote notification inside saga", vote)
+    // console.log("Vote notification inside saga", vote)
     yield call(sendVote, socket, vote);
     // socket.on('updateNotification', (updatedNotification) => {
     //   console.log(updatedNotification);
@@ -240,7 +239,7 @@ function* read(socket) {
   //   console.log('~~~~heard from socket~~~');
   //   // yield put(TESTONLY());
   //   // emit(newMessage({ message }));
-  // });  
+  // });
   const channel = yield call(subscribe, socket);
   while (true) {
     let action = yield take(channel);
@@ -254,7 +253,7 @@ function* handleIO(socket) {
   yield fork(reportNotification, socket);
   yield fork(voteNotification, socket);
   yield fork(fetchUserInfo, socket);
-  yield fork(updateUserData, socket);
+  // yield fork(updateUserData, socket);
 }
 
 // ---------Define flow of socket
@@ -264,8 +263,9 @@ function* flow() {
     const socket = yield call(connectSocket, token, userId);
     const notifications = yield call(getNotifications, socket, userId, location);
     yield put(loadNotifications(notifications));
-    const userInfo = yield call(getUserInfo, socket, userId);
-    yield put(saveUserInfo(userInfo));
+    const userProfile = yield call(fetchUserInfo, socket, userId);
+    console.log(userProfile, 'userInfo')
+    yield put(saveUserInfo(userProfile));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');

@@ -13,7 +13,7 @@ import {
   from 'react-native';
 import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+console.log(typeof Icon);
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
@@ -145,7 +145,7 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
             </List>
-            <TouchableOpacity style={Styles.container} onPress={ this.handlePressSignUp }>
+            <TouchableOpacity style={Styles.container} onPress={ this.handlePressRegister }>
               <View style={Styles.button}>
                 <Text style={Styles.buttonText}>Submit</Text>
               </View>

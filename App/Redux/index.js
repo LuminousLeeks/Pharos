@@ -26,14 +26,12 @@ const initialState = {
     longitudeDelta: 100,
   },
   notifications: defaultState.notifications,
-  userInfo: {
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    radius: '',
-  },
   username: '',
+  userName: '', // TODO: Delete later
+  firstName: '',
+  lastName: '',
+  email: '',
+  radius: '',
   token: '',
   watchID: '',
   error: null,
@@ -70,8 +68,8 @@ const rootReducer = (state = initialState, action) => {
         watchID: action.watchID,
       };
     case 'UPDATE_EVENTS':
-    console.log('INSIDE REDUCER');
-    console.log(action.notifications);
+    // console.log('INSIDE REDUCER');
+    // console.log(action.notifications);
 
       return {
         ...state,
@@ -83,14 +81,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notifications: action.notifications,
       };
-    case 'FETCH_USER_INFO':
-      return {
-        ...state,
-        userId: action.userId,
-        username: action.unserInfo.username, // Uncommented to build user profile
-        // userInterests: action.userInterests, // TODO: Decide on naming conventions
-        userInfo: action.userInfo,
-      };
+
     // case 'UPDATE_USER_INFO':
     //   return {
     //     ...state,
@@ -102,11 +93,13 @@ const rootReducer = (state = initialState, action) => {
     //     // email: action.email,
     //   };
     case 'SAVE_USER_INFO':
-      console.log('in reducer -----------------');
-      console.log(action.userInfo);
       return {
         ...state,
-        userInfo: action.userInfo,
+        username: action.userProfile.username,
+        firstName: action.userProfile.firstName,
+        lastName: action.userProfile.lastName,
+        email: action.userProfile.email,
+        radius: action.userProfile.radius,
       };
 
     case 'FETCH_CATEGORIES' :

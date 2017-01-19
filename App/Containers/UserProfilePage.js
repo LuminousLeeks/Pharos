@@ -3,15 +3,14 @@ import UserProfile from '../Components/UserProfile';
 import { loadUserInfo } from '../Actions';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
-// NOTE: this is the standard format
-// const mapStateToProps = (state, ownProps) => {
-// however the ownProps only have ownProps.socket so we use {socket}
-
 const mapStateToProps = (state) => {
-  console.log(state, 'MAP USER STATE TO PROPS');
   return {
     userId: state.userId,
-    userInfo: state.userInfo,
+    username: state.username,
+    firstName: state.firstName,
+    lastName: state.lastName,
+    email: state.email,
+    radius: state.radius,
   };
 };
 
@@ -28,4 +27,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
 export default UserProfilePage;
-// export default UserProfilePage;

@@ -52,10 +52,9 @@ export const loadUserInfo = userId => ({
 //   // userInterests, //TODO: decide on naming conventions
 // });
 // SAVE USER FUNCTION
-export const saveUserInfo = (userId, userInfo) => ({
+export const saveUserInfo = (userId, userProfile) => ({
   type: 'SAVE_USER_INFO',
-  userId,
-  userInfo,
+  userProfile,
 });
 
 // UPDATE USER FUNCTION
