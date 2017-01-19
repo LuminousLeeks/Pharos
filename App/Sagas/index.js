@@ -181,7 +181,7 @@ function subscribe(socket) {
       // console.log('heard from server socket, newNotification');
       // console.log(newNotification)
       Alert.alert(
-        'Received new notifications: ',
+        'Received new notification: ',
         `${newNotification.title} event was reported, ${newNotification.description}`,
         [
           {text: 'OK', onPress: () => console.log('OK Pressed!')},

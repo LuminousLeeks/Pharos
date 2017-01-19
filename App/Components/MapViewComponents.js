@@ -21,8 +21,7 @@ export default class MapViewComponents extends Component {
     super(props);
     this.state = {
       openSwiper: false,
-      displayedEvent: {}, 
-      mapRegion: this.props.region, 
+      displayedEvent: {} 
     }
   }
 
@@ -32,12 +31,8 @@ export default class MapViewComponents extends Component {
   }
 
   onRegionChange(region) {
-    console.log(region);
-    this.setState({
-      mapRegion: region,
-    })
-    // this.props.updateRegion(region);
-    this.props.retrieveMapMarkers(this.props.token, this.props.userId, region);
+    this.props.updateRegion(region);
+    this.props.retrieveMapMarkers(this.props.token, this.props.userId, this.props.region);
 
   }
 
@@ -87,8 +82,8 @@ export default class MapViewComponents extends Component {
       <View style={Styles.container}>
         <MapView
           style={Styles.map}
-          region={this.state.mapRegion}
-          initialRegion={this.state.mapRegion}
+          region={this.props.region}
+          initialRegion={this.props.region}
           onRegionChange={region => this.onRegionChange(region)}
           // showsUserLocation={this.props.showUserLocation} //TODO: need to add this function
         >
@@ -112,7 +107,7 @@ export default class MapViewComponents extends Component {
             }})
             .map((NotificationObj, index) => (
               <MapView.Marker
-                key={NotificationObj.notification.id}
+                key={index}
                 coordinate={{
                   latitude: NotificationObj.notification.location.coordinates[0],
                   longitude: NotificationObj.notification.location.coordinates[1],
@@ -148,7 +143,6 @@ MapViewComponents.propTypes = {
   updateRegion: PropTypes.func,
   userId: PropTypes.number,
   voteForNotification: PropTypes.func,
-  notifications: PropTypes.array,
 
 };
 
