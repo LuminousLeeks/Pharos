@@ -4,7 +4,6 @@ export const partialReport = newNotification => ({
 });
 
 export const reportNotification = newNotification => ({
-
   type: 'REPORT_EVENT',
   newNotification,
 });

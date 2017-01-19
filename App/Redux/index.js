@@ -27,9 +27,11 @@ const initialState = {
   },
   notifications: defaultState.notifications,
   userInfo: {
+    username: '',
     firstName: '',
     lastName: '',
     email: '',
+    radius: '',
   },
   username: '',
   token: '',
@@ -68,6 +70,9 @@ const rootReducer = (state = initialState, action) => {
         watchID: action.watchID,
       };
     case 'UPDATE_EVENTS':
+    console.log('INSIDE REDUCER');
+    console.log(action.notifications);
+
       return {
         ...state,
         notifications: action.notifications,
@@ -82,7 +87,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userId: action.userId,
-        username: action.username, // Uncommented to build user profile
+        username: action.unserInfo.username, // Uncommented to build user profile
         // userInterests: action.userInterests, // TODO: Decide on naming conventions
         userInfo: action.userInfo,
       };

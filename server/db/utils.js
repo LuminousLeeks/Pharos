@@ -186,14 +186,23 @@ const initializeDb = function initializeDb() {
     }
   });
 };
-const getUserInfoFromDb = function getUserInfoFromD(userId) {
+
+const getUserInfoFromDb = function getUserInfoFromDb(userId) {
   return new Promise((resolve, reject) => {
     User.findAll({ where: { id: userId }, returning: true })
       .then((results) => {
-        console.log(results, 'RESULTS IN DATABASE!!!!!!!!!!!!!!!!!!!!!')
-        resolve(results);
+
+        const dbUserInfo = {
+          username: results[0].dataValues.username,
+          firstName: results[0].dataValues.firstName,
+          lastName: results[0].dataValues.lastName,
+          email: results[0].dataValues.email,
+          radius: results[0].dataValues.radius,
+        };
+
+        resolve(dbUserInfo);
       })
-      .catch(reject)
+      .catch(reject);
   });
 };
 

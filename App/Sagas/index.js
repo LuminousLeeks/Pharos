@@ -162,7 +162,7 @@ function getUserInfo(socket, userId) {
 function* fetchUserInfo(socket) {
   while (true) {
     const { userId } = yield take('LOAD_USER_INFO');
-    const userInfo = yield call(findUserInDb, socket, userId);
+    const userInfo = yield call(getUserInfo, socket, userId);
     yield put(saveUserInfo(userInfo));
   }
 }

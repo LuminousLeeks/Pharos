@@ -10,8 +10,8 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 const mapStateToProps = (state) => {
   console.log(state, 'MAP USER STATE TO PROPS');
   return {
-    userInfo: state.userInfo,
     userId: state.userId,
+    userInfo: state.userInfo,
   };
 };
 
