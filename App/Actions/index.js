@@ -3,9 +3,10 @@ export const partialReport = newNotification => ({
   newNotification,
 });
 
-export const reportNotification = newNotification => ({
+export const reportNotification = (newNotification, userId) => ({
   type: 'REPORT_EVENT',
   newNotification,
+  userId,
 });
 
 export const updateRegion = region => ({
@@ -27,6 +28,10 @@ export const loadNotifications = notifications => ({
   type: 'UPDATE_EVENTS',
   notifications,
 });
+export const addNewNotification = notification => ({
+  type: 'ADD_NEW_NOTIFICATION',
+  notification,
+});
 export const saveWatchID = watchID => ({
   type: 'SAVE_WATCHID',
   watchID,
@@ -43,7 +48,7 @@ export const fetchNotifications = (token, location, userId) => ({
 });
 export const fetchUserInfo = (username, token, firstName, lastName) => ({
   type: 'FETCH_USER_INFO',
-  username: this.state.username,
+  username,
   token,
   firstName,
   lastName,
