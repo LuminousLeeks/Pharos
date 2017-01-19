@@ -21,14 +21,22 @@ module.exports = (io) => {
 
       socket.join(roomName);
       rooms.push(roomName);
-
       socket.on('getNotifications', (userID, location, callback) => {
         getNotifications(userID, location)
           .then((notifications) => {
             callback(notifications);
           });
       });
+      socket.on('sendVote', (vote) => {
+        insertVote(vote)
+        .then((insertedVote) => {
+          console.log('inserted vote to db ~~~~~~~~~~~~~');
+          console.log(insertedVote);
+        });
 
+        io.to(vote.userId)
+          .emit('updateNotification', 'server updated vote');
+      });
 
       socket.on('reportNotification', (notification) => {
         // server finds room names

@@ -76,10 +76,6 @@ function* login() {
     yield put(updatePosition(position));
     yield put(updateRegion(region));
     const res = yield call(loginPostRequest, username, password, position);
-    // if (err) {
-    //   console.log('loginPostRequest and server failed failed');
-    //   console.log(err);
-    // } else {
     if (! res.body.err) {
       const token = res.body.token;
       const userId = res.body.userId;
@@ -168,12 +164,54 @@ function* voteNotification(socket) {
     const { vote } = yield take('SERVER_VOTE_EVENT');
     console.log("Vote notification inside saga", vote)
     yield call(sendVote, socket, vote);
+    // socket.on('updateNotification', (updatedNotification) => {
+    //   console.log(updatedNotification);
+    //   console.log('~~~~heard from socket~~~');
+    //   // yield put(TESTONLY());
+    //   // emit(newMessage({ message }));
+    // });
   }
 }
 
+function subscribe(socket) {
+  return eventChannel(emit => {
+    socket.on('text', (text) => {
+      console.log('this is test', text);
+    });
+    socket.on('pushNotification', (newNotification) => {
+      console.log('heard from server socket, newNotification');
+      console.log(newNotification)
+      // emit(receiveNewNotification(newNotification));
+    });
+    socket.on('updateNotification', (updatedNotification) => {
+      console.log(updatedNotification);
+      console.log('~~~~heard from socket~~~');
+      emit(TESTONLY());
+      // emit(newMessage({ message }));
+    });
+    // socket.on('disconnect', e => {
+    //   // TODO: handle
+    // });
+    return () => {};
+  });
+}
+
+function* read(socket) {
+  // socket.on('updateNotification', (updatedNotification) => {
+  //   console.log(updatedNotification);
+  //   console.log('~~~~heard from socket~~~');
+  //   // yield put(TESTONLY());
+  //   // emit(newMessage({ message }));
+  // });  
+  const channel = yield call(subscribe, socket);
+  while (true) {
+    let action = yield take(channel);
+    yield put(action);
+  }
+}
 // ---------Combine sending and receiving data
 function* handleIO(socket) {
-  // yield fork(read, socket);
+  yield fork(read, socket);
   yield fork(fetchNotifications, socket);
   yield fork(reportNotification, socket);
   yield fork(voteNotification, socket);
@@ -183,12 +221,8 @@ function* handleIO(socket) {
 function* flow() {
   while (true) {
     let { token, userId, location } = yield take('SUCCESS');
-    console.log('Location ----------inside saga flow');
-    console.log(location);
     const socket = yield call(connectSocket, token, userId);
-    console.log('RRRRRRR', userId, location)
     const notifications = yield call(getNotifications, socket, userId, location);
-    console.log(')))))))))', notifications)
     yield put(loadNotifications(notifications));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);

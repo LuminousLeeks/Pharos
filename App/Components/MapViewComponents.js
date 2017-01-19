@@ -42,21 +42,35 @@ export default class MapViewComponents extends Component {
   handlePressIcon(notification, Icon) {
     console.log('clicked----------------')
     console.log(notification);
-    const descriptions = (
-        <Icon size={Metrics.icons.medium} />
-    );
-
+    const descriptions = `${notification.title}: ${notification.description}`;
     const upvoteIcon = (
       <FontAwesomeIcon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
     )
+    const downvoteIcon = (
+      <FontAwesomeIcon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} /> 
+    )    
+    let vote = {
+      notificationId: notification.id,
+      userId: this.props.userId,
+    }
     // console.log(this.props.events);
     SnackBar.show(descriptions, {
       confirmText: upvoteIcon,
       onConfirm: () => {
-        console.log('Thank you')
+        console.log('upvoted');
+        SnackBar.dismiss();
+        vote.type = true;
+        this.props.voteForNotification(vote);
+
+      },
+      cancelText: downvoteIcon,
+      onCancel: () => {
+        console.log('downvoted')
         SnackBar.dismiss()
-      }
-    })    
+        vote.type = false;
+        this.props.voteForNotification(vote);        
+      }    
+    })
     // this.setState({
     //   openSwiper: true,
     //   displayedEvent: event,
@@ -64,23 +78,6 @@ export default class MapViewComponents extends Component {
   }
 
   render() {
-    // let swiper = null;
-    // if (this.state.openSwiper) {
-    //   console.log(this.state.displayedEvent);
-    //   console.log(this.props.events);
-    //   swiper = (<MapCalloutContainer 
-    //     event={this.state.displayedEvent}
-    //     events={this.props.events}
-    //     userName={this.props.userName}
-    //     socket={this.props.socket}
-    //   />);
-    //   // console.log(swiper);
-    // } 
-    // let test = (
-    //   <View>
-    //     <Text> Test </Text>
-    //   </View>        
-    // );
     return (
       <View style={Styles.container}>
         <MapView
@@ -121,8 +118,11 @@ export default class MapViewComponents extends Component {
                   this.handlePressIcon(NotificationObj.notification, NotificationObj.Icon)
                 }}
               >
-                <View color="#4F8EF7" syle={Styles.icon} >
-                  <NotificationObj.Icon size={Metrics.icons.small} />
+                <View color="#4F8EF7" style={Styles.icon} >
+                  <NotificationObj.Icon
+                    size={Metrics.icons.small}
+                    color={'blue'}
+                  />
                 </View>
               </MapView.Marker>
             ))
@@ -141,6 +141,9 @@ export default class MapViewComponents extends Component {
 MapViewComponents.propTypes = {
   region: PropTypes.object,
   updateRegion: PropTypes.func,
+  userId: PropTypes.number,
+  voteForNotification: PropTypes.func,
+
 };
 
 /*

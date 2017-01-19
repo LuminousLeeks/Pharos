@@ -140,7 +140,7 @@ const insertVote = function insertVote(vote) {
         type,
         userId,
         notificationId,
-      }).then(resolve, reject);
+      }).then(resolve).catch(reject);
     });
   });
 };

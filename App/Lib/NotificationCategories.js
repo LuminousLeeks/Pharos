@@ -5,7 +5,7 @@ export default {
   3: {
     key: 'waitTime',
     description: 'Long wait time',
-    icon: ({size}) => (<FontAwesome name='clock-o' size= {size}/>),
+    icon: ({size, color}) => (<FontAwesome name='clock-o' size={size} color={color}/>),
     notifications: [
       'line for restaurant',
       'line for movie',
@@ -15,7 +15,7 @@ export default {
   2: {
     key: 'crime',
     description: 'Crimes found',
-    icon: ({size}) => (<FontAwesome name='bug' size= {size}/>),
+    icon: ({size, color}) => (<FontAwesome name='bug' size={size} color={color}/>),
     notifications: [
       'theft',
       'gun man',
@@ -25,7 +25,7 @@ export default {
   4: {
     key: 'publicNotification',
     description: 'Public notifications',
-    icon: ({size}) => (<FontAwesome name='bullhorn' size= {size}/>),
+    icon: ({size, color}) => (<FontAwesome name='bullhorn' size={size} color={color}/>),
     notifications: [
       'music festival',
       'farmer market',
@@ -35,7 +35,7 @@ export default {
   1: {
     key: 'hazard',
     description: 'Hazard notifications',
-    icon: ({size}) => (<FontAwesome name='flag' size= {size}/>),
+    icon: ({size, color}) => (<FontAwesome name='flag' size={size} color={color}/>),
     notifications: [
       'fire',
       'flood',
@@ -45,7 +45,7 @@ export default {
   5: {
     key: 'commute',
     description: 'Commute related notifications',
-    icon: ({size}) => (<FontAwesome name='car' size= {size}/>),
+    icon: ({size, color}) => (<FontAwesome name='car' size={size} color={color}/>),
     notifications: [
       'traffic',
       'accident',

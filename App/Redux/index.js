@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux'
-import Immutable from 'seamless-immutable'
 // import { combineReducers } from 'redux';
 // import Immutable from 'seamless-immutable';
 import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
@@ -12,44 +10,7 @@ const defaultState = {
     location: { latitude: 37.78500, longitude: -122.41059 },
     categoryId: 3,
   },
-  notifications: [
-    {
-      category: 'waitTime',
-      description: 'Long wait time',
-      notification: 'evantA',
-      story: 'Line for Pokemon ground is too long.',
-      vote: 7,
-      latitude: 37.784235,
-      longitude: -122.410597,
-    },
-    {
-      category: 'waitTime',
-      description: 'Long wait time',
-      notification: 'evantB',
-      story: 'Line for Logo land is too long.',
-      vote: 2,
-      latitude: 37.785566,
-      longitude: -122.407282,
-    },
-    {
-      category: 'hazard',
-      description: 'Hazard notifications',
-      notification: 'notificationK',
-      story: 'Pikachu is on fire.',
-      vote: 10,
-      latitude: 37.784311,
-      longitude: -122.404460,
-    },
-    {
-      category: 'commute',
-      description: 'Commute related notifications',
-      notification: 'notificationN',
-      story: 'Pikachu blocked I-880.',
-      vote: 6,
-      latitude: 37.784345,
-      longitude: -122.407679,
-    },
-  ],
+  notifications: [],
   categories: exampleCategories,
 };
 
@@ -108,12 +69,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notifications: action.notifications,
         // token: action.token
-      }
+      };
     case 'STATE_VOTE_EVENT':
       return {
         ...state,
         notifications: action.notifications,
-      }
+      };
     case 'FETCH_USER_INFO':
       return {
         ...state,
