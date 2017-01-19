@@ -1,34 +1,29 @@
 import { connect } from 'react-redux';
 import UserProfile from '../Components/UserProfile';
-import { fetchUserInfo, updateUserInfo } from '../Actions';
+import { loadUserInfo } from '../Actions';
+import { Actions as NavigationActions } from 'react-native-router-flux';
 
-// NOTE: this is the standard format
-// const mapStateToProps = (state, ownProps) => {
-// however the ownProps only have ownProps.socket so we use {socket}
-
-const mapStateToProps = (state, ownProps) => {
-  console.log(state, 'MAP USER STATE TO PROPS');
-  // return {
-  //   username: state.username,
-  //   firstName: state.firstName,
-  //   lastName: state.lastName,
-  //   token: state.token,
-  // };
-  const { username, firstName, lastName } = state;
-  return { username, firstName, lastName };
-  // email: state.email,
+const mapStateToProps = (state) => {
+  return {
+    userId: state.userId,
+    username: state.username,
+    firstName: state.firstName,
+    lastName: state.lastName,
+    email: state.email,
+    radius: state.radius,
+  };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
 
-  fetchUserInfo: (username, token) => {
-    dispatch(fetchUserInfo(username, token));
+const mapDispatchToProps = (dispatch) => ({
+
+  loadLoggedInUser: (userId) => {
+    dispatch(loadUserInfo(userId));
   },
-  updateUserInfo: (username, token) => {
-    dispatch(updateUserInfo(username, token));
-  },
+  // updateUserInfo: () => {
+  //   dispatch(updateUserInfo());
+  // },
 });
 
 const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
-
 export default UserProfilePage;

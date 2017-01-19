@@ -28,19 +28,14 @@ export default StyleSheet.create({
     height: 40,
     color: Colors.steel,
   },
-  loginButton: {
+  button: {
     flex: 1,
     borderWidth: 1,
-    borderColor: Colors.charcoal,
-    backgroundColor: '#0A69FE',
+    backgroundColor: Colors.coal,
     padding: 6,
   },
-  loginText: {
+  buttonText: {
     textAlign: 'center',
-    color: Colors.panther,
-  },
-  topLogo: {
-    alignSelf: 'center',
-    resizeMode: 'contain',
+    color: Colors.frost,
   },
 });

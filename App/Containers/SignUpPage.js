@@ -13,12 +13,13 @@ import {
   from 'react-native';
 import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+console.log(typeof Icon);
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 //Actions
 import { registerRequest } from '../Actions/index.js';
+
 // Styles
 import { Images, Metrics } from '../Themes';
 import Styles from './Styles/SignUpPageStyle';
@@ -58,7 +59,6 @@ class SignUpPage extends React.Component {
     let newSize = Metrics.screenHeight - e.endCoordinates.height
     this.setState({
       visibleHeight: newSize,
-      topLogo: {width: 100, height: 70}
     })
   }
 
@@ -67,7 +67,6 @@ class SignUpPage extends React.Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({
       visibleHeight: Metrics.screenHeight,
-      topLogo: {width: Metrics.screenWidth}
     })
   }
     onValueChange(e) {
@@ -134,7 +133,10 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
               <ListItem>
-                <Icon name="lock" size={30} color="blue" />
+              <InputGroup>
+                <Icon name="user-circle" style={{ color: '#0A69FE' }} />
+                <Input placeholder="Email" />
+              </InputGroup>
               </ListItem>
               <ListItem>
                 <InputGroup>
@@ -143,9 +145,9 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
             </List>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ this.handlePressRegister }>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>Signup</Text>
+            <TouchableOpacity style={Styles.container} onPress={ this.handlePressRegister }>
+              <View style={Styles.button}>
+                <Text style={Styles.buttonText}>Submit</Text>
               </View>
             </TouchableOpacity>
           </Content>

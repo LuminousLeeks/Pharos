@@ -41,19 +41,27 @@ export const fetchNotifications = (token, location, userId) => ({
   location,
   userId,
 });
-export const fetchUserInfo = (username, token, firstName, lastName) => ({
-  type: 'FETCH_USER_INFO',
-  username: this.state.username,
-  token,
-  firstName,
-  lastName,
-  // userInterests, //TODO: decide on naming conventions
+export const loadUserInfo = userId => ({
+  type: 'LOAD_USER_INFO',
+  userId,
 });
-export const updateUserInfo = (username, token) => ({
+
+// export const fetchUserInfo = userId => ({
+//   type: 'FETCH_USER_INFO',
+//   userId,
+//   // userInterests, //TODO: decide on naming conventions
+// });
+// SAVE USER FUNCTION
+export const saveUserInfo = (userId, userProfile) => ({
+  type: 'SAVE_USER_INFO',
+  userProfile,
+});
+
+// UPDATE USER FUNCTION
+export const updateUserInfo = (userId, userInfo) => ({
   type: 'UPDATE_USER_INFO',
-  username,
-  token,
-  // TODO: Update user data
+  userId,
+  userInfo,
 });
 export const sendVoteToState = notifications => ({
   type: 'STATE_VOTE_EVENT',
