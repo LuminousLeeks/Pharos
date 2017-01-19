@@ -40,7 +40,6 @@ export default class MapViewComponents extends Component {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
   handlePressIcon(notification, Icon) {
-    console.log('clicked----------------')
     console.log(notification);
     const descriptions = `${notification.title}: ${notification.description}`;
     const upvoteIcon = (
@@ -69,12 +68,10 @@ export default class MapViewComponents extends Component {
         SnackBar.dismiss()
         vote.type = false;
         this.props.voteForNotification(vote);        
-      }    
+      },
+      summaryText: `Current Vote Count: ${notification.voteCount}  `,
+      onSummary: () => {},
     })
-    // this.setState({
-    //   openSwiper: true,
-    //   displayedEvent: event,
-    // })
   }
 
   render() {
