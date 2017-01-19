@@ -23,9 +23,6 @@ module.exports = (io) => {
       rooms.push(roomName);
 
       socket.on('getNotifications', (userID, location, callback) => {
-        // TODO:
-        // location is stubbed here
-        // check what user id is.
         getNotifications(userID, location)
           .then((notifications) => {
             callback(notifications);
