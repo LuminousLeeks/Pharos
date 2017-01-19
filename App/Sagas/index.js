@@ -185,7 +185,7 @@ function* updateUserData(socket) {
 }
 
 // ---------Send event data to socket
-function* reportEvent(socket) {
+function* reportNotification(socket) {
   while (true) {
     const { newNotification } = yield take('REPORT_EVENT');
      socket.emit('reportNotification', newNotification);
