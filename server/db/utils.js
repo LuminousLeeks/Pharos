@@ -116,7 +116,12 @@ const insertNotification = function insertNotification(notification) {
         where: {
           categoryId: notification.categoryId,
         },
-      }).then(userIds => resolve(userIds.map(uid => uid.dataValues.userId), notification))
+      }).then(userIds => resolve(
+        {
+          userList: userIds.map(uid => uid.dataValues.userId),
+          newNotification: notification,
+        }
+      ))
         .catch(reject);
     }).catch(reject);
   });

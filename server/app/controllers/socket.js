@@ -1,6 +1,7 @@
 // const socketioJwt = require('socketio-jwt');
 // const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
+
 const rooms = [];
 const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
 
