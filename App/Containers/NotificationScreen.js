@@ -32,7 +32,7 @@ const NotificationScreen = connect(mapStateToProps, mapDispatchToProps)(Notifica
 NotificationScreen.propTypes = {
   event: PropTypes.object,
   userName: PropTypes.string,
-  events: PropTypes.object,
+  events: PropTypes.array,
 };
 
 export default NotificationScreen;
