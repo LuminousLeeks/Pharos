@@ -10,37 +10,43 @@ class ReportEventForms extends React.Component {
     super(props);
 
     this.state = {
-      description: ''
+      description: '',
     }
   }
 
   render() {
     return (
       <Container>
-        <Content style={{ padding:20 }}>
+        <Content style={{ padding: 20 }}>
           <Text
-            style={{alignSelf: 'center', marginTop:200, marginBottom: 20}}
+            style={{ alignSelf: 'center', marginTop: 200, marginBottom: 20 }}
             >
-            {'Report: ' + this.props.newEvent.description + ', ' + this.props.newEvent.event}
+            {'Report: ' + this.props.newNotification.description + ', ' + this.props.newNotification.event}
           </Text>
-          <InputGroup borderType='rounded'>
+          <InputGroup borderType="rounded">
             <Input
-              style={{height:300, marginTop:20}}
+              style={{ height: 300, marginTop: 20 }}
               stackedLabel
               onChangeText={(text) => this.setState({ description: text })}
               label="Report"
               placeholder="add more details about event"
-              />
+            />
           </InputGroup>
-          <View style={ {flexDirection: 'row', alignSelf: 'center'} }>
+          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
           <Button
             primary
             onPress={() =>
-              this.props.handleSubmit(this.props.newNotification, this.state.description, this.props.notificationLocation)}
+              this.props.handleSubmit(
+                this.props.newNotification,
+                this.state.description,
+                this.props.notificationLocation,
+                this.props.userId,
+              )}
             style={{
               alignSelf: 'flex-start',
-              margin: 20
-            }}>
+              margin: 20,
+            }}
+          >
             Submit
           </Button>
           <Button
@@ -48,7 +54,7 @@ class ReportEventForms extends React.Component {
             onPress={() => this.props.redirectToMapview()}
             style={{
               alignSelf: 'flex-end',
-              margin: 20
+              margin: 20,
             }}>
             Cancel
           </Button>
@@ -61,7 +67,11 @@ class ReportEventForms extends React.Component {
 
 ReportEventForms.propTypes = {
   redirectToMapview: PropTypes.func,
-  newEvent: PropTypes.object,
+  newEvent: PropTypes.Object,
+  userId: PropTypes.number,
+  newNotification: PropTypes.Object,
+  notificationLocation: PropTypes.Object,
+  handleSubmit: PropTypes.func,
 };
 
 export default ReportEventForms;

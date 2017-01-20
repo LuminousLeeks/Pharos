@@ -52,7 +52,7 @@ const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCall
 MapCalloutContainer.propTypes = {
   notification: PropTypes.object,
   userName: PropTypes.string,
-  notifications: PropTypes.array,
+  notifications: PropTypes.object,
 };
 
 export default MapCalloutContainer;
