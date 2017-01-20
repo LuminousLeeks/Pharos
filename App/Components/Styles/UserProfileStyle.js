@@ -1,27 +1,12 @@
 
 import { StyleSheet } from 'react-native';
-import { Colors, Metrics } from '../../Themes';
+import { Colors, Metrics, Fonts } from '../../Themes';
 
 export default StyleSheet.create({
-
-  updateButton: {
-    flex: 1,
-    borderWidth: 1,
-    backgroundColor: Colors.coal,
-    padding: 6,
-  },
-  updateText: {
-    textAlign: 'center',
-    color: Colors.frost,
-  },
-  container: {
-    paddingTop: 70,
-    backgroundColor: Colors.snow,
-  },
-  form: {
-    backgroundColor: Colors.snow,
-    margin: Metrics.baseMargin,
-    borderRadius: 4,
+  text: {
+    ...Fonts.style.h5,
+    color: Colors.snow,
+    marginVertical: Metrics.baseMargin,
   },
   row: {
     paddingVertical: Metrics.doubleBaseMargin,
@@ -30,23 +15,18 @@ export default StyleSheet.create({
   rowLabel: {
     color: Colors.charcoal,
   },
-  textInput: {
-    height: 40,
-    color: Colors.snow,
+  updateButtonWrapper: {
+    flex: 1,
   },
-  textInputReadonly: {
-    height: 40,
-    color: Colors.steel,
-  },
-  button: {
+  updateButton: {
     flex: 1,
     borderWidth: 1,
+    borderColor: Colors.charcoal,
     backgroundColor: Colors.panther,
     padding: 6,
   },
-  buttonText: {
+  updateText: {
     textAlign: 'center',
-    color: Colors.frost,
+    color: Colors.silver,
   },
 });
-

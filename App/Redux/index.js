@@ -25,13 +25,10 @@ const initialState = {
     latitudeDelta: 100,
     longitudeDelta: 100,
   },
-  notifications: defaultState.notifications,
-  username: '',
-  userName: '', // TODO: Delete later
+  userName: '',
   firstName: '',
   lastName: '',
-  email: '',
-  radius: '',
+  notifications: defaultState.notifications,
   token: '',
   watchID: '',
   error: null,
@@ -68,9 +65,6 @@ const rootReducer = (state = initialState, action) => {
         watchID: action.watchID,
       };
     case 'UPDATE_EVENTS':
-    // console.log('INSIDE REDUCER');
-    // console.log(action.notifications);
-
       return {
         ...state,
         notifications: action.notifications,
@@ -81,27 +75,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notifications: action.notifications,
       };
-
-    // case 'UPDATE_USER_INFO':
-    //   return {
-    //     ...state,
-    //     userId: action.userId,
-    //     userInfo: action.userInfo,
-    //     // username: action.username,
-    //     // firstName: action.firstName,
-    //     // lastName: action.lastName,
-    //     // email: action.email,
-    //   };
-    case 'SAVE_USER_INFO':
+    case 'FETCH_USER_INFO':
       return {
         ...state,
-        username: action.userProfile.username,
-        firstName: action.userProfile.firstName,
-        lastName: action.userProfile.lastName,
-        email: action.userProfile.email,
-        radius: action.userProfile.radius,
+        username: action.username, // Uncommented to build user profile
+        // userInterests: action.userInterests, // TODO: Decide on naming conventions
+        token: action.token,
+        firstName: action.firstName,
+        lastName: action.lastName,
       };
-
+    case 'UPDATE_USER_INFO':
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+      };
     case 'FETCH_CATEGORIES' :
       return {
         ...state,

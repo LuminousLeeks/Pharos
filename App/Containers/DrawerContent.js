@@ -23,14 +23,6 @@ class DrawerContent extends Component {
     this.toggleDrawer();
     NavigationActions.mapScreen();
   }
-  handlePressProfilePage() {
-    this.toggleDrawer();
-    NavigationActions.userProfilePage();
-  }
-  handlePressCategoriesList() {
-    this.toggleDrawer();
-    NavigationActions.categoriesList();
-  }
   handlePressLoginScreen() {
     this.toggleDrawer();
     NavigationActions.loginScreen();
@@ -39,17 +31,18 @@ class DrawerContent extends Component {
     this.toggleDrawer();
     NavigationActions.mapScreen();
   }
-  handlePressLogoutScreen() {
+  handleCategoriesList() {
     this.toggleDrawer();
-    NavigationActions.logoutScreen();
+    NavigationActions.categoriesList();
   }
   render() {
     return (
       <ScrollView style={styles.container}>
-        <DrawerButton text="Map View" onPress={this.handlePressMapView.bind(this)} />
-        <DrawerButton text="Profile" onPress={this.handlePressProfilePage.bind(this)} />
-        <DrawerButton text="Categories List" onPress={this.handlePressCategoriesList.bind(this)} />
-        <DrawerButton text="Logout" onPress={this.handlePressLogoutScreen.bind(this)} />
+        <DrawerButton text="Map View" onPress={this.handlePressMapView} />
+        <DrawerButton text="Categories List" onPress={this.handlePressCategoriesList} />
+        <DrawerButton text="Map Screen" onPress={this.handlePressMapScreen} />
+        <DrawerButton text="Logout" onPress={this.handlePressLogoutScreen} />
+
       </ScrollView>
     );
   }
