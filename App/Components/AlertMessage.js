@@ -6,20 +6,7 @@ import styles from './Styles/AlertMessageStyle'
 import * as Animatable from 'react-native-animatable'
 import { Metrics } from '../Themes/'
 import Icon from 'react-native-vector-icons/Ionicons'
-import ExamplesRegistry from '../Services/ExamplesRegistry'
 
-// Example
-ExamplesRegistry.add('Alert Message', () =>
-  <View>
-    <AlertMessage
-      title='Alert Message with animation'
-    />
-    <AlertMessage
-      title='Never see me'
-      show={false}
-    />
-  </View>
-)
 
 type AlertMessageProps = {
   title: string,
