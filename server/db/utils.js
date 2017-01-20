@@ -1,4 +1,3 @@
-
 const db = require('./db.js');
 const Promise = require('bluebird');
 const User = require('../models/User.js');
@@ -117,7 +116,12 @@ const insertNotification = function insertNotification(notification) {
         where: {
           categoryId: notification.categoryId,
         },
-      }).then(userIds => resolve(userIds.map(uid => uid.dataValues.userId), notification))
+      }).then(userIds => resolve(
+        {
+          userList: userIds.map(uid => uid.dataValues.userId),
+          newNotification: notification,
+        }
+      ))
         .catch(reject);
     }).catch(reject);
   });

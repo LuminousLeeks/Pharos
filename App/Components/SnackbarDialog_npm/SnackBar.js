@@ -193,12 +193,14 @@ export default class SnackBar extends Component {
 
   renderContent = () => {
     const {
+      summaryText,
+      onSummary,
       confirmText,
       onConfirm,
       cancelText,
       onCancel,
       title,
-      textColor
+      textColor,
     } = this.props
 
     const titleElement = <Text style={[styles.text, { color: textColor }]}>{title}</Text>
@@ -208,6 +210,7 @@ export default class SnackBar extends Component {
         <View>
           {titleElement}
           <View style={styles.actionRow}>
+            { this.renderButton(summaryText, onSummary, styles.flat) }
             { this.renderButton(cancelText, onCancel, styles.flat) }
             { this.renderButton(confirmText, onConfirm, styles.flat) }
           </View>
