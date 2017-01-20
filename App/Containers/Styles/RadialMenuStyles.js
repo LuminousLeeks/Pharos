@@ -11,7 +11,7 @@ export default {
   menu: {
     position: 'absolute',
     right: 0,
-    bottom: -15
+    bottom: -15,
   },
   option: {
     position: 'absolute',
@@ -19,7 +19,7 @@ export default {
     bottom: -55,
     width: 50,
     height: 50,
-    borderRadius: 25
+    borderRadius: 25,
 
 
   },
@@ -27,7 +27,7 @@ export default {
     height: 70,
     width: 70,
     borderRadius: 35,
-    padding: 20
+    paddingTop: 22,
 
   }
 }
