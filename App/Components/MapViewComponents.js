@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component, PropTypes } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import MapView from 'react-native-maps';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 // import Icon from 'react-native-vector-icons/FontAwesome';
@@ -91,9 +91,9 @@ export default class MapViewComponents extends Component {
             }}
           >
             <FontAwesomeIcon
-              name="map-pin"
-              size={Metrics.icons.small}
-              color={'blue'}
+              name="crosshairs"
+              size={Metrics.icons.medium}
+              color={'red'}
             />
           </MapView.Marker>
 
@@ -120,6 +120,17 @@ export default class MapViewComponents extends Component {
                     size={Metrics.icons.small}
                     color={'blue'}
                   />
+                  <Image
+                    source={require('../Images/mapmarker2.png')}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      position: 'absolute',
+                      top: -7,
+                      left: -16,
+                      zIndex: -1,
+                    }}
+                  />
                 </View>
               </MapView.Marker>
             ))
@@ -144,6 +155,9 @@ MapViewComponents.propTypes = {
 };
 
 /*
+                  </Image>
+
+
                 <MapView.Callout style={Styles.callout} >
                   <MapCalloutContainer
                     event={EventObj.event}
