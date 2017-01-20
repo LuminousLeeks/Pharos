@@ -1,55 +1,70 @@
-import React, { Component } from 'react';
-import { ScrollView, BackAndroid } from 'react-native';
-import styles from './Styles/DrawerContentStyle';
-import DrawerButton from '../Components/DrawerButton';
-import { Actions as NavigationActions } from 'react-native-router-flux';
+// @flow
+
+import React, { Component } from 'react'
+import { ScrollView, Image, BackAndroid } from 'react-native'
+import styles from './Styles/DrawerContentStyle'
+import { Images } from '../Themes'
+import DrawerButton from '../Components/DrawerButton'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 class DrawerContent extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
-        this.toggleDrawer();
-        return true;
+        this.toggleDrawer()
+        return true
       }
-      return false;
-    });
+      return false
+    })
   }
 
-  toggleDrawer() {
-    this.context.drawer.toggle();
+  toggleDrawer () {
+    this.context.drawer.toggle()
   }
-  handlePressMapView() {
-    this.toggleDrawer();
-    NavigationActions.mapScreen();
+
+  handlePressComponents = () => {
+    this.toggleDrawer()
+    NavigationActions.componentExamples()
   }
-  handlePressLoginScreen() {
-    this.toggleDrawer();
-    NavigationActions.loginScreen();
+
+  handlePressUsage = () => {
+    this.toggleDrawer()
+    NavigationActions.usageExamples()
   }
-  handlePressMapScreen() {
-    this.toggleDrawer();
-    NavigationActions.mapScreen();
+
+  handlePressAPI = () => {
+    this.toggleDrawer()
+    NavigationActions.apiTesting()
   }
-  handleCategoriesList() {
-    this.toggleDrawer();
-    NavigationActions.categoriesList();
+
+  handlePressTheme = () => {
+    this.toggleDrawer()
+    NavigationActions.theme()
   }
-  render() {
+
+  handlePressDevice = () => {
+    this.toggleDrawer()
+    NavigationActions.deviceInfo()
+  }
+
+  render () {
     return (
       <ScrollView style={styles.container}>
-        <DrawerButton text="Map View" onPress={this.handlePressMapView} />
-        <DrawerButton text="Categories List" onPress={this.handlePressCategoriesList} />
-        <DrawerButton text="Map Screen" onPress={this.handlePressMapScreen} />
-        <DrawerButton text="Logout" onPress={this.handlePressLogoutScreen} />
-
+        <Image source={Images.logo} style={styles.logo} />
+        <DrawerButton text='Component Examples' onPress={this.handlePressComponents} />
+        <DrawerButton text='Usage Examples' onPress={this.handlePressUsage} />
+        <DrawerButton text='API Testing' onPress={this.handlePressAPI} />
+        <DrawerButton text='Themes' onPress={this.handlePressTheme} />
+        <DrawerButton text='Device Info' onPress={this.handlePressDevice} />
       </ScrollView>
-    );
+    )
   }
+
 }
 
 DrawerContent.contextTypes = {
-  drawer: React.PropTypes.object,
-};
+  drawer: React.PropTypes.object
+}
 
-export default DrawerContent;
+export default DrawerContent

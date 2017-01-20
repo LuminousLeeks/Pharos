@@ -1,15 +1,17 @@
+// @flow
+
 import React, { Component } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import styles from './Styles/DrawerButtonStyles'
-// import ExamplesRegistry from '../Services/ExamplesRegistry'
+import ExamplesRegistry from '../Services/ExamplesRegistry'
 
 // Example
-// ExamplesRegistry.add('Drawer Button', () =>
-//   <DrawerButton
-//     text='Example left drawer button'
-//     onPress={() => window.alert('Your drawers are showing')}
-//   />
-// )
+ExamplesRegistry.add('Drawer Button', () =>
+  <DrawerButton
+    text='Example left drawer button'
+    onPress={() => window.alert('Your drawers are showing')}
+  />
+)
 
 type DrawerButtonProps = {
   text: string,
@@ -27,15 +29,5 @@ class DrawerButton extends Component {
     )
   }
 }
-
-// class DrawerButton extends Component {
-//   render () {
-//     return (
-//       <TouchableOpacity onPress={() => {}}>
-//         <Text style={styles.text}>{}</Text>
-//       </TouchableOpacity>
-//     )
-//   };
-// };
 
 export default DrawerButton

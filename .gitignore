@@ -3,23 +3,20 @@
 # Logs
 logs
 *.log
-npm-debug.log*
-
 
 # Runtime data
 pids
 *.pid
 *.seed
-*pid.lock
+
 
 # OSX
 #
 .DS_Store
 
-
 # Xcode
 #
-ios/build/
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -36,7 +33,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-ios/Pharos.xcodeproj/project.pbxproj
+
 # Android/IntelliJ
 #
 build/
@@ -50,18 +47,12 @@ local.properties
 node_modules/
 npm-debug.log
 
-
 #Module dependencies
-node_modules/
+#
 bower_components/
-
-
-# Optional eslint cache
-.eslintcache
 
 # BUCK
 buck-out/
 \.buckd/
 android/app/libs
 *.keystore
-
