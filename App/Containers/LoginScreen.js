@@ -21,35 +21,15 @@ import {
 } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
-// type LoginScreenProps = {
-//   dispatch: () => any,
-//   fetching: boolean,
-//   attemptLogin: () => void,
-//   attemptRegister: () => void
-// }
 
 class LoginScreen extends React.Component {
 
-  // props: LoginScreenProps
-
-  // state: {
-  //   username: string,
-  //   password: string,
-  //   visibleHeight: number,
-  //   topLogo: {
-  //     width: number
-  //   }
-  // }
-
-  // isAttempting: boolean
-  // keyboardDidShowListener: Object
-  // keyboardDidHideListener: Object
 
   constructor (props) {
     super(props)
     this.state = {
-      username: 'Ccc',
-      password: 'ccc',
+      username: 'Bing',
+      password: 'bing',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
