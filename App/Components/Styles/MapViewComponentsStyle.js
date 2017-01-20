@@ -35,7 +35,7 @@ export default StyleSheet.create({
   icon: {
 
   },
-  maker: {
-
+  marker: {
+    // zIndex: 0,
   }
 });

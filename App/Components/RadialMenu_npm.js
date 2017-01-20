@@ -70,7 +70,9 @@ var RadialMenu = React.createClass({
     var newSelected = null;
     if (!this.RMOpening) {
       newSelected = this.computeNewSelected(gestureState);
+      // console.log(newSelected)
       if (this.state.selectedItem !== newSelected) {
+        this.props.onDetach()
         if (this.state.selectedItem !== null) {
           var restSpot = this.state.item_spots[this.state.selectedItem];
           Animated.spring(this.state.item_anims[this.state.selectedItem], {
@@ -83,11 +85,12 @@ var RadialMenu = React.createClass({
           }).start();
         }
         this.state.selectedItem = newSelected;
-        console.log(newSelected);
         //--------test------
-        // if (newSelected !== null && newSelected !== 'close') {
-
-        // }
+        if (newSelected !== null && newSelected !== 0) {
+          console.log(this.state.children[newSelected].props.description);
+          let description = this.state.children[newSelected].props.description;
+          this.props.onAttach(description);
+        }
       }
     }
   },

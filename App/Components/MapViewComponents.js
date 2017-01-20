@@ -13,9 +13,6 @@ import NotificationCategories from '../Lib/NotificationCategories';
 import NotificationScreen from '../Containers/NotificationScreen';
 import SnackBar from './SnackbarDialog_npm';
 
-
-
-
 export default class MapViewComponents extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +56,7 @@ export default class MapViewComponents extends Component {
         console.log('upvoted');
         SnackBar.dismiss();
         vote.type = true;
-        this.props.voteForNotification(vote);
+        // this.props.voteForNotification(vote);
 
       },
       cancelText: downvoteIcon,
@@ -67,7 +64,7 @@ export default class MapViewComponents extends Component {
         console.log('downvoted')
         SnackBar.dismiss()
         vote.type = false;
-        this.props.voteForNotification(vote);        
+        // this.props.voteForNotification(vote);        
       },
       summaryText: `Current Vote Count: ${notification.voteCount}  `,
       onSummary: () => {},
@@ -88,6 +85,9 @@ export default class MapViewComponents extends Component {
             coordinate={{
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
+            }}
+            style={{
+              zIndex: 10,
             }}
           >
             <FontAwesomeIcon
