@@ -13,7 +13,6 @@ import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
 import CategoriesList from '../Containers/CategoriesList';
 import UserProfilePage from '../Containers/UserProfilePage';
 import SignUpPage from '../Containers/SignUpPage';
-import UpdateProfilePage from '../Containers/UpdateProfilePage';
 // import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -24,21 +23,20 @@ class NavigationRouter extends Component {
     return (
       <Router>
         <Scene
-          key="drawer"
+          key='drawer'
           component={NavigationDrawer}
-          open={false}
-        >
+          open={false}>
           <Scene
-            key="drawerChildrenWrapper"
+            key='drawerChildrenWrapper'
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}
           >
             <Scene
-              key="mapScreen"
+              key='mapScreen'
               component={MapScreen}
-              title="Pharos"
+              title='Pharos'
             />
             <Scene
               initial
@@ -53,10 +51,10 @@ class NavigationRouter extends Component {
               title="Sign-Up"
             />
             <Scene
-              // // initial
-              // key="categoriesList"
-              // component={CategoriesList}
-              // title="CategoriesList"
+              // initial
+              key="categoriesList"
+              component={CategoriesList}
+              title="CategoriesList"
             />
             <Scene
               key='reportNotificationScreen'
@@ -67,36 +65,13 @@ class NavigationRouter extends Component {
               // initial
               key="userProfilePage"
               component={UserProfilePage}
-              title="User Profile"
-            />
-            <Scene
-              // initial
-              key="updateProfilePage"
-              component={UpdateProfilePage}
-              title="Update Profile"
+              title="User Profile Page"
             />
           </Scene>
         </Scene>
       </Router>
-    );
-  }
-}
+    )
+  };
+};
 
 export default NavigationRouter;
-
-
-/*
-            <Scene
-              // initial
-              key="categoriesList"
-              component={CategoriesList}
-              title="CategoriesList"
-            />
-            <Scene
-              // initial
-              key="updateProfilePage"
-              component={UpdateProfilePage}
-              title="Update Profile"
-            />
-
-*/

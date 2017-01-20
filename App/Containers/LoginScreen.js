@@ -17,8 +17,7 @@ import {Images, Metrics} from '../Themes'
 import {
   loginRequest,
   registerRequest,
-  getPosition,
-  // loadUserInfo,
+  getPosition
 } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
@@ -134,7 +133,6 @@ class LoginScreen extends React.Component {
               style={textInputStyle}
               value={username}
               editable={editable}
-              autoFocus={true}
               keyboardType='default'
               returnKeyType='next'
               autoCapitalize='none'

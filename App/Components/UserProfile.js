@@ -1,77 +1,53 @@
 import React, { Component, PropTypes } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Container, Content, List, ListItem } from 'native-base';
-import { Actions as NavigationActions } from 'react-native-router-flux';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import { Metrics } from '../Themes';
+import {  Container, Content } from 'native-base';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Styles from './Styles/UserProfileStyle';
 
+// const testUser = {
+//   username: 'demo',
+//   firstName: 'John',
+//   lastName: 'Smith',
+// };
 
 class UserProfile extends Component {
-
-  componentWillMount() {
-    const context = this;
-    // console.log(this.props.loadLoggedInUser, 'this sending to Actions');
-    this.props.loadLoggedInUser(context.props.userId);
-  }
-  sendToUpdatePage() {
-    console.log(this.props);
-    NavigationActions.updateProfilePage();
-  }
   render() {
-    const {username, firstName, lastName, email, radius} = this.props;
     return (
-      <ScrollView style={Styles.container}>
-        <Container>
-          <Content>
-            <List>
-              <ListItem>
-                <Text>Username
-                  <Text>{` ${username} `}</Text>
-                </Text>
-              </ListItem>
-              <ListItem>
-                <Text>Full Name
-                  <Text>{` ${firstName} ${lastName}`}</Text>
-                </Text>
-              </ListItem>
-              <ListItem >
-                <Text > Email
-                  <Text>{` ${email}`}</Text>
-                </Text>
-              </ListItem>
-              <ListItem >
-                <Text >Radius
-                <Text>{` ${radius}`}</Text>
-                </Text>
-              </ListItem>
-            </List>
-            <TouchableOpacity
-              onPress={this.sendToUpdatePage}
-              style={Styles.container}
-            >
-              <View style={Styles.button}>
-                <Text style={Styles.buttonText}>Change Profile Settings</Text>
-              </View>
-            </TouchableOpacity>
-          </Content>
-        </Container>
-      </ScrollView>
+      <View>
+        <View style={[Styles.row]}>
+          <Text style={Styles.rowLabel}> {`Hello + ${this.props.firstName} + ${this.props.lastName} !`}</Text>
+        </View>
+        <View style={[Styles.row]}>
+          <Text style={Styles.rowLabel}>Username: </Text>
+          <Text style={Styles.rowLabel}>{this.props.username} </Text>
+        </View>
+        <View style={[Styles.row]}>
+          <Text style={Styles.rowLabel}>First Name: </Text>
+          <Text style={Styles.rowLabel}>{this.props.firstName} </Text>
+        </View>
+        <View style={[Styles.row]}>
+          <Text style={Styles.rowLabel}>Last Name: </Text>
+          <Text style={Styles.rowLabel}>{this.props.lastName} </Text>
+        </View>
+
+        <View style={[Styles.updateRow]}>
+          <TouchableOpacity
+            style={Styles.updateButtonWrapper}
+            onPress={() => { this.props.updateUserInfo(); }}
+          >
+            <View style={Styles.updateButton}>
+              <Text style={Styles.updateText}>Update Profile</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 }
 
 UserProfile.propTypes = {
-  userId: PropTypes.number,
   username: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  email: PropTypes.string,
-  radius: PropTypes.string,
-  loadLoggedInUser: PropTypes.func,
-
-  // fetchUserInfo: PropTypes.func,
-  // userInfo: PropTypes.object,
 };
 
 export default UserProfile;
