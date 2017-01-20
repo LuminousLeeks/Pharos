@@ -44,11 +44,11 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     newNotification: action.newNotification,
     //   };
-    case 'ADD_NEW_NOTIFICATION':
-      return {
-        ...state,
-        notifications: state.notifications.concat(action.notification),
-      };
+//     case 'ADD_NEW_NOTIFICATION':
+//       return {
+//         ...state,
+//         notifications: state.notifications.concat(action.notification),
+//       };
     case 'PARTIAL_REPORT':
       return {
         ...state,
