@@ -5,12 +5,14 @@ import { eventChannel } from 'redux-saga'
 import { fork, take, call, put, cancel } from 'redux-saga/effects'
 import req from 'superagent'
 import { Actions as NavigationActions } from 'react-native-router-flux';
+import { Alert } from 'react-native';
 
 import {
   loginSuccess,
   loadNotifications,
   updateRegion,
   updatePosition,
+  addNewNotification,
 } from '../Actions'
 
 //----------------- navigator action ---------------------------
@@ -150,7 +152,7 @@ function* fetchNotifications(socket) {
 // ---------Send notification data to socket
 function* reportNotification(socket) {
   while (true) {
-    const { newNotification } = yield take('REPORT_EVENT');
+    const { newNotification, userId } = yield take('REPORT_EVENT');
      socket.emit('reportNotification', newNotification);
   }
 }
@@ -175,19 +177,21 @@ function* voteNotification(socket) {
 
 function subscribe(socket) {
   return eventChannel(emit => {
-    socket.on('text', (text) => {
-      console.log('this is test', text);
-    });
     socket.on('pushNotification', (newNotification) => {
-      console.log('heard from server socket, newNotification');
-      console.log(newNotification)
-      // emit(receiveNewNotification(newNotification));
+      // console.log('heard from server socket, newNotification');
+      // console.log(newNotification)
+      Alert.alert(
+        'Received new notification: ',
+        `${newNotification.title} event was reported, ${newNotification.description}`,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]        
+      )
+      // emit(addNewNotification(newNotification));
     });
-    socket.on('updateNotification', (updatedNotification) => {
+    socket.on('sendVoteSucceed', (updatedNotification) => {
+      console.log('~~~~sendVoteSucceed~~~');
       console.log(updatedNotification);
-      console.log('~~~~heard from socket~~~');
-      emit(TESTONLY());
-      // emit(newMessage({ message }));
     });
     // socket.on('disconnect', e => {
     //   // TODO: handle

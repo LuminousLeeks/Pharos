@@ -18,7 +18,6 @@ pids
 
 
 # Xcode
-#
 ios/build/
 *.pbxuser
 !default.pbxuser
@@ -37,6 +36,8 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/Pharos.xcodeproj/project.pbxproj
+#
+
 # Android/IntelliJ
 #
 build/
