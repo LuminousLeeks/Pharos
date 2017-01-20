@@ -39,11 +39,16 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REPORT_EVENT':
-      return {
-        ...state,
-        newNotification: action.newNotification,
-      };
+    // case 'REPORT_EVENT':
+    //   return {
+    //     ...state,
+    //     newNotification: action.newNotification,
+    //   };
+//     case 'ADD_NEW_NOTIFICATION':
+//       return {
+//         ...state,
+//         notifications: state.notifications.concat(action.notification),
+//       };
     case 'PARTIAL_REPORT':
       return {
         ...state,
