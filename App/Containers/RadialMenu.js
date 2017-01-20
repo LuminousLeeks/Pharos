@@ -27,7 +27,7 @@ class RadialMenuComponent extends React.Component {
       this.setState({
         attachedNotification: description,
       }, () => {
-        TopSnackBar.show(`Releast to report ${description}`);
+        TopSnackBar.show(`Release to report ${description}`);
         console.log(this.state);
       });
     }
