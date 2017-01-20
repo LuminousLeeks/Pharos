@@ -1,2 +1,0 @@
-* * * * * /Users/efesurekli/Desktop/hr/Pharos/services/archiever/cron-ex.sh >> /Users/efesurekli/Desktop/hr/Pharos/services/archiever/archiever.log 2>&1
-
