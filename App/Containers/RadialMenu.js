@@ -55,8 +55,8 @@ class RadialMenuComponent extends React.Component {
     return (
       <View style={Styles.menu}>
         <RadialMenu
-          onOpen={() => {}}
-          onClose={() => {}}
+          onOpen={() => {console.log('open')}}
+          onClose={() => {console.log('close')}}
           itemRadius={50}
           menuRadius={150}
           spreadAngle={90}

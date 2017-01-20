@@ -83,6 +83,11 @@ var RadialMenu = React.createClass({
           }).start();
         }
         this.state.selectedItem = newSelected;
+        console.log(newSelected);
+        //--------test------
+        // if (newSelected !== null && newSelected !== 'close') {
+
+        // }
       }
     }
   },
@@ -130,6 +135,8 @@ var RadialMenu = React.createClass({
       ),
       onPanResponderRelease: this.releaseItem,
       onPanResponderTerminate: this.releaseItem,
+      // onPanResponderRelease: () => {console.log('onPanResponderRelease')},      
+      // onPanResponderTerminate: () => {console.log('onPanResponderTerminate')},      
     });
   },
 
