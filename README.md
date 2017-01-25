@@ -1,42 +1,36 @@
 ## Pharos by React-Native
 
-A community driven, mobile awareness application
-delivering real-time push notifications based on your interests and location
+A community driven, mobile awareness application delivering real-time push notifications based on user interests and location
 
 
 ## Preview
-A SnackBar component that can display inline: <br />
+Report event using animated radial button <br />
 ![Inline Mode](./appRecording.gif)
 
-## Usage
-
-> Some usage instructions
+## Technology
+React-Native, Express, PostgreSQL, Socket.io <br />
+Redux, Redux-Saga, PostGis, Sequelize, bCrypt, JSON WebToken, Mocha
 
 ## Requirements
 
 - Node 0.10.x
 - Redis 2.6.x
 - Postgresql 9.1.x
-- etc
-- etc
-
-## Development
+- Xcode 8.2.x
 
 ### Installing Dependencies
 
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
+brew install postgres
+brew install postgis
 npm install
-bower install
 ```
+## Usage
 
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+```sh
+npm run startdb
+npm run startServer
+npm run startApp
+```
