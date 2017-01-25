@@ -1,6 +1,6 @@
-## Pharos by React-Native
+# Pharos
 
-A community driven, mobile awareness application delivering real-time push notifications based on user interests and location
+### A community driven, mobile awareness application delivering real-time push notifications based on user interests and location
 
 
 ## Preview
