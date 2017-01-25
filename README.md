@@ -7,7 +7,7 @@ A community driven, mobile awareness application delivering real-time push notif
 Report event using animated radial button <br />
 ![Inline Mode](./appRecording.gif)
 
-## Technology
+## Technology Stack
 React-Native, Express, PostgreSQL, Socket.io <br />
 Redux, Redux-Saga, PostGis, Sequelize, bCrypt, JSON WebToken, Mocha
 
