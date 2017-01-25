@@ -189,6 +189,7 @@ function subscribe(socket) {
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,        
       }
+
       Alert.alert(
         'Received new notification: ',
         `${newNotification.title} event was reported, ${newNotification.description}`,
