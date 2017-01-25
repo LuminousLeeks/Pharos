@@ -47,7 +47,8 @@ function* getPosition() {
 //helper function for login POST
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
-  const url = 'http://127.0.0.1:8099';
+  // const url = 'http://127.0.0.1:8099';
+  const url = 'http://138.197.221.226:8099';  
   return req.post(`${url}/api/auth/login`)
     .send({ username, password });
   // return new Promise((resolve) => {
@@ -67,7 +68,8 @@ export const signupPostRequest = (username, password, userInfo) => {
   const firstName = userInfo.firstName;
   const lastName = userInfo.lastName;
   const email = userInfo.email;
-  const url = 'http://127.0.0.1:8099';
+  // const url = 'http://127.0.0.1:8099';
+  const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/signup`)
     .send({ username, password, firstName, lastName, email });
 };
@@ -110,7 +112,8 @@ function* signup() {
 
 // Connect Redux client to socket
 function connectSocket(token, userId) {
-  const socket = io.connect('http://127.0.0.1:8099/socket', {
+  // const socket = io.connect('http://127.0.0.1:8099/socket', {
+  const socket = io.connect('http://138.197.221.226:8099/socket', {
     transports: ['websocket'],
   });
 
@@ -179,7 +182,14 @@ function subscribe(socket) {
   return eventChannel(emit => {
     socket.on('pushNotification', (newNotification) => {
       // console.log('heard from server socket, newNotification');
-      // console.log(newNotification)
+      console.log(newNotification);
+      let newEventRegion = {
+        latitude: newNotification.location.coordinates[0],
+        longitude: newNotification.location.coordinates[1] * (-1) - 180,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,        
+      }
+
       Alert.alert(
         'Received new notification: ',
         `${newNotification.title} event was reported, ${newNotification.description}`,
@@ -187,7 +197,7 @@ function subscribe(socket) {
           {text: 'OK', onPress: () => console.log('OK Pressed!')},
         ]        
       )
-      // emit(addNewNotification(newNotification));
+      emit(updateRegion(newEventRegion));
     });
     socket.on('sendVoteSucceed', (updatedNotification) => {
       console.log('~~~~sendVoteSucceed~~~');
@@ -201,12 +211,6 @@ function subscribe(socket) {
 }
 
 function* read(socket) {
-  // socket.on('updateNotification', (updatedNotification) => {
-  //   console.log(updatedNotification);
-  //   console.log('~~~~heard from socket~~~');
-  //   // yield put(TESTONLY());
-  //   // emit(newMessage({ message }));
-  // });  
   const channel = yield call(subscribe, socket);
   while (true) {
     let action = yield take(channel);
