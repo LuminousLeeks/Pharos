@@ -65,6 +65,7 @@ export default class MapViewComponents extends Component {
         SnackBar.dismiss()
         vote.type = false;
         // this.props.voteForNotification(vote);        
+
       },
       summaryText: `Current Vote Count: ${notification.voteCount}  `,
       onSummary: () => {},

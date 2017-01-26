@@ -182,7 +182,14 @@ function subscribe(socket) {
   return eventChannel(emit => {
     socket.on('pushNotification', (newNotification) => {
       // console.log('heard from server socket, newNotification');
-      // console.log(newNotification)
+      console.log(newNotification);
+      let newEventRegion = {
+        latitude: newNotification.location.coordinates[0],
+        longitude: newNotification.location.coordinates[1] * (-1) - 180,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,        
+      }
+
       Alert.alert(
         'Received new notification: ',
         `${newNotification.title} event was reported, ${newNotification.description}`,
@@ -190,7 +197,7 @@ function subscribe(socket) {
           {text: 'OK', onPress: () => console.log('OK Pressed!')},
         ]        
       )
-      // emit(addNewNotification(newNotification));
+      emit(updateRegion(newEventRegion));
     });
     socket.on('sendVoteSucceed', (updatedNotification) => {
       console.log('~~~~sendVoteSucceed~~~');
