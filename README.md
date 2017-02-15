@@ -2,6 +2,8 @@
 >A community driven, mobile awareness application
 that delivers real-time event notifications based on your interests and location.
 
+<img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
+<img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 ## Team
 
@@ -9,7 +11,6 @@ that delivers real-time event notifications based on your interests and location
   - [Efe Surekly] - (https://github.com/efesurekli)
   - [Michael Dai] - (https://github.com/michaelbdai)
   - [Sean O'Neal] - (https://github.com/sean-oneal)
-
 
 ## Table of Contents
 
@@ -76,7 +77,9 @@ npm run startApp
 
 ## Roadmap
 
-View the project roadmap [here]()
+###
+
+View the project roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
 
 
 ## Contributing
