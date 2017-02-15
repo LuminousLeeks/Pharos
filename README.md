@@ -1,12 +1,14 @@
 # Project Name
 
-A GitHub for ideas.
+<img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
+<img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 ## Team
 
-  - __Product Owner__: Sean O'Neal
-  - __Scrum Master__: Craig Dearden
-  - __Development Team Members__: Efe Surekli, Michael Dai
+  - [Craig Dearden] - (https://github.com/cdearden)
+  - [Efe Surekly] - (https://github.com/efesurekli)
+  - [Michael Dai] - (https://github.com/michaelbdai)
+  - [Sean O'Neal] - (https://github.com/sean-oneal)
 
 ## Table of Contents
 
@@ -44,7 +46,9 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+###
+
+View the project roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
 
 
 ## Contributing
