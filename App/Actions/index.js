@@ -1,33 +1,30 @@
+export const partialReport = newNotification => ({
+  type: 'PARTIAL_REPORT',
+  newNotification,
+});
 
-import req from 'superagent';
-import { Actions as NavigationActions } from 'react-native-router-flux';
-
-export const reportEvent = newEvent => ({
+export const reportNotification = (newNotification, userId) => ({
   type: 'REPORT_EVENT',
-  newEvent,
+  newNotification,
+  userId,
 });
 
 export const updateRegion = region => ({
   type: 'UPDATE_REGION',
   region,
 });
-
+export const getPosition = () => ({
+  type: 'GET_POSITION',
+});
 export const updatePosition = position => ({
   type: 'UPDATE_POSITION',
   userLocation: {
-    region: {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    },
-    currentLocation: {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    },
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
   },
 });
 // !!! this is duplicate !!!
+<<<<<<< HEAD
 // export const loadEvents = (events, token) => {
 //   console.log('loadEvents action triggered');
 //   console.log(events);
@@ -36,22 +33,37 @@ export const updatePosition = position => ({
 //     events,
 //   };
 // };
+=======
+export const loadNotifications = notifications => ({
+  type: 'UPDATE_EVENTS',
+  notifications,
+});
+export const addNewNotification = notification => ({
+  type: 'ADD_NEW_NOTIFICATION',
+  notification,
+});
+>>>>>>> upstream/master
 export const saveWatchID = watchID => ({
   type: 'SAVE_WATCHID',
   watchID,
 });
-export const updateEvent = events => ({
+export const updateNotification = notifications => ({
   type: 'UPDATE_EVENTS',
-  events,
+  notifications,
 });
-export const fetchEvents = (token, userLocation) => ({
+export const fetchNotifications = (token, location, userId) => ({
   type: 'FETCH_EVENTS',
   token,
-  userLocation,
+  location,
+  userId,
 });
 export const fetchUserInfo = (username, token, firstName, lastName) => ({
   type: 'FETCH_USER_INFO',
+<<<<<<< HEAD
   username: this.state.username,
+=======
+  username,
+>>>>>>> upstream/master
   token,
   firstName,
   lastName,
@@ -63,6 +75,17 @@ export const updateUserInfo = (username, token) => ({
   token,
   // TODO: Update user data
 });
+<<<<<<< HEAD
+=======
+export const sendVoteToState = notifications => ({
+  type: 'STATE_VOTE_EVENT',
+  notifications,
+});
+export const sendVoteToServer = vote => ({
+  type: 'SERVER_VOTE_EVENT',
+  vote,
+});
+>>>>>>> upstream/master
 export const fetchCategories = (username, token, categories = '') => ({
   type: 'FETCH_CATEGORIES',
   username,
@@ -84,13 +107,13 @@ export const request = () => ({
   type: 'REQUEST',
 });
 
-export const loginSuccess = (username, token) => {
-  console.log(token, 'sucess and token!');
-  NavigationActions.mapScreen();
+export const loginSuccess = (username, token, userId, location) => {
   return {
     type: 'SUCCESS',
     username,
     token,
+    userId,
+    location,
   };
 };
 
@@ -105,55 +128,17 @@ export const loginRequest = (username, password) => ({
   password,
 });
 
-export const registerRequest = (username, password) => ({
+export const registerRequest = (username, password, userInfo) => ({
   type: 'SIGNUP_REQUEST',
   username,
   password,
+  userInfo,
 });
 
-export const loginRequest_ = (username, password) => (dispatch) => {
-  dispatch(request);
-  const url = 'http://127.0.0.1:8099';
-  return req.post(url.concat('/api/auth/login'))
-      .send({ username, password })
-      .end((err, res) => {
-        if (err) { throw err; }
-         // change state to loginSuccess / failure
-        const token = res.body;
-        console.log(token);
-        if (token) {
-          NavigationActions.mapview();
-          return dispatch(loginSuccess(username, token));
-        } else {
-          const error = res.text;
-          return dispatch(authFail(error));
-        }
-      });
-};
-// REFACTOR: Below code is almost DUPLICATE.
-// Finalize the signin / signup endpoints then refactor
+// export const TESTONLY = () => {
+//   console.log('testonly action triggered~~~~~~~~~~~~');
+//   return {
+//     type: 'TESTONLY',
+//   }
 
-export const registerRequest_ = (username, password) => (dispatch) => {
-  dispatch(request);
-  const url = 'http://127.0.0.1:8099';
-  return req.post(url.concat('/api/auth/register'))
-      .send({
-        username,
-        password,
-        firstName: 'John',
-        lastName: 'Appleseed',
-      })
-      .end((err, res) => {
-        if (err) { throw err; }
-        const token = res.body;
-        console.log(token);
-         // change state to success / failure
-        if (token) {
-          return dispatch(loginSuccess(username, token));
-        } else {
-          const error = res.text;
-          return dispatch(authFail(error));
-        }
-      });
-};
-
+// }

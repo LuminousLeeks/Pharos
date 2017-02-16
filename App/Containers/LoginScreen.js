@@ -14,38 +14,22 @@ import {
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
 import {Images, Metrics} from '../Themes'
-import { loginRequest, registerRequest } from '../Actions/index.js'
+import {
+  loginRequest,
+  registerRequest,
+  getPosition
+} from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
-// type LoginScreenProps = {
-//   dispatch: () => any,
-//   fetching: boolean,
-//   attemptLogin: () => void,
-//   attemptRegister: () => void
-// }
 
 class LoginScreen extends React.Component {
 
-  // props: LoginScreenProps
-
-  // state: {
-  //   username: string,
-  //   password: string,
-  //   visibleHeight: number,
-  //   topLogo: {
-  //     width: number
-  //   }
-  // }
-
-  // isAttempting: boolean
-  // keyboardDidShowListener: Object
-  // keyboardDidHideListener: Object
 
   constructor (props) {
     super(props)
     this.state = {
-      username: 'borat',
-      password: 'borat',
+      username: 'Bing',
+      password: 'bing',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
@@ -101,7 +85,8 @@ class LoginScreen extends React.Component {
   handlePressRegister = () => {
     const { username, password } = this.state;
     this.isAttempting = true;
-    this.props.attemptRegister(username, password);
+    NavigationActions.signUpPage();
+    // this.props.attemptRegister(username, password);
   }
 
   handleChangeUsername = (text) => {
@@ -161,7 +146,7 @@ class LoginScreen extends React.Component {
                 <Text style={Styles.loginText}>Login</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ this.handlePressRegister }>
+            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ NavigationActions.signUpPage }>
               <View style={Styles.loginButton}>
                 <Text style={Styles.loginText}>Signup</Text>
               </View>
@@ -182,7 +167,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (username, password) => dispatch(loginRequest(username, password)),
+    attemptLogin: (username, password) => {
+      // dispatch(getPosition());
+      dispatch(loginRequest(username, password));
+    },
     attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
   }
 }

@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 import { combineReducers } from 'redux';
 import Immutable from 'seamless-immutable';
 import { exampleCategories } from './../../data/exampleData'; // TODO: Test data => Remove before production!
+=======
+// import { combineReducers } from 'redux';
+// import Immutable from 'seamless-immutable';
+import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
+>>>>>>> upstream/master
 
 const defaultState = {
-  newEvent: {
+  newNotification: {
     category: 'waitTime',
     description: 'Long wait time',
-    event: 'evantA'
+    title: 'evantA',
+    location: { latitude: 37.78500, longitude: -122.41059 },
+    categoryId: 3,
   },
+<<<<<<< HEAD
   events: [
     {
       category: 'waitTime',
@@ -46,12 +55,15 @@ const defaultState = {
       longitude: -122.407679,
     },
   ],
+=======
+  notifications: [],
+>>>>>>> upstream/master
   categories: exampleCategories,
 };
 
 const initialState = {
   fething: false,
-  newEvent: defaultState.newEvent,
+  newNotification: defaultState.newNotification,
   userInterests: {},
   userLocation: {},
   region: {
@@ -63,19 +75,42 @@ const initialState = {
   userName: '',
   firstName: '',
   lastName: '',
+<<<<<<< HEAD
   events: defaultState.events,
   token: '',
   watchID: '',
   error: null,
+=======
+  notifications: defaultState.notifications,
+  token: '',
+  watchID: '',
+  error: null,
+  userId: '',
+  selectedCategories: {},
+>>>>>>> upstream/master
   categories: defaultState.categories,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REPORT_EVENT':
+    // case 'REPORT_EVENT':
+    //   return {
+    //     ...state,
+    //     newNotification: action.newNotification,
+    //   };
+    case 'ADD_NEW_NOTIFICATION':
       return {
         ...state,
+<<<<<<< HEAD
         newEvent: action.newEvent,
+=======
+        notifications: state.notifications.concat(action.notification),
+      };
+    case 'PARTIAL_REPORT':
+      return {
+        ...state,
+        newNotification: action.newNotification,
+>>>>>>> upstream/master
       };
     case 'UPDATE_POSITION':
       return {
@@ -95,6 +130,7 @@ const rootReducer = (state = initialState, action) => {
     case 'UPDATE_EVENTS':
       return {
         ...state,
+<<<<<<< HEAD
         events: action.events,
         token: action.token,
       };
@@ -127,6 +163,45 @@ const rootReducer = (state = initialState, action) => {
         token: action.token,
         saveCategories: action.saveCategories, // TODO: Make sure naming convention matches Database
       };
+=======
+        notifications: action.notifications,
+        // token: action.token
+      };
+    case 'STATE_VOTE_EVENT':
+      return {
+        ...state,
+        notifications: action.notifications,
+      };
+    case 'FETCH_USER_INFO':
+      return {
+        ...state,
+        username: action.username, // Uncommented to build user profile
+        // userInterests: action.userInterests, // TODO: Decide on naming conventions
+        token: action.token,
+        firstName: action.firstName,
+        lastName: action.lastName,
+      };
+    case 'UPDATE_USER_INFO':
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+      };
+    case 'FETCH_CATEGORIES' :
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+        categories: action.categories,
+      };
+    case 'SAVE_CATEGORIES':
+      return {
+        ...state,
+        username: action.username,
+        token: action.token,
+        saveCategories: action.saveCategories, // TODO: Make sure naming convention matches Database
+      };
+>>>>>>> upstream/master
     case 'TOGGLE_CATEGORY':
       if (state.id !== action.id) {
         return state;
@@ -138,7 +213,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: true,
-        token: action.token,
+        // token: action.token,
       };
     case 'STOP_FETCHING':
       return {
@@ -147,8 +222,9 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case 'REQUEST':
-      return { ...state, fetching: true, token: action.token };
+      return { ...state, token: action.token };
     case 'SUCCESS':
+<<<<<<< HEAD
       return {
         ...state,
         fetching: false,
@@ -160,13 +236,21 @@ const rootReducer = (state = initialState, action) => {
         fetching: false,
         error: action.error,
       };
+=======
+      return { ...state, username: action.username, token: action.token, userId: action.userId };
+    case 'AUTH_FAIL':
+      return { ...state, error: action.error };
+>>>>>>> upstream/master
     case 'LOGOUT':
       return state;
+    case 'LOGGEDIN':
+      return { ...state, fetching: false };
     default:
       return state;
   }
 };
 
+<<<<<<< HEAD
 // Bing disabled the one below... Why, I don't know why.
 // const rootReducer = combineReducers({
 //   mapAction,
@@ -176,4 +260,6 @@ const rootReducer = (state = initialState, action) => {
 // Below was active in my case... so we have to make that up.
 // export default rootReducer;
 
+=======
+>>>>>>> upstream/master
 export default rootReducer;

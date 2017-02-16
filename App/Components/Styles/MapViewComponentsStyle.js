@@ -18,9 +18,11 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  myCallout: {
+  callout: {
+
     alignSelf: 'stretch',
     width: 100,
+
   },
   flex: {
     flex: 1,
@@ -30,4 +32,10 @@ export default StyleSheet.create({
     fontSize: 30,
     color: 'blue',
   },
+  icon: {
+
+  },
+  marker: {
+    // zIndex: 0,
+  }
 });

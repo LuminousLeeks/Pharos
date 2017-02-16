@@ -5,6 +5,7 @@ logs
 *.log
 npm-debug.log*
 
+
 # Runtime data
 pids
 *.pid
@@ -18,7 +19,6 @@ pids
 
 
 # Xcode
-#
 ios/build/
 *.pbxuser
 !default.pbxuser
@@ -37,6 +37,11 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/Pharos.xcodeproj/project.pbxproj
+<<<<<<< HEAD
+=======
+#
+
+>>>>>>> upstream/master
 # Android/IntelliJ
 #
 build/
@@ -50,9 +55,11 @@ local.properties
 node_modules/
 npm-debug.log
 
+
 #Module dependencies
 node_modules/
 bower_components/
+
 
 # Optional eslint cache
 .eslintcache

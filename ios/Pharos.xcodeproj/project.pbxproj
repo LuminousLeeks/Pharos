@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +37,19 @@
 		E38E79D9DC94430392FCE5C5 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7E2C4A2BCE6450CBAAB3D74 /* Zocial.ttf */; };
 		EC2C8391A51349D7B692B42A /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5697258F241A4E069182552C /* libRNI18n.a */; };
 		FA492A0605DE4C64BECC4B92 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50FB85E272C64B8E862F31D7 /* Ionicons.ttf */; };
+		629E8C9FDB6942F4B67B134F /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E29F0362A0644EC80ED09B2 /* Andale Mono.ttf */; };
+		CF925241BAAC48DEA46CE258 /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A74A6B7A7B046899E5A0EC6 /* Arial Black.ttf */; };
+		5CB515A003CB4D68BE600CDC /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 086E734EE70F4CF19C342D18 /* Arial.ttf */; };
+		B74F0D25190840A5A72134E3 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D7675A840A543B39EAB169F /* Comic Sans MS.ttf */; };
+		70220ADAEE3E4A5689908C1D /* Courier New.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF3E808ED9584D54A4EFD48F /* Courier New.ttf */; };
+		9BD76D74789F4C4A91F64B3B /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BE8EA1B930A4CD985030AC3 /* Georgia.ttf */; };
+		8842D89FF2D94E8FAB1F8E9F /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB879069D64444778840C294 /* Microsoft Sans Serif.ttf */; };
+		548ED64FE04043089FDB9D62 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD827856342400C9DE7C7AD /* Roboto_medium.ttf */; };
+		C65811E677D44364862EFA68 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8D81F321F0644518B2CBF6B /* Roboto.ttf */; };
+		1731093526444EF9AFFE30F5 /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1815CD7D8D540C68D48C80C /* SF-UI-Text-Regular.otf */; };
+		24F99B319E954B739CF5553B /* Skia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C51AA6B7D0F44A1A18C89C1 /* Skia.ttf */; };
+		645ADC2217EC4CD0B636B37B /* Times New Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E8630C8AC0249879AC90A05 /* Times New Roman.ttf */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,6 +279,18 @@
 		F907360758464100AD23D828 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		F96A05AB40374B20AD01BB20 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FE19AB82DD5F49D9BA7ADFD6 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		1E29F0362A0644EC80ED09B2 /* Andale Mono.ttf */ = {isa = PBXFileReference; name = "Andale Mono.ttf"; path = "../node_modules/native-base/Fonts/Andale Mono.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7A74A6B7A7B046899E5A0EC6 /* Arial Black.ttf */ = {isa = PBXFileReference; name = "Arial Black.ttf"; path = "../node_modules/native-base/Fonts/Arial Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		086E734EE70F4CF19C342D18 /* Arial.ttf */ = {isa = PBXFileReference; name = "Arial.ttf"; path = "../node_modules/native-base/Fonts/Arial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0D7675A840A543B39EAB169F /* Comic Sans MS.ttf */ = {isa = PBXFileReference; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EF3E808ED9584D54A4EFD48F /* Courier New.ttf */ = {isa = PBXFileReference; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4BE8EA1B930A4CD985030AC3 /* Georgia.ttf */ = {isa = PBXFileReference; name = "Georgia.ttf"; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AB879069D64444778840C294 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; name = "Microsoft Sans Serif.ttf"; path = "../node_modules/native-base/Fonts/Microsoft Sans Serif.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3FD827856342400C9DE7C7AD /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B8D81F321F0644518B2CBF6B /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F1815CD7D8D540C68D48C80C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; name = "SF-UI-Text-Regular.otf"; path = "../node_modules/native-base/Fonts/SF-UI-Text-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4C51AA6B7D0F44A1A18C89C1 /* Skia.ttf */ = {isa = PBXFileReference; name = "Skia.ttf"; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8E8630C8AC0249879AC90A05 /* Times New Roman.ttf */ = {isa = PBXFileReference; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +322,7 @@
 				EC2C8391A51349D7B692B42A /* libRNI18n.a in Frameworks */,
 				A05FCE0C590F40E09A8E33A3 /* libAirMaps.a in Frameworks */,
 				7F5BDDA25B56410EA2B7F5AA /* libRNVectorIcons.a in Frameworks */,
+				68158C1641D14AD8A30FA838 /* libRNSnackbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +441,18 @@
 				1A693843E5444D64841E0443 /* Octicons.ttf */,
 				5DF551531C4C47059F0D990C /* SimpleLineIcons.ttf */,
 				B7E2C4A2BCE6450CBAAB3D74 /* Zocial.ttf */,
+				1E29F0362A0644EC80ED09B2 /* Andale Mono.ttf */,
+				7A74A6B7A7B046899E5A0EC6 /* Arial Black.ttf */,
+				086E734EE70F4CF19C342D18 /* Arial.ttf */,
+				0D7675A840A543B39EAB169F /* Comic Sans MS.ttf */,
+				EF3E808ED9584D54A4EFD48F /* Courier New.ttf */,
+				4BE8EA1B930A4CD985030AC3 /* Georgia.ttf */,
+				AB879069D64444778840C294 /* Microsoft Sans Serif.ttf */,
+				3FD827856342400C9DE7C7AD /* Roboto_medium.ttf */,
+				B8D81F321F0644518B2CBF6B /* Roboto.ttf */,
+				F1815CD7D8D540C68D48C80C /* SF-UI-Text-Regular.otf */,
+				4C51AA6B7D0F44A1A18C89C1 /* Skia.ttf */,
+				8E8630C8AC0249879AC90A05 /* Times New Roman.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -457,6 +494,7 @@
 				52101584583448E09D20636F /* RNI18n.xcodeproj */,
 				5DD2AA9BE7274B2E9437188A /* AirMaps.xcodeproj */,
 				AC73A73CBBB44F8C96CA7F17 /* RNVectorIcons.xcodeproj */,
+				0A58530D6E7E40BAAF3C49EB /* RNSnackbar.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -578,7 +616,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 800;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -873,6 +911,18 @@
 				B2C41E7668EE4D3DB871278E /* Octicons.ttf in Resources */,
 				E23C95C9EC2E407DB472A6E5 /* SimpleLineIcons.ttf in Resources */,
 				E38E79D9DC94430392FCE5C5 /* Zocial.ttf in Resources */,
+				629E8C9FDB6942F4B67B134F /* Andale Mono.ttf in Resources */,
+				CF925241BAAC48DEA46CE258 /* Arial Black.ttf in Resources */,
+				5CB515A003CB4D68BE600CDC /* Arial.ttf in Resources */,
+				B74F0D25190840A5A72134E3 /* Comic Sans MS.ttf in Resources */,
+				70220ADAEE3E4A5689908C1D /* Courier New.ttf in Resources */,
+				9BD76D74789F4C4A91F64B3B /* Georgia.ttf in Resources */,
+				8842D89FF2D94E8FAB1F8E9F /* Microsoft Sans Serif.ttf in Resources */,
+				548ED64FE04043089FDB9D62 /* Roboto_medium.ttf in Resources */,
+				C65811E677D44364862EFA68 /* Roboto.ttf in Resources */,
+				1731093526444EF9AFFE30F5 /* SF-UI-Text-Regular.otf in Resources */,
+				24F99B319E954B739CF5553B /* Skia.ttf in Resources */,
+				645ADC2217EC4CD0B636B37B /* Times New Roman.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,7 +1004,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pharos.app/Pharos";
 			};
@@ -975,7 +1027,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pharos.app/Pharos";
 			};
@@ -994,6 +1048,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Pharos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1011,6 +1066,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Pharos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1029,15 +1085,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1059,6 +1119,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-snackbar/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1080,15 +1141,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1104,6 +1168,7 @@
 					"$(SRCROOT)/../node_modules/react-native-i18n/RNI18n",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-snackbar/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

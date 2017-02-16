@@ -1,16 +1,26 @@
+/* eslint-disable */
 import { connect } from 'react-redux';
 import MapViewComponents from '../Components/MapViewComponents';
-import { fetchEvents, updateEvent, updatePosition, saveWatchID, updateRegion } from '../Actions';
+import {
+  fetchNotifications,
+  updateNotification,
+  updatePosition,
+  saveWatchID,
+  updateRegion,
+  sendVoteToServer
+} from '../Actions';
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
 // however the ownProps only have ownProps.socket so we use {socket}
 
 const mapStateToProps = (state, ownProps) => ({
-  events: state.events,
+  notifications: state.notifications,
   region: state.region,
   watchID: state.watchID,
-  token: state.token,
+  userId: state.userId,
+  userName: state.userName,
+  userId: state.userId,
   currentLocation: state.currentLocation,
 });
 
@@ -24,7 +34,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         if (cb) { cb(position.coords); }
       },
       (err) => {},
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   },
   watchPosition: () => navigator.geolocation.watchPosition(
@@ -35,15 +45,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       // TODO: remove this for production
       // , {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     ),
-  retrieveMapMarkers: (token, userLocation) => {
-    dispatch(fetchEvents(token, userLocation));
+  retrieveMapMarkers: (token, userId, location) => {
+    dispatch(fetchNotifications(token, location, userId));
   },
   saveWatchID: (watchID) => {
     dispatch(saveWatchID(watchID));
   },
   updateRegion: (region) => {
+    console.log('in MapScreen, updateRegion props is triggered-------')
+    console.log(region);
     dispatch(updateRegion(region));
   },
+  voteForNotification: (vote) => {
+    dispatch(sendVoteToServer(vote));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapViewComponents);

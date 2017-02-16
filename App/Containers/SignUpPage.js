@@ -11,7 +11,12 @@ import {
   Button,
   }
   from 'react-native';
+<<<<<<< HEAD
 import { Container, Content, List, ListItem, InputGroup, Input, Icon } from 'native-base';
+=======
+import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+>>>>>>> upstream/master
 
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -32,6 +37,10 @@ class SignUpPage extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
+<<<<<<< HEAD
+=======
+      email: '',
+>>>>>>> upstream/master
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth },
     };
@@ -74,9 +83,24 @@ class SignUpPage extends React.Component {
     });
   }
   handlePressRegister = () => {
+<<<<<<< HEAD
     const { username, password } = this.state;
     this.isAttempting = true;
     this.props.attemptRegister(username, password);
+=======
+    const { username,
+      password,
+      firstName,
+      lastName,
+      email } = this.state;
+    const userInfo = {
+      firstName,
+      lastName,
+      email,
+    };
+    this.isAttempting = true;
+    this.props.attemptRegister(username, password, userInfo);
+>>>>>>> upstream/master
   }
   render() {
     return (
@@ -85,6 +109,7 @@ class SignUpPage extends React.Component {
           <Content>
             <List>
               <ListItem>
+<<<<<<< HEAD
                 <InputGroup>
                   <Input inlineLabel label="First Name" placeholder="John" value=""/>
                 </InputGroup>
@@ -104,6 +129,52 @@ class SignUpPage extends React.Component {
                 <InputGroup>
                   <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
                   <Input placeholder="PASSWORD" secureTextEntry />
+=======
+                <Icon name="user" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Input
+                   label="First Name"
+                  onChangeText={(text) => this.setState({firstName: text})} placeholder="First" />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Input
+                    label="Last Name"
+                    onChangeText={(text) => this.setState({lastName: text})} placeholder="Last" />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <Icon name="envelope" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Input
+                    label="Email"
+                    placeholder="Email"
+                    onChangeText={(text) => this.setState({email: text})} />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <Icon name="user" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Input label="Username"
+                  onChangeText={(text) => this.setState({username: text})} placeholder="username"
+                  />
+                </InputGroup>
+              </ListItem>
+              <ListItem>
+                <Icon name="lock" size={30} color="blue" />
+              </ListItem>
+              <ListItem>
+                <InputGroup>
+                  <Input placeholder="password"
+                    onChangeText={(text) => this.setState({password: text})} secureTextEntry />
+>>>>>>> upstream/master
                 </InputGroup>
               </ListItem>
             </List>
@@ -126,7 +197,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+<<<<<<< HEAD
     attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
+=======
+    attemptRegister: (username, password, userInfo) => dispatch(registerRequest(username, password, userInfo)),
+>>>>>>> upstream/master
   };
 };
 

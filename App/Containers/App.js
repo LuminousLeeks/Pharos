@@ -17,7 +17,7 @@ const loggerMiddleware = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(
-  thunkMiddleware, 
+  thunkMiddleware,
   loggerMiddleware, 
   sagaMiddleware
 ));
@@ -88,5 +88,3 @@ export default App;
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-
-

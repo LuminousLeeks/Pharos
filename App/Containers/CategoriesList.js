@@ -5,7 +5,11 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 import { List, ListItem, CheckBox, Text } from 'native-base';
 import { fetchCategories, saveSelectedCategories, toggleCategory } from './../Actions/index.js';
 // TODO: Remove Test Data
+<<<<<<< HEAD
 import EventCategories from './../Lib/EventCategories';
+=======
+import NotificationCategories from './../Lib/NotificationCategories';
+>>>>>>> upstream/master
 
 // For empty lists
 import AlertMessage from './../Components/AlertMessage';
@@ -16,7 +20,11 @@ import styles from './Styles/CategoriesListStyle';
 class CategoriesList extends React.Component {
 
   state: {
+<<<<<<< HEAD
     dataSource: EventCategories
+=======
+    dataSource: NotificationCategories
+>>>>>>> upstream/master
   }
 
   constructor(props) {
@@ -28,7 +36,11 @@ class CategoriesList extends React.Component {
     * This is an array of objects with the properties you desire
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
+<<<<<<< HEAD
     const dataObjects = EventCategories;
+=======
+    const dataObjects = NotificationCategories;
+>>>>>>> upstream/master
 
     /* ***********************************************************
     * STEP 2
@@ -51,7 +63,11 @@ class CategoriesList extends React.Component {
   handleCheckBoxSelection(e) {  // TODO: finish handling the checkbox selecting action
     const { username, categories, selectedCategories } = this.state;
     this.
+<<<<<<< HEAD
     e.preventDefault();
+=======
+    e.prnotificationDefault();
+>>>>>>> upstream/master
     // this.props.toggleCategory(selectedCategories)
     console.log('handle selected');
   };

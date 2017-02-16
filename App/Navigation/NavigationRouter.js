@@ -9,7 +9,11 @@ import NavigationDrawer from './NavigationDrawer';
 // import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
+<<<<<<< HEAD
 import ReportEventScreen from '../Containers/ReportEventScreen';
+=======
+import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
+>>>>>>> upstream/master
 import CategoriesList from '../Containers/CategoriesList';
 import UserProfilePage from '../Containers/UserProfilePage';
 import SignUpPage from '../Containers/SignUpPage';
@@ -44,6 +48,7 @@ class NavigationRouter extends Component {
               component={LoginScreen}
               title="Login Screen"
             />
+<<<<<<< HEAD
             <Scene
               // initial
               key="signUpPage"
@@ -63,6 +68,27 @@ class NavigationRouter extends Component {
             />
             <Scene
               // initial
+=======
+            <Scene
+              // initial
+              key="signUpPage"
+              component={SignUpPage}
+              title="Sign-Up"
+            />
+            <Scene
+              // initial
+              key="categoriesList"
+              component={CategoriesList}
+              title="CategoriesList"
+            />
+            <Scene
+              key='reportNotificationScreen'
+              component={ReportNotificationScreen}
+              title='Report Notification'
+            />
+            <Scene
+              // initial
+>>>>>>> upstream/master
               key="userProfilePage"
               component={UserProfilePage}
               title="User Profile Page"

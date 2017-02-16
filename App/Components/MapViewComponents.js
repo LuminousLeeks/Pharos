@@ -1,43 +1,74 @@
+/* eslint-disable */
 import React, { Component, PropTypes } from 'react';
-import { View } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import MapView from 'react-native-maps';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { Metrics } from '../Themes';
 import Styles from './Styles/MapViewComponentsStyle';
 import RadialMenu from '../Containers/RadialMenu';
-import CalloutContainer from '../Containers/CalloutContainer';
-import EventCategories from '../Lib/EventCategories';
+import MapCalloutContainer from '../Containers/MapCalloutContainer';
+import NotificationCategories from '../Lib/NotificationCategories';
+// import MapCalloutContainer from '../Containers/MapCalloutContainer';
+import NotificationScreen from '../Containers/NotificationScreen';
+import SnackBar from './SnackbarDialog_npm';
 
-
-// const Mapviews = ({ events, socket, loadEvents, updateEvents }) => {
 export default class MapViewComponents extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      openSwiper: false,
+      displayedEvent: {} 
+    }
   }
 
   componentDidMount() {
-    const retrieveMapMarkers = this.props.retrieveMapMarkers.bind(this);
-    this.props.getCurrentPosition((coord) => {
-      const region = {
-        latitude: coord.latitude,
-        longitude: coord.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      };
-      this.props.updateRegion(region);
-      retrieveMapMarkers(this.props.token, coord);
-    });
     const watchID = this.props.watchPosition();
     this.props.saveWatchID(watchID);
   }
 
   onRegionChange(region) {
     this.props.updateRegion(region);
-    this.props.retrieveMapMarkers(this.props.token, this.props.currentLocation);
+    this.props.retrieveMapMarkers(this.props.token, this.props.userId, this.props.region);
+
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.props.watchID);
+  }
+  handlePressIcon(notification, Icon) {
+    console.log(notification);
+    const descriptions = `${notification.title}: ${notification.description}`;
+    const upvoteIcon = (
+      <FontAwesomeIcon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
+    )
+    const downvoteIcon = (
+      <FontAwesomeIcon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} /> 
+    )    
+    let vote = {
+      notificationId: notification.id,
+      userId: this.props.userId,
+    }
+    // console.log(this.props.events);
+    SnackBar.show(descriptions, {
+      confirmText: upvoteIcon,
+      onConfirm: () => {
+        console.log('upvoted');
+        SnackBar.dismiss();
+        vote.type = true;
+        // this.props.voteForNotification(vote);
+
+      },
+      cancelText: downvoteIcon,
+      onCancel: () => {
+        console.log('downvoted')
+        SnackBar.dismiss()
+        vote.type = false;
+        // this.props.voteForNotification(vote);        
+      },
+      summaryText: `Current Vote Count: ${notification.voteCount}  `,
+      onSummary: () => {},
+    })
   }
 
   render() {
@@ -55,42 +86,61 @@ export default class MapViewComponents extends Component {
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
             }}
+            style={{
+              zIndex: 10,
+            }}
           >
-            <Icon
-              name="map-pin"
-              size={Metrics.icons.small}
-              color={'blue'}
+            <FontAwesomeIcon
+              name="crosshairs"
+              size={Metrics.icons.medium}
+              color={'red'}
             />
           </MapView.Marker>
 
-          {this.props.events
-            .map(event => ({
-              event,
-              Icon: EventCategories[event.category].icon,
-            }))
-            .map((EventObj, index) =>
+          {this.props.notifications
+            .map(notification => { return {
+              notification,
+              Icon: NotificationCategories[notification.categoryId].icon,
+            }})
+            .map((NotificationObj, index) => (
               <MapView.Marker
                 key={index}
                 coordinate={{
-                  latitude: EventObj.event.latitude,
-                  longitude: EventObj.event.longitude,
+                  latitude: NotificationObj.notification.location.coordinates[0],
+                  longitude: NotificationObj.notification.location.coordinates[1],
                 }}
-                event={EventObj.event}
+                event={NotificationObj.notification}
+                style={Styles.marker}
+                onPress={() => {
+                  this.handlePressIcon(NotificationObj.notification, NotificationObj.Icon)
+                }}
               >
-                <View color="#4F8EF7" >
-                  <EventObj.Icon size={Metrics.icons.small} />
-                </View>
-                <MapView.Callout style={Styles.myCallout} >
-                  <CalloutContainer
-                    notification={EventObj.event}
-                    socket={this.props.socket}
+                <View color="#4F8EF7" style={Styles.icon} >
+                  <NotificationObj.Icon
+                    size={Metrics.icons.small}
+                    color={'blue'}
                   />
-                </MapView.Callout>
-              </MapView.Marker>,
-            )
+                  <Image
+                    source={require('../Images/mapmarker2.png')}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      position: 'absolute',
+                      top: -7,
+                      left: -16,
+                      zIndex: -1,
+                    }}
+                  />
+                </View>
+              </MapView.Marker>
+            ))
           }
         </MapView>
-        <RadialMenu socket={this.props.socket} />
+        <RadialMenu
+          socket={this.props.socket}
+          region={this.props.region}
+          userId={this.props.userId}
+        />
       </View>
     );
   }
@@ -99,4 +149,22 @@ export default class MapViewComponents extends Component {
 MapViewComponents.propTypes = {
   region: PropTypes.object,
   updateRegion: PropTypes.func,
+  userId: PropTypes.number,
+  voteForNotification: PropTypes.func,
+
 };
+
+/*
+                  </Image>
+
+
+                <MapView.Callout style={Styles.callout} >
+                  <MapCalloutContainer
+                    event={EventObj.event}
+                    events={this.props.events}
+                    userName={this.props.userName}
+                    socket={this.props.socket}
+                  />
+                </MapView.Callout>
+
+*/
