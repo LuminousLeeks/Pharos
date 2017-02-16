@@ -3,7 +3,9 @@
 that delivers real-time event notifications based on your interests and location.
 
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
+<br>
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
+
 
 ## Team
 
