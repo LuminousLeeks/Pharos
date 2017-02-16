@@ -1,7 +1,8 @@
 # Project Name
 
+
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
-<br>
+
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 
@@ -22,9 +23,15 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
 
-> Some usage instructions
+## Tech Stack
+This application was built using the following technologies: React-Native
+1.Redux
+1.Redux Saga
+1.PostgreSQL
+1.PostGIS
+1.Express
+1.Socket.io
 
 ## Requirements
 
@@ -41,16 +48,50 @@
 From within the root directory:
 
 ```sh
+npm install
+```
+
+If you do not have React-Native CLI installed:
+```sh
+npm install -g react-native-cli
+```
+
+Populate Data
+
+### Launching App Simulator
+
+From within the root directory:
+
+Build the Database
+```sh
+npm run startdb
+npm run buildb
+npm run populatedb
+```
+
+```sh
 sudo npm install -g bower
 npm install
 bower install
 ```
 
-### Roadmap
+##Testing
+
+Server Test
+```sh
+npm run testServer
+```
+
+Database Test
+```sh
+npm run testdb
+```
+
+## Roadmap
 
 ###
 
-View the project roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
+View the product roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
 
 
 ## Contributing

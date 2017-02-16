@@ -11,7 +11,6 @@ pids
 *.pid
 *.seed
 *pid.lock
-.env
 
 # OSX
 #
@@ -39,7 +38,10 @@ project.xcworkspace
 ios/Pharos.xcodeproj/project.pbxproj
 #
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Add Install Details to Readme, Remove Unused Files
 # Android/IntelliJ
 #
 build/
