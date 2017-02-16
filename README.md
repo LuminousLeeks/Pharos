@@ -1,17 +1,18 @@
 # Project Name
 
-
+### Pharos App Homepage
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
 
+### Pharos Notification Menu
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 
 ## Team
 
   - [Craig Dearden] - (https://github.com/cdearden)
-  - [Efe Surekly] - (https://github.com/efesurekli)
-  - [Michael Dai] - (https://github.com/michaelbdai)
-  - [Sean O'Neal] - (https://github.com/sean-oneal)
+  - [Efe Surekly]   - (https://github.com/efesurekli)
+  - [Michael Dai]   - (https://github.com/michaelbdai)
+  - [Sean O'Neal]   - (https://github.com/sean-oneal)
 
 ## Table of Contents
 
@@ -73,6 +74,13 @@ npm run populatedb
 sudo npm install -g bower
 npm install
 bower install
+```
+
+Clearning the Database
+
+```sh
+npm run dropdb
+npm run buildb
 ```
 
 ##Testing

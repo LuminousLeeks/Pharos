@@ -1,11 +1,12 @@
 // A script that loads thousands of random user, notification and vote data to the db. //
 
-const db = require('../db/db.js')
-const User = require('../models/User.js')
-const Notification = require('../models/Notification.js')
-const Vote = require('../models/Vote.js')
-const Category = require('../models/Category.js')
-const Subscription = require('../models/Subscription.js')
+
+const db = require('../db/db.js');
+const User = require('../models/User.js');
+const Notification = require('../models/Notification.js');
+const Vote = require('../models/Vote.js');
+const Category = require('../models/Category.js');
+const Subscription = require('../models/Subscription.js');
 
 // const Promise = require('Sequelize').Promise;
 // Populate the database

@@ -3,8 +3,6 @@
 
 require('dotenv').config();
 
-// require('dotenv').config();
-
 const port = require('./../env/index').PORT;
 const express = require('express');
 const path = require('path');
