@@ -3,7 +3,7 @@
 that delivers real-time event notifications based on your interests and location.
 
 ### Pharos Login
-<img src="readme/login.png" alt="Pharos mockup login" height=600 />
+<img src="readme/readme.png" alt="Pharos mockup login" height=600 />
 
 ### Pharos Homepage
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
