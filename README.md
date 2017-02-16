@@ -2,8 +2,9 @@
 >A community driven, mobile awareness application
 that delivers real-time event notifications based on your interests and location.
 
+
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
-<br>
+
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 
@@ -26,12 +27,12 @@ that delivers real-time event notifications based on your interests and location
 
 ## Tech Stack
 This application was built using the following technologies: React-Native
-Redux
-Redux Saga
-PostgreSQL
-PostGIS
-Express
-Socket.io
+1.Redux
+1.Redux Saga
+1.PostgreSQL
+1.PostGIS
+1.Express
+1.Socket.io
 
 ## Requirements
 
@@ -57,7 +58,9 @@ If you do not have React-Native CLI installed:
 npm install -g react-native-cli
 ```
 
-### Simulating the Application in Xcode
+Populate Data
+
+### Launching App Simulator
 
 From within the root directory:
 
@@ -65,6 +68,7 @@ Build the Database
 ```sh
 npm run startdb
 npm run buildb
+npm run populatedb
 ```
 
 Start the Server
@@ -77,11 +81,23 @@ Launch the App
 npm run startApp
 ```
 
+##Testing
+
+Server Test
+```sh
+npm run testServer
+```
+
+Database Test
+```sh
+npm run testdb
+```
+
 ## Roadmap
 
 ###
 
-View the project roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
+View the product roadmap [here](https://github.com/LuminousLeeks/Pharos/issues)
 
 
 ## Contributing
