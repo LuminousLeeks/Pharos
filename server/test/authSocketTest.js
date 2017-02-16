@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 /* eslint-disable */
 var request = require('supertest');
 var express = require('express');

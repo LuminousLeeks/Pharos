@@ -8,33 +8,32 @@ import createLogger from 'redux-logger'
 import RootContainer from './RootContainer'
 import rootReducer from '../Redux/index.js'
 
-import createSagaMiddleware from 'redux-saga';
-import saga from '../Sagas';
+import createSagaMiddleware from 'redux-saga'
+import saga from '../Sagas'
 
 // import reducer from './reducers';
 
-const loggerMiddleware = createLogger();
-const sagaMiddleware = createSagaMiddleware();
+const loggerMiddleware = createLogger()
+const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(rootReducer, applyMiddleware(
   thunkMiddleware,
-  loggerMiddleware, 
+  loggerMiddleware,
   sagaMiddleware
-));
-sagaMiddleware.run(saga);
+))
+sagaMiddleware.run(saga)
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <RootContainer />
       </Provider>
-    );
+    )
   }
 }
 
-
-export default App;
+export default App
 
 // export default function configureStore(initialState) {
 //   const sagaMiddleware = createSagaMiddleware();
@@ -47,12 +46,9 @@ export default App;
 //   return store;
 // }
 
-
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-
 // import applyConfigSettings from '../Config';
-
 
 // const createStoreWithMiddleware = applyMiddleware(
 //   thunkMiddleware,
@@ -74,7 +70,6 @@ export default App;
 // Apply config overrides
 // applyConfigSettings();
 // create our store
-
 
 // THIS LINE WAS COMMENTED OUT.
 // const store = configureStore();

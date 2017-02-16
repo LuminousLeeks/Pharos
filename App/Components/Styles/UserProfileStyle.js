@@ -1,32 +1,32 @@
 
-import { StyleSheet } from 'react-native';
-import { Colors, Metrics, Fonts } from '../../Themes';
+import { StyleSheet } from 'react-native'
+import { Colors, Metrics, Fonts } from '../../Themes'
 
 export default StyleSheet.create({
   text: {
     ...Fonts.style.h5,
     color: Colors.snow,
-    marginVertical: Metrics.baseMargin,
+    marginVertical: Metrics.baseMargin
   },
   row: {
     paddingVertical: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin,
+    paddingHorizontal: Metrics.doubleBaseMargin
   },
   rowLabel: {
-    color: Colors.charcoal,
+    color: Colors.charcoal
   },
   updateButtonWrapper: {
-    flex: 1,
+    flex: 1
   },
   updateButton: {
     flex: 1,
     borderWidth: 1,
     borderColor: Colors.charcoal,
     backgroundColor: Colors.panther,
-    padding: 6,
+    padding: 6
   },
   updateText: {
     textAlign: 'center',
-    color: Colors.silver,
-  },
-});
+    color: Colors.silver
+  }
+})

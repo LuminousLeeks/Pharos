@@ -1,7 +1,7 @@
 // @flow
 
 const colors = {
-  background: 'rgba(0,0,0,1)',// '#1F0808',
+  background: 'rgba(0,0,0,1)', // '#1F0808',
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',
   transparent: 'rgba(0,0,0,0)',

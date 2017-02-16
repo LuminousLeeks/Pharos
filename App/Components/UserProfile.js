@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import {  Container, Content } from 'native-base';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import Styles from './Styles/UserProfileStyle';
+import React, { Component, PropTypes } from 'react'
+import { Container, Content } from 'native-base'
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
+import Styles from './Styles/UserProfileStyle'
 
 // const testUser = {
 //   username: 'demo',
@@ -10,7 +10,7 @@ import Styles from './Styles/UserProfileStyle';
 // };
 
 class UserProfile extends Component {
-  render() {
+  render () {
     return (
       <View>
         <View style={[Styles.row]}>
@@ -32,7 +32,7 @@ class UserProfile extends Component {
         <View style={[Styles.updateRow]}>
           <TouchableOpacity
             style={Styles.updateButtonWrapper}
-            onPress={() => { this.props.updateUserInfo(); }}
+            onPress={() => { this.props.updateUserInfo() }}
           >
             <View style={Styles.updateButton}>
               <Text style={Styles.updateText}>Update Profile</Text>
@@ -40,14 +40,14 @@ class UserProfile extends Component {
           </TouchableOpacity>
         </View>
       </View>
-    );
+    )
   }
 }
 
 UserProfile.propTypes = {
   username: PropTypes.string,
   firstName: PropTypes.string,
-  lastName: PropTypes.string,
-};
+  lastName: PropTypes.string
+}
 
-export default UserProfile;
+export default UserProfile

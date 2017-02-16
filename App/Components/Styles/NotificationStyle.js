@@ -1,7 +1,7 @@
 // @flow
 
-import { StyleSheet } from 'react-native';
-import { ApplicationStyles } from '../../Themes/';
+import { StyleSheet } from 'react-native'
+import { ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -12,30 +12,30 @@ export default StyleSheet.create({
     width: 300,
     height: 220,
     marginTop: 200,
-    borderRadius: 20,
+    borderRadius: 20
   },
   container: {
-    height: 300,
+    height: 300
   },
   callout: {
     position: 'relative',
-    width: 200,
+    width: 200
   },
   flex: {
     flex: 1,
     flexDirection: 'row',
-    marginRight: 100,
+    marginRight: 100
   },
   text: {
     fontSize: 15,
-    width: 200,
+    width: 200
   },
   count: {
     marginTop: 10,
     fontSize: 30,
-    color: 'blue',
+    color: 'blue'
   },
   cardItem: {
-    height: 150,
-  },
-});
+    height: 150
+  }
+})

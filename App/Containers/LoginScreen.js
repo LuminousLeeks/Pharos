@@ -21,9 +21,7 @@ import {
 } from '../Actions/index.js'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
-
 class LoginScreen extends React.Component {
-
 
   constructor (props) {
     super(props)
@@ -33,7 +31,7 @@ class LoginScreen extends React.Component {
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
-    this.isAttempting = false;
+    this.isAttempting = false
   }
 
   componentWillReceiveProps (newProps) {
@@ -76,16 +74,16 @@ class LoginScreen extends React.Component {
   }
 
   handlePressLogin = () => {
-    const { username, password } = this.state;
-    this.isAttempting = true;
+    const { username, password } = this.state
+    this.isAttempting = true
     // attempt a login - a saga is listening to pick it up from here.
-    this.props.attemptLogin(username, password); //dispatch an action from here.
+    this.props.attemptLogin(username, password) // dispatch an action from here.
   }
 
   handlePressRegister = () => {
-    const { username, password } = this.state;
-    this.isAttempting = true;
-    NavigationActions.signUpPage();
+    const { username, password } = this.state
+    this.isAttempting = true
+    NavigationActions.signUpPage()
     // this.props.attemptRegister(username, password);
   }
 
@@ -146,7 +144,7 @@ class LoginScreen extends React.Component {
                 <Text style={Styles.loginText}>Login</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={ NavigationActions.signUpPage }>
+            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.signUpPage}>
               <View style={Styles.loginButton}>
                 <Text style={Styles.loginText}>Signup</Text>
               </View>
@@ -169,9 +167,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     attemptLogin: (username, password) => {
       // dispatch(getPosition());
-      dispatch(loginRequest(username, password));
+      dispatch(loginRequest(username, password))
     },
-    attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
+    attemptRegister: (username, password) => dispatch(registerRequest(username, password))
   }
 }
 

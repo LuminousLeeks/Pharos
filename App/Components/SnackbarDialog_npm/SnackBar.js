@@ -200,7 +200,7 @@ export default class SnackBar extends Component {
       cancelText,
       onCancel,
       title,
-      textColor,
+      textColor
     } = this.props
 
     const titleElement = <Text style={[styles.text, { color: textColor }]}>{title}</Text>

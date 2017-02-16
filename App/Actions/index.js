@@ -24,16 +24,6 @@ export const updatePosition = position => ({
   },
 });
 // !!! this is duplicate !!!
-<<<<<<< HEAD
-// export const loadEvents = (events, token) => {
-//   console.log('loadEvents action triggered');
-//   console.log(events);
-//   return {
-//     type: 'UPDATE_EVENTS',
-//     events,
-//   };
-// };
-=======
 export const loadNotifications = notifications => ({
   type: 'UPDATE_EVENTS',
   notifications,
@@ -42,7 +32,6 @@ export const addNewNotification = notification => ({
   type: 'ADD_NEW_NOTIFICATION',
   notification,
 });
->>>>>>> upstream/master
 export const saveWatchID = watchID => ({
   type: 'SAVE_WATCHID',
   watchID,
@@ -59,11 +48,7 @@ export const fetchNotifications = (token, location, userId) => ({
 });
 export const fetchUserInfo = (username, token, firstName, lastName) => ({
   type: 'FETCH_USER_INFO',
-<<<<<<< HEAD
-  username: this.state.username,
-=======
   username,
->>>>>>> upstream/master
   token,
   firstName,
   lastName,
@@ -75,8 +60,6 @@ export const updateUserInfo = (username, token) => ({
   token,
   // TODO: Update user data
 });
-<<<<<<< HEAD
-=======
 export const sendVoteToState = notifications => ({
   type: 'STATE_VOTE_EVENT',
   notifications,
@@ -85,7 +68,6 @@ export const sendVoteToServer = vote => ({
   type: 'SERVER_VOTE_EVENT',
   vote,
 });
->>>>>>> upstream/master
 export const fetchCategories = (username, token, categories = '') => ({
   type: 'FETCH_CATEGORIES',
   username,

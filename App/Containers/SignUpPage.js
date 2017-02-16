@@ -11,12 +11,8 @@ import {
   Button,
   }
   from 'react-native';
-<<<<<<< HEAD
-import { Container, Content, List, ListItem, InputGroup, Input, Icon } from 'native-base';
-=======
 import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
->>>>>>> upstream/master
 
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -37,10 +33,7 @@ class SignUpPage extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
-<<<<<<< HEAD
-=======
       email: '',
->>>>>>> upstream/master
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth },
     };
@@ -83,11 +76,6 @@ class SignUpPage extends React.Component {
     });
   }
   handlePressRegister = () => {
-<<<<<<< HEAD
-    const { username, password } = this.state;
-    this.isAttempting = true;
-    this.props.attemptRegister(username, password);
-=======
     const { username,
       password,
       firstName,
@@ -100,7 +88,6 @@ class SignUpPage extends React.Component {
     };
     this.isAttempting = true;
     this.props.attemptRegister(username, password, userInfo);
->>>>>>> upstream/master
   }
   render() {
     return (
@@ -109,27 +96,6 @@ class SignUpPage extends React.Component {
           <Content>
             <List>
               <ListItem>
-<<<<<<< HEAD
-                <InputGroup>
-                  <Input inlineLabel label="First Name" placeholder="John" value=""/>
-                </InputGroup>
-              </ListItem>
-              <ListItem>
-                <InputGroup>
-                  <Input inlineLabel label="Last Name" placeholder="Appleseed" value=""/>
-                </InputGroup>
-              </ListItem>
-              <ListItem>
-              <InputGroup>
-                <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                <Input placeholder="Email" />
-              </InputGroup>
-              </ListItem>
-              <ListItem>
-                <InputGroup>
-                  <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-                  <Input placeholder="PASSWORD" secureTextEntry />
-=======
                 <Icon name="user" size={30} color="blue" />
               </ListItem>
               <ListItem>
@@ -174,7 +140,6 @@ class SignUpPage extends React.Component {
                 <InputGroup>
                   <Input placeholder="password"
                     onChangeText={(text) => this.setState({password: text})} secureTextEntry />
->>>>>>> upstream/master
                 </InputGroup>
               </ListItem>
             </List>
@@ -197,11 +162,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-<<<<<<< HEAD
-    attemptRegister: (username, password) => dispatch(registerRequest(username, password)),
-=======
     attemptRegister: (username, password, userInfo) => dispatch(registerRequest(username, password, userInfo)),
->>>>>>> upstream/master
   };
 };
 

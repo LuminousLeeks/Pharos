@@ -1,11 +1,11 @@
 // A script that loads thousands of random user, notification and vote data to the db. //
 
-const db = require('../db/db.js');
-const User = require('../models/User.js');
-const Notification = require('../models/Notification.js');
-const Vote = require('../models/Vote.js');
-const Category = require('../models/Category.js');
-const Subscription = require('../models/Subscription.js');
+const db = require('../db/db.js')
+const User = require('../models/User.js')
+const Notification = require('../models/Notification.js')
+const Vote = require('../models/Vote.js')
+const Category = require('../models/Category.js')
+const Subscription = require('../models/Subscription.js')
 
 // const Promise = require('Sequelize').Promise;
 // Populate the database
@@ -15,13 +15,13 @@ const Subscription = require('../models/Subscription.js');
 
 const data = {
   categories: [{
-    name: 'hazard',
+    name: 'hazard'
   }, {
-    name: 'crime',
+    name: 'crime'
   }, {
-    name: 'waitTime',
+    name: 'waitTime'
   }, {
-    name: 'publicEvent',
+    name: 'publicEvent'
   }],
   notifications: [{
     title: '1',
@@ -29,56 +29,56 @@ const data = {
     voteCount: 1,
     userId: 1,
     description: 'Whatever',
-    categoryId: 1,
+    categoryId: 1
   }, {
     title: '2',
     location: { type: 'Point', coordinates: [37.7806521, -122.4080723] },
     voteCount: 2,
     userId: 1,
     description: 'Whatever',
-    categoryId: 2,
+    categoryId: 2
   }, {
     title: '3',
     location: { type: 'Point', coordinates: [37.7804521, -122.4080723] },
     voteCount: 5,
     userId: 1,
     description: 'Whatever',
-    categoryId: 3,
+    categoryId: 3
   }, {
     title: '5',
     location: { type: 'Point', coordinates: [37.7804521, -122.4080723] },
     voteCount: 6,
     userId: 1,
     description: 'Whatever',
-    categoryId: 4,
+    categoryId: 4
   }, {
     title: '4',
     location: { type: 'Point', coordinates: [37.7921694, -122.4068309] },
     voteCount: 2,
     userId: 1,
     description: 'Whatever',
-    categoryId: 2,
+    categoryId: 2
   }],
   votes: [{
     type: true,
     userId: 2,
-    notificationId: 1,
+    notificationId: 1
   }, {
     type: true,
     userId: 2,
-    notificationId: 2,
+    notificationId: 2
   }, {
     type: false,
     userId: 3,
-    notificationId: 2,
+    notificationId: 2
   }, {
     type: true,
     userId: 4,
-    notificationId: 3,
+    notificationId: 3
   }, {
     type: true,
     userId: 5,
-    notificationId: 4,
+    notificationId: 4
   }],
   users: [{
     username: 'seneca1',
@@ -87,7 +87,7 @@ const data = {
     password: '123456',
     salt: '123452',
     email: 'dkamen@gmail.com',
-    radius: 200,
+    radius: 200
   }, {
     username: 'epictetus1',
     firstName: 'John',
@@ -95,7 +95,7 @@ const data = {
     password: '123456',
     salt: '123452',
     email: 'dkamen@gmail.com',
-    radius: 1500,
+    radius: 1500
   }, {
     username: 'cato1',
     firstName: 'John',
@@ -103,7 +103,7 @@ const data = {
     password: '123456',
     salt: '123452',
     email: 'dkamen@gmail.com',
-    radius: 200,
+    radius: 200
   }, {
     username: 'julius1',
     firstName: 'John',
@@ -111,7 +111,7 @@ const data = {
     password: '123456',
     salt: '123452',
     email: 'dkamen@gmail.com',
-    radius: 1500,
+    radius: 1500
   }, {
     username: 'marc1',
     firstName: 'John',
@@ -119,57 +119,57 @@ const data = {
     password: '123456',
     salt: '123452',
     email: 'dkamen@gmail.com',
-    radius: 200,
+    radius: 200
   }],
   subscriptions: [{
     userId: 1,
-    categoryId: 1,
+    categoryId: 1
   }, {
     userId: 2,
-    categoryId: 2,
+    categoryId: 2
   }, {
     userId: 3,
-    categoryId: 3,
+    categoryId: 3
   }, {
     userId: 4,
-    categoryId: 4,
+    categoryId: 4
   }, {
     userId: 4,
-    categoryId: 2,
+    categoryId: 2
   }, {
     userId: 5,
-    categoryId: 1,
+    categoryId: 1
   }, {
     userId: 1,
-    categoryId: 2,
+    categoryId: 2
   }, {
     userId: 5,
-    categoryId: 4,
-  },
-  ],
+    categoryId: 4
+  }
+  ]
   // 37.7806521,-122.4070723 //current location
   // 37.7806521,-122.4080723  //113 meter distance
   // 37.7804521,-122.4080723 //133 meter
   // 37.7921694,-122.4068309 //1236 km - point 4
-};
+}
 
-db.sync({ force:true }).then(function(){
-  return User.bulkCreate(data.users);
+db.sync({ force: true }).then(function () {
+  return User.bulkCreate(data.users)
 })
-.then(function(){
-  return Category.bulkCreate(data.categories);
+.then(function () {
+  return Category.bulkCreate(data.categories)
 })
-.then(function(){
-  return Notification.bulkCreate(data.notifications);
+.then(function () {
+  return Notification.bulkCreate(data.notifications)
 })
-.then(function(){
-  return Vote.bulkCreate(data.votes);
+.then(function () {
+  return Vote.bulkCreate(data.votes)
 })
-.then(function(){
-  return Subscription.bulkCreate(data.subscriptions);
+.then(function () {
+  return Subscription.bulkCreate(data.subscriptions)
 })
-.catch(function(error) {
-  throw error;
-});
+.catch(function (error) {
+  throw error
+})
 
-module.exports = data;
+module.exports = data

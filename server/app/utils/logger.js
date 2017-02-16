@@ -1,8 +1,8 @@
-const winston = require('winston');
+const winston = require('winston')
 
-winston.emitErrs = true;
+winston.emitErrs = true
 
-const path = require('path');
+const path = require('path')
 
 const logger = new (winston.Logger)({
   transports: [
@@ -10,7 +10,7 @@ const logger = new (winston.Logger)({
       level: 'debug',
       handleExceptions: true,
       colorize: true,
-      json: false,
+      json: false
     }),
     new (winston.transports.File)({
       level: 'info',
@@ -19,16 +19,16 @@ const logger = new (winston.Logger)({
       json: true,
       maxsize: 5242880, //  5MB
       maxFiles: 5,
-      colorize: false,
-    }),
+      colorize: false
+    })
   ],
-  exitOnError: false,
-});
+  exitOnError: false
+})
 
-module.exports = logger;
+module.exports = logger
 
 module.exports.stream = {
   write: (message) => {
-    logger.info(message);
-  },
-};
+    logger.info(message)
+  }
+}

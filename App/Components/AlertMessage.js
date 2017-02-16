@@ -7,7 +7,6 @@ import * as Animatable from 'react-native-animatable'
 import { Metrics } from '../Themes/'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-
 type AlertMessageProps = {
   title: string,
   icon?: string,

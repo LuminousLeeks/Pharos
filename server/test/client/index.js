@@ -1,55 +1,54 @@
-let token = '';
-const username = 'user1';
-const password = 'abcdefg';
+let token = ''
+const username = 'user1'
+const password = 'abcdefg'
 
 $.ajax({
-  type: "POST",
+  type: 'POST',
   url: 'http://localhost:8099/api/auth/login',
   data: { username, password },
   success: (res) => {
-    token = res.token;
+    token = res.token
 
-    const bingsUniqueIdentifier = 'bing';
-    const bingsSocket = io.connect( 'http://127.0.0.1:8099/socket', {query: token});
+    const bingsUniqueIdentifier = 'bing'
+    const bingsSocket = io.connect('http://127.0.0.1:8099/socket', {query: token})
 
-    bingsSocket.on( 'connect', function () {
-      console.log( 'connected to server 2' );
+    bingsSocket.on('connect', function () {
+      console.log('connected to server 2')
       bingsSocket
-        .emit('authenticate', {token: token}) //send the jwt
+        .emit('authenticate', {token: token}) // send the jwt
         .on('authenticated', function () {
-          console.log('authenticated');
+          console.log('authenticated')
 
-          bingsSocket.emit('text', 'Client: hello');
+          bingsSocket.emit('text', 'Client: hello')
           bingsSocket.on('text', (text) => {
-            console.log(text);
-          });
-          bingsSocket.emit('createRoom', bingsUniqueIdentifier);
+            console.log(text)
+          })
+          bingsSocket.emit('createRoom', bingsUniqueIdentifier)
           bingsSocket.emit('getNotifications', bingsUniqueIdentifier, (notifications) => {
-            console.log("Notifications from server", notifications);
-          });
+            console.log('Notifications from server', notifications)
+          })
 
-          bingsSocket.emit('reportNotification', { bings: 'notification' });
+          bingsSocket.emit('reportNotification', { bings: 'notification' })
           bingsSocket.on('pushNotification', (notification) => {
-            console.log(notification);
-          });
+            console.log(notification)
+          })
 
-          bingsSocket.emit('setUserConfigurations', { bings: 'user configurations' });
+          bingsSocket.emit('setUserConfigurations', { bings: 'user configurations' })
           bingsSocket.on('pushNotifications', (notifications) => {
-            console.log(notifications);
-          });
+            console.log(notifications)
+          })
         })
-        .on('unauthorized', function(msg) {
-          console.log("unauthorized: " + JSON.stringify(msg.data));
-          throw new Error(msg.data.type);
+        .on('unauthorized', function (msg) {
+          console.log('unauthorized: ' + JSON.stringify(msg.data))
+          throw new Error(msg.data.type)
         })
-    });
-  },
-});
+    })
+  }
+})
 
-
-//=========================================
+// =========================================
 // Socket connections to stubbed origin
-//=========================================
+// =========================================
 
 // const craigsSocket = io.connect('http://localhost:3000');
 // craigsSocket.on( 'connect', function () {

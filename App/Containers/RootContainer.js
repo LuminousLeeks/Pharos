@@ -1,14 +1,14 @@
 // @flow
 
-import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
-import NavigationRouter from '../Navigation/NavigationRouter';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { View, StatusBar } from 'react-native'
+import NavigationRouter from '../Navigation/NavigationRouter'
+import { connect } from 'react-redux'
 // import StartupActions from '../Redux/StartupRedux'
 // import ReduxPersist from '../Config/ReduxPersist'
 
 // Styles
-import styles from './Styles/RootContainerStyle';
+import styles from './Styles/RootContainerStyle'
 
 class RootContainer extends Component {
   // componentDidMount () {
@@ -18,7 +18,7 @@ class RootContainer extends Component {
     // };
   // };
 
-  render() {
+  render () {
     return (
       <View style={styles.applicationView}>
         <StatusBar barStyle='light-content' />
@@ -33,7 +33,7 @@ class RootContainer extends Component {
   // startup: () => dispatch(StartupActions.startup())
 // })
 
-export default connect()(RootContainer);
+export default connect()(RootContainer)
 
 // ORIGINAL CASE (AUTHENTICATION)
 // export default connect(null, mapDispatchToProps)(RootContainer);

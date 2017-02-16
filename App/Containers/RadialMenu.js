@@ -1,57 +1,56 @@
-import React, { PropTypes } from 'react';
-import { Badge, Button } from 'native-base';
-import { View, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions as NavigationActions } from 'react-native-router-flux';
-import RadialMenu from '../Components/RadialMenu_npm';
-import TopSnackBar from '../Components/TopSnackbarDialog_npm';
-import Styles from './Styles/RadialMenuStyles';
-import NotificationCategories from '../Lib/NotificationCategories';
-import { partialReport } from '../Actions';
+import React, { PropTypes } from 'react'
+import { Badge, Button } from 'native-base'
+import { View, Alert } from 'react-native'
+import { connect } from 'react-redux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
+import RadialMenu from '../Components/RadialMenu_npm'
+import TopSnackBar from '../Components/TopSnackbarDialog_npm'
+import Styles from './Styles/RadialMenuStyles'
+import NotificationCategories from '../Lib/NotificationCategories'
+import { partialReport } from '../Actions'
 
 class RadialMenuComponent extends React.Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-      attachedNotification: 'default text',
-    };
-  }
-
-  handleReport(newNotification) {
-    this.props.dispatch(partialReport(newNotification));
-    //!!!!----------mistake here!!!
-    NavigationActions.reportNotificationScreen();
-  }
-  handleAttach(description) {
-    if (description) {
-      this.setState({
-        attachedNotification: description,
-      }, () => {
-        TopSnackBar.show(`Release to report ${description}`);
-        console.log(this.state);
-      });
+      attachedNotification: 'default text'
     }
   }
-  handleDetach() {
-    this.setState({
-      attachedNotification: 'default text',
-    }, () => {
-      TopSnackBar.dismiss();
-      console.log(this.state);
-    });
-  }
-  handleSelect(notifications, description, key) {
 
+  handleReport (newNotification) {
+    this.props.dispatch(partialReport(newNotification))
+    //! !!!----------mistake here!!!
+    NavigationActions.reportNotificationScreen()
+  }
+  handleAttach (description) {
+    if (description) {
+      this.setState({
+        attachedNotification: description
+      }, () => {
+        TopSnackBar.show(`Release to report ${description}`)
+        console.log(this.state)
+      })
+    }
+  }
+  handleDetach () {
+    this.setState({
+      attachedNotification: 'default text'
+    }, () => {
+      TopSnackBar.dismiss()
+      console.log(this.state)
+    })
+  }
+  handleSelect (notifications, description, key) {
     // helper function to get category id
-    TopSnackBar.dismiss();
+    TopSnackBar.dismiss()
     const getCategoryId = (categoryName) => {
-      for(let prop in NotificationCategories) {
+      for (let prop in NotificationCategories) {
         if (NotificationCategories[prop].key === categoryName) {
-          return parseInt(prop, 10);
+          return parseInt(prop, 10)
         }
       }
-      return 0; // throws error;
-    };
+      return 0 // throws error;
+    }
 
     Alert.alert(
       'Report notification category: ' + description,
@@ -68,26 +67,26 @@ class RadialMenuComponent extends React.Component {
               userId: this.props.userId,
               categoryId: getCategoryId(key),
               title,
-              description,
-            };
-            this.handleReport(newNotification);
-          },
-        };
+              description
+            }
+            this.handleReport(newNotification)
+          }
+        }
       }),
-    );
+    )
   }
-  render() {
+  render () {
     return (
       <View style={Styles.menu}>
         <RadialMenu
-          onOpen={() => { console.log('open'); }}
-          onClose={() => { console.log('close'); }}
+          onOpen={() => { console.log('open') }}
+          onClose={() => { console.log('close') }}
           itemRadius={50}
           menuRadius={150}
           spreadAngle={90}
           startAngle={0}
-          onAttach={(description) => { this.handleAttach(description); }}
-          onDetach={() => { this.handleDetach(); }}
+          onAttach={(description) => { this.handleAttach(description) }}
+          onDetach={() => { this.handleDetach() }}
         >
           <Badge style={Styles.root}>Report</Badge>
           { Object.keys(NotificationCategories)
@@ -100,7 +99,7 @@ class RadialMenuComponent extends React.Component {
                 onSelect={() => {
                   this.handleSelect(NotificationCategory.notifications,
                     NotificationCategory.description,
-                    NotificationCategory.key);
+                    NotificationCategory.key)
                 }}
                 description={NotificationCategory.description}
               >
@@ -110,21 +109,20 @@ class RadialMenuComponent extends React.Component {
           }
         </RadialMenu>
       </View>
-    );
+    )
   }
 }
 
 RadialMenuComponent.propTypes = {
   userName: PropTypes.string,
   region: PropTypes.object,
-  userId: PropTypes.number,
-};
+  userId: PropTypes.number
+}
 
 const mapStateToProps = state => ({
-  userName: state.userName,
-});
+  userName: state.userName
+})
 
-
-RadialMenuComponent = connect(mapStateToProps)(RadialMenuComponent);
+RadialMenuComponent = connect(mapStateToProps)(RadialMenuComponent)
 
 export default RadialMenuComponent

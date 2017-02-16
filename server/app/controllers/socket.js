@@ -29,14 +29,13 @@ module.exports = (io) => {
         // server finds room names
         // foreach  room name send notifications to client
         insertNotification(notification)
-        .then(({userList, newNotification}) => {
+        .then(({ userList, newNotification }) => {
           userList.forEach((userId) => {
             io.to(userId).emit('pushNotification', newNotification);
           });
         });
       });
-
-      // userConfigurations should be an object with {email, firstName, subscriptions, lastName, password } etc.
+ // userConfigurations should be an object with {email, firstName, subscriptions, lastName, password } etc.
       socket.on('setUserConfigurations', (userConfigurations, userId) => {
         updateUser(userId, userConfigurations);
       });

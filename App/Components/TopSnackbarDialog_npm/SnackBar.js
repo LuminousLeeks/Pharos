@@ -27,12 +27,11 @@ const TIMEOUT_ID: string = 'snackBar'
 
 const { width, height } = Dimensions.get('window')
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'absolute',
-    // bottom: INITIAL_POSITION,    
+    // bottom: INITIAL_POSITION,
     top: INITIAL_POSITION + TOP_SPACING,
     width
   },
@@ -140,7 +139,7 @@ export default class SnackBar extends Component {
       }),
       Animated.timing(transformOffsetY, {
         // toValue: INITIAL_POSITION,
-        toValue: INITIAL_POSITION + TOP_SPACING,        
+        toValue: INITIAL_POSITION + TOP_SPACING,
         duration: fadeOutDuration,
         easing: Easing.inOut(Easing.quad)
       })
@@ -204,7 +203,7 @@ export default class SnackBar extends Component {
       cancelText,
       onCancel,
       title,
-      textColor,
+      textColor
     } = this.props
 
     const titleElement = <Text style={[styles.text, { color: textColor }]}>{title}</Text>
