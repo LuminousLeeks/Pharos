@@ -39,7 +39,7 @@ This application was built using the following technologies:
 - Socket.io
 - Sequelize
 - bCrypt
-- JwT
+- JWT
 
 ## Requirements
 
@@ -51,6 +51,7 @@ This application was built using the following technologies:
 iOS Simulation:
 - Xcode 8.2.x
 
+
 ## Development
 
 ### Installing Dependencies
@@ -58,11 +59,6 @@ iOS Simulation:
 From within the root directory:
 ```sh
 npm install
-```
-
-React-Native CLI installed:
-```sh
-npm install -g react-native-cli
 ```
 
 Populate Data
@@ -83,12 +79,12 @@ Start the Server
 npm run startServer
 ```
 
-Launch the App
+Launch App in Simulator
 ```sh
 npm run startApp
 ```
 
-Clearning the Database
+Clearing the Database
 
 ```sh
 npm run dropDb
