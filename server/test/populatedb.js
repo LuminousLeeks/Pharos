@@ -1,19 +1,19 @@
 // A script that loads thousands of random user, notification and vote data to the db. //
 
-var db = require('../db/db.js');
-var User = require('../models/User.js');
-var Notification = require('../models/Notification.js');
-var Vote = require('../models/Vote.js');
-var Category = require('../models/Category.js');
-var Subscription = require('../models/Subscription.js');
+const db = require('../db/db.js');
+const User = require('../models/User.js');
+const Notification = require('../models/Notification.js');
+const Vote = require('../models/Vote.js');
+const Category = require('../models/Category.js');
+const Subscription = require('../models/Subscription.js');
 
-// var Promise = require('Sequelize').Promise;
+// const Promise = require('Sequelize').Promise;
 // Populate the database
 
 // npm run builddb
 // npm run populatedb
 
-var data = {
+const data = {
   categories: [{
     name: 'hazard',
   }, {

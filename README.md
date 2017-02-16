@@ -2,18 +2,19 @@
 >A community driven, mobile awareness application
 that delivers real-time event notifications based on your interests and location.
 
-
+### Pharos App Homepage
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
 
+### Pharos Notification Menu
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
 
 ## Team
 
   - [Craig Dearden] - (https://github.com/cdearden)
-  - [Efe Surekly] - (https://github.com/efesurekli)
-  - [Michael Dai] - (https://github.com/michaelbdai)
-  - [Sean O'Neal] - (https://github.com/sean-oneal)
+  - [Efe Surekly]   - (https://github.com/efesurekli)
+  - [Michael Dai]   - (https://github.com/michaelbdai)
+  - [Sean O'Neal]   - (https://github.com/sean-oneal)
 
 ## Table of Contents
 
@@ -79,6 +80,13 @@ npm run startServer
 Launch the App
 ```sh
 npm run startApp
+```
+
+Clearning the Database
+
+```sh
+npm run dropdb
+npm run buildb
 ```
 
 ##Testing

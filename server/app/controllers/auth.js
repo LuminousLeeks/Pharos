@@ -15,7 +15,6 @@ module.exports.socketAuth = (sockets, cb) => {
       // callback: false, // disconnect socket server side if invalid token
     }))
     .on('authenticated', (socket) => {
-
       cb(socket);
     });
 };
@@ -33,7 +32,7 @@ module.exports.loginUser = (request, response) => {
     },
   })
   .then((returnedUser) => {
-    console.log("returnedUser");
+    // console.log("returnedUser");
     console.log(returnedUser);
     if (returnedUser === null) {
       response.status(200).send({ err: 'User not found' });
@@ -66,7 +65,7 @@ module.exports.createUser = (request, response) => {
     username,
     password,
   };
-  console.log(userModel)
+  console.log(userModel);
   User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {

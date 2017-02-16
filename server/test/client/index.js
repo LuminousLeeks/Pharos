@@ -1,6 +1,6 @@
 let token = '';
-const username = 'borat';
-const password = 'borat';
+const username = 'user1';
+const password = 'abcdefg';
 
 $.ajax({
   type: "POST",

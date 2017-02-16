@@ -3,8 +3,6 @@
 
 require('dotenv').config();
 
-// require('dotenv').config();
-
 const port = require('./../env/index').PORT;
 const express = require('express');
 const path = require('path');
@@ -48,6 +46,7 @@ module.exports.app = app;
 
 //  Prevent circular dependency by defining routes after exports
 const router = require('./routes/router');
+
 app.use('/api', router);
 
 //  TODO: Determine whether additional handling/rendering of static files is needed
