@@ -9,7 +9,6 @@
 ### Pharos Notification Menu
 <img src="readme/readme2.png" alt="Pharos mockup 2" height=600 />
 
-
 ## Team
 
   - [Craig Dearden] - (https://github.com/cdearden)
@@ -37,14 +36,20 @@ This application was built using the following technologies:
 - PostGIS
 - Express
 - Socket.io
+- Sequelize
+- bCrypt
+- JwT
 
 ## Requirements
 
 - Node 0.10.x
 - Redis 2.6.x
 - Postgresql 9.1.x
-- etc
-- etc
+- PostGIS 2.2.x
+- React-Native CLI
+
+iOS Simulation:
+- Xcode 8.2.x
 
 ## Development
 
@@ -56,7 +61,7 @@ From within the root directory:
 npm install
 ```
 
-If you do not have React-Native CLI installed:
+React-Native CLI installed:
 ```sh
 npm install -g react-native-cli
 ```
@@ -69,9 +74,9 @@ From within the root directory:
 
 Build the Database
 ```sh
-npm run startdb
-npm run buildb
-npm run populatedb
+npm run startDb
+npm run buildDb
+npm run populateDb
 ```
 
 ```sh
@@ -83,8 +88,8 @@ bower install
 Clearning the Database
 
 ```sh
-npm run dropdb
-npm run buildb
+npm run dropDb
+npm run buildDb
 ```
 
 ##Testing
@@ -96,7 +101,7 @@ npm run testServer
 
 Database Test
 ```sh
-npm run testdb
+npm run testDb
 ```
 
 ## Roadmap

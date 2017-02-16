@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db.js')
+const Sequelize = require('sequelize');
+const db = require('../db.js');
 
 const Notification = db.define('notification', {
   userId: Sequelize.INTEGER,
@@ -7,13 +7,14 @@ const Notification = db.define('notification', {
   location: Sequelize.GEOGRAPHY,
   voteCount: Sequelize.INTEGER,
   title: Sequelize.STRING,
-  categoryId: Sequelize.INTEGER
-})
+  categoryId: Sequelize.INTEGER,
+});
 
 db.authenticate().then(() => {
-  Notification.sync()
+  Notification.sync();
 }).catch((error) => {
-  throw error
-})
+
+  throw error;
+});
 
 module.exports = Notification;
