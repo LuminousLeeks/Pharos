@@ -38,7 +38,7 @@ This application was built using the following technologies:
 - Socket.io
 - Sequelize
 - bCrypt
-- JwT
+- JWT
 
 ## Requirements
 
@@ -61,11 +61,6 @@ From within the root directory:
 npm install
 ```
 
-React-Native CLI installed:
-```sh
-npm install -g react-native-cli
-```
-
 Populate Data
 
 ### Launching App Simulator
@@ -79,13 +74,17 @@ npm run buildDb
 npm run populateDb
 ```
 
+Start the Server
 ```sh
-sudo npm install -g bower
-npm install
-bower install
+npm run startServer
 ```
 
-Clearning the Database
+Launch App in Simulator
+```sh
+npm run startApp
+```
+
+Clearing the Database
 
 ```sh
 npm run dropDb
