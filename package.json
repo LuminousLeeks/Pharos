@@ -28,7 +28,7 @@
     "buildDb": "psql -f init.sql",
     "generateDataset": "node server/test/generateTestData.js",
     "populateDb": "node server/test/populatedb.js",
-    "testdb": "mocha server/test/dbspecs.js",
+    "testDb": "mocha server/test/dbspecs.js",
     "dropDb": "psql -c 'drop database pharos_db'",
     "dropArchieveDb": "psql -c 'drop database pharos_db'",
     "testServer": "mocha server/test/specs.js",
