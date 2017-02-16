@@ -128,8 +128,8 @@ function* signup() {
 
 // Connect Redux client to socket
 function connectSocket(token, userId) {
-  const socket = io.connect('http://127.0.0.1:8099/socket', {
-  // const socket = io.connect('http://138.197.221.226:8099/socket', {
+  // const socket = io.connect('http://127.0.0.1:8099/socket', {
+  const socket = io.connect('http://138.197.221.226:8099/socket', {
     transports: ['websocket'],
   });
 
