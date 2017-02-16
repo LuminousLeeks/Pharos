@@ -1,6 +1,9 @@
 # Project Name
 
-### Pharos App Homepage
+### Pharos Login
+<img src="readme/login.png" alt="Pharos mockup login" height=600 />
+
+### Pharos Homepage
 <img src="readme/readme1.png" alt="Pharos mockup 1" height=600 />
 
 ### Pharos Notification Menu
