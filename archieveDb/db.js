@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize')
 
 // connect to the db:
 const db = new Sequelize('pharos_archieve', 'pharos_admin', 'aware', {
@@ -7,8 +7,8 @@ const db = new Sequelize('pharos_archieve', 'pharos_admin', 'aware', {
   pool: {
     max: 20,
     min: 0,
-    idle: 10000,
-  },
-});
+    idle: 10000
+  }
+})
 
 module.exports = db;

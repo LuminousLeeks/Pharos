@@ -1,3 +1,4 @@
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
@@ -9,8 +10,8 @@ import { sendVoteToState, sendVoteToServer } from '../Actions/index.js';
 const mapStateToProps = (state, ownProps) => ({
   notification: ownProps.notification,
 
-  username: state.username,
-});
+  username: state.username
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   handleThumbsUpIsPressed: () => {
@@ -32,20 +33,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(sendVoteToServer({
       username: ownProps.username,
       notificationId: ownProps.notification.notificationId,
-      vote: true,
-    }));
+      vote: true
+    }))
   },
   handleThumbsDownIsPressed: () => {
     // dispatch(sendVoteToState(updatedNotificationsArray));
     dispatch(sendVoteToServer({
       username: ownProps.username,
       notificationId: ownProps.notification.notificationId,
-      vote: false,
-    }));
-  },
-});
+      vote: false
+    }))
+  }
+})
 
-const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCallout);
+const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCallout)
 
 MapCalloutContainer.propTypes = {
   notification: PropTypes.object,
@@ -53,4 +54,4 @@ MapCalloutContainer.propTypes = {
   notifications: PropTypes.object,
 };
 
-export default MapCalloutContainer;
+export default MapCalloutContainer

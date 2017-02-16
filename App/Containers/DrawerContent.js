@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { ScrollView, BackAndroid } from 'react-native';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -6,18 +7,18 @@ import DrawerButton from '../Components/DrawerButton';
 
 class DrawerContent extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
-        this.toggleDrawer();
-        return true;
+        this.toggleDrawer()
+        return true
       }
-      return false;
-    });
+      return false
+    })
   }
 
-  toggleDrawer() {
-    this.context.drawer.toggle();
+  toggleDrawer () {
+    this.context.drawer.toggle()
   }
   handlePressMapScreen() {
     this.toggleDrawer();
@@ -31,19 +32,20 @@ class DrawerContent extends Component {
     this.toggleDrawer();
     NavigationActions.logout(); // TODO: add Logout screen in Nav router
   }
-  render() {
+  render () {
     return (
       <ScrollView style={styles.container}>
         <DrawerButton text="Map Screen" onPress={this.handlePressMapScreen.bind(this)} />
         <DrawerButton text="Manage Account" onPress={this.handlePressUserAccount.bind(this)} />
         <DrawerButton text="Logout" onPress={this.handlePressLogout.bind(this)} />
+
       </ScrollView>
-    );
+    )
   }
 }
 
 DrawerContent.contextTypes = {
-  drawer: React.PropTypes.object,
-};
+  drawer: React.PropTypes.object
+}
 
-export default DrawerContent;
+export default DrawerContent

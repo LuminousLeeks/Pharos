@@ -26,13 +26,14 @@
 
 
 ## Tech Stack
-This application was built using the following technologies: React-Native
-1.Redux
-1.Redux Saga
-1.PostgreSQL
-1.PostGIS
-1.Express
-1.Socket.io
+This application was built using the following technologies:
+- React-Native
+- Redux
+- Redux Saga
+- PostgreSQL
+- PostGIS
+- Express
+- Socket.io
 
 ## Requirements
 

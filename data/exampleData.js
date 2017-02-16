@@ -55,7 +55,6 @@ const exampleNotifications = [
 
 module.exports = exampleNotifications;
 
-
 // location
 // {
 //   latitude: 37.75825,

@@ -5,16 +5,16 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-import createSagaMiddleware from 'redux-saga';
-import saga from '../Sagas';
+import createSagaMiddleware from 'redux-saga'
+import saga from '../Sagas'
 
 import RootContainer from './RootContainer';
 import rootReducer from '../Redux/index';
 
 // import reducer from './reducers';
 
-const loggerMiddleware = createLogger();
-const sagaMiddleware = createSagaMiddleware();
+const loggerMiddleware = createLogger()
+const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(rootReducer, applyMiddleware(
   thunkMiddleware,
@@ -24,12 +24,12 @@ const store = createStore(rootReducer, applyMiddleware(
 sagaMiddleware.run(saga);
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <RootContainer />
       </Provider>
-    );
+    )
   }
 }
 

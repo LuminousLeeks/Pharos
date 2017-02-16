@@ -11,7 +11,8 @@ import {
   Button,
   }
   from 'react-native';
-import { Container, Content, List, ListItem, InputGroup, Input, Icon } from 'native-base';
+import { Container, Content, List, ListItem, InputGroup, Input } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { connect } from 'react-redux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
