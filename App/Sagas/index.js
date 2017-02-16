@@ -47,8 +47,8 @@ function* getPosition() {
 //helper function for login POST
 export const loginPostRequest = (username, password) => {
   console.log('in Saga, triggered loginPostRequest');
-  const url = 'http://127.0.0.1:8099';
-  // const url = 'http://138.197.221.226:8099';
+  // const url = 'http://127.0.0.1:8099';
+  const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/login`)
     .send({ username, password });
   // return new Promise((resolve) => {
@@ -68,8 +68,8 @@ export const signupPostRequest = (username, password, userInfo) => {
   const firstName = userInfo.firstName;
   const lastName = userInfo.lastName;
   const email = userInfo.email;
-  const url = 'http://127.0.0.1:8099';
-  // const url = 'http://138.197.221.226:8099';
+  // const url = 'http://127.0.0.1:8099';
+  const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/signup`)
     .send({ username, password, firstName, lastName, email });
 };
@@ -112,8 +112,8 @@ function* signup() {
 
 // Connect Redux client to socket
 function connectSocket(token, userId) {
-  const socket = io.connect('http://127.0.0.1:8099/socket', {
-  // const socket = io.connect('http://138.197.221.226:8099/socket', {
+  // const socket = io.connect('http://127.0.0.1:8099/socket', {
+  const socket = io.connect('http://138.197.221.226:8099/socket', {
     transports: ['websocket'],
   });
 
