@@ -37,30 +37,30 @@ class NavigationRouter extends Component {
               // initial
               key="mapScreen"
               component={MapScreen}
-              title="Map Screen"
+              title="Map"
             />
             <Scene
               initial
               key="loginScreen"
               component={LoginScreen}
-              title="Login"
+              title="Welcome!"
             />
             <Scene
               // initial
               key="signUpPage"
               component={SignUpPage}
-              title="Sign-Up"
+              title="Sign Up!"
             />
             <Scene
-              key='reportNotificationScreen'
+              key="reportNotificationScreen"
               component={ReportNotificationScreen}
-              title='Report Notification'
+              title="Report Notification"
             />
             <Scene
               // initial
               key="userProfilePage"
               component={UserProfilePage}
-              title="User Profile Page"
+              title="Your Account"
             />
           </Scene>
         </Scene>
