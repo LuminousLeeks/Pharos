@@ -17,7 +17,7 @@ const openDrawer = () => {
 export default {
   backButton () {
     return (
-      <TouchableOpacity onPress={NavigationActions.pop}>
+      <TouchableOpacity onPress={NavigationActions.drawer}>
         <Icon name='angle-left'
           size={Metrics.icons.large}
           color={Colors.snow}

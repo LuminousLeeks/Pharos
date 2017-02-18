@@ -17,7 +17,6 @@ class DrawerContent extends Component {
   }
 
   toggleDrawer() {
-    console.log(this.context, '>>>>>>> CONTEXT IN DRAWER>>>>>>>>>>>');
     this.context.drawer.toggle();
   }
   handlePressMapScreen() {
