@@ -18,7 +18,7 @@ export default class MapViewComponents extends Component {
     super(props);
     this.state = {
       openSwiper: false,
-      displayedEvent: {} 
+      displayedEvent: {}
     }
   }
 
@@ -37,14 +37,13 @@ export default class MapViewComponents extends Component {
     navigator.geolocation.clearWatch(this.props.watchID);
   }
   handlePressIcon(notification, Icon) {
-    console.log(notification);
     const descriptions = `${notification.title}: ${notification.description}`;
     const upvoteIcon = (
       <FontAwesomeIcon name="thumbs-o-up" size={Metrics.icons.medium} color={'blue'} />
     )
     const downvoteIcon = (
-      <FontAwesomeIcon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} /> 
-    )    
+      <FontAwesomeIcon name="thumbs-o-down" size={Metrics.icons.medium} color={'blue'} />
+    )
     let vote = {
       notificationId: notification.id,
       userId: this.props.userId,
@@ -64,7 +63,7 @@ export default class MapViewComponents extends Component {
         console.log('downvoted')
         SnackBar.dismiss()
         vote.type = false;
-        // this.props.voteForNotification(vote);        
+        // this.props.voteForNotification(vote);
       },
       summaryText: `Current Vote Count: ${notification.voteCount}  `,
       onSummary: () => {},

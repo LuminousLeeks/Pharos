@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import UserProfile from '../Components/UserProfile'
-import { fetchUserInfo, updateUserInfo } from '../Actions'
+import { connect } from 'react-redux';
+import UserProfile from '../Components/UserProfile';
+import { fetchUserInfo, updateUserInfo } from '../Actions';
 
 // NOTE: this is the standard format
 // const mapStateToProps = (state, ownProps) => {
@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+const UserProfilePage = connect(mapStateToProps, mapDispatchToProps)(UserProfile);
 
-export default UserProfilePage
+export default UserProfilePage;

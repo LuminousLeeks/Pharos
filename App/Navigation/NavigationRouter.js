@@ -10,7 +10,6 @@ import NavigationDrawer from './NavigationDrawer';
 import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
 import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
-import CategoriesList from '../Containers/CategoriesList';
 import UserProfilePage from '../Containers/UserProfilePage';
 import SignUpPage from '../Containers/SignUpPage';
 // import socket from '../Lib/socket'
@@ -23,38 +22,34 @@ class NavigationRouter extends Component {
     return (
       <Router>
         <Scene
-          key='drawer'
+          key="drawer"
           component={NavigationDrawer}
-          open={false}>
+          open={false}
+        >
           <Scene
-            key='drawerChildrenWrapper'
+            key="drawerChildrenWrapper"
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}
           >
             <Scene
-              key='mapScreen'
+              // initial
+              key="mapScreen"
               component={MapScreen}
-              title='Pharos'
+              title="Map Screen"
             />
             <Scene
               initial
               key="loginScreen"
               component={LoginScreen}
-              title="Login Screen"
+              title="Login"
             />
             <Scene
               // initial
               key="signUpPage"
               component={SignUpPage}
               title="Sign-Up"
-            />
-            <Scene
-              // initial
-              key="categoriesList"
-              component={CategoriesList}
-              title="CategoriesList"
             />
             <Scene
               key='reportNotificationScreen'
@@ -70,8 +65,8 @@ class NavigationRouter extends Component {
           </Scene>
         </Scene>
       </Router>
-    )
-  };
-};
+    );
+  }
+}
 
 export default NavigationRouter;

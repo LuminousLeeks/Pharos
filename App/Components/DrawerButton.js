@@ -18,7 +18,7 @@ type DrawerButtonProps = {
 
 class DrawerButton extends Component {
   props: DrawerButtonProps
-
+  // console.log(props)
   render () {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
@@ -38,4 +38,4 @@ class DrawerButton extends Component {
 //   };
 // };
 
-export default DrawerButton
+export default DrawerButton;

@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => ({
   region: state.region,
   watchID: state.watchID,
   userId: state.userId,
-  userName: state.userName,
+  username: state.username,
   userId: state.userId,
   currentLocation: state.currentLocation,
 });

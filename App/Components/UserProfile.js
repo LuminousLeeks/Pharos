@@ -32,7 +32,7 @@ class UserProfile extends Component {
         <View style={[Styles.updateRow]}>
           <TouchableOpacity
             style={Styles.updateButtonWrapper}
-            onPress={() => { this.props.updateUserInfo() }}
+            onPress={() => { this.props.updateUserInfo()}}
           >
             <View style={Styles.updateButton}>
               <Text style={Styles.updateText}>Update Profile</Text>
