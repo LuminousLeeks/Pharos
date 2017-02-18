@@ -1,15 +1,15 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
-import { Button } from 'native-base'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import MapCallout from '../Components/MapCallout'
-import { sendVoteToState, sendVoteToServer } from '../Actions/index.js'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MapCallout from '../Components/MapCallout';
+import { sendVoteToState, sendVoteToServer } from '../Actions/index.js';
 
 const mapStateToProps = (state, ownProps) => ({
   notification: ownProps.notification,
 
-  username: state.username
+  username: state.username,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -30,27 +30,27 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
     // dispatch(sendVoteToState(updateNotificationsArray));
     dispatch(sendVoteToServer({
-      userName: ownProps.userName,
+      username: ownProps.username,
       notificationId: ownProps.notification.notificationId,
-      vote: true
-    }))
+      vote: true,
+    }));
   },
   handleThumbsDownIsPressed: () => {
     // dispatch(sendVoteToState(updatedNotificationsArray));
     dispatch(sendVoteToServer({
-      userName: ownProps.userName,
+      username: ownProps.username,
       notificationId: ownProps.notification.notificationId,
-      vote: false
-    }))
-  }
-})
+      vote: false,
+    }));
+  },
+});
 
-const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCallout)
+const MapCalloutContainer = connect(mapStateToProps, mapDispatchToProps)(MapCallout);
 
 MapCalloutContainer.propTypes = {
   notification: PropTypes.object,
-  userName: PropTypes.string,
-  notifications: PropTypes.object
-}
+  username: PropTypes.string,
+  notifications: PropTypes.object,
+};
 
-export default MapCalloutContainer
+export default MapCalloutContainer;
