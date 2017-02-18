@@ -50,14 +50,14 @@ export const loginPostRequest = (username, password) => {
   const url = 'http://127.0.0.1:8099';
   // const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/login`)
-    // .send({ username, password });
-  return new Promise((resolve) => {
-    req.post(`${url}/api/auth/login`)
-    .send({ username, password })
-    .end(function(err, res){
-      resolve({res, err});
-    })
-  })
+    .send({ username, password });
+  // return new Promise((resolve) => {
+  //   req.post(`${url}/api/auth/login`)
+  //   .send({ username, password })
+  //   .end(function(err, res){
+  //     resolve({res, err});
+  //   })
+  // })
 };
 
 

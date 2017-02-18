@@ -25,7 +25,7 @@ const initialState = {
     latitudeDelta: 100,
     longitudeDelta: 100,
   },
-  userName: '',
+  username: '',
   firstName: '',
   lastName: '',
   notifications: defaultState.notifications,
