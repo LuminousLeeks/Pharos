@@ -11,11 +11,10 @@ module.exports.socketAuth = (sockets, cb) => {
       // secret: process.env.JWT_SECRET,
       secret: jwtSecret,
       // handshake: true,
-      timeout: 100000, // 10 seconds to send the authentication message
+      timeout: 10000, // 10 seconds to send the authentication message
       // callback: false, // disconnect socket server side if invalid token
     }))
     .on('authenticated', (socket) => {
-
       cb(socket);
     });
 };
