@@ -1,39 +1,39 @@
 
-import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 
-import RootContainer from './RootContainer'
-import rootReducer from '../Redux/index.js'
+import createSagaMiddleware from 'redux-saga';
+import saga from '../Sagas';
 
-import createSagaMiddleware from 'redux-saga'
-import saga from '../Sagas'
+import RootContainer from './RootContainer';
+import rootReducer from '../Redux/index';
 
 // import reducer from './reducers';
 
-const loggerMiddleware = createLogger()
-const sagaMiddleware = createSagaMiddleware()
+const loggerMiddleware = createLogger();
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(
   thunkMiddleware,
   loggerMiddleware,
-  sagaMiddleware
-))
-sagaMiddleware.run(saga)
+  sagaMiddleware,
+));
+sagaMiddleware.run(saga);
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <RootContainer />
       </Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;
 
 // export default function configureStore(initialState) {
 //   const sagaMiddleware = createSagaMiddleware();
