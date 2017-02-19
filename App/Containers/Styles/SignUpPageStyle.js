@@ -1,27 +1,27 @@
 // @flow
 
-import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes'
+import { StyleSheet } from 'react-native';
+import { Colors, Metrics } from '../../Themes';
 
 export default StyleSheet.create({
   container: {
     paddingTop: 70,
-    backgroundColor: Colors.snow
+    backgroundColor: Colors.snow,
   },
   row: {
     paddingVertical: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin
+    paddingHorizontal: Metrics.doubleBaseMargin,
   },
   rowLabel: {
-    color: Colors.charcoal
+    color: Colors.charcoal,
   },
   textInput: {
     height: 40,
-    color: Colors.snow
+    color: Colors.snow,
   },
   textInputReadonly: {
     height: 40,
-    color: Colors.steel
+    color: Colors.steel,
   },
   loginButton: {
     flex: 1,
