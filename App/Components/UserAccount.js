@@ -24,7 +24,7 @@ class UserAccount extends Component {
             <List>
               <ListItem>
                 <Text>
-                <Text>Username:</Text>
+                <Text>Username: </Text>
                   <Text>{`${username}`}</Text>
                 </Text>
               </ListItem>

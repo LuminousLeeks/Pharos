@@ -96,7 +96,7 @@ class SignUpPage extends React.Component {
           <Content>
             <List>
               <ListItem>
-                <Icon name="user" size={30} color="blue" />
+                <Icon name="user" size={30} />
               </ListItem>
               <ListItem>
                 <InputGroup>
@@ -113,7 +113,7 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
               <ListItem>
-                <Icon name="envelope" size={30} color="blue" />
+                <Icon name="envelope" size={30}/>
               </ListItem>
               <ListItem>
                 <InputGroup>
@@ -124,7 +124,7 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
               <ListItem>
-                <Icon name="user" size={30} color="blue" />
+                <Icon name="user" size={30} />
               </ListItem>
               <ListItem>
                 <InputGroup>
@@ -134,7 +134,7 @@ class SignUpPage extends React.Component {
                 </InputGroup>
               </ListItem>
               <ListItem>
-                <Icon name="lock" size={30} color="blue" />
+                <Icon name="lock" size={30} />
               </ListItem>
               <ListItem>
                 <InputGroup>
