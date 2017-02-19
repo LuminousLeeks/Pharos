@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
   notification: ownProps.notification,
 
   username: state.username,
-})
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   handleThumbsUpIsPressed: () => {
