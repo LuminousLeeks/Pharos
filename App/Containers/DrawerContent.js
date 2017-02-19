@@ -23,9 +23,9 @@ class DrawerContent extends Component {
     this.toggleDrawer();
     NavigationActions.mapScreen();
   }
-  handlePressUserProfile() {
+  handlePressUserAccount() {
     this.toggleDrawer();
-    NavigationActions.userProfilePage();
+    NavigationActions.userAccountScreen();
   }
   handlePressLogout() {
     this.toggleDrawer();
@@ -35,7 +35,7 @@ class DrawerContent extends Component {
     return (
       <ScrollView style={styles.container}>
         <DrawerButton text="Map Screen" onPress={this.handlePressMapScreen.bind(this)} />
-        <DrawerButton text="Manage Account" onPress={this.handlePressUserProfile.bind(this)} />
+        <DrawerButton text="Manage Account" onPress={this.handlePressUserAccount.bind(this)} />
         <DrawerButton text="Logout" onPress={this.handlePressLogout.bind(this)} />
       </ScrollView>
     );

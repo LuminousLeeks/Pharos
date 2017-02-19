@@ -9,8 +9,8 @@ import NavigationDrawer from './NavigationDrawer';
 // import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
-import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
-import UserProfilePage from '../Containers/UserProfilePage';
+// import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
+import UserAccountScreen from '../Containers/UserAccountScreen';
 import SignUpPage from '../Containers/SignUpPage';
 // import socket from '../Lib/socket'
 /* **************************
@@ -47,20 +47,15 @@ class NavigationRouter extends Component {
             />
             <Scene
               // initial
-              key="signUpPage"
-              component={SignUpPage}
-              title="Sign Up!"
-            />
-            <Scene
-              key="reportNotificationScreen"
-              component={ReportNotificationScreen}
-              title="Report Notification"
+              key="userAccountScreen"
+              component={UserAccountScreen}
+              title="User Account"
             />
             <Scene
               // initial
-              key="userProfilePage"
-              component={UserProfilePage}
-              title="Your Account"
+              key="signUpPage"
+              component={SignUpPage}
+              title="Sign Up"
             />
           </Scene>
         </Scene>
