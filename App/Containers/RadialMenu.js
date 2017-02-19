@@ -60,7 +60,7 @@ class RadialMenuComponent extends React.Component {
           text: title,
           onPress: () => { // TODO : add title to it
             const newNotification = {
-              userName: this.props.userName,
+              username: this.props.username,
               category: key,
               latitude: this.props.region.latitude,
               longitude: this.props.region.longitude,
@@ -114,13 +114,13 @@ class RadialMenuComponent extends React.Component {
 }
 
 RadialMenuComponent.propTypes = {
-  userName: PropTypes.string,
+  username: PropTypes.string,
   region: PropTypes.object,
   userId: PropTypes.number
 }
 
 const mapStateToProps = state => ({
-  userName: state.userName
+  username: state.username
 })
 
 RadialMenuComponent = connect(mapStateToProps)(RadialMenuComponent)
