@@ -46,20 +46,15 @@ export const fetchNotifications = (token, location, userId) => ({
   location,
   userId,
 });
-export const fetchUserInfo = (username, token, firstName, lastName) => ({
+export const fetchUserInfo = userId => ({
   type: 'FETCH_USER_INFO',
-  username,
-  token,
-  firstName,
-  lastName,
-  // userInterests, //TODO: decide on naming conventions
+  userId,
 });
-export const updateUserInfo = (username, token) => ({
-  type: 'UPDATE_USER_INFO',
-  username,
-  token,
-  // TODO: Update user data
-});
+// export const updateUserInfo = (userId) => ({
+//   type: 'UPDATE_USER_INFO',
+//   userId,
+//   // TODO: Implement ability to update user data
+// });
 export const sendVoteToState = notifications => ({
   type: 'STATE_VOTE_EVENT',
   notifications,
@@ -89,13 +84,14 @@ export const request = () => ({
   type: 'REQUEST',
 });
 
-export const loginSuccess = (username, token, userId, location) => {
+export const loginSuccess = (username, token, userId, location, email) => {
   return {
     type: 'SUCCESS',
     username,
     token,
     userId,
     location,
+    email,
   };
 };
 

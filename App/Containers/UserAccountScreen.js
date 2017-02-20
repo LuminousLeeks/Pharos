@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     firstName: state.firstName,
     lastName: state.lastName,
     email: state.email,
-    radius: state.radius,
+    // radius: state.radius,
   };
 };
 
