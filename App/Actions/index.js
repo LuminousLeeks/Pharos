@@ -53,7 +53,7 @@ export const fetchUserInfo = userId => ({
 // export const updateUserInfo = (userId) => ({
 //   type: 'UPDATE_USER_INFO',
 //   userId,
-//   // TODO: Implement ability to update user data
+//   // TODO: Implement update user data
 // });
 export const sendVoteToState = notifications => ({
   type: 'STATE_VOTE_EVENT',
@@ -63,35 +63,32 @@ export const sendVoteToServer = vote => ({
   type: 'SERVER_VOTE_EVENT',
   vote,
 });
-export const fetchCategories = (username, token, categories = '') => ({
-  type: 'FETCH_CATEGORIES',
-  username,
-  token,
-  categories,
-});
-export const saveCategories = (username, token, categories) => ({
-  type: 'SAVE_CATEGORIES',
-  username,
-  token,
-  categories,
-});
-export const toggleCategory = (username, id) => ({
-  type: 'TOGGLE_CATEGORY',
-  id,
-});
+// export const fetchCategories = (userId, categories = []) => ({
+//   type: 'FETCH_CATEGORIES',
+//   userId,
+//   categories,
+// });
+// export const saveCategories = (username, token, categories) => ({
+//   type: 'SAVE_CATEGORIES',
+//   username,
+//   token,
+//   categories,
+// });
+// export const toggleCategory = (username, id) => ({
+//   type: 'TOGGLE_CATEGORY',
+//   id,
+// });
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
   type: 'REQUEST',
 });
 
-export const loginSuccess = (username, token, userId, location, email) => {
+export const loginSuccess = (userInfo, token, location) => {
   return {
     type: 'SUCCESS',
-    username,
+    userInfo,
     token,
-    userId,
     location,
-    email,
   };
 };
 

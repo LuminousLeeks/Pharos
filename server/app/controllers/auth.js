@@ -32,19 +32,26 @@ module.exports.loginUser = (request, response) => {
     },
   })
   .then((returnedUser) => {
-    console.log("returnedUser");
-    console.log(returnedUser);
+    // returns user from database
     if (returnedUser === null) {
       response.status(200).send({ err: 'User not found' });
     }
     if (bcrypt.compareSync(reqUser.password, returnedUser.password)) {
-      response.status(200).send({ token, userId: returnedUser.id });
+      response.status(200).send({
+        token,
+        userId: returnedUser.id,
+        username: returnedUser.username,
+        email: returnedUser.email,
+        firstName: returnedUser.firstName,
+        lastName: returnedUser.lastName,
+        radius: returnedUser.radius,
+      });
     } else {
       response.status(200).send({ err: 'Invalid Login' });
     }
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
     response.status(200).send({ err: 'An error occured', errMsg: error });
   });
 };
@@ -65,18 +72,31 @@ module.exports.createUser = (request, response) => {
     username,
     password,
   };
-  console.log(userModel);
+  // console.log(userModel);
   User.findOne({ where: { username } })
     .then((user) => {
       if (!user) {
         insertUser(userModel, settings).then((createdUserId) => {
+
           const userSignature = {
             username: userModel.username,
             password: userModel.password,
           };
+
+          const userInfo = {
+            username: userModel.username,
+            firstName: userModel.firstName,
+            lastName: userModel.lastName,
+            email: userModel.email,
+            radius: settings.radius,
+          };
           // user signature must be consistent
           const token = jwtoken.sign(userSignature, jwtSecret);
-          response.send({ token, userId: createdUserId });
+          response.send({
+            userInfo,
+            token,
+            userId: createdUserId,
+          });
         });
       } else {
         response.status(404).send('user already exists');

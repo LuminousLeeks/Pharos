@@ -6,13 +6,12 @@ import Styles from './Styles/UserAccountStyle';
 
 class UserAccount extends Component {
 
-  componentWillMount() {
-
-  }
+  // componentWillMount() {
+  //   this.props.fetchAccountScreenInfo();
+  // }
 
   render() {
-    // console.log(this.props, 'PROPS IN PROFILE VIEW');
-    const { username, firstName, lastName, email } = this.props;
+    const { username, firstName, lastName, email, radius, userSubscriptions } = this.props;
     return (
       <ScrollView style={Styles.container}>
         <Container>
@@ -36,6 +35,18 @@ class UserAccount extends Component {
                   <Text>{`${email}`}</Text>
                 </Text>
               </ListItem>
+              <ListItem>
+                <Text>
+                  <Text>Radius: </Text>
+                  <Text>{`${radius}`}</Text>
+                </Text>
+              </ListItem>
+              <ListItem>
+                <Text>
+                  <Text>Notification Subscriptions: </Text>
+                  <Text>Click here...</Text>
+                </Text>
+              </ListItem>
             </List>
           </Content>
         </Container>
@@ -49,7 +60,8 @@ UserAccount.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
-  // radius: PropTypes.number,
+  radius: PropTypes.number,
+  // userSubscriptions: PropTypes.array,
   // fetchAccountScreenInfo: PropTypes.func,
 };
 

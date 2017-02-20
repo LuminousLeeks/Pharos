@@ -15,7 +15,7 @@ const defaultState = {
 };
 
 const initialState = {
-  fething: false,
+  fetching: false,
   newNotification: defaultState.newNotification,
   userInterests: {},
   userLocation: {},
@@ -33,8 +33,8 @@ const initialState = {
   watchID: '',
   error: null,
   userId: '',
-  selectedCategories: {},
-  categories: defaultState.categories,
+  userSubscriptions: [],
+  radius: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -80,21 +80,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notifications: action.notifications,
       };
-    case 'FETCH_USER_INFO':
-      return {
-        ...state,
-        username: action.username, // Uncommented to build user profile
-        // userInterests: action.userInterests, // TODO: Decide on naming conventions
-        token: action.token,
-        firstName: action.firstName,
-        lastName: action.lastName,
-      };
-    case 'UPDATE_USER_INFO':
-      return {
-        ...state,
-        username: action.username,
-        token: action.token,
-      };
+    // case 'UPDATE_USER_INFO':
+    //   return {
+    //     ...state,
+    //     userId: action.userId, //TODO: Save updated user info
+    //   };
     case 'FETCH_CATEGORIES' :
       return {
         ...state,
@@ -131,7 +121,16 @@ const rootReducer = (state = initialState, action) => {
     case 'REQUEST':
       return { ...state, token: action.token };
     case 'SUCCESS':
-      return { ...state, username: action.username, token: action.token, userId: action.userId };
+      return {
+        ...state,
+        username: action.userInfo.username,
+        token: action.token,
+        userId: action.userInfo.userId,
+        firstName: action.userInfo.firstName,
+        lastName: action.userInfo.lastName,
+        email: action.userInfo.email,
+        radius: action.userInfo.radius,
+      };
     case 'AUTH_FAIL':
       return { ...state, error: action.error };
     case 'LOGOUT':

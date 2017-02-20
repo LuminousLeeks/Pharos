@@ -13,6 +13,7 @@ import {
   updateRegion,
   updatePosition,
   addNewNotification,
+  fetchUserInfo,
 } from '../Actions'
 
 //----------------- navigator action ---------------------------
@@ -46,7 +47,7 @@ function* getPosition() {
 
 //helper function for login POST
 export const loginPostRequest = (username, password) => {
-  console.log('in Saga, triggered loginPostRequest');
+  // console.log('in Saga, triggered loginPostRequest');
   const url = 'http://127.0.0.1:8099';
   // const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/login`)
@@ -64,10 +65,11 @@ export const loginPostRequest = (username, password) => {
 //helper function for signup POST
 export const signupPostRequest = (username, password, userInfo) => {
   userInfo = userInfo || {firstName: 'John', lastName: 'Appleseed'}
-  console.log('userInfo', userInfo);
+  // console.log('userInfo', userInfo);
   const firstName = userInfo.firstName;
   const lastName = userInfo.lastName;
   const email = userInfo.email;
+
   const url = 'http://127.0.0.1:8099';
   // const url = 'http://138.197.221.226:8099';
   return req.post(`${url}/api/auth/signup`)
@@ -77,15 +79,25 @@ export const signupPostRequest = (username, password, userInfo) => {
 function* login() {
     const { username, password } = yield take('LOGIN_REQUEST')
     const { position, region } = yield call(getPositionFromNavigator);
+
     yield put(updatePosition(position));
     yield put(updateRegion(region));
+
     const res = yield call(loginPostRequest, username, password, position);
+
     if (! res.body.err) {
       const token = res.body.token;
-      const userId = res.body.userId;
-      console.log('position in Sage *login --------------');
-      console.log(position);
-      yield put(loginSuccess(username, token, userId, position.coords));
+
+      let userInfo = {
+        userId: res.body.userId,
+        username: res.body.username,
+        firstName: res.body.firstName,
+        lastName: res.body.lastName,
+        email: res.body.email,
+        radius: res.body.radius,
+      };
+
+      yield put(loginSuccess(userInfo, token, position.coords));
     } else {
       console.log('login error, response is-----');
       console.log(res.body.err);
@@ -100,12 +112,15 @@ function* signup() {
     yield put(updateRegion(region));
     const res = yield call(signupPostRequest, username, password, userInfo);
     const token = res.body.token;
-    const userId = res.body.userId;
+
+    let newUser = res.body.userInfo;
+    newUser.userId = res.body.userId
+
     const location = {
       latitude: region.latitude,
       longitude: region.longitude,
     };
-    yield put(loginSuccess( username, token, userId, location));
+    yield put(loginSuccess(newUser, token, location));
 }
 // --------------------Socket Evnets-------------------------
 // ----------------------------------------------------------
