@@ -52,9 +52,9 @@ class NavigationRouter extends Component {
               title="User Account"
             />
             <Scene
-              key='reportNotificationScreen'
+              key="reportNotificationScreen"
               component={ReportNotificationScreen}
-              title='Report Notification'
+              title="Report Notification"
             />
             <Scene
               // initial
