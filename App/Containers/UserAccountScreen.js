@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UserAccount from '../Components/UserAccount';
-// import {  } from '../Actions';
+import { fetchUserInfo } from '../Actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,9 +13,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getAccountInfo: (userId) => {
-    dispatch(fetchUserAccount(userId));
+const mapDispatchToProps = dispatch => ({
+  fetchAccountScreenInfo: (userId) => {
+    dispatch(fetchUserInfo(userId));
   },
 
 });
