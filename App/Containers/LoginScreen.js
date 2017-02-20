@@ -22,12 +22,11 @@ import {
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 class LoginScreen extends React.Component {
-
   constructor (props) {
     super(props)
     this.state = {
-      username: 'Sean',
-      password: 'sean',
+      username: 'Govinator',
+      password: '1234',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }

@@ -13,7 +13,7 @@ import {
   updateRegion,
   updatePosition,
   addNewNotification,
-  fetchUserInfo,
+  // fetchUserInfo,
 } from '../Actions'
 
 //----------------- navigator action ---------------------------

@@ -11,10 +11,9 @@ class UserAccount extends Component {
   // }
 
   render() {
-    const { username, firstName, lastName, email, radius, userSubscriptions } = this.props;
+    const { username, firstName, lastName, email, radius } = this.props;
     return (
-      <ScrollView style={Styles.container}>
-        <Container>
+        <Container style={Styles.container}>
           <Content>
             <List>
               <ListItem>
@@ -50,7 +49,6 @@ class UserAccount extends Component {
             </List>
           </Content>
         </Container>
-      </ScrollView>
     );
   }
 }

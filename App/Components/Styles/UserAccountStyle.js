@@ -5,5 +5,5 @@ import { Colors, Metrics } from '../../Themes';
 export default StyleSheet.create({
   container: {
     paddingTop: 70,
-    },
+  },
 });
