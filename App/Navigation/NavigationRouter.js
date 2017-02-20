@@ -9,7 +9,7 @@ import NavigationDrawer from './NavigationDrawer';
 // import Mapview from '../Containers/Mapview'
 import MapScreen from '../Containers/MapScreen';
 import LoginScreen from '../Containers/LoginScreen';
-// import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
+import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
 import UserAccountScreen from '../Containers/UserAccountScreen';
 import SignUpPage from '../Containers/SignUpPage';
 // import socket from '../Lib/socket'
@@ -50,6 +50,11 @@ class NavigationRouter extends Component {
               key="userAccountScreen"
               component={UserAccountScreen}
               title="User Account"
+            />
+            <Scene
+              key='reportNotificationScreen'
+              component={ReportNotificationScreen}
+              title='Report Notification'
             />
             <Scene
               // initial
