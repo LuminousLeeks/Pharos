@@ -69,6 +69,16 @@ const getNotifications = function getNotifications(userId, location, category, r
   });
 };
 
+// Pull list of categories from database
+const updateAppCategories = function updateAppCategories(userId) {
+  return new Promise((resolve, reject) => {
+    Category.findAll({})
+    .then((results) => {
+      resolve(results);
+    })
+    .catch(reject);
+  });
+};
 // all inputs are string
 // expect subscriptions as an array of category ids.
 const insertUser = function insertUser(user, settings) {
@@ -202,4 +212,5 @@ module.exports = {
   getNotifications,
   overriddenBulkCreate,
   updateUser,
+  updateAppCategories,
 };

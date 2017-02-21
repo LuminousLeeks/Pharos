@@ -3,7 +3,7 @@
 const socketAuth = require('./auth').socketAuth;
 
 const rooms = [];
-const { getNotifications, insertNotification, updateUser, insertVote } = require('../../db/utils.js');
+const { getNotifications, insertNotification, updateUser, insertVote, updateAppCategories } = require('../../db/utils.js');
 
 module.exports = (io) => {
   socketAuth(io, (socket) => {
@@ -38,6 +38,12 @@ module.exports = (io) => {
  // userConfigurations should be an object with {email, firstName, subscriptions, lastName, password } etc.
       socket.on('setUserConfigurations', (userConfigurations, userId) => {
         updateUser(userId, userConfigurations);
+      });
+
+      socket.on('getAppCategories', (userId, callback) => {
+        updateAppCategories(userId).then((categories) => {
+          callback(categories);
+        });
       });
     });
   });

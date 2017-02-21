@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 // import Immutable from 'seamless-immutable';
-import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
+// import { exampleCategories } from './../../data/exampleData'; // TODO: Test data. Remove before production
 
 const defaultState = {
   newNotification: {
@@ -11,13 +11,13 @@ const defaultState = {
     categoryId: 3,
   },
   notifications: [],
-  categories: exampleCategories,
+  categories: {},
 };
 
 const initialState = {
+  categories: defaultState.categories,
   fetching: false,
   newNotification: defaultState.newNotification,
-  userInterests: {},
   userLocation: {},
   region: {
     latitude: 0,
@@ -33,7 +33,7 @@ const initialState = {
   watchID: '',
   error: null,
   userId: '',
-  userSubscriptions: [],
+  subscriptions: [],
   radius: null,
 };
 
@@ -85,27 +85,18 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     userId: action.userId, //TODO: Save updated user info
     //   };
-    case 'FETCH_CATEGORIES' :
-      return {
-        ...state,
-        username: action.username,
-        token: action.token,
-        categories: action.categories,
-      };
+    // case 'FETCH_CATEGORIES' :
+    //   return {
+    //     ...state,
+    //     username: action.username,
+    //     token: action.token,
+    //     categories: action.categories,
+    //   };
     case 'SAVE_CATEGORIES':
       return {
         ...state,
-        username: action.username,
-        token: action.token,
-        saveCategories: action.saveCategories, // TODO: Make sure naming convention matches Database
+        categories: action.categories,
       };
-    case 'TOGGLE_CATEGORY':
-      if (state.id !== action.id) {
-        return state;
-      }
-      return Object.assign({}, state, {
-        selected: !state.selected,
-      });
     case 'START_FETCHING':
       return {
         ...state,

@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import { Container, Content, List, ListItem } from 'native-base';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { Body, Container, Content, List, Left, Right, ListItem, Text } from 'native-base';
+import { Actions as NavigationActions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Styles from './Styles/UserAccountStyle';
 
 
 class UserAccount extends Component {
 
-  // componentWillMount() {
-  //   this.props.fetchAccountScreenInfo();
-  // }
+  componentWillMount() {
+
+  }
 
   render() {
     const { username, firstName, lastName, email, radius } = this.props;
@@ -40,11 +41,9 @@ class UserAccount extends Component {
                   <Text>{`${radius}`}</Text>
                 </Text>
               </ListItem>
-              <ListItem>
-                <Text>
-                  <Text>Notification Subscriptions: </Text>
-                  <Text>Click here...</Text>
-                </Text>
+              <ListItem button onPress={NavigationActions.categoriesList}>
+                <Text>Edit Subscriptions  <Icon name="cog" size={15} /> </Text>
+
               </ListItem>
             </List>
           </Content>
@@ -59,8 +58,7 @@ UserAccount.propTypes = {
   lastName: PropTypes.string,
   email: PropTypes.string,
   radius: PropTypes.number,
-  // userSubscriptions: PropTypes.array,
-  // fetchAccountScreenInfo: PropTypes.func,
+  categories: PropTypes.array,
 };
 
 export default UserAccount;

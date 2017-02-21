@@ -13,6 +13,7 @@ import {
   updateRegion,
   updatePosition,
   addNewNotification,
+  updateCategories,
   // fetchUserInfo,
 } from '../Actions'
 
@@ -162,9 +163,27 @@ function getNotifications(socket, userId, location) {
 function* fetchNotifications(socket) {
   while (true) {
     const { token, userId, location } = yield take('FETCH_EVENTS');
-    console.log("location!!!!!!!!!!!!", location)
     const notifications = yield call(getNotifications, socket, userId, location);
     yield put(loadNotifications(notifications));
+  }
+}
+
+// ---------------CATEGORIES ------
+// ---------------------------------
+
+function getAllCategories(socket, userId) {
+  return new Promise((resolve, reject) => {
+    socket.emit('getAppCategories', userId, (categoryList) => {
+      resolve(categoryList);
+    })
+  })
+}
+
+function* fetchCategories(socket) {
+  while (true) {
+    const userId = yield take('FETCH_CATEGORIES');
+    const categories = yield call(getAllCategories, socket, userId);
+    yield put(updateCategories(categories));
   }
 }
 // ---------Send notification data to socket
@@ -231,6 +250,7 @@ function* handleIO(socket) {
   yield fork(fetchNotifications, socket);
   yield fork(reportNotification, socket);
   yield fork(voteNotification, socket);
+  yield fork(fetchCategories, socket);
 }
 
 // ---------Define flow of socket
@@ -240,6 +260,8 @@ function* flow() {
     const socket = yield call(connectSocket, token, userId);
     const notifications = yield call(getNotifications, socket, userId, location);
     yield put(loadNotifications(notifications));
+    const categories = yield call(getAllCategories, socket, userId);
+    yield put(updateCategories(categories));
     NavigationActions.mapScreen();
     const task = yield fork(handleIO, socket);
     let action = yield take('LOGOUT_REQUEST');

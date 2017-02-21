@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
     lastName: state.lastName,
     email: state.email,
     radius: state.radius,
+    categories: state.categories,
   };
 };
 
@@ -17,7 +18,6 @@ const mapDispatchToProps = dispatch => ({
   fetchAccountScreenInfo: (userId) => {
     dispatch(fetchUserInfo(userId));
   },
-
 });
 
 const UserAccountScreen = connect(mapStateToProps, mapDispatchToProps)(UserAccount);

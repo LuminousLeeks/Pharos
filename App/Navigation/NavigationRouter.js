@@ -12,6 +12,7 @@ import LoginScreen from '../Containers/LoginScreen';
 import ReportNotificationScreen from '../Containers/ReportNotificationScreen';
 import UserAccountScreen from '../Containers/UserAccountScreen';
 import SignUpPage from '../Containers/SignUpPage';
+import CategoriesList from '../Containers/CategoriesList';
 // import socket from '../Lib/socket'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -62,6 +63,11 @@ class NavigationRouter extends Component {
               component={SignUpPage}
               title="Sign Up"
             />
+            <Scene
+              key="categoriesList"
+              component={CategoriesList}
+              title="Select Categories"
+           />
           </Scene>
         </Scene>
       </Router>

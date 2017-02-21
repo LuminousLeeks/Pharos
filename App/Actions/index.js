@@ -63,21 +63,7 @@ export const sendVoteToServer = vote => ({
   type: 'SERVER_VOTE_EVENT',
   vote,
 });
-// export const fetchCategories = (userId, categories = []) => ({
-//   type: 'FETCH_CATEGORIES',
-//   userId,
-//   categories,
-// });
-// export const saveCategories = (username, token, categories) => ({
-//   type: 'SAVE_CATEGORIES',
-//   username,
-//   token,
-//   categories,
-// });
-// export const toggleCategory = (username, id) => ({
-//   type: 'TOGGLE_CATEGORY',
-//   id,
-// });
+
 /* ------------- Types and Action Creators ------------- */
 export const request = () => ({
   type: 'REQUEST',
@@ -110,6 +96,14 @@ export const registerRequest = (username, password, userInfo) => ({
   userInfo,
 });
 
+export const categoriesRefresh = () => ({
+  type: 'FETCH_CATEGORIES',
+});
+
+export const updateCategories = categories => ({
+  type: 'SAVE_CATEGORIES',
+  categories,
+});
 // export const TESTONLY = () => {
 //   console.log('testonly action triggered~~~~~~~~~~~~');
 //   return {
