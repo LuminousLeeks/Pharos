@@ -1,5 +1,3 @@
-// const socketioJwt = require('socketio-jwt');
-// const exampleData = require('./../../../data/exampleData.js');
 const socketAuth = require('./auth').socketAuth;
 
 const rooms = [];
@@ -19,7 +17,6 @@ module.exports = (io) => {
       socket.on('sendVote', (vote) => {
         insertVote(vote)
         .then((insertedVote) => {
-          // console.log('Inserted vote to db');
           io.to(vote.userId)
             .emit('sendVoteSucceed', insertedVote);
         });
